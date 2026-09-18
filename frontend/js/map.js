@@ -8,7 +8,7 @@ git checkout -b feature/scheduling-page     {{feature/<page-name>  feature/<comp
 git add *
 git commit -m "Add responsive grid layout for calendar scheduling page"
 git push origin feature/scheduling-page
-/*
+*/
 
 
 // ==> Polygon covering the whole world, needed for inversion polygon
@@ -19,8 +19,8 @@ var worldPolygon = [
   [-360, -180]
 ];
 
-// ==> Complex Polygon that covers important parts of campus
-var campusPolygon = [[28.070417, -80.625449], [28.070417, -80.624848], [28.069707, -80.624848], [28.069638, -80.62112], [28.068711, -80.621163], [28.068695, -80.619682], [28.064138, -80.6198], [28.064091, -80.619167], [28.06251, -80.619189], [28.062519, -80.621248], [28.059944, -80.621259], [28.059878, -80.620036], [28.05876, -80.620058], [28.058789, -80.621291], [28.057908, -80.621281], [28.057975, -80.625615], [28.063834, -80.625545], [28.063824, -80.626076], [28.064378, -80.626066], [28.064383, -80.625513], [28.070417, -80.625449]];
+// ==> Complex Polygon that covers important parts of campus (This polygon was created from a polygon drawing website on maps)
+var campusPolygon = [[28.070417, -80.625449], [28.070417, -80.624848], [28.069707, -80.624848], [28.069707, -80.621120], [28.068711, -80.621120], [28.068711, -80.619682], [28.064138, -80.619682], [28.064138, -80.619167], [28.062510, -80.619167], [28.062510, -80.621248], [28.059944, -80.621248], [28.059944, -80.620036], [28.058760, -80.620036], [28.058760, -80.621281], [28.057908, -80.621281], [28.057908, -80.625545], [28.063834, -80.625545], [28.063834, -80.626066], [28.064378, -80.626066], [28.064378, -80.625449], [28.070417, -80.625449]];
 
 // ==> Creating a inverted polygon where its a polygon of the world besides the campus
 var invertedPolygon = [worldPolygon, campusPolygon];
@@ -50,9 +50,13 @@ map.on('drag', function() {
 });
 
 
-// ==> Adds the openStreetMap style for the basis of the map
-const openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap'
+// Using Carto for map styles and rendering tiles (uses my API Key for this)
+// Style choosen is a detailed vector called voyager with no labels as customs will be implemented
+const openStreetMap = L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png?key=cb1_3q00_1_e26b53eeeb6cdda52535c6ad`, {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxNativeZoom: 20, // This helps zoom in closer, but doesn't render new tiles just scales it
+    maxZoom: 22
 }).addTo(map);
 
 
