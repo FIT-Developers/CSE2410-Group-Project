@@ -42,7 +42,7 @@ var map = L.map('map', {
 }).setView([28.063810, -80.623834], 18);
 
 
-// ==? A fix for getting the bounds to actually limit the user's drag
+// == A fix for getting the bounds to actually limit the user's drag
 // States when dragging make sure its inside of the bounds set earlier
 // Animate messes stuff up so keep it false
 map.on('drag', function() {
@@ -71,5 +71,37 @@ L.polygon(invertedPolygon, {
 }).addTo(map);
 
 
-// ==> Adds a marker at specific coordinates to the map
-var marker = L.marker([28.065796, -80.622820]).addTo(map);
+
+// Returns a divIcon class that uses the variable that contains the html (svg icon stuff), which can then be read by L.marker creation in its icon: (properties)
+function createCustomPin(bgColor) {
+    var Pin = `
+        <!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="30" height="38">
+
+            <!-- Custom Svg Path of a teardrop, drawn with https://yqnn.github.io/svg-path-editor/ -->
+            <path d="M 50 10 A 38 38 0 0 1 88 48 C 88 68 65 90 50 94 C 35 90 12 68 12 48 A 38 38 0 0 1 50 10 Z" 
+                    fill="#FFFFFF" />
+                
+            <!-- Create a inner circle of the arguement color -->
+            <circle cx="50" cy="48" r="32" fill="${bgColor}" />
+            
+        </svg>
+    `;
+
+    // Creates a divIcon from leaflet documentation, this includes the htmk/svg icon stuff, icon size, where the origin point of icon is
+    // Also className is literally the class name for when operating css, so use .custom-pin for changing the CSS of these pins
+    // Documentation on this: https://leafletjs.com/reference.html#icon
+    return L.divIcon({
+        className: 'custom-pin',
+        html: Pin,
+        iconSize: [30, 38],
+        iconAnchor: [15, 28]
+    });
+}
+
+// Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
+var Evans_Library = L.marker([28.065824,-80.622820], { icon: createCustomPin('#6B8E9B') }).addTo(map)
+Evans_Library.bindTooltip("John H. Evans Library"); // Basic Tooltip creation on the marker
+
+var Skurla_Hall = L.marker([28.064435,-80.624572], { icon: createCustomPin('#c5a336') }).addTo(map)
+Evans_Library.bindTooltip("George M. Skurla Hall");
