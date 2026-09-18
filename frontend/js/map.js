@@ -73,7 +73,8 @@ L.polygon(invertedPolygon, {
 
 
 // Returns a divIcon class that uses the variable that contains the html (svg icon stuff), which can then be read by L.marker creation in its icon: (properties)
-function createCustomPin(bgColor) {
+// Adds icons from assets aswell, sourced from: https://www.svgrepo.com/collection/dazzle-line-icons/7?search=book
+function createCustomPin(bgColor, iconName) {
     var Pin = `
         <!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="30" height="38">
@@ -85,6 +86,10 @@ function createCustomPin(bgColor) {
             <!-- Create a inner circle of the arguement color -->
             <circle cx="50" cy="48" r="32" fill="${bgColor}" />
             
+            <!-- Create a basic svg img and have its colors and brightness set so its all white -->
+            <image href="./assets/icons/${iconName}" x="26" y="26" width="48" height="48" style="filter: brightness(0) invert(1);" />
+            
+
         </svg>
     `;
 
@@ -100,8 +105,38 @@ function createCustomPin(bgColor) {
 }
 
 // Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
-var Evans_Library = L.marker([28.065824,-80.622820], { icon: createCustomPin('#6B8E9B') }).addTo(map)
+var Evans_Library = L.marker([28.065824,-80.622820], { icon: createCustomPin('#6B8E9B','book.svg') }).addTo(map)
 Evans_Library.bindTooltip("John H. Evans Library"); // Basic Tooltip creation on the marker
 
-var Skurla_Hall = L.marker([28.064435,-80.624572], { icon: createCustomPin('#c5a336') }).addTo(map)
-Evans_Library.bindTooltip("George M. Skurla Hall");
+var Skurla_Hall = L.marker([28.064435,-80.624572], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
+Skurla_Hall.bindTooltip("George M. Skurla Hall");
+
+var Roberts_Hall = L.marker([28.06933296623996, -80.62454490022863], { icon: createCustomPin('#4cdd9e','house.svg') }).addTo(map)
+Roberts_Hall.bindTooltip("Roberts Hall");
+
+var Tennis_Courts = L.marker([28.06827840908719, -80.62448146598793], { icon: createCustomPin('#367b45','tennis.svg') }).addTo(map)
+Tennis_Courts.bindTooltip("Tennis & Pickleball Courts");
+
+var Parking_7 = L.marker([28.068709965835726, -80.62516521548011], { icon: createCustomPin('#606069','parking.svg') }).addTo(map)
+Parking_7.bindTooltip("Parking Lot 7");
+
+var Brownlie = L.marker([28.067202396374327, -80.62520549743712], { icon: createCustomPin('#4cdd9e','house.svg') }).addTo(map)
+Brownlie.bindTooltip("Brownlie Hall");
+
+var Pantherium = L.marker([28.066847506842795, -80.62414693021333], { icon: createCustomPin('#9b53b9','masks.svg') }).addTo(map)
+Pantherium.bindTooltip("Pantherium");
+
+var Denius_Center = L.marker([28.066511698330658, -80.62369840781662], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
+Denius_Center.bindTooltip("Denius Student Center");
+
+var Bookstore = L.marker([28.066333035434727, -80.62378106888966], { icon: createCustomPin('#7b2f1c','bag.svg') }).addTo(map)
+Bookstore.bindTooltip("Florida Tech Bookstore");
+
+var Jerome_Admin = L.marker([28.066422745432106, -80.62446252886568], { icon: createCustomPin('#65abcc','shield.svg') }).addTo(map)
+Jerome_Admin.bindTooltip("Jerome P. Keuper Administration Building");
+
+var Dining_Hall = L.marker([28.062367657194457, -80.62272603625505], { icon: createCustomPin('#c0ca85','fork.svg') }).addTo(map)
+Dining_Hall.bindTooltip("Panther Dining Hall");
+
+var Pool = L.marker([28.062793914626525, -80.62274722253706], { icon: createCustomPin('#05487f','water.svg') }).addTo(map)
+Pool.bindTooltip("Panther Aquatic Center");

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="800px" height="800px" viewBox="0 2 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Handle: Outline Stroke Only -->
+  <path d="M 9 9 V 6 C 9 4.3431 10.3431 3 12 3 C 13.6569 3 15 4.3431 15 6 V 9" 
+        stroke="#FFFFFF" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none" />
+
+  <!-- Bag Body: Solid Fill with Outline Stroke -->
+  <path d="M 10.4 21 H 13.6 C 15.8402 21 16.9603 21 17.816 20.564 C 18.5686 20.1805 19.1805 19.5686 19.564 18.816 C 20 17.9603 20 16.8402 20 14.6 V 12.2 C 20 11.0799 20 10.5198 19.782 10.092 C 19.5903 9.7157 19.2843 9.4097 18.908 9.218 C 18.4802 9 17.9201 9 16.8 9 H 7.2 C 6.0799 9 5.5198 9 5.092 9.218 C 4.7157 9.4097 4.4097 9.7157 4.218 10.092 C 4 10.5198 4 11.0799 4 12.2 V 14.6 C 4 16.8402 4 17.9603 4.436 18.816 C 4.8195 19.5686 5.4314 20.1805 6.184 20.564 C 7.0397 21 8.1598 21 10.4 21 Z" 
+        fill="#FFFFFF" 
+        stroke="#FFFFFF" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+</svg>
