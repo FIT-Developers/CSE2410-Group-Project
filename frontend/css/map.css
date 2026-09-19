@@ -37,5 +37,12 @@ body {
 .custom-pin {
     /* Adding a drop shadow to those custom pins to make sure they can be visible (css documentation helps for formatting) */
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
-    
+} /* Animation for easing and outing of the parking area */
+.parking_7 {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.parking_7.active {
+    opacity: 1;
+    border-radius: 10;
 }

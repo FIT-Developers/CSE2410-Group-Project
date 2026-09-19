@@ -42,7 +42,7 @@ var map = L.map('map', {
 }).setView([28.063810, -80.623834], 18);
 
 
-// == A fix for getting the bounds to actually limit the user's drag
+// ==> A fix for getting the bounds to actually limit the user's drag
 // States when dragging make sure its inside of the bounds set earlier
 // Animate messes stuff up so keep it false
 map.on('drag', function() {
@@ -50,7 +50,7 @@ map.on('drag', function() {
 });
 
 
-// Using Carto for map styles and rendering tiles (uses my API Key for this)
+// ==> Using Carto for map styles and rendering tiles (uses my API Key for this)
 // Style choosen is a detailed vector called voyager with no labels as customs will be implemented
 const openStreetMap = L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png?key=cb1_3q00_1_e26b53eeeb6cdda52535c6ad`, {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -72,7 +72,7 @@ L.polygon(invertedPolygon, {
 
 
 
-// Returns a divIcon class that uses the variable that contains the html (svg icon stuff), which can then be read by L.marker creation in its icon: (properties)
+// ==> Returns a divIcon class that uses the variable that contains the html (svg icon stuff), which can then be read by L.marker creation in its icon: (properties)
 // Adds icons from assets aswell, sourced from: https://www.svgrepo.com/collection/dazzle-line-icons/7?search=book
 function createCustomPin(bgColor, iconName) {
     var Pin = `
@@ -93,7 +93,7 @@ function createCustomPin(bgColor, iconName) {
         </svg>
     `;
 
-    // Creates a divIcon from leaflet documentation, this includes the htmk/svg icon stuff, icon size, where the origin point of icon is
+    // ==> Creates a divIcon from leaflet documentation, this includes the htmk/svg icon stuff, icon size, where the origin point of icon is
     // Also className is literally the class name for when operating css, so use .custom-pin for changing the CSS of these pins
     // Documentation on this: https://leafletjs.com/reference.html#icon
     return L.divIcon({
@@ -104,7 +104,7 @@ function createCustomPin(bgColor, iconName) {
     });
 }
 
-// Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
+// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
 var Evans_Library = L.marker([28.065824,-80.622820], { icon: createCustomPin('#6B8E9B','book.svg') }).addTo(map)
 Evans_Library.bindTooltip("John H. Evans Library"); // Basic Tooltip creation on the marker
 
@@ -117,8 +117,20 @@ Roberts_Hall.bindTooltip("Roberts Hall");
 var Tennis_Courts = L.marker([28.06827840908719, -80.62448146598793], { icon: createCustomPin('#367b45','tennis.svg') }).addTo(map)
 Tennis_Courts.bindTooltip("Tennis & Pickleball Courts");
 
+// ==> Show a highlighted rectangle where the parking area is when hovering over parking, animation and rounding is done by CSS
+// More about rectangles and its properties, were found on https://leafletjs.com/reference.html#rectangle
+// Later this needs to be turned into a function so multiple parking markers can work (needs marker and bounds parameter)
+const area = L.rectangle([[28.069694059142638, -80.6253013744353], 
+    [28.06765795584343, -80.62506137512882]], {
+    color: '#7ab8ff', fillColor: '#0078FF', fillOpacity: 0.15, weight: 1,
+    className: 'parking_7', interactive: false
+}).addTo(map);
+
 var Parking_7 = L.marker([28.068709965835726, -80.62516521548011], { icon: createCustomPin('#606069','parking.svg') }).addTo(map)
 Parking_7.bindTooltip("Parking Lot 7");
+Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Ternary operation to make the code take up less lines
+Parking_7.on('mouseout', () => area.getElement()?.classList.remove('active'));
+
 
 var Brownlie = L.marker([28.067202396374327, -80.62520549743712], { icon: createCustomPin('#4cdd9e','house.svg') }).addTo(map)
 Brownlie.bindTooltip("Brownlie Hall");
@@ -140,3 +152,21 @@ Dining_Hall.bindTooltip("Panther Dining Hall");
 
 var Pool = L.marker([28.062793914626525, -80.62274722253706], { icon: createCustomPin('#05487f','water.svg') }).addTo(map)
 Pool.bindTooltip("Panther Aquatic Center");
+
+var Clemente = L.marker([28.063397060424393, -80.62258844704462], { icon: createCustomPin('#1c1b1b','dumbell.svg') }).addTo(map)
+Clemente.bindTooltip("Charles and Ruth Clemente Center for Sports and Recreation");
+
+var Gas = L.marker([28.06369793990833, -80.62177176400293], { icon: createCustomPin('#4b6955','gas.svg') }).addTo(map)
+Gas.bindTooltip("Gas Mobil");
+
+var Olin_Eng = L.marker([28.063267280455182, -80.62395276215993], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
+Olin_Eng.bindTooltip("F.W. Olin Engineering Complex");
+
+var Olin_Life = L.marker([28.063220878633135, -80.62468584789855], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
+Olin_Life.bindTooltip("F.W. Olin Life Sciences Building");
+
+var Olin_Phys = L.marker([28.06245240668176, -80.62390778688403], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
+Olin_Phys.bindTooltip("F.W. Olin Physical Sciences Center");
+
+var Blank = L.marker([], { icon: createCustomPin('#1c1b1b','dumbell.svg') }).addTo(map)
+Blank.bindTooltip("");
