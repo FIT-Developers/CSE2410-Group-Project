@@ -7,7 +7,7 @@ git checkout -b feature/scheduling-page     {{feature/<page-name>  feature/<comp
 
 git add *
 git commit -m "Add responsive grid layout for calendar scheduling page"
-git push origin feature/scheduling-page
+git push origin Prototype
 */
 
 
@@ -50,14 +50,27 @@ map.on('drag', function() {
 });
 
 
+
+
 // ==> Using Carto for map styles and rendering tiles (uses my API Key for this)
 // Style choosen is a detailed vector called voyager with no labels as customs will be implemented
-const openStreetMap = L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png?key=cb1_3q00_1_e26b53eeeb6cdda52535c6ad`, {
+/*
+const roadLayer = L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png?key=cb1_3q00_1_e26b53eeeb6cdda52535c6ad`, {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxNativeZoom: 20, // This helps zoom in closer, but doesn't render new tiles just scales it
     maxZoom: 22
 }).addTo(map);
+*/
+
+// Searched and found a random url that works for leaflet and its in satellite view, might scrap carto roadmap view
+var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    subdomains: 'abcd',
+    maxNativeZoom: 20,
+    maxZoom: 22
+}).addTo(map);
+
 
 
 // ==> customRenderer is a fix to zooming and dragging having grey areas load in after
@@ -66,8 +79,9 @@ const customRenderer = L.svg({ padding: 1.0 });
 L.polygon(invertedPolygon, {
     renderer: customRenderer,
     color: 'transparent',
-    fillColor: 'gray',
-    fillOpacity: 0.7
+    fillColor: 'black',
+    fillOpacity: 0.6,
+    className: "campus_mask"
 }).addTo(map);
 
 
