@@ -1,7 +1,7 @@
 // !====> Git Notes <====!
 /*
-git checkout main
-git pull origin main
+git checkout Prototype
+git pull origin Prototype
 
 git checkout -b feature/scheduling-page     {{feature/<page-name>  feature/<component> backend/<service> fix/<bug-name>}}
 
@@ -221,11 +221,32 @@ function successLocation(position) {
     }
 
     // Specific User Marker
-    userMarker = L.marker([latitude, longitude], { icon: createCustomPin('#00c4ef','trophy.svg') }).addTo(map)
+    var GPS_Pin = `
+        <!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="30">
+
+            <!-- Custom Svg Path of a teardrop, drawn with https://yqnn.github.io/svg-path-editor/ -->
+            <circle cx="50" cy="50" r="38" fill="#FFFFFF" />
+                
+            <!-- Create a inner circle of the arguement color -->
+            <circle cx="50" cy="50" r="32" fill="#00c4ef" />
+        </svg>
+    `;
+
+    User = L.divIcon({
+        className: 'user-pin',
+        html: GPS_Pin,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20]
+    });
+
+
+    userMarker = L.marker([latitude, longitude], { icon: User}).addTo(map)
 
     // Blue Accuracy Circle
     accuracyCircle = L.circle([latitude, longitude], {
         radius: accuracy,
+        fillOpacity: .2
     }).addTo(map);
 }
 function errorLocation(error) {
@@ -235,3 +256,5 @@ function errorLocation(error) {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
+
+// Added custom User Marker with glow, Fixed Bug with SVG's being black for darkmode
