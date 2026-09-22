@@ -50,7 +50,8 @@ var map = L.map('map', {
     MaxBounds: bounds,
     maxBoundsViscosity: 1.0,
     minZoom: 17,
-    maxZoom: 22
+    maxZoom: 22,
+    zoomControl: false
 }).setView([28.063810, -80.623834], 18);
 
 
@@ -122,18 +123,8 @@ function createCustomPin(bgColor, iconName) {
     });
 }
 
-// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
-var Evans_Library = L.marker([28.065824,-80.622820], { icon: createCustomPin('#6B8E9B','book.svg') }).addTo(map)
-Evans_Library.bindTooltip("John H. Evans Library"); // Basic Tooltip creation on the marker
 
-var Skurla_Hall = L.marker([28.064435,-80.624572], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
-Skurla_Hall.bindTooltip("George M. Skurla Hall");
 
-var Roberts_Hall = L.marker([28.06933296623996, -80.62454490022863], { icon: createCustomPin('#4cdd9e','house.svg') }).addTo(map)
-Roberts_Hall.bindTooltip("Roberts Hall");
-
-var Tennis_Courts = L.marker([28.06827840908719, -80.62448146598793], { icon: createCustomPin('#367b45','tennis.svg') }).addTo(map)
-Tennis_Courts.bindTooltip("Tennis & Pickleball Courts");
 
 // ==> Show a highlighted rectangle where the parking area is when hovering over parking, animation and rounding is done by CSS
 // More about rectangles and its properties, were found on https://leafletjs.com/reference.html#rectangle
@@ -144,47 +135,25 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
     className: 'parking_7', interactive: false
 }).addTo(map);
 
-var Parking_7 = L.marker([28.068709965835726, -80.62516521548011], { icon: createCustomPin('#606069','parking.svg') }).addTo(map)
-Parking_7.bindTooltip("Parking Lot 7");
+// Detecting mouseover to make the highlighted area visible
 Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Ternary operation to make the code take up less lines
-Parking_7.on('mouseout', () => area.getElement()?.classList.remove('active'));
 
-
-var Brownlie = L.marker([28.067202396374327, -80.62520549743712], { icon: createCustomPin('#4cdd9e','house.svg') }).addTo(map)
-Brownlie.bindTooltip("Brownlie Hall");
-
-var Pantherium = L.marker([28.066847506842795, -80.62414693021333], { icon: createCustomPin('#9b53b9','masks.svg') }).addTo(map)
-Pantherium.bindTooltip("Pantherium");
-
-var Denius_Center = L.marker([28.066511698330658, -80.62369840781662], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
-Denius_Center.bindTooltip("Denius Student Center");
-
-var Bookstore = L.marker([28.066333035434727, -80.62378106888966], { icon: createCustomPin('#7b2f1c','bag.svg') }).addTo(map)
-Bookstore.bindTooltip("Florida Tech Bookstore");
-
-var Jerome_Admin = L.marker([28.066422745432106, -80.62446252886568], { icon: createCustomPin('#65abcc','shield.svg') }).addTo(map)
-Jerome_Admin.bindTooltip("Jerome P. Keuper Administration Building");
-
-var Dining_Hall = L.marker([28.062367657194457, -80.62272603625505], { icon: createCustomPin('#c0ca85','fork.svg') }).addTo(map)
-Dining_Hall.bindTooltip("Panther Dining Hall");
-
-var Pool = L.marker([28.062793914626525, -80.62274722253706], { icon: createCustomPin('#05487f','water.svg') }).addTo(map)
-Pool.bindTooltip("Panther Aquatic Center");
-
-var Clemente = L.marker([28.063397060424393, -80.62258844704462], { icon: createCustomPin('#1c1b1b','dumbell.svg') }).addTo(map)
-Clemente.bindTooltip("Charles and Ruth Clemente Center for Sports and Recreation");
-
-var Gas = L.marker([28.06369793990833, -80.62177176400293], { icon: createCustomPin('#4b6955','gas.svg') }).addTo(map)
-Gas.bindTooltip("Gas Mobil");
-
-var Olin_Eng = L.marker([28.063267280455182, -80.62395276215993], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
-Olin_Eng.bindTooltip("F.W. Olin Engineering Complex");
-
-var Olin_Life = L.marker([28.063220878633135, -80.62468584789855], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
-Olin_Life.bindTooltip("F.W. Olin Life Sciences Building");
-
-var Olin_Phys = L.marker([28.06245240668176, -80.62390778688403], { icon: createCustomPin('#c5a336','grad_cap.svg') }).addTo(map)
-Olin_Phys.bindTooltip("F.W. Olin Physical Sciences Center");
+// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
+// Grabbed online for how to parse and obtain .json data as this is new to me
+// Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
+// Error catching added
+fetch('./data/markers.json')
+  .then(response => response.json())
+  .then(locations => {
+    locations.forEach(loc => {
+      L.marker([loc.lat, loc.lng], { 
+        icon: createCustomPin(loc.color, loc.icon) 
+      })
+      .bindTooltip(loc.tooltip)
+      .addTo(map);
+    });
+  })
+  .catch(error => console.error('Error loading markers:', error));
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
@@ -210,7 +179,6 @@ if (navigator.geolocation) {
 function successLocation(position) {
     // Storing and grabbing cords
     const {latitude, longitude, accuracy} = position.coords;
-    console.log("Accuracy in metres:",accuracy);
 
     // Deletes Markers if there already present, to have room to create new ones
     if (userMarker) {
@@ -256,5 +224,3 @@ function errorLocation(error) {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
-
-// Added custom User Marker with glow, Fixed Bug with SVG's being black for darkmode

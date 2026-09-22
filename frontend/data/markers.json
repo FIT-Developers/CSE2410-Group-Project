@@ -1,0 +1,138 @@
+[
+  {
+    "id": "Evans_Library",
+    "tooltip": "John H. Evans Library",
+    "lat": 28.065824,
+    "lng": -80.62282,
+    "color": "#6B8E9B",
+    "icon": "book.svg"
+  },
+  {
+    "id": "Skurla_Hall",
+    "tooltip": "George M. Skurla Hall",
+    "lat": 28.064435,
+    "lng": -80.624572,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg"
+  },
+  {
+    "id": "Roberts_Hall",
+    "tooltip": "Roberts Hall",
+    "lat": 28.06933296623996,
+    "lng": -80.62454490022863,
+    "color": "#4cdd9e",
+    "icon": "house.svg"
+  },
+  {
+    "id": "Tennis_Courts",
+    "tooltip": "Tennis & Pickleball Courts",
+    "lat": 28.06827840908719,
+    "lng": -80.62448146598793,
+    "color": "#367b45",
+    "icon": "tennis.svg"
+  },
+  {
+    "id": "Parking_7",
+    "tooltip": "Parking Lot 7",
+    "lat": 28.068709965835726,
+    "lng": -80.62516521548011,
+    "color": "#606069",
+    "icon": "parking.svg"
+  },
+  {
+    "id": "Brownlie",
+    "tooltip": "Brownlie Hall",
+    "lat": 28.067202396374327,
+    "lng": -80.62520549743712,
+    "color": "#4cdd9e",
+    "icon": "house.svg"
+  },
+  {
+    "id": "Pantherium",
+    "tooltip": "Pantherium",
+    "lat": 28.066847506842795,
+    "lng": -80.62414693021333,
+    "color": "#9b53b9",
+    "icon": "masks.svg"
+  },
+  {
+    "id": "Denius_Center",
+    "tooltip": "Denius Student Center",
+    "lat": 28.066511698330658,
+    "lng": -80.62369840781662,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg"
+  },
+  {
+    "id": "Bookstore",
+    "tooltip": "Florida Tech Bookstore",
+    "lat": 28.066333035434727,
+    "lng": -80.62378106888966,
+    "color": "#7b2f1c",
+    "icon": "bag.svg"
+  },
+  {
+    "id": "Jerome_Admin",
+    "tooltip": "Jerome P. Keuper Administration Building",
+    "lat": 28.066422745432106,
+    "lng": -80.62446252886568,
+    "color": "#65abcc",
+    "icon": "shield.svg"
+  },
+  {
+    "id": "Dining_Hall",
+    "tooltip": "Panther Dining Hall",
+    "lat": 28.062367657194457,
+    "lng": -80.62272603625505,
+    "color": "#c0ca85",
+    "icon": "fork.svg"
+  },
+  {
+    "id": "Pool",
+    "tooltip": "Panther Aquatic Center",
+    "lat": 28.062793914626525,
+    "lng": -80.62274722253706,
+    "color": "#05487f",
+    "icon": "water.svg"
+  },
+  {
+    "id": "Clemente",
+    "tooltip": "Charles and Ruth Clemente Center for Sports and Recreation",
+    "lat": 28.063397060424393,
+    "lng": -80.62258844704462,
+    "color": "#1c1b1b",
+    "icon": "dumbell.svg"
+  },
+  {
+    "id": "Gas",
+    "tooltip": "Gas Mobil",
+    "lat": 28.06369793990833,
+    "lng": -80.62177176400293,
+    "color": "#4b6955",
+    "icon": "gas.svg"
+  },
+  {
+    "id": "Olin_Eng",
+    "tooltip": "F.W. Olin Engineering Complex",
+    "lat": 28.063267280455182,
+    "lng": -80.62395276215993,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg"
+  },
+  {
+    "id": "Olin_Life",
+    "tooltip": "F.W. Olin Life Sciences Building",
+    "lat": 28.063220878633135,
+    "lng": -80.62468584789855,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg"
+  },
+  {
+    "id": "Olin_Phys",
+    "tooltip": "F.W. Olin Physical Sciences Center",
+    "lat": 28.06245240668176,
+    "lng": -80.62390778688403,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg"
+  }
+]
