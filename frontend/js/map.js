@@ -51,7 +51,15 @@ var map = L.map('map', {
     maxBoundsViscosity: 1.0,
     minZoom: 17,
     maxZoom: 22,
-    zoomControl: false
+    zoomControl: false,
+
+    keepBuffer: 12,                 
+    updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
+    updateWhenZooming: true,        // Keeps rendering tiles while zoom animations play
+    tileSize: 256,
+    
+    // Smoothness:
+    crossOrigin: true
 }).setView([28.063810, -80.623834], 18);
 
 
@@ -149,8 +157,8 @@ fetch('./data/markers.json')
   })
   .catch(error => console.error('Error loading markers:', error));
 
-// Detecting mouseover to make the highlighted area visible
-Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Ternary operation to make the code take up less lines
+// Detecting mouseover to make the highlighted area visible ### NO LONGER WORKS WITH .json ###
+//Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Optional Chaining is used so errors dont occur if null
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
@@ -198,7 +206,7 @@ function successLocation(position) {
         </svg>
     `;
 
-    User = L.divIcon({
+    var User = L.divIcon({
         className: 'user-pin',
         html: GPS_Pin,
         iconSize: [40, 40],
