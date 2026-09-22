@@ -123,9 +123,6 @@ function createCustomPin(bgColor, iconName) {
     });
 }
 
-
-
-
 // ==> Show a highlighted rectangle where the parking area is when hovering over parking, animation and rounding is done by CSS
 // More about rectangles and its properties, were found on https://leafletjs.com/reference.html#rectangle
 // Later this needs to be turned into a function so multiple parking markers can work (needs marker and bounds parameter)
@@ -134,9 +131,6 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
     color: '#7ab8ff', fillColor: '#0078FF', fillOpacity: 0.15, weight: 1,
     className: 'parking_7', interactive: false
 }).addTo(map);
-
-// Detecting mouseover to make the highlighted area visible
-Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Ternary operation to make the code take up less lines
 
 // ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
 // Grabbed online for how to parse and obtain .json data as this is new to me
@@ -154,6 +148,9 @@ fetch('./data/markers.json')
     });
   })
   .catch(error => console.error('Error loading markers:', error));
+
+// Detecting mouseover to make the highlighted area visible
+Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Ternary operation to make the code take up less lines
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
