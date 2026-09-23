@@ -1,23 +1,25 @@
 package com.campus_map.demo.model;
+import java.util.Map;
 import java.util.HashMap;
-import java.util.ArrayList; 
+
 public class Graph {
-    private HashMap<Node, ArrayList<Edge>> nodeMap; 
-    private int size; 
+    
+    private Map<String, Node> nodeMap;
+    private Integer size; 
 
     public Graph(){
-        nodeMap = new HashMap<>(); 
+        nodeMap = new HashMap<String, Node>(); 
         size = 0; 
     }
 
-    public void addNodeOnly(Node newNode){
-        ArrayList<Edge> emptyList = new ArrayList<>(); 
-        nodeMap.put(newNode, emptyList); 
+    public void addNode(String nodeName, Coordinate coords){
+        Node newNode = new Node(coords); 
+        nodeMap.put(nodeName, newNode); 
+        size++;
     }
 
-    public void addNodeWithEdge(Node newNode, Edge newEdge){
-        ArrayList<Edge> newList = new ArrayList<>(); 
-        newList.add(newEdge); 
-        nodeMap.put(newNode, newList); 
+    public void addEdge(String targetNodeName, Edge newEdge){
+        nodeMap.get(targetNodeName).addNeighbor(newEdge);
     }
+
 }
