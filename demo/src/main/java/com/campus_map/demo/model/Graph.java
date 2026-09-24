@@ -12,7 +12,8 @@ public class Graph {
         size = 0; 
     }
 
-    public void addNode(String nodeName, Coordinate coords){
+    public void addNode(String nodeName, float lonCoord, float latCoord){
+        Coordinate coords = new Coordinate(lonCoord, latCoord);
         Node newNode = new Node(coords); 
         nodeMap.put(nodeName, newNode); 
         size++;

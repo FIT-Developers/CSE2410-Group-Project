@@ -3,11 +3,9 @@ import java.util.ArrayList;
 public class Building {
     private int id;
     private String name; 
-
     private ArrayList<Coordinate> boundary; 
 
-    public Building(int id, String name, Coordinate entrance, ArrayList<Coordinate> boundary){
-        this.id = id;
+    public Building(String name, Coordinate entrance, ArrayList<Coordinate> boundary){
         this.name = name; 
         this.boundary = boundary;
     }
