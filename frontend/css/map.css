@@ -30,5 +30,17 @@ body {
     filter: blur(3px) drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.7));
 }
 .user-pin {
-    filter: drop-shadow(0px 8px 8px rgba(0, 196, 239, 0.6));
+    filter: drop-shadow(0px 8px 8px rgba(182, 80, 80, 0.6));
+}
+
+/* Mobile Screen Adjustments for the marker size */
+.custom-pin svg {
+    transform-origin: center center;
+}
+
+/* Target Mobile Viewports */
+@media screen and (max-width: 768px) {
+    .custom-pin svg {
+        transform: scale(1.5);
+    }
 }

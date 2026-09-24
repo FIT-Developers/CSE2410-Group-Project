@@ -202,7 +202,7 @@ function successLocation(position) {
             <circle cx="50" cy="50" r="38" fill="#FFFFFF" />
                 
             <!-- Create a inner circle of the arguement color -->
-            <circle cx="50" cy="50" r="32" fill="#00c4ef" />
+            <circle cx="50" cy="50" r="32" fill="#B65050" />
         </svg>
     `;
 
@@ -219,7 +219,8 @@ function successLocation(position) {
     // Blue Accuracy Circle
     accuracyCircle = L.circle([latitude, longitude], {
         radius: accuracy,
-        fillOpacity: .2
+        fillOpacity: .2,
+        color: '#B65050'
     }).addTo(map);
 }
 function errorLocation(error) {
