@@ -49,7 +49,7 @@ bounds = L.latLngBounds(corner1, corner2);
 var map = L.map('map', {
     MaxBounds: bounds,
     maxBoundsViscosity: 1.0,
-    minZoom: 17,
+    minZoom: 16,
     maxZoom: 22,
     zoomControl: false,
 

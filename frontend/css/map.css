@@ -41,6 +41,6 @@ body {
 /* Target Mobile Viewports */
 @media screen and (max-width: 768px) {
     .custom-pin svg {
-        transform: scale(1.5);
+        transform: scale(1.2);
     }
 }
