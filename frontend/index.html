@@ -2,32 +2,72 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Campus Map</title>
+	<meta charset="UTF-8">
+	<title>Campus Map</title>
 
-    <!-- Leaflet's CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	<!-- Leaflet's CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
-    <!-- Our CSS -->
-    <link rel="stylesheet" href="css/map.css" />
+	<!-- Our CSS -->
+	<link rel="stylesheet" href="css/map.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-boundary-canvas@1.0.0/leaflet-boundary-canvas.min.js"></script>
-    
-    
+	<script src="https://cdn.jsdelivr.net/npm/leaflet-boundary-canvas@1.0.0/leaflet-boundary-canvas.min.js"></script>
+	
+	
 </head>
 
+
 <body>
-    <!-- This is where the map will appear -->
-    <div id="map"></div>
 
-    <!-- Leaflet's JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<header>
+		<!-- Search Bar -->
+		<form id="search-form" role="search" aria-label="Site search">
+		<input 
+			type="search" 
+			id="search-input" 
+			placeholder="Search..." 
+			aria-label="Search query"
+		>
 
-    <!-- Our JavaScript -->
-    <script type="module" src="js/map.js"></script>
+		<button type="submit" aria-label="Submit search">
+			<!-- SVG icon or text -->
+			 <img src="">
+			Search
+		</button>
+		</form>
 
+	</header>
+
+
+	<!-- This is where the map will appear -->
+	<div id="map"></div>
+
+	<!-- Leaflet's JavaScript -->
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+	<!-- Our JavaScript -->
+	<script type="module" src="js/map.js"></script>
+
+
+	<footer>
+		<!-- Bottom Navbar -->
+		<nav>
+			<a href="index.html">
+				<img src="">
+			</a>
+
+			<a href="scheduling.html">
+				<img src="">
+			</a>
+
+			<a href="settings.html">
+				<img src="">
+			</a>
+			
+		</nav>
+	</footer>
 </body>
 
 </html>

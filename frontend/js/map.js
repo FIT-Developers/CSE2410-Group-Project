@@ -47,6 +47,7 @@ bounds = L.latLngBounds(corner1, corner2);
 // MaxBounds is set the variable bounds which is from two corners that hold lat and long
 // maxBoundsViscosity is how elastic it feels when going out, (0 is smooth, 1 is like a hard wall, the rest is bounce back)
 var map = L.map('map', {
+    attributionControl: false,
     MaxBounds: bounds,
     maxBoundsViscosity: 1.0,
     minZoom: 17,
