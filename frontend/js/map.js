@@ -6,7 +6,7 @@ git pull origin Prototype
 git checkout -b feature/scheduling-page     {{feature/<page-name>  feature/<component> backend/<service> fix/<bug-name>}}
 
 git add *
-git commit -m "Add responsive grid layout for calendar scheduling page"
+git commit -m "Add"
 git push origin Prototype
 */
 // ==> Run Live Server for Mobile Testing: ngrok http 5500
@@ -140,6 +140,21 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
     className: 'parking_7', interactive: false
 }).addTo(map);
 
+// ==> Function to add marker popup with each marker data from json
+function marker_Popup(marker, titleData) {
+    marker.on('click', (e) => {
+        // Prevent map click event from immediately closing the sheet
+        // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
+        L.DomEvent.stopPropagation(e);
+
+        // Grabs the html id, and replaces the content in it with unique marker data
+        document.getElementById('marker-popup-title').textContent = titleData;
+
+        // Adds the open class to the html marker popup, allowing it to slide up and be visible
+        document.getElementById('marker-popup').classList.add('open');
+    });
+}
+
 // ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
 // Grabbed online for how to parse and obtain .json data as this is new to me
 // Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
@@ -148,15 +163,23 @@ fetch('./data/markers.json')
   .then(response => response.json())
   .then(locations => {
     locations.forEach(loc => {
-      L.marker([loc.lat, loc.lng], { 
-        icon: createCustomPin(loc.color, loc.icon) 
-      })
-      .bindTooltip(loc.tooltip)
-      .addTo(map);
+      const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
+      // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
+      marker_Popup(marker, loc.tooltip);
     });
   })
   .catch(error => console.error('Error loading markers:', error));
 
+
+
+// Any clicks outside on map, slide the popup down and is no longer visible
+map.on('click', () => {
+    document.getElementById('marker-popup').classList.remove('open');
+}); // This prevents clicks on the actually popup to slide it down
+document.getElementById('marker-popup').addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+//**********************************************************
 // Detecting mouseover to make the highlighted area visible ### NO LONGER WORKS WITH .json ###
 //Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Optional Chaining is used so errors dont occur if null
 // ============================================================================================================================================================
@@ -230,3 +253,5 @@ function errorLocation(error) {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
+
+// Commit: Removed tootips on markers, added a bottom sheet in index, added the css for a bottom sheet, using open class and transformations to slides it up, new function for marker data to bottom sheet, goes away if clicked outside sheet
