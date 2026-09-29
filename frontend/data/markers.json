@@ -151,5 +151,179 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility"
+  },
+  {
+    "id": "Bio_Eng",
+    "tooltip": "Bioengeneering and Sciences",
+    "lat": 28.062501,
+    "lng": -80.624672,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Campbell",
+    "tooltip": "Campbell Hall",
+    "lat": 28.067887,
+    "lng": -80.623624,
+    "color": "#4cdd9e",
+    "icon": "house.svg",
+    "type": "Dorm"
+  },
+  {
+    "id": "Evans",
+    "tooltip": "Evens Hall",
+    "lat": 28.067655,
+    "lng": -80.623129,
+    "color": "#4cdd9e",
+    "icon": "house.svg",
+    "type": "Dorm"
+  },
+  {
+    "id": "Grimson",
+    "tooltip": "Grimson Hall",
+    "lat": 28.067392,
+    "lng": -80.623619,
+    "color": "#4cdd9e",
+    "icon": "house.svg",
+    "type": "Dorm"
+  },
+  {
+    "id": "Shaw",
+    "tooltip": "Shaw Hall",
+    "lat": 28.067379,
+    "lng": -80.624275,
+    "color": "#4cdd9e",
+    "icon": "house.svg",
+    "type": "Dorm"
+  },
+  {
+    "id": "Wood",
+    "tooltip": "Wood Hall",
+    "lat": 28.067882,
+    "lng": -80.624286,
+    "color": "#4cdd9e",
+    "icon": "house.svg",
+    "type": "Dorm"
+  },
+  {
+    "id": "L3_Sci&Eng",
+    "tooltip": "L3Harris Center for Science and Engineering",
+    "lat": 28.061706,
+    "lng": -80.624325,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+
+  },
+  {
+    "id": "Crawford",
+    "tooltip": "Crawford Building",
+    "lat": 28.064409,
+    "lng": -80.623984,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Academic_404",
+    "tooltip": "Academic Quad 404",
+    "lat": 28.066067,
+    "lng": -80.623503,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Academic_403",
+    "tooltip": "Academic Quad 403",
+    "lat": 28.066067,
+    "lng": -80.623776,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Academic_402",
+    "tooltip": "Academic Quad 402",
+    "lat": 28.066067,
+    "lng": -80.624050,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Academic_407",
+    "tooltip": "Academic Quad 407",
+    "lat": 28.065455,
+    "lng": -80.623516,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Academic_406",
+    "tooltip": "Academic Quad 406",
+    "lat": 28.065455,
+    "lng": -80.623781,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Academic_405",
+    "tooltip": "Academic Quad 405",
+    "lat": 28.065455,
+    "lng": -80.624050,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "John_Miller",
+    "tooltip": "John E. Miller Building",
+    "lat": 28.065776,
+    "lng": -80.624353,
+    "color": "#65abcc",
+    "icon": "shield.svg",
+    "type": "Admin"
+  },
+  {
+    "id": "Link_Bldg",
+    "tooltip": "Link Building",
+    "lat": 28.065283,
+    "lng": -80.622982,
+    "color": "#c5a336",
+    "icon": "grad_cap.svg",
+    "type": "Facility"
+  },
+  {
+    "id": "Gleason",
+    "tooltip": "Gleason Performing Arts Center",
+    "lat": 28.064728,
+    "lng": -80.623212,
+    "color": "#9b53b9",
+    "icon": "masks.svg",
+    "type": "Theater"
+  },
+  {
+    "id": "WFIT",
+    "tooltip": "WFIT Radio",
+    "lat": 28.064500,
+    "lng": -80.623098,
+    "color": "#FFC0CB",
+    "icon": "mail.svg",
+    "type": "Radio"
+  },
+  {
+    "id": "Ruth_Funk",
+    "tooltip": "Ruth Funk Center(Esports Center)",
+    "lat": 28.066089,
+    "lng": -80.623188,
+    "color": "#DC143C",
+    "icon": "trophy.svg",
+    "type": "Facility"
   }
+
+  
 ]
