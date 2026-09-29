@@ -5,7 +5,8 @@
     "lat": 28.065824,
     "lng": -80.62282,
     "color": "#6B8E9B",
-    "icon": "book.svg"
+    "icon": "book.svg",
+    "type": "Library"
   },
   {
     "id": "Skurla_Hall",
@@ -13,7 +14,8 @@
     "lat": 28.064435,
     "lng": -80.624572,
     "color": "#c5a336",
-    "icon": "grad_cap.svg"
+    "icon": "grad_cap.svg",
+    "type": "Facility"
   },
   {
     "id": "Roberts_Hall",
@@ -21,7 +23,8 @@
     "lat": 28.06933296623996,
     "lng": -80.62454490022863,
     "color": "#4cdd9e",
-    "icon": "house.svg"
+    "icon": "house.svg",
+    "type": "Dorm"
   },
   {
     "id": "Tennis_Courts",
@@ -29,7 +32,8 @@
     "lat": 28.06827840908719,
     "lng": -80.62448146598793,
     "color": "#367b45",
-    "icon": "tennis.svg"
+    "icon": "tennis.svg",
+    "type": "Sport"
   },
   {
     "id": "Parking_7",
@@ -37,7 +41,8 @@
     "lat": 28.068709965835726,
     "lng": -80.62516521548011,
     "color": "#606069",
-    "icon": "parking.svg"
+    "icon": "parking.svg",
+    "type": "Parking"
   },
   {
     "id": "Brownlie",
@@ -45,7 +50,8 @@
     "lat": 28.067202396374327,
     "lng": -80.62520549743712,
     "color": "#4cdd9e",
-    "icon": "house.svg"
+    "icon": "house.svg",
+    "type": "Dorm"
   },
   {
     "id": "Pantherium",
@@ -53,7 +59,8 @@
     "lat": 28.066847506842795,
     "lng": -80.62414693021333,
     "color": "#9b53b9",
-    "icon": "masks.svg"
+    "icon": "masks.svg",
+    "type": "Theater"
   },
   {
     "id": "Denius_Center",
@@ -61,7 +68,8 @@
     "lat": 28.066511698330658,
     "lng": -80.62369840781662,
     "color": "#c5a336",
-    "icon": "grad_cap.svg"
+    "icon": "grad_cap.svg",
+    "type": "Facility"
   },
   {
     "id": "Bookstore",
@@ -69,7 +77,8 @@
     "lat": 28.066333035434727,
     "lng": -80.62378106888966,
     "color": "#7b2f1c",
-    "icon": "bag.svg"
+    "icon": "bag.svg",
+    "type": "Store"
   },
   {
     "id": "Jerome_Admin",
@@ -77,7 +86,8 @@
     "lat": 28.066422745432106,
     "lng": -80.62446252886568,
     "color": "#65abcc",
-    "icon": "shield.svg"
+    "icon": "shield.svg",
+    "type": "Admin"
   },
   {
     "id": "Dining_Hall",
@@ -85,7 +95,8 @@
     "lat": 28.062367657194457,
     "lng": -80.62272603625505,
     "color": "#c0ca85",
-    "icon": "fork.svg"
+    "icon": "fork.svg",
+    "type": "Food"
   },
   {
     "id": "Pool",
@@ -93,7 +104,8 @@
     "lat": 28.062793914626525,
     "lng": -80.62274722253706,
     "color": "#05487f",
-    "icon": "water.svg"
+    "icon": "water.svg",
+    "type": "Pool"
   },
   {
     "id": "Clemente",
@@ -101,7 +113,8 @@
     "lat": 28.063397060424393,
     "lng": -80.62258844704462,
     "color": "#1c1b1b",
-    "icon": "dumbell.svg"
+    "icon": "dumbell.svg",
+    "type": "Gym"
   },
   {
     "id": "Gas",
@@ -109,7 +122,8 @@
     "lat": 28.06369793990833,
     "lng": -80.62177176400293,
     "color": "#4b6955",
-    "icon": "gas.svg"
+    "icon": "gas.svg",
+    "type": "Gas"
   },
   {
     "id": "Olin_Eng",
@@ -117,7 +131,8 @@
     "lat": 28.063267280455182,
     "lng": -80.62395276215993,
     "color": "#c5a336",
-    "icon": "grad_cap.svg"
+    "icon": "grad_cap.svg",
+    "type": "Facility"
   },
   {
     "id": "Olin_Life",
@@ -125,7 +140,8 @@
     "lat": 28.063220878633135,
     "lng": -80.62468584789855,
     "color": "#c5a336",
-    "icon": "grad_cap.svg"
+    "icon": "grad_cap.svg",
+    "type": "Facility"
   },
   {
     "id": "Olin_Phys",
@@ -133,6 +149,7 @@
     "lat": 28.06245240668176,
     "lng": -80.62390778688403,
     "color": "#c5a336",
-    "icon": "grad_cap.svg"
+    "icon": "grad_cap.svg",
+    "type": "Facility"
   }
 ]

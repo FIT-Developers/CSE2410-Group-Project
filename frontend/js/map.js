@@ -52,6 +52,7 @@ var map = L.map('map', {
     minZoom: 16,
     maxZoom: 22,
     zoomControl: false,
+    attributionControl: false,
 
     keepBuffer: 12,                 
     updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
@@ -141,19 +142,25 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
 }).addTo(map);
 
 // ==> Function to add marker popup with each marker data from json
-function marker_Popup(marker, titleData) {
+function marker_Popup(marker, titleData, typeData) {
     marker.on('click', (e) => {
         // Prevent map click event from immediately closing the sheet
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
 
         // Grabs the html id, and replaces the content in it with unique marker data
-        document.getElementById('marker-popup-title').textContent = titleData;
+        document.getElementById('MarkerName').textContent = titleData;
+        document.getElementById('TypeName').textContent = typeData;
 
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
     });
 }
+
+// Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
+document.querySelector('#close').addEventListener('click', function() {
+    document.getElementById('marker-popup').classList.remove('open');
+});
 
 // ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
 // Grabbed online for how to parse and obtain .json data as this is new to me
@@ -165,7 +172,7 @@ fetch('./data/markers.json')
     locations.forEach(loc => {
       const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
       // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip);
+      marker_Popup(marker, loc.tooltip, loc.type);
     });
   })
   .catch(error => console.error('Error loading markers:', error));
@@ -253,5 +260,3 @@ function errorLocation(error) {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
-
-// Commit: Removed tootips on markers, added a bottom sheet in index, added the css for a bottom sheet, using open class and transformations to slides it up, new function for marker data to bottom sheet, goes away if clicked outside sheet

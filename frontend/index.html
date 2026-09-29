@@ -5,15 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Campus Map</title>
+    <!-- Enable Standalone Fullscreen Mode for iOS Safari (Obtained from online sources/documentation)-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Campus Map">
 
+    <!-- Google font stuff -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <title>Campus Map</title>
     <!-- Leaflet's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
     <!-- Our CSS -->
     <link rel="stylesheet" href="css/map.css" />
-
     <script src="https://cdn.jsdelivr.net/npm/leaflet-boundary-canvas@1.0.0/leaflet-boundary-canvas.min.js"></script>
     
     
@@ -23,8 +31,37 @@
     <div id="map"></div>
 
     <div class="marker-popup" id="marker-popup">
-        <div class="marker-popup-content">
-            <h3 id="marker-popup-title">Marker Title</h3>
+        <div id="container">
+            <h1 id="MarkerName">Marker Name</h1>
+            <div class="popup-header-icons">
+                <img src="./assets/icons/menu-icons/bookmark.svg" alt="" class="icon" id="bookmark">
+                <img src="./assets/icons/menu-icons/x.svg" alt="" class="icon" id="close">
+            </div>
+        </div>
+        <div id="container">
+            <h2 id="TypeName">Type Name</h2><pre style="word-spacing: -0.4em;"> • </pre> 
+            <h2 id="Distance">0.0 mi</h2><pre style="word-spacing: -0.4em;"> • </pre>
+            <h2 id="TimeAway">0 min</h2>
+            <img src="./assets/icons/menu-icons/walk.svg" alt="" class="icon" id="walking">
+        </div>
+        <div id="container">
+            <h2 id="OpenStatus">Open</h2>
+            <pre style="word-spacing: -0.4em;"> • </pre>
+            <h2 id="CloseTime">Closes 7 PM</h2>
+        </div>
+        <div id="container" style="gap: 15px; margin-top: 8px">
+            <div id="directions" class="button">
+                <img src="./assets/icons/menu-icons/navigator.svg" alt="" class="icon" id="nav">
+                <span>Directions</span>
+            </div>
+            <div id="website" class="button">
+                <img src="./assets/icons/menu-icons/send.svg" alt="" class="icon" id="send">
+                <span>Website</span>
+            </div>
+        </div>
+        <div id="container" style="gap: 20px; margin-top: 16px; overflow-x: auto">
+            <img src="./assets/images/Library1.png" alt="" class="img" id="img-1">
+            <img src="./assets/images/Library2.png" alt="" class="img" id="img-2">
         </div>
     </div>
 
