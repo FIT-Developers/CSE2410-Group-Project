@@ -115,6 +115,7 @@ div #container {
 }
 #close {
     filter: var(--accent-color-filter);
+    cursor: pointer;
 }
 #walking {
     filter: var(--base-color-filter);
