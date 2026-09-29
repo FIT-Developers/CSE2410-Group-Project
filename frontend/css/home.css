@@ -1,33 +1,8 @@
-@import url('https://googleapis.com');
-html,
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	overflow: hidden;
-	background-color: #000000;
-	/* CSS Font stuff to help match it with the renders from figma */
-	font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
-	font-weight: 400 !important;
-	font-optical-sizing: auto;
-	font-variation-settings: "wght" 400;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-/* Colors to use for the frontend design */
-:root {
-	--accent-color: #B65050;
-	--base-color: #9F9F9F;
-	--light-color: #E7E7E7;
+/* ============================================
 
-	/* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
-	/* https: //codepen.io/sosuke/pen/Pjoqqp */
-	--accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
-	--base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
-	--light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
-	--white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
-	--black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
-}
+	==> home.css
+
+   ============================================ */
 
 #map {
 	height: 100%;
@@ -70,49 +45,6 @@ div #container {
 }
 #send {
 	filter: var(--black-filter)
-}
-
-
-/* Nav Bar */
-#nav-bar {
-	display: flex;
-	align-items: center;
-	background-color: #B65050;
-	border-bottom: 5px solid darkred;
-}
-
-#nav-ul {
-	display: flex;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-#nav-login-signup {
-	display: flex;
-	list-style: none;
-	margin: 0 0 0 auto;
-	padding: 0;
-}
-
-#nav-ul li a, #nav-login-signup li a {
-	display: block;
-	color: #FFFFFF;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-
-#nav-ul li a:hover, #nav-login-signup li a:hover {
-	background-color: aquamarine;
-}
-
-#nav-login-signup-vertical-bar {
-	background-color: black;
-	position: relative;
-	margin: auto;
-	width: 2px;
-	height: 25px;
 }
 
 
