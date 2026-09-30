@@ -28,6 +28,11 @@ body {
 	--white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
 	--black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
 }
+/* ============================================
+
+	==> home.css
+
+   ============================================ */
 
 #map {
 	height: 100%;
