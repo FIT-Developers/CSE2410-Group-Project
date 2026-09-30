@@ -142,7 +142,7 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
 }).addTo(map);
 
 // ==> Function to add marker popup with each marker data from json
-function marker_Popup(marker, titleData, typeData) {
+function marker_Popup(marker, titleData, typeData, img1, img2) {
     marker.on('click', (e) => {
         // Prevent map click event from immediately closing the sheet
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
@@ -151,6 +151,9 @@ function marker_Popup(marker, titleData, typeData) {
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;
         document.getElementById('TypeName').textContent = typeData;
+
+        document.getElementById('img-1').src = img1;
+        document.getElementById('img-2').src = img2;
 
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
@@ -172,7 +175,7 @@ fetch('./data/markers.json')
     locations.forEach(loc => {
       const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
       // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip, loc.type);
+      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2);
     });
   })
   .catch(error => console.error('Error loading markers:', error));

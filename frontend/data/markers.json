@@ -6,7 +6,10 @@
     "lng": -80.62282,
     "color": "#6B8E9B",
     "icon": "book.svg",
-    "type": "Library"
+    "type": "Library",
+    "img1": "./assets/images/Library1.png",
+    "img2": "./assets/images/Library2.png",
+    "web": "http://lib.fit.edu/"
   },
   {
     "id": "Skurla_Hall",
