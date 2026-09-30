@@ -173,6 +173,6 @@ div #container {
 /* Target Mobile Viewports */
 @media screen and (max-width: 768px) {
     .custom-pin svg {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 }
