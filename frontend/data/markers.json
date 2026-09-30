@@ -175,7 +175,7 @@
   },
   {
     "id": "Evans",
-    "tooltip": "Evens Hall",
+    "tooltip": "Evans Hall",
     "lat": 28.067655,
     "lng": -80.623129,
     "color": "#4cdd9e",
@@ -314,18 +314,18 @@
     "tooltip": "WFIT Radio",
     "lat": 28.064500,
     "lng": -80.623098,
-    "color": "#FFC0CB",
-    "icon": "mail.svg",
-    "type": "Radio"
+    "color": "#e59ba8",
+    "icon": "bell.svg",
+    "type": "Service"
   },
   {
     "id": "Ruth_Funk",
-    "tooltip": "Ruth Funk Center(Esports Center)",
+    "tooltip": "Ruth Funk Center (Esports Center)",
     "lat": 28.066089,
     "lng": -80.623188,
-    "color": "#DC143C",
+    "color": "#367b45",
     "icon": "trophy.svg",
-    "type": "Facility"
+    "type": "Sport"
   }
 
   
