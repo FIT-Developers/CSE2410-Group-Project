@@ -4,6 +4,7 @@ git checkout Prototype
 git pull origin Prototype
 
 git checkout -b feature/scheduling-page     {{feature/<page-name>  feature/<component> backend/<service> fix/<bug-name>}}
+{git push -u origin feature/user-login}
 
 git add *
 git commit -m "Add"
