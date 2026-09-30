@@ -1,0 +1,178 @@
+@import url('https://googleapis.com');
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #000000;
+    /* CSS Font stuff to help match it with the renders from figma */
+    font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400 !important;
+    font-optical-sizing: auto;
+    font-variation-settings: "wght" 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* Colors to use for the frontend design */
+:root {
+    --accent-color: #B65050;
+    --base-color: #9F9F9F;
+    --light-color: #E7E7E7;
+
+    /* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
+    /* https: //codepen.io/sosuke/pen/Pjoqqp */
+    --accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
+    --base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
+    --light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
+    --white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
+    --black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+
+.marker-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    z-index: 2000;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
+    
+    /* Inside content, overall padding of popup */
+    padding: 20px 26px 20px 26px; /* Top, Right, Bottom, Left */
+    box-sizing: border-box;
+
+    /* Have it hidden off screen */
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.marker-popup.open {
+    transform: translateY(0);
+}
+
+
+div #container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.marker-popup h1 {
+    margin: 0px;
+    font-size: 1.4rem;
+    /* Fix long names by truncating then adding ... */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.marker-popup h2, pre {
+    margin: 0px;
+    margin-top: 0px;
+    font-size: 1rem;
+    color: var(--base-color)
+}
+.marker-popup .popup-header-icons {
+    display: flex;
+    gap: 0.4rem;
+    margin-left: auto;
+}
+.marker-popup .icon {
+    width: 2.3rem;
+    height: auto;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+.marker-popup .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px 10px 9px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 40px;
+    border: 0px
+}
+.marker-popup .button .icon {
+    width: 1.6rem;
+}
+.marker-popup .img {
+    width: 18rem;
+    height: 14rem;
+    object-fit: cover;
+    
+    border-radius: 30px;
+}
+#bookmark {
+    filter: var(--base-color-filter);
+    width: 2.1rem;
+}
+#close {
+    filter: var(--accent-color-filter);
+    cursor: pointer;
+}
+#walking {
+    filter: var(--base-color-filter);
+    margin-top: 0px;
+    width: 1.1rem;
+}
+#TimeAway {
+    font-variation-settings: 'wght' 700;
+}
+#OpenStatus {
+    font-variation-settings: 'wght' 700;
+    color: var(--accent-color)
+}
+#directions {
+    background-color: var(--accent-color);
+    color:#ffffff;
+}
+#website {
+    background-color: var(--light-color);
+    color:#000000;
+}
+#nav {
+    filter: var(--white-filter)
+}
+#send {
+    filter: var(--black-filter)
+}
+
+
+
+.custom-pin {
+    /* Adding a drop shadow to those custom pins to make sure they can be visible (css documentation helps for formatting) */
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+} /* Animation for easing and outing of the parking area */
+.parking_7 {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.parking_7.active {
+    opacity: 1;
+    border-radius: 10;
+}
+.campus_mask { /* Added a blur and drop shadow because the lines felt too strict */
+    filter: blur(3px) drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.7));
+}
+.user-pin {
+    filter: drop-shadow(0px 8px 8px rgba(182, 80, 80, 0.6));
+}
+
+/* Mobile Screen Adjustments for the marker size */
+.custom-pin svg {
+    transform-origin: center center;
+}
+
+/* Target Mobile Viewports */
+@media screen and (max-width: 768px) {
+    .custom-pin svg {
+        transform: scale(1.2);
+    }
+}

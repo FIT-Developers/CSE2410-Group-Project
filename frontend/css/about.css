@@ -1,17 +1,4 @@
-/* ============================================
-	==> global.css
-
-	==> Used across all HTML files.
-   ============================================ */
-
-/* Imports */
 @import url('https://googleapis.com');
-
-
-/* ============================================ */
-
-
-/* HTML, body*/
 html,
 body {
 	width: 100%;
@@ -27,12 +14,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
-
-/* ============================================ */
-
-
-/* :root */
+/* Colors to use for the frontend design */
 :root {
 	--accent-color: #B65050;
 	--base-color: #9F9F9F;
@@ -47,8 +29,49 @@ body {
 	--black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
 }
 
+#map {
+	height: 100%;
+	width: 100%;
+}
 
-/* ============================================ */
+
+
+div #container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+#close {
+	filter: var(--accent-color-filter);
+}
+#walking {
+	filter: var(--base-color-filter);
+	margin-top: 0px;
+	width: 1.1rem;
+}
+#TimeAway {
+	font-variation-settings: 'wght' 700;
+}
+#OpenStatus {
+	font-variation-settings: 'wght' 700;
+	color: var(--accent-color)
+}
+#directions {
+	background-color: var(--accent-color);
+	color:#ffffff;
+}
+#website {
+	background-color: var(--light-color);
+	color:#000000;
+}
+#nav {
+	filter: var(--white-filter)
+}
+#send {
+	filter: var(--black-filter)
+}
+
 
 /* Nav Bar */
 #nav-bar {
@@ -93,5 +116,45 @@ body {
 }
 
 
-/* ============================================ */
+/* About Page */
+#about-page {
+	display: block;
+	background-color: #000000;
+	position: relative;
+	height: 100vh;
+	width: 100%;
+}
 
+/* Header */
+#about-page-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: goldenrod;
+	position: relative;
+	height: 100px;
+	width: 100%;
+}
+
+#header-title {
+	margin: 0;
+	background-color: green;
+	text-align: center;
+}
+
+/* About Page Content */
+#about-page-content {
+	position: relative;
+	display: block;
+	background-color: beige;
+	height: 100vh;
+	width: 100%;
+}
+
+
+/* Target Mobile Viewports */
+@media screen and (max-width: 768px) {
+	.custom-pin svg {
+		transform: scale(1.2);
+	}
+}
