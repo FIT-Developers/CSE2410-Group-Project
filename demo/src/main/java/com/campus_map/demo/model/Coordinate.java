@@ -11,8 +11,8 @@ public class Coordinate {
 
     public float[] getCoordinates(){
         float[] coordArray = new float[2];
-        coordArray[0] = lon; 
-        coordArray[1] = lat; 
+        coordArray[0] = lat; 
+        coordArray[1] = lon; 
         return coordArray; 
     }
 

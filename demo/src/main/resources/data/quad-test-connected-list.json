@@ -1,0 +1,341 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-21T12:47:06Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 280234240,
+  "nodes": [
+    2843802614,
+    2843802613,
+    2843802612,
+    2843802611,
+    2843802610,
+    2843802609,
+    2843802608,
+    2843802589,
+    2843802590,
+    2843802591,
+    2843802732,
+    2843803133,
+    2843802730,
+    2843802731
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234252,
+  "nodes": [
+    2843802700,
+    2843802744,
+    2843802701,
+    2843802733,
+    2843802702,
+    2843802703,
+    2843802704,
+    2843802591,
+    2843802705,
+    2843802706,
+    2843802707,
+    2843802708
+  ],
+  "tags": {
+    "highway": "service",
+    "oneway": "no",
+    "service": "alley",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 280234253,
+  "nodes": [
+    2843802708,
+    2843802709,
+    2843802710,
+    2843802711,
+    2843802712,
+    2843802713,
+    2843802708
+  ],
+  "tags": {
+    "highway": "service",
+    "oneway": "yes",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 280234256,
+  "nodes": [
+    2843802712,
+    2843802719,
+    2843802720,
+    2843802721,
+    2843802722,
+    2843802723,
+    7527593920,
+    2843802724,
+    2843802725,
+    3554727801,
+    2843802726,
+    2843802727,
+    2843802728,
+    2843802729
+  ],
+  "tags": {
+    "highway": "service",
+    "service": "alley",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 280234268,
+  "nodes": [
+    2843802778,
+    5751509372,
+    2843802731,
+    2843802779,
+    2843802780,
+    2843802781,
+    2843802782,
+    2843802852,
+    2843802783,
+    2843802784
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234290,
+  "nodes": [
+    2843802848,
+    2843802946,
+    2843802949,
+    2843802940,
+    2843802944,
+    2843802921,
+    2843802942,
+    2843802919,
+    2843802914,
+    2843802911,
+    2843802909,
+    2843802849,
+    2843802850,
+    2843802851,
+    2843802852
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234291,
+  "nodes": [
+    2843802853,
+    2843802950,
+    2843802941,
+    2843802922,
+    2843802920,
+    2843802915,
+    2843802912,
+    2843802854,
+    2843802855,
+    2843802856,
+    2843802857,
+    2843802858,
+    2843802859
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234295,
+  "nodes": [
+    2843802908,
+    2843802909,
+    2843802917,
+    2843802854,
+    2843802910
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234296,
+  "nodes": [
+    2843802911,
+    2843802912
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234297,
+  "nodes": [
+    2843802913,
+    2843802914,
+    2843802915,
+    2843802916
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234298,
+  "nodes": [
+    2843802917,
+    2843802918
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234299,
+  "nodes": [
+    2843802919,
+    2843802920
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234300,
+  "nodes": [
+    2843802731,
+    2843802921,
+    2843802922,
+    2843803130,
+    2843803129
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234302,
+  "nodes": [
+    2843802940,
+    2843802941
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete:plates"
+  }
+},
+{
+  "type": "way",
+  "id": 280234303,
+  "nodes": [
+    2843802942,
+    2843802943
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234304,
+  "nodes": [
+    2843802944,
+    2843802945
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234319,
+  "nodes": [
+    2843802974,
+    7527593990,
+    3554727801,
+    2843802923
+  ],
+  "tags": {
+    "crossing": "zebra",
+    "footway": "crossing",
+    "highway": "footway",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 280234321,
+  "nodes": [
+    2843803129,
+    2843802923
+  ],
+  "tags": {
+    "highway": "steps",
+    "surface": "concrete"
+  }
+},
+{
+  "type": "way",
+  "id": 280234322,
+  "nodes": [
+    2843803130,
+    2843803131,
+    2843803132
+  ],
+  "tags": {
+    "highway": "footway",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 804769521,
+  "nodes": [
+    7527594207,
+    7527593920,
+    2843802856
+  ],
+  "tags": {
+    "highway": "footway",
+    "name": "Dent Smith Trail"
+  }
+}
+
+  ]
+}

@@ -1,0 +1,1 @@
+Spatial hashing for the pathfinding algorithm

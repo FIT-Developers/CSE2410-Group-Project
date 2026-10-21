@@ -10,7 +10,9 @@ public class MapApplication {
 
 	public static void main(String[] args) throws Exception {
 
-		ObjectMapper objectMapper = new ObjectMapper();
+		MapBuilder mb = new MapBuilder(); 
+
+		/*ObjectMapper objectMapper = new ObjectMapper();
 		Graph graph = new Graph(); 
 		Building[] buildings = new Building[100]; 
 
@@ -24,7 +26,7 @@ public class MapApplication {
 
 			System.out.println("Current working directory: ");
 		System.out.println(System.getProperty("user.dir"));
-		SpringApplication.run(MapApplication.class, args);
+		SpringApplication.run(MapApplication.class, args);*/
 	
 
 	}
