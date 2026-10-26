@@ -12,21 +12,7 @@ public class MapApplication {
 
 		MapBuilder mb = new MapBuilder(); 
 
-		/*ObjectMapper objectMapper = new ObjectMapper();
-		Graph graph = new Graph(); 
-		Building[] buildings = new Building[100]; 
-
-		JsonNode jsonNode = objectMapper.readTree(new File("demo/src/main/resources/data/buildings.json"));
-		JsonNode buildingsNode = jsonNode.get("buildings");
-
-		for (JsonNode buildingNode : buildingsNode) {
-			graph.addNode(buildingNode.get("name").asText(), buildingNode.get("longitude").floatValue(), buildingNode.get("latitude").floatValue());
-		}
-			
-
-			System.out.println("Current working directory: ");
-		System.out.println(System.getProperty("user.dir"));
-		SpringApplication.run(MapApplication.class, args);*/
+		SpringApplication.run(MapApplication.class, args);
 	
 
 	}

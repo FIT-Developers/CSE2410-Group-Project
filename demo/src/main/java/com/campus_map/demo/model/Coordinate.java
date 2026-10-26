@@ -1,27 +1,35 @@
 package com.campus_map.demo.model;
 public class Coordinate {
 
-    private float lat; 
-    private float lon; 
+    private double lat; 
+    private double lon; 
 
-    public Coordinate(float lat, float lon){
+    public Coordinate(double lat, double lon){
         this.lat = lat;
         this.lon = lon; 
     }
 
-    public float[] getCoordinates(){
-        float[] coordArray = new float[2];
+    public double[] getCoordinates(){
+        double[] coordArray = new double[2];
         coordArray[0] = lat; 
         coordArray[1] = lon; 
         return coordArray; 
     }
 
-    public void setLat(float newLat){
+    public void setLat(double newLat){
         lat = newLat; 
     }
 
-    public void setLon(float newLon){
+    public void setLon(double newLon){
         lon = newLon; 
+    }
+
+    public double getLat(){
+        return lat; 
+    }
+
+    public double getLon(){
+        return lon; 
     }
 
 }
