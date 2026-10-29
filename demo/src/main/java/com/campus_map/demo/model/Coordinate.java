@@ -9,12 +9,12 @@ public class Coordinate {
         this.lon = lon; 
     }
 
-    public double[] getCoordinates(){
+    /*public double[] getCoordinates(){
         double[] coordArray = new double[2];
         coordArray[0] = lat; 
         coordArray[1] = lon; 
         return coordArray; 
-    }
+    }*/
 
     public void setLat(double newLat){
         lat = newLat; 

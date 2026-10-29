@@ -1,12 +1,15 @@
 package com.campus_map.demo;
 import java.util.HashMap; 
 import com.fasterxml.jackson.databind.*; 
-import java.io.File; 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.List; 
 import java.util.PriorityQueue;
 import com.campus_map.demo.model.*;
 import com.campus_map.*;
 import java.util.ArrayList; 
+import java.nio.file.Path; 
 
 public class MapBuilder {
 
@@ -29,12 +32,16 @@ public class MapBuilder {
         
         public String node1; 
         public String node2; 
+        public Coordinate node1Coord; 
+        public Coordinate node2Coord; 
         double distance; 
 
         public MapEdge(String node1, String node2, double distance){
             this.node1 = node1; 
             this.node2 = node2; 
             this.distance = distance; 
+            this.node1Coord = NodeReference.getLocation(node1); 
+            this.node2Coord = NodeReference.getLocation(node2); 
         }
 
         //Custom comparator for later insertion into a PQ, possibly other data structures in the future
@@ -123,9 +130,25 @@ public class MapBuilder {
                 nodeChecker.put(current.node2, true); 
             }
         }
-    }
+    }   
+        File outputFile = new File("demo/src/main/resources/data/edge-output.json"); 
+        Path outputPath = Path.of("demo/src/main/resources/data/edge-output.json"); 
 
+        mapper.writeValue(outputFile, filteredEdges);
+        
+        /*for (MapEdge e : filteredEdges){
+            Files.writeString(outputPath, e.node1 + "\n", StandardOpenOption.APPEND);
+            Coordinate node1Coord = NodeReference.getLocation(e.node1); 
+            Files.writeString(outputPath, String.valueOf(node1Coord.getLat()) + " " + String.valueOf(node1Coord.getLon()) + "\n", StandardOpenOption.APPEND); 
+
+            Files.writeString(outputPath, e.node2 + "\n", StandardOpenOption.APPEND);
+            Coordinate node2Coord = NodeReference.getLocation(e.node2); 
+            Files.writeString(outputPath, String.valueOf(node2Coord.getLat()) + " " + String.valueOf(node2Coord.getLon()) + "\n", StandardOpenOption.APPEND); 
+
+
+        }*/
         System.out.println("test"); 
+
 
 
         
