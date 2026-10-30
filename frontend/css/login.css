@@ -1,0 +1,66 @@
+
+
+/* Header */
+#login-page-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: goldenrod;
+	position: relative;
+	height: 100px;
+	width: 100%;
+}
+
+#login-title {
+	margin: 0;
+	background-color: green;
+	text-align: center;
+}
+
+/* Login Page Content */
+#login-page-content {
+	display: flex;
+    justify-content: center;
+	background-color: beige;
+	height: 100vh;
+	width: 100%;
+}
+
+/* Login Form */
+#login-form-div {
+    margin-top: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 50vh;
+    width: 55vh;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#login-form label {
+    font-size: 25px;
+}
+
+#login-form input {
+    font-size: 25px;
+    border: 2px solid black;
+}
+
+#login-form input[type=email],
+#login-form input[type=password] {
+    position: relative;
+    background: none;
+    box-sizing: content-box;
+    color: black;
+    padding: 10px;
+}
+
+#login-form input[type=submit] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+}
