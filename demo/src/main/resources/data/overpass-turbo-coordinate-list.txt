@@ -1,0 +1,12 @@
+top left: 28.070447, -80.625465
+middle left: 28.064113, -80.626141
+bottom left: 28.057893, -80.625637
+bottom right: 28.057969, -80.621581
+mary star of sea bottom right: 28.058878, -80.620036
+mary star of sea top right: 28.059633, -80.620084
+mid right: 28.059739, -80.621340
+mid right: 28.062594, -80.621270
+l3 harris commons bottom right: 28.062556, -80.619500
+top right of southgate: 28.067999, -80.619698
+top left of southgate: 28.068033, -80.621184
+top right of babbling brook: 28.069680, -80.621409
