@@ -143,11 +143,17 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
 }).addTo(map);
 
 // ==> Function to add marker popup with each marker data from json
+let selectedBuilding = null;
+let routeLine = null;
 function marker_Popup(marker, titleData, typeData, img1, img2) {
     marker.on('click', (e) => {
+        
         // Prevent map click event from immediately closing the sheet
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
+
+
+        selectedBuilding = marker.getLatLng();
 
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;
@@ -164,6 +170,63 @@ function marker_Popup(marker, titleData, typeData, img1, img2) {
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
     document.getElementById('marker-popup').classList.remove('open');
+});
+
+document.querySelector('#directions').addEventListener('click', async function(event) {
+    console.log('Directions clicked');
+    event.preventDefault();
+
+    
+    // Read the latest user location from your existing GPS marker.
+    const userPosition = userMarker.getLatLng();
+
+    this.disabled = true;
+
+    try {
+        const response = await fetch('/api/route', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                start: {
+                    lat: userPosition.lat,
+                    lng: userPosition.lng
+                },
+                destination: {
+                    lat: selectedBuilding.lat,
+                    lng: selectedBuilding.lng
+                }
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Route request failed (${response.status})`);
+        }
+
+        const data = await response.json();
+
+
+        if (routeLine) {
+            map.removeLayer(routeLine);
+        }
+
+        routeLine = L.polyline(data.path, {
+            color: '#0078ff',
+            weight: 5
+        }).addTo(map);
+
+        document.getElementById('marker-popup').classList.remove('open');
+
+        map.fitBounds(routeLine.getBounds(), {
+            padding: [30, 30]
+        });
+    } catch (error) {
+        console.error(error);
+        
+    } finally {
+        this.disabled = false;
+    }
 });
 
 // ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
