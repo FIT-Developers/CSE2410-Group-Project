@@ -201,6 +201,33 @@ document.getElementById('marker-popup').addEventListener('click', (e) => {
 // ============================================================================================================================================================
 
 
+// ============================================================================================================================================================
+// ======================================================Button Activations====================================================================================
+// ============================================================================================================================================================
+// Adds a dropdown when clicking the filter button, which shows the days of the week
+document.addEventListener("DOMContentLoaded", () => {
+    // Have variables for the HTML ID's, fetch them
+    const filterContainer = document.querySelector(".filter-container");
+    const filterBtn = document.getElementById("filterBtn");
+
+    // When btn clicked sets filter container to have .active
+    filterBtn.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevents immediate close from bubbling up to document
+        filterContainer.classList.toggle("active");
+    });
+
+    // If clicking outside contained, then get rid of dropdown/.active
+    document.addEventListener("click", (event) => {
+        if (!filterContainer.contains(event.target)) {
+            filterContainer.classList.remove("active");
+        }
+    });
+});
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+
+
 
 // ============================================================================================================================================================
 // ======================================================LIVE USER GPS, With User Marker=======================================================================

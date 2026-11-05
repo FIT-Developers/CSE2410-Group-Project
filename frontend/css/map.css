@@ -175,11 +175,20 @@ div #container {
 }
 
 
-.filter-btn {
+
+
+
+/* =====> Filter Button + Dropdown <===== */
+.filter-container {
     z-index: 1003;
     position: fixed;
     top: 25px;
     right: 20px;
+    width: 47px;
+}
+.filter-btn {
+    position: relative;
+    z-index: 1002;
     width: 47px;
     height: 47px;
     background-color: white;
@@ -188,14 +197,74 @@ div #container {
     justify-content: center;
     align-items: center;
     padding: 0 0px;
+
     filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2));
 }
-
 .filter-btn .icon {
     width: 32px;
     margin-top: 2px;
     filter: var(--accent-color-filter);
 }
+/* Swaps the colors when btn active */
+.filter-container.active .filter-btn {
+    background-color: var(--accent-color);
+}
+.filter-container.active .filter-btn .icon {
+    filter: brightness(0) invert(1);
+}
+.dropdown-slot {
+    /* Position */
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 110%;
+    margin-top: 0px;
+    /* Border */
+    border-radius: 50px;
+    box-sizing: border-box;
+    border: 4px solid var(--accent-color);
+    /* Visuals */
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2));
+    background-color: #ffffff;
+    /* Contents */
+    padding: 54px 0 6px 0;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Animation */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0px);
+    transition: opacity 0.15s ease, transform 0.15s ease, max-height 0.2s ease, visibility 0.15s;
+}
+/* --- ACTIVE DROPDOWN STATE --- */
+.filter-container.active .dropdown-slot {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    max-height: 300px;
+}
+/* 5. Dropdown Menu Items */
+.icon-item {
+    width: 36px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50px;
+    background-color: var(--light-color);
+    cursor: pointer;
+    /* Align text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Text */
+    font-variation-settings: 'wght' 500;
+    font-size: 20px;
+}
+.icon-item:active {
+    transform: scale(0.92); /* Change size when clicked */
+}
+
+
 
 
 
