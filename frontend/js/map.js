@@ -55,10 +55,9 @@ var map = L.map('map', {
     zoomControl: false,
     attributionControl: false,
 
-    keepBuffer: 12,                 
-    updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
-    updateWhenZooming: true,        // Keeps rendering tiles while zoom animations play
     tileSize: 256,
+
+    inertia: false, // Stops the flicking, going out of bounds
     
     // Smoothness:
     crossOrigin: true
@@ -78,7 +77,11 @@ var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/se
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
     subdomains: 'abcd',
     maxNativeZoom: 20,
-    maxZoom: 22
+    maxZoom: 22,
+
+    keepBuffer: 12,                 
+    updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
+    updateWhenZooming: true,        // Keeps rendering tiles while zoom animations play
 }).addTo(map);
 
 
@@ -203,6 +206,7 @@ document.getElementById('marker-popup').addEventListener('click', (e) => {
 // ======================================================LIVE USER GPS, With User Marker=======================================================================
 // ============================================================================================================================================================
 // Create global variables to fix multiple markers being placed with reload
+let currentCoords = null; 
 let userMarker = null;
 let accuracyCircle = null;
 // ==> Grabs correct coords and location of a user (Followed by https://www.youtube.com/watch?v=4D6nJd_ORX4)
@@ -218,6 +222,9 @@ if (navigator.geolocation) {
 function successLocation(position) {
     // Storing and grabbing cords
     const {latitude, longitude, accuracy} = position.coords;
+
+    // Store code for outside function use
+    currentCoords = [latitude, longitude];
 
     // Deletes Markers if there already present, to have room to create new ones
     if (userMarker) {
@@ -261,6 +268,32 @@ function errorLocation(error) {
     console.error(error);
     alert("Location access failed. Loading default view")
 }
+
+
+document.querySelector('.active-location-btn').addEventListener('click', function() {
+    if (currentCoords) {
+        map.setView(currentCoords, 16, {
+            animate: true,
+            pan: {
+                duration: 6,
+                easeLinearity: 5
+            }
+        });
+
+        // Goes down in zoom when over user
+        map.once('moveend', function() {
+            map.setView(currentCoords, 19, {
+                animate: true,
+                zoom: {
+                    duration: 6
+                }
+            });
+        });
+    } else {
+        console.log("Location doesn't exist or permission denied.");
+    }
+});
+
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
