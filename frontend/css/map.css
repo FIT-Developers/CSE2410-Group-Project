@@ -102,6 +102,10 @@ body {
     
     border-radius: 30px;
 }
+.custom-pin.active-pin svg {
+    transform: scale(1.6);
+    transition: transform 0.2s ease-in-out;
+}
 
 
 
@@ -372,6 +376,7 @@ div #container {
 /* Mobile Screen Adjustments for the marker size */
 .custom-pin svg {
     transform-origin: center center;
+    transition: transform 0.2s ease-out;
 }
 
 /* Target Mobile Viewports */

@@ -152,6 +152,13 @@ function marker_Popup(marker, titleData, typeData, img1, img2) {
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
 
+        // Removes all the active markers class 
+        document.querySelectorAll('.custom-pin').forEach(pin => {
+            pin.classList.remove('active-pin');
+        });
+        // Enlarge active marker, similar to google maps
+        marker.getElement().classList.add('active-pin');
+
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;
         document.getElementById('TypeName').textContent = typeData;
@@ -161,12 +168,24 @@ function marker_Popup(marker, titleData, typeData, img1, img2) {
 
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
+
+        // Used to keep the marker centered higher, Math.pow counteracts the zooming issue
+        const offset = (.0008 / Math.pow(2, map.getZoom() - 18));
+        // Make user go to that marker they clicked, only goto, keep the same zoom
+        map.setView([marker.getLatLng().lat - offset, marker.getLatLng().lng], map.getZoom(), {
+            animate: true,
+            pan: { duration: 0.5 }
+        });
     });
 }
 
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
     document.getElementById('marker-popup').classList.remove('open');
+    // Removes the active markers class when exiting popup
+    document.querySelectorAll('.custom-pin').forEach(pin => {
+        pin.classList.remove('active-pin');
+    });
 });
 
 // ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
@@ -189,6 +208,11 @@ fetch('./data/markers.json')
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
     document.getElementById('marker-popup').classList.remove('open');
+    // Removes the active markers class when exiting popup
+    document.querySelectorAll('.custom-pin').forEach(pin => {
+        pin.classList.remove('active-pin');
+    });
+    
 }); // This prevents clicks on the actually popup to slide it down
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
@@ -299,21 +323,19 @@ function errorLocation(error) {
 
 document.querySelector('.active-location-btn').addEventListener('click', function() {
     if (currentCoords) {
-        map.setView(currentCoords, 16, {
+        map.setView(currentCoords, map.getZoom(), {
             animate: true,
             pan: {
-                duration: 6,
-                easeLinearity: 5
+                duration: 0.5,
+                easeLinearity: 0.5
             }
         });
 
         // Goes down in zoom when over user
         map.once('moveend', function() {
-            map.setView(currentCoords, 19, {
+            map.flyTo(currentCoords, 19, {
                 animate: true,
-                zoom: {
-                    duration: 6
-                }
+                duration: 0.5
             });
         });
     } else {
