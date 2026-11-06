@@ -293,3 +293,5 @@ div #container {
 	background-color: var(--accent-color); /* Matches your #B65050 accent color */
 	color: #ffffff;
 }
+
+/* Implemented live-location search and category marker filtering */
