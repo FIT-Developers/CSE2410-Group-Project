@@ -302,6 +302,7 @@ div #container {
     background: transparent;
     font-size: 22px;
     color: #000000;
+    width:calc(100% - 82px);
 
     /* Weird font issues, so set it manually */
     font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
