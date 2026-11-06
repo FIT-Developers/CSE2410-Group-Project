@@ -57,10 +57,9 @@ var map = L.map('map', {
     zoomControl: false,
     attributionControl: false,
 
-    keepBuffer: 12,                 
-    updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
-    updateWhenZooming: true,        // Keeps rendering tiles while zoom animations play
     tileSize: 256,
+
+    inertia: false, // Stops the flicking, going out of bounds
     
     // Smoothness:
     crossOrigin: true
@@ -80,7 +79,11 @@ var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/se
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
     subdomains: 'abcd',
     maxNativeZoom: 20,
-    maxZoom: 22
+    maxZoom: 22,
+
+    keepBuffer: 12,                 
+    updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
+    updateWhenZooming: true,        // Keeps rendering tiles while zoom animations play
 }).addTo(map);
 
 
@@ -170,6 +173,14 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
 
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
+
+        // Used to keep the marker centered higher, Math.pow counteracts the zooming issue
+        const offset = (.0008 / Math.pow(2, map.getZoom() - 18));
+        // Make user go to that marker they clicked, only goto, keep the same zoom
+        map.setView([marker.getLatLng().lat - offset, marker.getLatLng().lng], map.getZoom(), {
+            animate: true,
+            pan: { duration: 0.5 }
+        });
     });
 
 }
@@ -177,6 +188,10 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
     document.getElementById('marker-popup').classList.remove('open');
+    // Removes the active markers class when exiting popup
+    document.querySelectorAll('.custom-pin').forEach(pin => {
+        pin.classList.remove('active-pin');
+    });
 });
 //website button now redirects to website in json
 document.querySelector('#website').addEventListener('click', function(){
@@ -225,6 +240,11 @@ fetch('./data/markers.json')
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
     document.getElementById('marker-popup').classList.remove('open');
+    // Removes the active markers class when exiting popup
+    document.querySelectorAll('.custom-pin').forEach(pin => {
+        pin.classList.remove('active-pin');
+    });
+    
 }); // This prevents clicks on the actually popup to slide it down
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
@@ -238,11 +258,71 @@ document.getElementById('marker-popup').addEventListener('click', (e) => {
 // ============================================================================================================================================================
 
 
+// ============================================================================================================================================================
+// =========================================================Filter Button======================================================================================
+// ============================================================================================================================================================
+// Local Storage gets also dictionary stuff, to set the value for each day, if nothing grabs defaults to false
+// Info about it https://www.w3schools.com/jsref/prop_win_localstorage.asp
+const filterStates = {
+    M: localStorage.getItem('filter_state_M') === "true",
+    Tu: localStorage.getItem('filter_state_Tu') === "true",
+    W: localStorage.getItem('filter_state_W') === "true",
+    Th: localStorage.getItem('filter_state_Th') === "true",
+    F: localStorage.getItem('filter_state_F') === "true"
+};
+// Adds a dropdown when clicking the filter button, which shows the days of the week
+document.addEventListener("DOMContentLoaded", () => {
+    // Have variables for the HTML ID's, fetch them
+    const filterContainer = document.querySelector(".filter-container");
+    const filterBtn = document.getElementById("filterBtn");
+
+    // When btn clicked sets filter container to have .active
+    filterBtn.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevents immediate close from bubbling up to document
+        filterContainer.classList.toggle("active");
+    });
+
+    // If clicking outside contained, then get rid of dropdown/.active
+    document.addEventListener("click", (event) => {
+        if (!filterContainer.contains(event.target)) {
+            filterContainer.classList.remove("active");
+        }
+    });
+
+    // The list of id's in the html
+    const filterDays = ['M', 'Tu', 'W', 'Th', 'F'];
+    // Loop through those ids
+    filterDays.forEach(dayId => {
+        // store the id as a element in a variable
+        const dayElement = document.getElementById(dayId);
+        
+        // If that global list is true for that id then give it the class to change css
+        if (filterStates[dayId]) {
+            dayElement.classList.add('active-filter');
+        }
+        // When clicking that element change its global boolean value
+        dayElement.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+            // Simple invert boolean
+            filterStates[dayId] = !filterStates[dayId];
+            // Toggle the CSS class based on the new boolean value
+            dayElement.classList.toggle('active-filter', filterStates[dayId]);
+            // Save new boolean to localStorage by using setItem, this is so it can persist on reload
+            localStorage.setItem(`filter_state_${dayId}`, filterStates[dayId]);
+        });
+    });
+});
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+
+
 
 // ============================================================================================================================================================
 // ======================================================LIVE USER GPS, With User Marker=======================================================================
 // ============================================================================================================================================================
 // Create global variables to fix multiple markers being placed with reload
+let currentCoords = null; 
 let userMarker = null;
 let accuracyCircle = null;
 // ==> Grabs correct coords and location of a user (Followed by https://www.youtube.com/watch?v=4D6nJd_ORX4)
@@ -258,6 +338,9 @@ if (navigator.geolocation) {
 function successLocation(position) {
     // Storing and grabbing cords
     const {latitude, longitude, accuracy} = position.coords;
+
+    // Store code for outside function use
+    currentCoords = [latitude, longitude];
 
     // Deletes Markers if there already present, to have room to create new ones
     if (userMarker) {
