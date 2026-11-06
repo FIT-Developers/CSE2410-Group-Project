@@ -31,7 +31,7 @@ public class MapBuilder {
 
 
     //Edge class for storing the edges once all of the best edges have been found
-    class MapEdge implements Comparable<MapEdge>{
+    class MapEdge{
         
         public String node1; 
         public String node2; 
@@ -48,18 +48,6 @@ public class MapBuilder {
         }
 
 
-        //Custom comparator for later insertion into a PQ, possibly other data structures in the future
-        public int compareTo(MapEdge otherEdge){
-            if (this.distance == otherEdge.distance){
-                return 0; 
-            }
-            else if (this.distance > otherEdge.distance){
-                return 1; 
-            }
-            else {
-                return -1; 
-            }
-        }
 
     }
 
@@ -92,8 +80,7 @@ public class MapBuilder {
         ObjectMapper mapper = new ObjectMapper(); 
         //Makes it so the mapper won't fail when encountering a value that doesn't have a matching name in 
         //the corresponding class
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false
-);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         //A list to store our final "filtered" edges and a list to operate on the "ways" in the JSON file
         List<MapEdge> filteredEdges = new ArrayList<>(); 
@@ -106,11 +93,14 @@ public class MapBuilder {
         JsonNode elements = root.get("elements");
         for (JsonNode value : elements){
             Coordinate coord = new Coordinate(Double.parseDouble(value.get("lat").asText()), Double.parseDouble(value.get("lon").asText()));
-            NodeReference.addNode(value.get("id").asText(), coord); 
+            NodeReference.addNodeLocation(value.get("id").asText(), coord); 
         }
 
         //For each way in the WayList, iterate through and generate all edges between all nodes. 
         //Add them to a PQ, keyed on their distance. 
+        double minLon = 10000000; 
+        double minLat = 10000000; 
+
         for (WayList.Element e : list.elements){
             for(int i = 1; i < e.nodes.length; i ++){
                 String node1 = e.nodes[i - 1]; 
@@ -120,13 +110,48 @@ public class MapBuilder {
                 double comparisonDistance = distance(node1Coord, node2Coord); 
                 MapEdge newEdge = new MapEdge(node1, node2, comparisonDistance); 
                 filteredEdges.add(newEdge); 
+
+                Node firstNode; 
+                Node secondNode; 
+                if ((firstNode = NodeReference.nodeIdMap.get(node1)) == null) {
+                    firstNode = new Node(node1, node1Coord); 
+                    NodeReference.nodeIdMap.put(firstNode.getId(), firstNode); 
+                }
+                if ((secondNode = NodeReference.nodeIdMap.get(node2)) == null) {
+                    secondNode = new Node(node2, node2Coord); 
+                    NodeReference.nodeIdMap.put(firstNode.getId(), firstNode); 
+                }
+
+                double weight = distance(firstNode.getCoordinates(), secondNode.getCoordinates()); 
+                System.out.println(weight); 
+
+                Edge forwardsEdge = new Edge(secondNode, weight); 
+                firstNode.addNeighbor(forwardsEdge); 
+                Edge backwardsEdge = new Edge(firstNode, weight); 
+                secondNode.addNeighbor(backwardsEdge); 
+
+                NodeReference.insertSpatial(firstNode); 
+                NodeReference.insertSpatial(secondNode); 
+
+                //TODO Remove this shit
+                if (firstNode.getCoordinates().getLat() < minLat) { minLat = firstNode.getCoordinates().getLat(); }
+                if (firstNode.getCoordinates().getLon() < minLon) { minLon = firstNode.getCoordinates().getLon(); }
+                if (secondNode.getCoordinates().getLat() < minLat) { minLat = secondNode.getCoordinates().getLat(); }
+                if (secondNode.getCoordinates().getLon() < minLon) { minLon = secondNode.getCoordinates().getLon(); }
         }
 
     }   
+
+        //TODO Also remove this
+        minLon = minLon * (98.0 / 111.0); 
+        System.out.println(minLon); 
+        System.out.println(minLat); 
         File outputFile = new File("demo/src/main/resources/data/edge-output.json"); 
         mapper.writeValue(outputFile, filteredEdges);
-        
-        System.out.println("test"); 
+        System.out.println(filteredEdges.size()); 
+        Coordinate testCoordinate = new Coordinate(28.064904, -80.622600); 
+        Node closestNode = NodeReference.getClosestNode(testCoordinate); 
+        System.out.print(closestNode.getId() + ", " + closestNode.getCoordinates().getLon() + ", " + closestNode.getCoordinates().getLat()); 
 
 
 

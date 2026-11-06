@@ -1,25 +1,19 @@
 package com.campus_map.demo.model;
 
 public class Edge {
-    private Node host;
     private Node destination; 
-    private float weight; 
+    private double weight; 
 
-    public Edge(Node host, Node destination, float weight){
-        this.host = host;
+    public Edge(Node destination, double weight){
         this.destination = destination; 
         this.weight = weight; 
     }
 
-    public Node getHost(){
-        return host; 
-    }
-    
     public Node getDestination(){
         return destination; 
     }
 
-    public float getWeight(){
+    public double getWeight(){
         return weight; 
     }
 }

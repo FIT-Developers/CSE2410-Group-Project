@@ -4,7 +4,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
-
+let x = 0; 
 fetch('/node-data/edge-output.json')
   .then(response => response.json())
   .then(edges => {
@@ -15,6 +15,8 @@ fetch('/node-data/edge-output.json')
                           [edge.node2Coord.lat, edge.node2Coord.lon] ]; 
         
         var polyline = L.polyline(pathcoords, {color: 'red'}).addTo(map);
+        x++; 
     });
   })
   .catch(error => console.error('Error loading markers:', error));
+  console.log(x); 

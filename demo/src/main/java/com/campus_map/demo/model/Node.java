@@ -1,10 +1,12 @@
 package com.campus_map.demo.model;
 import java.util.ArrayList;
 public class Node {
+    private String id; 
     private Coordinate coords; 
     private ArrayList<Edge> neighbors; 
 
-    public Node(Coordinate coords){
+    public Node(String id, Coordinate coords){
+        this.id = id; 
         this.coords = coords; 
         this.neighbors = new ArrayList<>();
     }
@@ -15,6 +17,10 @@ public class Node {
 
     public void addNeighbor(Edge newEdge){
         neighbors.add(newEdge); 
+    }
+
+    public String getId(){
+        return id; 
     }
 
     public ArrayList<Edge> getNeighbors(){
