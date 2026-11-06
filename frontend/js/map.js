@@ -145,7 +145,8 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
 // ==> Function to add marker popup with each marker data from json
 let selectedBuilding = null;
 let routeLine = null;
-function marker_Popup(marker, titleData, typeData, img1, img2) {
+let markerWebsite = null;
+function marker_Popup(marker, titleData, typeData, img1, img2, web) {
     marker.on('click', (e) => {
         
         // Prevent map click event from immediately closing the sheet
@@ -154,6 +155,7 @@ function marker_Popup(marker, titleData, typeData, img1, img2) {
 
 
         selectedBuilding = marker.getLatLng();
+        markerWebsite = web
 
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;
@@ -162,72 +164,43 @@ function marker_Popup(marker, titleData, typeData, img1, img2) {
         document.getElementById('img-1').src = img1;
         document.getElementById('img-2').src = img2;
 
+       
+
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
     });
+
 }
 
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
     document.getElementById('marker-popup').classList.remove('open');
 });
+document.querySelector('#website').addEventListener('click', function(){
+    window.open(markerWebsite, '_blank');
+})
 
+//when direction button is pressed start nav
+let navigating = false;
 document.querySelector('#directions').addEventListener('click', async function(event) {
-    console.log('Directions clicked');
     event.preventDefault();
-
-    
-    // Read the latest user location from your existing GPS marker.
-    const userPosition = userMarker.getLatLng();
-
-    this.disabled = true;
-
-    try {
-        const response = await fetch('/api/route', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                start: {
-                    lat: userPosition.lat,
-                    lng: userPosition.lng
-                },
-                destination: {
-                    lat: selectedBuilding.lat,
-                    lng: selectedBuilding.lng
-                }
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Route request failed (${response.status})`);
-        }
-
-        const data = await response.json();
-
+    //kills nav if button pressed again and removes route line
+    if (navigating) {
+        navigating = false;
 
         if (routeLine) {
             map.removeLayer(routeLine);
+            routeLine = null;
         }
 
-        routeLine = L.polyline(data.path, {
-            color: '#0078ff',
-            weight: 5
-        }).addTo(map);
-
-        document.getElementById('marker-popup').classList.remove('open');
-
-        map.fitBounds(routeLine.getBounds(), {
-            padding: [30, 30]
-        });
-    } catch (error) {
-        console.error(error);
-        
-    } finally {
-        this.disabled = false;
+        return;
     }
+    navigating = true;
+    lastRouteUpdate = Date.now();
+    await updateRoute();
 });
+
+
 
 // ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
 // Grabbed online for how to parse and obtain .json data as this is new to me
@@ -239,7 +212,7 @@ fetch('./data/markers.json')
     locations.forEach(loc => {
       const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
       // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2);
+      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
     });
   })
   .catch(error => console.error('Error loading markers:', error));
@@ -253,6 +226,7 @@ map.on('click', () => {
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
+
 //**********************************************************
 // Detecting mouseover to make the highlighted area visible ### NO LONGER WORKS WITH .json ###
 //Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Optional Chaining is used so errors dont occur if null
@@ -319,11 +293,74 @@ function successLocation(position) {
         fillOpacity: .2,
         color: '#B65050'
     }).addTo(map);
+    if (navigating && Date.now() - lastRouteUpdate >= 5000) {
+        lastRouteUpdate = Date.now();
+        updateRoute();
+    }
 }
 function errorLocation(error) {
     console.error(error);
     alert("Location access failed. Loading default view")
 }
+// ==> Draws the route gotten from backend on screen every 5 seconds
+// Uses fetch request to backend
+let routeInProgress = false;
+let lastRouteUpdate = 0;
+async function updateRoute() {
+    
+    if(!userMarker || !selectedBuilding || routeInProgress || !worldPolygon.contains(userMarker.getLatLng)) return;
+
+    routeInProgress = true;
+
+      try {
+        const position = userMarker.getLatLng();
+        const response = await fetch('/api/route', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                start: {
+                    lat: position.lat,
+                    lng: position.lng
+                },
+                destination: {
+                    lat: selectedBuilding.lat,
+                    lng: selectedBuilding.lng
+                }
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Route request failed (${response.status})`);
+        }
+
+        const data = await response.json();
+
+
+        if (routeLine) {
+            map.removeLayer(routeLine);
+        }
+
+        routeLine = L.polyline(data.path, {
+            color: '#0078ff',
+            weight: 5
+        }).addTo(map);
+
+        document.getElementById('marker-popup').classList.remove('open');
+
+        map.fitBounds(routeLine.getBounds(), {
+            padding: [30, 30]
+        });
+    } catch (error) {
+        console.error(error);
+        
+    } finally{
+        routeInProgress = false
+    }
+
+}
+
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
