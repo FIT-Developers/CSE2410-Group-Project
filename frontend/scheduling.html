@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Enable Standalone Fullscreen Mode for iOS Safari (Obtained from online sources/documentation)-->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="Campus Map">
+
+	<!-- Google font stuff -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&display=swap"
+		rel="stylesheet">
+
+
+	<title>Campus Map</title>
+	<!-- Our CSS -->
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/scheduling.css" />
+
+
+</head>
+
+<body>
+	<div class="bottom-nav" id="footer">
+		<a href="map.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/compass.svg" alt="" class="icon">
+		</a>
+		<a href="scheduling.html" class="nav-item active">
+			<img src="./assets/icons/menu-icons/calendar.svg" alt="" class="icon">
+		</a>
+		<a href="home.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/user.svg" alt="" class="icon">
+		</a>
+		<a href="home.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/setting.svg" alt="" class="icon">
+		</a>
+	</div>
+
+
+
+
+
+	<div class="schedule-viewport" id="scheduleViewport">
+		<div class="schedule-grid">
+	
+			<div class="corner-cell"></div>
+	
+			<!-- Sticky Day Headers -->
+			<div class="head" id="mon-head">
+				<span class="name">Mon</span><span class="date">8/24</span>
+			</div>
+			<div class="head" id="tues-head">
+				<span class="name">Tues</span><span class="date">8/25</span>
+			</div>
+			<div class="head" id="wed-head">
+				<span class="name">Wed</span><span class="date">8/26</span>
+			</div>
+			<div class="head" id="thurs-head">
+				<span class="name">Thurs</span><span class="date">8/27</span>
+			</div>
+			<div class="head" id="fri-head">
+				<span class="d-name">Fri</span><span class="date">8/28</span>
+			</div>
+	
+			<div class="time-col">
+				<div class="time">8am</div>
+				<div class="time">9am</div>
+				<div class="time">10am</div>
+				<div class="time">11am</div>
+				<div class="time">12pm</div>
+				<div class="time">1pm</div>
+				<div class="time">2pm</div>
+				<div class="time">3pm</div>
+				<div class="time">4pm</div>
+				<div class="time">5pm</div>
+				<div class="time">6pm</div>
+				<div class="time">7pm</div>
+				<div class="time">8pm</div>
+			</div>
+	
+			<!-- Empty grid lines -->
+			<div class="day-col" id="mon-col"></div>
+			<div class="day-col" id="tues-col"></div>
+			<div class="day-col" id="wed-col"></div>
+			<div class="day-col" id="thurs-col"></div>
+			<div class="day-col" id="fri-col"></div>
+	
+		</div>
+	</div>
+
+	<!-- Our JavaScript -->
+	<script type="module" src="js/scheduling.js"></script>
+
+</body>
+
+</html>

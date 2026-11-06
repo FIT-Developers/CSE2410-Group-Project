@@ -1,0 +1,165 @@
+@import url('https://googleapis.com');
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #000000;
+    /* CSS Font stuff to help match it with the renders from figma */
+    font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400 !important;
+    font-optical-sizing: auto;
+    font-variation-settings: "wght" 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Colors to use for the frontend design */
+:root {
+    --accent-color: #B65050;
+    --base-color: #9F9F9F;
+    --light-color: #E7E7E7;
+    --light-blue-color: #6fb2ff;
+    --opacity-blue-color: #6fb2ff0f;
+
+    /* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
+    /* https: //codepen.io/sosuke/pen/Pjoqqp */
+    --accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
+    --base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
+    --light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
+    --white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
+    --black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
+}
+
+
+/* =====> Bottom Nav Bar <===== */
+div #container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.bottom-nav {
+    z-index: 1002;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 85px;
+    background-color: #ffffff;
+    border-radius: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 0px;
+}
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex: 1;
+}
+.bottom-nav .nav-item .icon {
+    width: 41px;
+    filter: var(--base-color-filter);
+}
+.bottom-nav .nav-item.active {
+    filter: var(--accent-color-filter);
+}
+/* Highlight circle element */
+.bottom-nav .nav-item.active::before {
+    content: "";
+    position: absolute;
+    z-index: 1001;
+
+    width: 75%;
+    height: 140%;
+    border-radius: 100px;
+    background-color: #ffd4d446;
+}
+
+
+
+/* =====> Grid Layout <===== */
+/* Container holding the scrollable area */
+.schedule-viewport {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: #ffffff;
+    cursor: grab;
+}
+.schedule-viewport:active {
+    cursor: grabbing;
+}
+/* The grid setup */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: 45px repeat(5, 32vw);
+    grid-template-rows: 60px 1fr;
+    min-width: max-content;
+}
+/* Padding corner (sets up grid) */
+.corner-cell {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 30;
+}
+.head {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--base-color);
+    font-family: sans-serif;
+}
+.head .name {
+    font-size: 18px;
+    font-weight: 500;
+}
+.head .date {
+    font-size: 12px;
+}
+.head.active {
+    color: var(--light-blue-color);
+}
+/* row times */
+.time-col {
+    position: sticky;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 15;
+    height: 960px;
+}
+.time {
+    height: 80px;
+    font-size: 12px;
+    color: var(--light-color);
+    /* align numbers to line */
+    text-align: right;
+    padding-right: 3px;
+    transform: translateY(-8px);
+}
+/* time grid lines */
+.day-col {
+    position: relative;
+    height: 960px;
+    /* Draws horizontal lines every 80px using a gradient */
+    background-image: repeating-linear-gradient(to bottom,
+        transparent,
+        transparent 79px,
+        var(--light-color) 79px,
+        var(--light-color) 80px);
+    border-right: 1px solid transparent;
+}
+.day-col.active-bg {
+    background-color: var(--opacity-blue-color);
+}
