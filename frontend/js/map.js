@@ -26,6 +26,8 @@ var worldPolygon = [
 
 // ==> Complex Polygon that covers important parts of campus (This polygon was created from a polygon drawing website on maps)
 var campusPolygon = [[28.070417, -80.625449], [28.070417, -80.624848], [28.069707, -80.624848], [28.069707, -80.621120], [28.068711, -80.621120], [28.068711, -80.619682], [28.064138, -80.619682], [28.064138, -80.619167], [28.062510, -80.619167], [28.062510, -80.621248], [28.059944, -80.621248], [28.059944, -80.620036], [28.058760, -80.620036], [28.058760, -80.621281], [28.057908, -80.621281], [28.057908, -80.625545], [28.063834, -80.625545], [28.063834, -80.626066], [28.064378, -80.626066], [28.064378, -80.625449], [28.070417, -80.625449]];
+//used for routing to make sure user can't route off campus
+const campusBounds = L.latLngBounds(campusPolygon);
 
 // ==> Creating a inverted polygon where its a polygon of the world besides the campus
 var invertedPolygon = [worldPolygon, campusPolygon];
@@ -176,6 +178,7 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
 document.querySelector('#close').addEventListener('click', function() {
     document.getElementById('marker-popup').classList.remove('open');
 });
+//website button now redirects to website in json
 document.querySelector('#website').addEventListener('click', function(){
     window.open(markerWebsite, '_blank');
 })
@@ -308,7 +311,7 @@ let routeInProgress = false;
 let lastRouteUpdate = 0;
 async function updateRoute() {
     
-    if(!userMarker || !selectedBuilding || routeInProgress || !worldPolygon.contains(userMarker.getLatLng)) return;
+    if(!userMarker || !selectedBuilding || routeInProgress || !campusBounds.contains(userMarker.getLatLng())) return;
 
     routeInProgress = true;
 
