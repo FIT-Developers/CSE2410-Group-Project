@@ -158,6 +158,12 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
 
+        // Removes all the active markers class 
+        document.querySelectorAll('.custom-pin').forEach(pin => {
+            pin.classList.remove('active-pin');
+        });
+        // Enlarge active marker, similar to google maps
+        marker.getElement().classList.add('active-pin');
 
         selectedBuilding = marker.getLatLng();
         markerWebsite = web
@@ -388,6 +394,46 @@ function errorLocation(error) {
     console.error(error);
     alert("Location access failed. Loading default view")
 }
+document.querySelector('.active-location-btn').addEventListener('click', function() {
+    if (currentCoords) {
+        map.setView(currentCoords, map.getZoom(), {
+            animate: true,
+            pan: {
+                duration: 0.5,
+                easeLinearity: 0.5
+            }
+        });
+    // Goes down in zoom when over user
+    map.once('moveend', function() {
+        map.flyTo(currentCoords, 19, {
+            animate: true,
+            duration: 0.5
+        });
+    });
+    } else {
+        console.log("Location doesn't exist or permission denied.");
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ==> Draws the route gotten from backend on screen every 5 seconds
 // Uses fetch request to backend
 let routeInProgress = false;
