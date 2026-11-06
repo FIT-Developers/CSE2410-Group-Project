@@ -26,6 +26,8 @@ var worldPolygon = [
 
 // ==> Complex Polygon that covers important parts of campus (This polygon was created from a polygon drawing website on maps)
 var campusPolygon = [[28.070417, -80.625449], [28.070417, -80.624848], [28.069707, -80.624848], [28.069707, -80.621120], [28.068711, -80.621120], [28.068711, -80.619682], [28.064138, -80.619682], [28.064138, -80.619167], [28.062510, -80.619167], [28.062510, -80.621248], [28.059944, -80.621248], [28.059944, -80.620036], [28.058760, -80.620036], [28.058760, -80.621281], [28.057908, -80.621281], [28.057908, -80.625545], [28.063834, -80.625545], [28.063834, -80.626066], [28.064378, -80.626066], [28.064378, -80.625449], [28.070417, -80.625449]];
+//used for routing to make sure user can't route off campus
+const campusBounds = L.latLngBounds(campusPolygon);
 
 // ==> Creating a inverted polygon where its a polygon of the world besides the campus
 var invertedPolygon = [worldPolygon, campusPolygon];
@@ -146,18 +148,19 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
 }).addTo(map);
 
 // ==> Function to add marker popup with each marker data from json
-function marker_Popup(marker, titleData, typeData, img1, img2) {
+let selectedBuilding = null;
+let routeLine = null;
+let markerWebsite = null;
+function marker_Popup(marker, titleData, typeData, img1, img2, web) {
     marker.on('click', (e) => {
+        
         // Prevent map click event from immediately closing the sheet
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
 
-        // Removes all the active markers class 
-        document.querySelectorAll('.custom-pin').forEach(pin => {
-            pin.classList.remove('active-pin');
-        });
-        // Enlarge active marker, similar to google maps
-        marker.getElement().classList.add('active-pin');
+
+        selectedBuilding = marker.getLatLng();
+        markerWebsite = web
 
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;
@@ -165,6 +168,8 @@ function marker_Popup(marker, titleData, typeData, img1, img2) {
 
         document.getElementById('img-1').src = img1;
         document.getElementById('img-2').src = img2;
+
+       
 
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
@@ -177,6 +182,7 @@ function marker_Popup(marker, titleData, typeData, img1, img2) {
             pan: { duration: 0.5 }
         });
     });
+
 }
 
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
@@ -187,6 +193,32 @@ document.querySelector('#close').addEventListener('click', function() {
         pin.classList.remove('active-pin');
     });
 });
+//website button now redirects to website in json
+document.querySelector('#website').addEventListener('click', function(){
+    window.open(markerWebsite, '_blank');
+})
+
+//when direction button is pressed start nav
+let navigating = false;
+document.querySelector('#directions').addEventListener('click', async function(event) {
+    event.preventDefault();
+    //kills nav if button pressed again and removes route line
+    if (navigating) {
+        navigating = false;
+
+        if (routeLine) {
+            map.removeLayer(routeLine);
+            routeLine = null;
+        }
+
+        return;
+    }
+    navigating = true;
+    lastRouteUpdate = Date.now();
+    await updateRoute();
+});
+
+
 
 // ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
 // Grabbed online for how to parse and obtain .json data as this is new to me
@@ -198,7 +230,7 @@ fetch('./data/markers.json')
     locations.forEach(loc => {
       const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
       // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2);
+      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
     });
   })
   .catch(error => console.error('Error loading markers:', error));
@@ -217,6 +249,7 @@ map.on('click', () => {
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
+
 //**********************************************************
 // Detecting mouseover to make the highlighted area visible ### NO LONGER WORKS WITH .json ###
 //Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Optional Chaining is used so errors dont occur if null
@@ -346,34 +379,73 @@ function successLocation(position) {
         fillOpacity: .2,
         color: '#B65050'
     }).addTo(map);
+    if (navigating && Date.now() - lastRouteUpdate >= 5000) {
+        lastRouteUpdate = Date.now();
+        updateRoute();
+    }
 }
 function errorLocation(error) {
     console.error(error);
     alert("Location access failed. Loading default view")
 }
+// ==> Draws the route gotten from backend on screen every 5 seconds
+// Uses fetch request to backend
+let routeInProgress = false;
+let lastRouteUpdate = 0;
+async function updateRoute() {
+    
+    if(!userMarker || !selectedBuilding || routeInProgress || !campusBounds.contains(userMarker.getLatLng())) return;
 
+    routeInProgress = true;
 
-document.querySelector('.active-location-btn').addEventListener('click', function() {
-    if (currentCoords) {
-        map.setView(currentCoords, map.getZoom(), {
-            animate: true,
-            pan: {
-                duration: 0.5,
-                easeLinearity: 0.5
-            }
+      try {
+        const position = userMarker.getLatLng();
+        const response = await fetch('/api/route', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                start: {
+                    lat: position.lat,
+                    lng: position.lng
+                },
+                destination: {
+                    lat: selectedBuilding.lat,
+                    lng: selectedBuilding.lng
+                }
+            })
         });
 
-        // Goes down in zoom when over user
-        map.once('moveend', function() {
-            map.flyTo(currentCoords, 19, {
-                animate: true,
-                duration: 0.5
-            });
+        if (!response.ok) {
+            throw new Error(`Route request failed (${response.status})`);
+        }
+
+        const data = await response.json();
+
+
+        if (routeLine) {
+            map.removeLayer(routeLine);
+        }
+
+        routeLine = L.polyline(data.path, {
+            color: '#0078ff',
+            weight: 5
+        }).addTo(map);
+
+        document.getElementById('marker-popup').classList.remove('open');
+
+        map.fitBounds(routeLine.getBounds(), {
+            padding: [30, 30]
         });
-    } else {
-        console.log("Location doesn't exist or permission denied.");
+    } catch (error) {
+        console.error(error);
+        
+    } finally{
+        routeInProgress = false
     }
-});
+
+}
 
 // ============================================================================================================================================================
 // ============================================================================================================================================================
