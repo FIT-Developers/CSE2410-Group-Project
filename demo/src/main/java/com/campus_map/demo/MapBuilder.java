@@ -149,8 +149,12 @@ public class MapBuilder {
         File outputFile = new File("demo/src/main/resources/data/edge-output.json"); 
         mapper.writeValue(outputFile, filteredEdges);
         System.out.println(filteredEdges.size()); 
-        Coordinate testCoordinate = new Coordinate(28.064904, -80.622600); 
-        Node closestNode = NodeReference.getClosestNode(testCoordinate); 
+        Coordinate test1 = new Coordinate(28.064904, -80.622600); 
+        Coordinate test2 = new Coordinate(28.058977, -80.622936);
+        Node closestNode1 = NodeReference.getClosestNode(test1); 
+        Node closestNode2 = NodeReference.getClosestNode(test2); 
+
+        ArrayList<Node> testRoute = NodeReference.getRoute(closestNode1, closestNode2); 
         System.out.print(closestNode.getId() + ", " + closestNode.getCoordinates().getLon() + ", " + closestNode.getCoordinates().getLat()); 
 
 

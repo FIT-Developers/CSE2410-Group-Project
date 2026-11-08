@@ -1,8 +1,12 @@
 package com.campus_map;
 import com.campus_map.demo.model.*; 
-import java.util.HashMap; 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ArrayList; 
+import java.util.List;
+import java.util.PriorityQueue; 
 
+//This is a class with many static members that I expect to reuse on the backend in multiple scenarios
 public class NodeReference {
     public final static HashMap<String, Coordinate> nodeLocationMap = new HashMap<>(); 
     public final static HashMap<String, Node> nodeIdMap = new HashMap<>(); 
@@ -103,6 +107,82 @@ public class NodeReference {
 
     return closestNode;
 }
+
+    public static ArrayList<Node> getRoute(Node a, Node b){
+        //This is a java record which is cool and I know very little about
+        record QueueItem(Node node, double distance){}
+
+        //Keeps track of current distances - so the queue doesn't have to be searched to find a node
+        //and update it's distance
+        HashMap<Node, Double> distances = new HashMap<>(); 
+
+        //This keeps a reference of the node that was previously traversed to arrive at the second node
+        //in the format <Desination, Previous>, so that a route can be reconstructed all the way back to our start node
+        HashMap<Node, Node> predecessors = new HashMap<>();
+
+        //Keeps track of the next node to be used, uses a QueueItem to store distance since the Nodes don't 
+        //actually store distance by default. The lambda expression is a comparator, which is long and clanky
+        //since comparitors must return an int and not the double specified by e1.distance()
+        PriorityQueue<QueueItem> queue = new PriorityQueue<>((e1, e2) -> {
+            if (e1.distance() - e2.distance() < 0) {
+                return -1; 
+            }
+            else if (e1.distance() - e2.distance() > 0) {
+                return 1; 
+            }
+            else {
+                return 0;
+            }
+        }); 
+
+        //Stores the final route from Node a to Node b
+        ArrayList<Node> route = new ArrayList<>(); 
+
+        distances.put(a, 0.0); 
+        queue.add(new QueueItem(a, 0.0)); 
+
+        while(!queue.isEmpty()) {
+            QueueItem curItem = queue.poll(); 
+            
+            //The node we just polled from the queue is an outdated entry with a higher distance than the current minimum
+            //Computing new distances for this Node's neighbors would be a waste, so we skip it
+            if (curItem.distance() != distances.get(curItem.node())) {
+                continue; 
+            }
+
+            //If this is the destination node and it's distance is the minimum, then we are done
+            if(curItem.node().getId().equals(b.getId())) {
+                break; 
+            }
+
+            //For each edge found from the current polled Node, explore the Nodes they lead to
+            for (Edge e : curItem.node().getNeighbors()){
+
+                //Calculate the new distance and get the Node that this edge leads to
+                double curDistance = curItem.distance() + e.getWeight(); 
+                Node curNode = e.getDestination(); 
+
+                //If the node has no associated distance or the new distance is smaller than the current
+                // smallest, remap it in distances, predecessors, and requeue it
+                if (!distances.containsKey(curNode) || distances.get(curNode) > curDistance) {
+
+                    distances.put(curNode, curDistance); 
+                    predecessors.put(curNode, curItem.node()); 
+                    queue.add(new QueueItem(curNode, curDistance)); 
+                }
+
+            }
+        }
+
+        Node curNode = b; 
+        while(!curNode.getId().equals(a.getId())) {
+            route.addFirst(curNode); 
+            curNode = predecessors.get(curNode); 
+        }
+        route.addFirst(a); 
+        return route; 
+
+    }
 
 
 
