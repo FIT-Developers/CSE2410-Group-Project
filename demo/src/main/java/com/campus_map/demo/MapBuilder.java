@@ -1,15 +1,10 @@
 package com.campus_map.demo;
-import java.util.HashMap; 
 import com.fasterxml.jackson.databind.*; 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.List; 
-import java.util.PriorityQueue;
 import com.campus_map.demo.model.*;
 import com.campus_map.*;
 import java.util.ArrayList; 
-import java.nio.file.Path; 
 
 public class MapBuilder {
 
@@ -119,7 +114,7 @@ public class MapBuilder {
                 }
                 if ((secondNode = NodeReference.nodeIdMap.get(node2)) == null) {
                     secondNode = new Node(node2, node2Coord); 
-                    NodeReference.nodeIdMap.put(firstNode.getId(), firstNode); 
+                    NodeReference.nodeIdMap.put(secondNode.getId(), secondNode); 
                 }
 
                 double weight = distance(firstNode.getCoordinates(), secondNode.getCoordinates()); 
@@ -143,27 +138,21 @@ public class MapBuilder {
     }   
 
         //TODO Also remove this
-        minLon = minLon * (98.0 / 111.0); 
-        System.out.println(minLon); 
-        System.out.println(minLat); 
         File outputFile = new File("demo/src/main/resources/data/edge-output.json"); 
-        mapper.writeValue(outputFile, filteredEdges);
-        System.out.println(filteredEdges.size()); 
         Coordinate test1 = new Coordinate(28.064904, -80.622600); 
         Coordinate test2 = new Coordinate(28.058977, -80.622936);
         Node closestNode1 = NodeReference.getClosestNode(test1); 
         Node closestNode2 = NodeReference.getClosestNode(test2); 
 
         ArrayList<Node> testRoute = NodeReference.getRoute(closestNode1, closestNode2); 
-        System.out.print(closestNode.getId() + ", " + closestNode.getCoordinates().getLon() + ", " + closestNode.getCoordinates().getLat()); 
+        ArrayList<Coordinate> coordinates = new ArrayList<>(); 
+        for (Node n : testRoute){
+            coordinates.addLast(n.getCoordinates()); 
+        }
 
+        mapper.writeValue(outputFile, coordinates); 
 
-
-        
-        
-        //Below just generates a list of coordinates and a corresponding Node ID, but I want to insert them into a map anyways
-        //NodeList nodeList = mapper.readValue(new File("demo/src/main/resources/data/quad-test-node-list.json"), NodeList.class);
-        System.out.println(list.elements.get(0).toString()); 
+    
     }
 
 }
