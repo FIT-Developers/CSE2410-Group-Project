@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RoutingApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        new MapBuilder();
         SpringApplication.run(RoutingApplication.class, args);
     }
 }
