@@ -9,7 +9,11 @@
     "type": "Library",
     "img1": "./assets/images/Library1.png",
     "img2": "./assets/images/library2.png",
-    "web": "http://lib.fit.edu/"
+    "web": "http://lib.fit.edu/",
+    "offsetx": -300,
+    "offsety": 50,
+    "offsetr": 0, "scale":1070,
+    "layout": "428EVL - 1.png"
   },
   {
     "id": "Skurla_Hall",
@@ -20,8 +24,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "./assets/images/Skurla_Img1.jpg",
-    "img2":"./assets/images/Skurla_Img2.jpg",
-    "web":"https://www.fit.edu/university-events-and-protocol/venues-and-campus-facilities/george-m-skurla-hall/"
+    "img2": "./assets/images/Skurla_Img2.jpg",
+    "web": "https://www.fit.edu/university-events-and-protocol/venues-and-campus-facilities/george-m-skurla-hall/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Roberts_Hall",
@@ -32,8 +40,12 @@
     "icon": "house.svg",
     "type": "Dorm",
     "img1": "./assets/images/RobertsHall_Img1.jpg",
-    "img2":"./assets/images/RobertsHall_Img2.jpg",
-    "web":"https://www.fit.edu/housing/"
+    "img2": "./assets/images/RobertsHall_Img2.jpg",
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Tennis_Courts",
@@ -44,8 +56,12 @@
     "icon": "tennis.svg",
     "type": "Sport",
     "img1": "./assets/images/Tennis_Img1.jpg",
-    "img2":"./assets/images/Tennis_Img2.jpg",
-    "web":"https://www.fit.edu/university-events-and-protocol/venues-and-campus-facilities/tennis--racquetball-courts/"
+    "img2": "./assets/images/Tennis_Img2.jpg",
+    "web": "https://www.fit.edu/university-events-and-protocol/venues-and-campus-facilities/tennis--racquetball-courts/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Parking_7",
@@ -56,8 +72,12 @@
     "icon": "parking.svg",
     "type": "Parking",
     "img1": "./assets/images/Parking7_Img1.jpg",
-    "img2":"",
-    "web":"https://www.fit.edu/security/parking/"
+    "img2": "",
+    "web": "https://www.fit.edu/security/parking/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Brownlie",
@@ -68,8 +88,12 @@
     "icon": "house.svg",
     "type": "Dorm",
     "img1": "./assets/images/Browlie_Img1.jpg",
-    "img2":"./assets/images/Browlie_Img2.jpg",
-    "web":"https://www.fit.edu/housing/"
+    "img2": "./assets/images/Browlie_Img2.jpg",
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Pantherium",
@@ -80,8 +104,12 @@
     "icon": "masks.svg",
     "type": "Theater",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Denius_Center",
@@ -92,8 +120,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Bookstore",
@@ -104,8 +136,12 @@
     "icon": "bag.svg",
     "type": "Store",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Jerome_Admin",
@@ -116,8 +152,12 @@
     "icon": "shield.svg",
     "type": "Admin",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Dining_Hall",
@@ -128,8 +168,12 @@
     "icon": "fork.svg",
     "type": "Food",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Pool",
@@ -140,8 +184,12 @@
     "icon": "water.svg",
     "type": "Pool",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Clemente",
@@ -152,8 +200,12 @@
     "icon": "dumbell.svg",
     "type": "Gym",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Gas",
@@ -164,8 +216,12 @@
     "icon": "gas.svg",
     "type": "Gas",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Olin_Eng",
@@ -176,8 +232,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Olin_Life",
@@ -188,8 +248,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Olin_Phys",
@@ -200,8 +264,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Bio_Eng",
@@ -212,8 +280,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Campbell",
@@ -224,8 +296,12 @@
     "icon": "house.svg",
     "type": "Dorm",
     "img1": "",
-    "img2":"",
-    "web":"https://www.fit.edu/housing/"
+    "img2": "",
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Evans",
@@ -236,8 +312,12 @@
     "icon": "house.svg",
     "type": "Dorm",
     "img1": "",
-    "img2":"",
-    "web":"https://www.fit.edu/housing/"
+    "img2": "",
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Grimson",
@@ -248,8 +328,12 @@
     "icon": "house.svg",
     "type": "Dorm",
     "img1": "",
-    "img2":"",
-    "web":"https://www.fit.edu/housing/"
+    "img2": "",
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Shaw",
@@ -260,8 +344,12 @@
     "icon": "house.svg",
     "type": "Dorm",
     "img1": "",
-    "img2":"",
-    "web":"https://www.fit.edu/housing/"
+    "img2": "",
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Wood",
@@ -272,8 +360,12 @@
     "icon": "house.svg",
     "type": "Dorm",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "L3_Sci&Eng",
@@ -284,9 +376,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
-
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Crawford",
@@ -297,8 +392,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 56,
+    "offsety": -10,
+    "offsetr": 0, "scale":670,
+    "layout": "420CRF - 1.png"
   },
   {
     "id": "Academic_404",
@@ -309,8 +408,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Academic_403",
@@ -321,8 +424,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Academic_402",
@@ -333,8 +440,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Academic_407",
@@ -345,8 +456,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Academic_406",
@@ -357,8 +472,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Academic_405",
@@ -369,8 +488,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "John_Miller",
@@ -381,8 +504,12 @@
     "icon": "shield.svg",
     "type": "Admin",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Link_Bldg",
@@ -393,8 +520,12 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Gleason",
@@ -405,8 +536,12 @@
     "icon": "masks.svg",
     "type": "Theater",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "WFIT",
@@ -417,8 +552,12 @@
     "icon": "bell.svg",
     "type": "Service",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "Ruth_Funk",
@@ -429,8 +568,12 @@
     "icon": "trophy.svg",
     "type": "Sport",
     "img1": "",
-    "img2":"",
-    "web":""
+    "img2": "",
+    "web": "",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "CV_Chawla",
@@ -442,7 +585,11 @@
     "type": "Dorm",
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
-    "web": "https://www.fit.edu/housing/"
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "CV_Husband",
@@ -454,7 +601,11 @@
     "type": "Dorm",
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
-    "web": "https://www.fit.edu/housing/"
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "CV_Ramon",
@@ -466,7 +617,11 @@
     "type": "Dorm",
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
-    "web": "https://www.fit.edu/housing/"
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "CV_Mccool",
@@ -478,7 +633,11 @@
     "type": "Dorm",
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
-    "web": "https://www.fit.edu/housing/"
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "CV_Clark",
@@ -490,7 +649,11 @@
     "type": "Dorm",
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
-    "web": "https://www.fit.edu/housing/"
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "CV_Brown",
@@ -502,7 +665,11 @@
     "type": "Dorm",
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
-    "web": "https://www.fit.edu/housing/"
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   },
   {
     "id": "CV_Anderson",
@@ -514,8 +681,10 @@
     "type": "Dorm",
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
-    "web": "https://www.fit.edu/housing/"
+    "web": "https://www.fit.edu/housing/",
+    "offsetx": 0,
+    "offsety": 0,
+    "offsetr": 0, "scale":680,
+    "layout": ""
   }
-
-  
 ]

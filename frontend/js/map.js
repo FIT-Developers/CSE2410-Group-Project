@@ -58,7 +58,7 @@ var map = L.map('map', {
     MaxBounds: bounds,
     maxBoundsViscosity: 1.0,
     minZoom: 16,
-    maxZoom: 22,
+    maxZoom: 21,
     zoomControl: false,
     attributionControl: false,
 
@@ -143,18 +143,46 @@ function createCustomPin(bgColor, iconName) {
     });
 }
 
-// ==> Show a highlighted rectangle where the parking area is when hovering over parking, animation and rounding is done by CSS
-// More about rectangles and its properties, were found on https://leafletjs.com/reference.html#rectangle
-// Later this needs to be turned into a function so multiple parking markers can work (needs marker and bounds parameter)
-const area = L.rectangle([[28.069694059142638, -80.6253013744353], 
-    [28.06765795584343, -80.62506137512882]], {
-    color: '#7ab8ff', fillColor: '#0078FF', fillOpacity: 0.15, weight: 1,
-    className: 'parking_7', interactive: false
-}).addTo(map);
+// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
+// Grabbed online for how to parse and obtain .json data as this is new to me
+// Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
+// Error catching added
+fetch('./data/markers.json')
+.then(response => response.json())
+.then(locations => {
+    locations.forEach(loc => {
+
+        // Create custom marker based on the location and color and icon
+        const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
+
+        // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
+        marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
+
+        // Pass building overlay information with offsets
+        addBuildingOverlay(loc.lat, loc.lng, loc.layout, loc.offsetx, loc.offsety, loc.offsetr, loc.scale, buildingOverlays);
+
+    });
+})
+.catch(error => console.error('Error loading markers:', error));
+
+
+
+
+
+
+
+
+// ======>  VARIABLES FOR MARKERS  <======
+// ==> Function to add marker popup with each marker data from json
+let selectedBuilding = null;
 
 // Grab the json graph data with nodes, edges and adjancey list
 // => Done similarly for markers.json using the same documentation
 let graphData = null;
+let markerWebsite = null;
+let routeLine = null;
+// Layer Group that stores the building image overlays
+const buildingOverlays = L.layerGroup();
 
 fetch('./data/graph.json')
     .then(response => response.json())
@@ -162,11 +190,6 @@ fetch('./data/graph.json')
         graphData = data;
     })
     .catch(error => console.error('Error loading graph data:', error));
-
-// ==> Function to add marker popup with each marker data from json
-let selectedBuilding = null;
-let routeLine = null;
-let markerWebsite = null;
 
 function marker_Popup(marker, titleData, typeData, img1, img2, web) {
     marker.on('click', (e) => {
@@ -234,6 +257,11 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
 
 }
 
+
+
+
+
+// ======>  POPUP CLICKS  <======
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
     document.getElementById('marker-popup').classList.remove('open');
@@ -275,25 +303,6 @@ document.querySelector('#directions').addEventListener('click', async function(e
     await updateRoute();
 });
 
-
-
-// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
-// Grabbed online for how to parse and obtain .json data as this is new to me
-// Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
-// Error catching added
-fetch('./data/markers.json')
-  .then(response => response.json())
-  .then(locations => {
-    locations.forEach(loc => {
-      const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
-      // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
-    });
-  })
-  .catch(error => console.error('Error loading markers:', error));
-
-
-
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
     document.getElementById('marker-popup').classList.remove('open');
@@ -310,14 +319,91 @@ map.on('click', () => {
     }
     
 }); 
+
 // This prevents clicks on the actually popup to slide it down
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
 
-//**********************************************************
-// Detecting mouseover to make the highlighted area visible ### NO LONGER WORKS WITH .json ###
-//Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Optional Chaining is used so errors dont occur if null
+
+
+
+
+// Hides it during the zoom animation, as this was a bug
+map.on('zoomstart', () => {
+  if (map.hasLayer(buildingOverlays)) {
+    map.removeLayer(buildingOverlays);
+  }
+});
+
+// If past zoom 21 then start showing the building images layer
+map.on('zoomend', () => {
+    if (map.getZoom() >= 21) {
+        if (!map.hasLayer(buildingOverlays)) map.addLayer(buildingOverlays);
+    } else {
+        if (map.hasLayer(buildingOverlays)) map.removeLayer(buildingOverlays);
+    }
+});
+
+// This pane is used for getting this layer below the marker layer
+map.createPane('buildingOverlayPane');
+map.getPane('buildingOverlayPane').style.zIndex = 400;
+function addBuildingOverlay(lat, lng, layout, offsetX, offsetY, offsetR, scale, layerGroup) {
+    // Exit early if marker has no layout image
+    if (!layout) return;
+
+    // Show the building image as a divIcon with custom img html and css positioning
+    const layoutIcon = L.divIcon({
+        className: 'building-overlay-icon',
+        iconSize: [0, 0],
+        html: `
+        <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true" focusable="false">
+
+        <div style="
+            position: absolute;
+            transform: translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px)) rotate(${offsetR}deg);
+            transform-origin: center;
+            z-index: -1;
+        ">
+        <img 
+            src="./assets/images/layouts/${layout}" 
+            alt="${layout}" 
+            style="
+            display: block; 
+            width: ${scale}px; 
+            filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+            opacity: 0.9;
+            " 
+        />
+        </div>
+        `
+    });
+
+    // Invisible marker to show the icon, as this is the only way for divIcon to appear
+    const layoutMarker = L.marker([lat, lng], {
+        icon: layoutIcon,
+        interactive: false,
+        pane: 'buildingOverlayPane'
+    });
+
+    // Add these images to the layer group so it can all be hidden and shown anytime
+    layerGroup.addLayer(layoutMarker);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
