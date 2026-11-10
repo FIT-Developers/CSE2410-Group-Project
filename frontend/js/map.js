@@ -167,6 +167,7 @@ fetch('./data/graph.json')
 let selectedBuilding = null;
 let routeLine = null;
 let markerWebsite = null;
+
 function marker_Popup(marker, titleData, typeData, img1, img2, web) {
     marker.on('click', (e) => {
         
@@ -191,18 +192,34 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
         document.getElementById('img-1').src = img1;
         document.getElementById('img-2').src = img2;
 
-        // Do routing to find distance and time
+
+        // Do routing to find distance and time and draw a polyline on the map
         if (currentCoords != null && graphData != null) {
-            const result = calculateRoute(currentCoords[0], currentCoords[1], marker.getLatLng().lat, marker.getLatLng().lng, graphData); 
-            document.getElementById('Distance').textContent = result.miles + " mi";
-            document.getElementById('TimeAway').textContent = result.minutes + " min";
+                const result = calculateRoute(currentCoords[0], currentCoords[1], marker.getLatLng().lat, marker.getLatLng().lng, graphData); 
+                document.getElementById('Distance').textContent = result.miles + " mi";
+                document.getElementById('TimeAway').textContent = result.minutes + " min";
+
+                // Clear the old route line before drawing a new one
+                if (routeLine) {
+                    map.removeLayer(routeLine);
+                }
+
+                // Check if length is real and then draw the new path
+                if (result.path && result.path.length > 0) {
+                    // Info for polyline can be found: https://leafletjs.com/reference.html#polyline
+                    // result.path is a list of [lat, long]
+                    routeLine = L.polyline(result.path, {
+                        color: '#B65050',
+                        weight: 6,
+                        opacity: 0.9
+                    }).addTo(map);
+                }
+        // If json data fails / Graphdata and if currentCoords / player location is off then don't calculate routes
         } else {
             document.getElementById('Distance').textContent = "? mi";
             document.getElementById('TimeAway').textContent = "? min";
         }
-
-       
-
+        
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
 
@@ -224,17 +241,25 @@ document.querySelector('#close').addEventListener('click', function() {
     document.querySelectorAll('.custom-pin').forEach(pin => {
         pin.classList.remove('active-pin');
     });
+
+    // If there is a polyline, remove that line and set that bool off
+    // Gets rid of the route when popup drops
+    if (routeLine) {
+        map.removeLayer(routeLine);
+        routeLine = null;
+    }
 });
-//website button now redirects to website in json
+
+// Website button now redirects to website in json
 document.querySelector('#website').addEventListener('click', function(){
     window.open(markerWebsite, '_blank');
 })
 
-//when direction button is pressed start nav
+// When direction button is pressed start nav -Robert (backend)
 let navigating = false;
 document.querySelector('#directions').addEventListener('click', async function(event) {
     event.preventDefault();
-    //kills nav if button pressed again and removes route line
+    // Kills nav if button pressed again and removes route line
     if (navigating) {
         navigating = false;
 
@@ -276,8 +301,16 @@ map.on('click', () => {
     document.querySelectorAll('.custom-pin').forEach(pin => {
         pin.classList.remove('active-pin');
     });
+
+    // If there is a polyline, remove that line and set that bool off
+    // Gets rid of the route when popup drops
+    if (routeLine) {
+        map.removeLayer(routeLine);
+        routeLine = null;
+    }
     
-}); // This prevents clicks on the actually popup to slide it down
+}); 
+// This prevents clicks on the actually popup to slide it down
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
@@ -437,26 +470,15 @@ document.querySelector('.active-location-btn').addEventListener('click', functio
         console.log("Location doesn't exist or permission denied.");
 }
 });
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ============================================================================================================================================================
+// ===============================================================Backend Stuff================================================================================
+// ============================================================================================================================================================
 // ==> Draws the route gotten from backend on screen every 5 seconds
 // Uses fetch request to backend
 let routeInProgress = false;
@@ -521,7 +543,9 @@ async function updateRoute() {
 // ============================================================================================================================================================
 
 
-
+// ============================================================================================================================================================
+// ==============================================Routing Engine (Dijistraks on Graph)==========================================================================
+// ============================================================================================================================================================
 const S = 1.4;
 const dist = (y1, x1, y2, x2) => Math.hypot(y1 - y2, x1 - x2) * 111139;
 
@@ -556,18 +580,16 @@ const findEdge = (y, x, N, E) => {
 
 function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
     let G = typeof graphData === 'string' ? JSON.parse(graphData) : graphData;
-    
-    // Dynamically convert the nodes array into a dictionary keyed by ID
     let N = {};
     G.nodes.forEach(node => { N[node.id] = node; });
     
     let E = G.edges, A = G.adjacencyList;
 
     let u = findEdge(userLat, userLng, N, E), m = findNode(markerLat, markerLng, N);
-    if (!u.i || !m.i) return { miles: 0, minutes: 0 };
+    if (!u.i || !m.i) return { miles: 0, minutes: 0, path: [] };
     
-    let t = {}, d = {}, U = new Set(Object.keys(A));
-    for (let n of U) { t[n] = 1/0; d[n] = 1/0; }
+    let t = {}, d = {}, prev = {}, U = new Set(Object.keys(A));
+    for (let n of U) { t[n] = 1/0; d[n] = 1/0; prev[n] = null; }
     t[u.i] = 0; d[u.i] = 0;
 
     while (U.size > 0) {
@@ -582,16 +604,35 @@ function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
             if (alt < t[nb.node]) {
                 t[nb.node] = alt;
                 d[nb.node] = d[c] + nb.distance;
+                prev[nb.node] = c; // Track the previous node for the path
             }
         }
     }
     
+    // Debugging
     if (t[m.i] === 1/0) {
     console.warn("No path found! Start node:", u.i, "End node:", m.i);
-    return { miles: 0, minutes: 0 };
+    return { miles: 0, minutes: 0, path: [] };
     }
+
+    // Reconstruct the physical path coordinates
+    let pathCoords = [];
+    let curr = m.i;
+    while (curr !== null) {
+        pathCoords.push([N[curr].lat, N[curr].lng]);
+        curr = prev[curr];
+    }
+    pathCoords.reverse(); // Flip it so it goes from Start -> End
+    
+    // Connect the user's exact location to the start of the node path
+    pathCoords.unshift([userLat, userLng]);
+
     return {
         miles: +((u.d + d[m.i] + m.d) / 1609.34).toFixed(1),
-        minutes: +((u.t + t[m.i] + m.t) / 60).toFixed(1)
+        minutes: +((u.t + t[m.i] + m.t) / 60).toFixed(1),
+        path: pathCoords
     };
 }
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
