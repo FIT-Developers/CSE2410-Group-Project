@@ -515,7 +515,18 @@
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
     "web": "https://www.fit.edu/housing/"
-  }
+  },
+  { "id" : "SSSC", 
+    "tooltip": "Student Support and Success Center",
+    "lat": 28.061614,
+    "lng": -80.622520,
+    "color": "#4cdd9e",
+    "icon": "bell.svg",
+    "type": "Service",
+    "img1": "./assets/images/SSSC_img1.jpg",
+    "img2": "./assets/images/SSSC_img2.jpg",
+    "web": "https://www.fit.edu/student-success-support-center/"
+}
 
   
 ]
