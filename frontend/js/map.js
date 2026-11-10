@@ -386,6 +386,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================================================================================================================
 // ======================================================LIVE USER GPS, With User Marker=======================================================================
 // ============================================================================================================================================================
+function updateData() {
+  console.log("Function executed at:", new Date().toLocaleTimeString());
+  // Your update logic here
+}
+const intervalId = setInterval(updateData, 3600000);
 
 // ==> Grabs correct coords and location of a user (Followed by https://www.youtube.com/watch?v=4D6nJd_ORX4)
 // Watches the users position and updates it accurately and connects to better signals if possible for better accuracy *watchPosition()
@@ -401,8 +406,14 @@ function successLocation(position) {
     // Storing and grabbing cords
     const {latitude, longitude, accuracy} = position.coords;
 
+
     // Store code for outside function use
     currentCoords = [latitude, longitude];
+
+    if (currentCoords != null) {
+        getWeatherCode(currentCoords[0], currentCoords[1]);
+        setInterval(getWeatherCode(currentCoords[0], currentCoords[1]), 3600000);
+    }
 
     // Deletes Markers if there already present, to have room to create new ones
     if (userMarker) {
@@ -541,6 +552,71 @@ async function updateRoute() {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
+
+
+
+
+
+
+async function getWeatherCode(lat, lon) {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code`;
+    
+    try {
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        const weatherCodes = data.hourly.weather_code;
+        const times = data.hourly.time;
+
+        // Find the index of the hour closest to the current time
+        // Grabbed from documentation to parse the list of hourly weather codes and find the one current one
+        const nowISO = new Date().toISOString().slice(0, 13) + ":00"; // Formats to "YYYY-MM-DDTHH:00"
+        const currentIndex = times.findIndex(t => t.startsWith(nowISO));
+        const targetIndex = currentIndex !== -1 ? currentIndex : 0;
+
+        const currentWeatherCode = weatherCodes[targetIndex];
+
+        console.log(`weatherCode is ${currentWeatherCode}`)
+
+        changeWeatherIcon(currentWeatherCode)
+    }
+    catch(error) {
+        console.warn("Weather Error " + error);
+    };
+    
+}
+function changeWeatherIcon(code) {
+    const mapping = {
+        0: "Sunny.svg",
+        1: "Sunny.svg",
+        2: "Cloudy.svg",
+        3: "Cloudy.svg",
+        45: "Foggy.svg",
+        48: "Foggy.svg",
+        51: "Heavy_Rain.svg",
+        53: "Heavy_Rain.svg",
+        55: "Heavy_Rain.svg",
+        56: "Heavy_Rain.svg",
+        57: "Heavy_Rain.svg",
+        61: "Heavy_Rain.svg",
+        63: "Heavy_Rain.svg",
+        65: "Heavy_Rain.svg",
+        66: "Heavy_Rain.svg",
+        67: "Heavy_Rain.svg",
+        95: "Thunder.svg",
+        97: "Thunder.svg",
+    }
+
+    const weatherElement = document.getElementById("weather-icon");
+    weatherElement.src = `./assets/icons/weather/${mapping[code]}`;
+}
+
+
+
+
+
 
 
 // ============================================================================================================================================================

@@ -320,6 +320,30 @@ div #container {
 }
 
 
+/* =====> Weather Showcase <===== */
+.weather-showcase {
+    z-index: 1002;
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    width: 2.6rem;
+    height: 2.6rem;
+    background-color: #FFFFFF;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0px;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.weather-showcase .icon {
+    width: 2rem;
+    filter: var(--accent-color-filter);
+}
+
+
+
 
 
 /* =====> Icon Styling <===== */
