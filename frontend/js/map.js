@@ -32,6 +32,11 @@ const campusBounds = L.latLngBounds(campusPolygon);
 // ==> Creating a inverted polygon where its a polygon of the world besides the campus
 var invertedPolygon = [worldPolygon, campusPolygon];
 
+// Create global variables to fix multiple markers being placed with reload
+let currentCoords = null; 
+let userMarker = null;
+let accuracyCircle = null;
+
 
 // ==> Setting up the bounds of the campus
 var corner1 = L.latLng(28.078443910089728, -80.63768835876286),
@@ -147,6 +152,17 @@ const area = L.rectangle([[28.069694059142638, -80.6253013744353],
     className: 'parking_7', interactive: false
 }).addTo(map);
 
+// Grab the json graph data with nodes, edges and adjancey list
+// => Done similarly for markers.json using the same documentation
+let graphData = null;
+
+fetch('./data/graph.json')
+    .then(response => response.json())
+    .then(data => {
+        graphData = data;
+    })
+    .catch(error => console.error('Error loading graph data:', error));
+
 // ==> Function to add marker popup with each marker data from json
 let selectedBuilding = null;
 let routeLine = null;
@@ -174,6 +190,16 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
 
         document.getElementById('img-1').src = img1;
         document.getElementById('img-2').src = img2;
+
+        // Do routing to find distance and time
+        if (currentCoords != null && graphData != null) {
+            const result = calculateRoute(currentCoords[0], currentCoords[1], marker.getLatLng().lat, marker.getLatLng().lng, graphData); 
+            document.getElementById('Distance').textContent = result.miles + " mi";
+            document.getElementById('TimeAway').textContent = result.minutes + " min";
+        } else {
+            document.getElementById('Distance').textContent = "? mi";
+            document.getElementById('TimeAway').textContent = "? min";
+        }
 
        
 
@@ -327,10 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================================================================================================================
 // ======================================================LIVE USER GPS, With User Marker=======================================================================
 // ============================================================================================================================================================
-// Create global variables to fix multiple markers being placed with reload
-let currentCoords = null; 
-let userMarker = null;
-let accuracyCircle = null;
+
 // ==> Grabs correct coords and location of a user (Followed by https://www.youtube.com/watch?v=4D6nJd_ORX4)
 // Watches the users position and updates it accurately and connects to better signals if possible for better accuracy *watchPosition()
 if (navigator.geolocation) {
@@ -497,3 +520,78 @@ async function updateRoute() {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 
+
+
+const S = 1.4;
+const dist = (y1, x1, y2, x2) => Math.hypot(y1 - y2, x1 - x2) * 111139;
+
+const findNode = (y, x, N) => {
+    let m = 1/0, id = null;
+    for (let i in N) {
+        let d = dist(y, x, N[i].lat, N[i].lng);
+        if (d < m) { m = d; id = i; }
+    }
+    return { i: id, d: m, t: m / S };
+};
+
+const findEdge = (y, x, N, E) => {
+    let m = 1/0, id = null;
+    for (let i in N) {
+        let d = dist(y, x, N[i].lat, N[i].lng);
+        if (d < m) { m = d; id = i; }
+    }
+    for (let k in E) {
+        let u = N[E[k].u], v = N[E[k].v];
+        if (!u || !v) continue;
+        let my = (u.lat + v.lat) / 2, mx = (u.lng + v.lng) / 2;
+        let dM = dist(y, x, my, mx);
+        if (dM < m) {
+            let du = dist(my, mx, u.lat, u.lng), dv = dist(my, mx, v.lat, v.lng);
+            m = dM + Math.min(du, dv);
+            id = du < dv ? u.id : v.id;
+        }
+    }
+    return { i: id, d: m, t: m / S };
+};
+
+function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
+    let G = typeof graphData === 'string' ? JSON.parse(graphData) : graphData;
+    
+    // Dynamically convert the nodes array into a dictionary keyed by ID
+    let N = {};
+    G.nodes.forEach(node => { N[node.id] = node; });
+    
+    let E = G.edges, A = G.adjacencyList;
+
+    let u = findEdge(userLat, userLng, N, E), m = findNode(markerLat, markerLng, N);
+    if (!u.i || !m.i) return { miles: 0, minutes: 0 };
+    
+    let t = {}, d = {}, U = new Set(Object.keys(A));
+    for (let n of U) { t[n] = 1/0; d[n] = 1/0; }
+    t[u.i] = 0; d[u.i] = 0;
+
+    while (U.size > 0) {
+        let c = null;
+        for (let n of U) if (c === null || t[n] < t[c]) c = n;
+        if (t[c] === 1/0 || c === m.i) break;
+        U.delete(c);
+        
+        for (let nb of (A[c] || [])) {
+            if (!U.has(nb.node)) continue;
+            let alt = t[c] + nb.weight;
+            if (alt < t[nb.node]) {
+                t[nb.node] = alt;
+                d[nb.node] = d[c] + nb.distance;
+            }
+        }
+    }
+    
+    if (t[m.i] === 1/0) {
+    console.warn("No path found! Start node:", u.i, "End node:", m.i);
+    return { miles: 0, minutes: 0 };
+    }
+    return {
+        miles: +((u.d + d[m.i] + m.d) / 1609.34).toFixed(1),
+        minutes: +((u.t + t[m.i] + m.t) / 60).toFixed(1)
+    };
+}
