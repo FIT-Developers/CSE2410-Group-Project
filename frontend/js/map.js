@@ -18,10 +18,10 @@ git push origin Prototype
 // ============================================================================================================================================================
 // ==> Polygon covering the whole world, needed for inversion polygon
 var worldPolygon = [
-  [360, -180],
-  [360, 180],
-  [-360, 180],
-  [-360, -180]
+    [360, -180],
+    [360, 180],
+    [-360, 180],
+    [-360, -180]
 ];
 
 // ==> Complex Polygon that covers important parts of campus (This polygon was created from a polygon drawing website on maps)
@@ -143,14 +143,37 @@ function createCustomPin(bgColor, iconName) {
     });
 }
 
-// ==> Show a highlighted rectangle where the parking area is when hovering over parking, animation and rounding is done by CSS
-// More about rectangles and its properties, were found on https://leafletjs.com/reference.html#rectangle
-// Later this needs to be turned into a function so multiple parking markers can work (needs marker and bounds parameter)
-const area = L.rectangle([[28.069694059142638, -80.6253013744353], 
-    [28.06765795584343, -80.62506137512882]], {
-    color: '#7ab8ff', fillColor: '#0078FF', fillOpacity: 0.15, weight: 1,
-    className: 'parking_7', interactive: false
-}).addTo(map);
+// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
+// Grabbed online for how to parse and obtain .json data as this is new to me
+// Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
+// Error catching added
+fetch('./data/markers.json')
+    .then(response => response.json())
+    .then(locations => {
+    locations.forEach(loc => {
+
+        // Creates custom marker with icon and color data
+        const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
+
+        // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
+        marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web, loc.color, loc.icon, loc.id);
+        
+    });
+})
+.catch(error => console.error('Error loading markers:', error));
+
+
+
+
+
+
+// ==> Function to add marker popup with each marker data from json
+let selectedBuilding = null;
+
+let routeLine = null;
+let markerWebsite = null;
+
+let recentMarkers = [];
 
 // Grab the json graph data with nodes, edges and adjancey list
 // => Done similarly for markers.json using the same documentation
@@ -162,13 +185,9 @@ fetch('./data/graph.json')
         graphData = data;
     })
     .catch(error => console.error('Error loading graph data:', error));
+    
 
-// ==> Function to add marker popup with each marker data from json
-let selectedBuilding = null;
-let routeLine = null;
-let markerWebsite = null;
-
-function marker_Popup(marker, titleData, typeData, img1, img2, web) {
+function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
     marker.on('click', (e) => {
         
         // Prevent map click event from immediately closing the sheet
@@ -198,6 +217,8 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
                 const result = calculateRoute(currentCoords[0], currentCoords[1], marker.getLatLng().lat, marker.getLatLng().lng, graphData); 
                 document.getElementById('Distance').textContent = result.miles + " mi";
                 document.getElementById('TimeAway').textContent = result.minutes + " min";
+
+                recordMarkerClick(titleData, typeData, color, icon, result.miles, result.minutes, id);
 
                 // Clear the old route line before drawing a new one
                 if (routeLine) {
@@ -233,6 +254,10 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
     });
 
 }
+
+
+
+
 
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
@@ -275,25 +300,6 @@ document.querySelector('#directions').addEventListener('click', async function(e
     await updateRoute();
 });
 
-
-
-// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
-// Grabbed online for how to parse and obtain .json data as this is new to me
-// Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
-// Error catching added
-fetch('./data/markers.json')
-  .then(response => response.json())
-  .then(locations => {
-    locations.forEach(loc => {
-      const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
-      // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
-    });
-  })
-  .catch(error => console.error('Error loading markers:', error));
-
-
-
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
     document.getElementById('marker-popup').classList.remove('open');
@@ -310,10 +316,45 @@ map.on('click', () => {
     }
     
 }); 
+
 // This prevents clicks on the actually popup to slide it down
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
+
+
+
+
+
+function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id) {
+    // Make an object to store
+    const markerObject = {
+    id,
+    title: titleData,
+    type: typeData,
+    color,
+    icon,
+    miles,
+    minutes,
+    };
+
+    // Remove the existing item if already present (prevents duplicates and promotes to top)
+    recentMarkers = recentMarkers.filter(item => item.id !== id);
+
+    // Push to the front of the array (most recent at index 0)
+    recentMarkers.unshift(markerObject);
+
+    if (recentMarkers.length > 4) {
+        recentMarkers.pop();
+    }
+
+    console.log(recentMarkers);
+}
+
+
+
+
+
 
 //**********************************************************
 // Detecting mouseover to make the highlighted area visible ### NO LONGER WORKS WITH .json ###
@@ -387,7 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ======================================================LIVE USER GPS, With User Marker=======================================================================
 // ============================================================================================================================================================
 function updateData() {
-  console.log("Function executed at:", new Date().toLocaleTimeString());
+    console.log("Function executed at:", new Date().toLocaleTimeString());
   // Your update logic here
 }
 const intervalId = setInterval(updateData, 3600000);
@@ -500,7 +541,7 @@ async function updateRoute() {
 
     routeInProgress = true;
 
-      try {
+    try {
         const position = userMarker.getLatLng();
         const response = await fetch('/api/route', {
             method: 'POST',

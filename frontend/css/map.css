@@ -162,6 +162,8 @@ div #container {
 }
 
 
+
+
 /* =====> Location Button <===== */
 .active-location-btn {
     z-index: 1002;
@@ -177,6 +179,8 @@ div #container {
     align-items: center;
     padding: 0 0px;
     filter:drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+
+    cursor: pointer;
 }
 .active-location-btn .icon {
     width: 2rem;
