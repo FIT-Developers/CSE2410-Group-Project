@@ -730,19 +730,21 @@ function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
         }
     }
     
-    // Debugging
+    // Debugging, as it informs the start node and end node for problem solving
     if (t[m.i] === 1/0) {
-    console.warn("No path found! Start node:", u.i, "End node:", m.i);
-    return { miles: 0, minutes: 0, path: [] };
+        console.warn("No path found! Start node:", u.i, "End node:", m.i);
+        return { miles: 0, minutes: 0, path: [] };
     }
 
     // Reconstruct the physical path coordinates
     let pathCoords = [];
     let curr = m.i;
+
     while (curr !== null) {
         pathCoords.push([N[curr].lat, N[curr].lng]);
         curr = prev[curr];
     }
+    
     pathCoords.reverse(); // Flip it so it goes from Start -> End
     
     // Connect the user's exact location to the start of the node path
@@ -750,7 +752,8 @@ function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
 
     return {
         miles: +((u.d + d[m.i] + m.d) / 1609.34).toFixed(1),
-        minutes: +((u.t + t[m.i] + m.t) / 60).toFixed(1),
+        // Subtract 2 minutes as its a little too high
+        minutes: +((u.t + t[m.i] + m.t) / 60 - 2).toFixed(1),
         path: pathCoords
     };
 }
