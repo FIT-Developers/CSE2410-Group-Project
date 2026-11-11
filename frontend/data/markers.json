@@ -526,6 +526,114 @@
     "img1": "./assets/images/SSSC_img1.jpg",
     "img2": "./assets/images/SSSC_img2.jpg",
     "web": "https://www.fit.edu/student-success-support-center/"
+  },
+  {
+  "id": "SG_A",
+  "tooltip": "Southgate Building A",
+  "lat": 28.067695,
+  "lng": -80.620641,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_B",
+  "tooltip": "Southgate Building B",
+  "lat": 28.067152,
+  "lng": -80.620731,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_C",
+  "tooltip": "Southgate Building C",
+  "lat": 28.067049,
+  "lng": -80.620183,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_D",
+  "tooltip": "Southgate Building D",
+  "lat": 28.066631,
+  "lng": -80.620463,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_E",
+  "tooltip": "Southgate Building E",
+  "lat": 28.066789,
+  "lng": -80.621019,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_H",
+  "tooltip": "Southgate Building H",
+  "lat": 28.066047,
+  "lng": -80.620453,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_K",
+  "tooltip": "Southgate Building K",
+  "lat": 28.065782,
+  "lng": -80.620439,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_L",
+  "tooltip": "Southgate Building L",
+  "lat": 28.065450,
+  "lng": -80.620458,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_M",
+  "tooltip": "Southgate Building M",
+  "lat": 28.065812,
+  "lng": -80.621113,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
 }
 
   
