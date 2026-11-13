@@ -211,6 +211,7 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         document.getElementById('img-1').src = img1;
         document.getElementById('img-2').src = img2;
 
+        console.log("Marker data obtained successfully at: " + marker.getLatLng());
 
         // Do routing to find distance and time and draw a polyline on the map
         if (currentCoords != null && graphData != null) {
@@ -229,6 +230,10 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
                 if (result.path && result.path.length > 0) {
                     // Info for polyline can be found: https://leafletjs.com/reference.html#polyline
                     // result.path is a list of [lat, long]
+
+                    console.log("Successfully obtained fastest route from user to marker with " + result.path.length + " nodes.");
+
+                    // Draw the polyline following the outputted path data
                     routeLine = L.polyline(result.path, {
                         color: '#B65050',
                         weight: 6,
@@ -348,7 +353,7 @@ function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id)
         recentMarkers.pop();
     }
 
-    console.log(recentMarkers);
+    console.log("Recent marker list: " + recentMarkers);
 }
 
 
@@ -489,6 +494,8 @@ function successLocation(position) {
 
 
     userMarker = L.marker([latitude, longitude], { icon: User}).addTo(map)
+    // Notify the location is working
+    console.log("Location obtained successfully at: " + latitude + ", " + longitude);
 
     // Blue Accuracy Circle
     accuracyCircle = L.circle([latitude, longitude], {
