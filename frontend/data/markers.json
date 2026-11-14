@@ -694,7 +694,32 @@
   "img1": "./assets/images/Scott_Center_img1.jpg",
   "img2": "./assets/images/Scott_Center_img2.jpg",
   "web": "https://www.fit.edu/psychology/faculty-and-research/centers-and-institutes/the-scott-center-for-autism-treatment/"
+},
+{
+  "id": "Mail",
+  "tooltip": "Mail Center",
+  "lat": 28.060847,
+  "lng": -80.622828,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/asset-management/mailing-and-shipping-services/"
+},
+{
+  "id": "Machine_Shp",
+  "tooltip": "Machine Shop",
+  "lat": 28.060764,
+  "lng": -80.623528,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/Machine_Shop_img1.png",
+  "img2": "./assets/images/Machine_Shop_img2.png",
+  "web": "https://www.fit.edu/machine-shop/"
 }
+
 
   
 ]
