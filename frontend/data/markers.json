@@ -730,6 +730,18 @@
   "img1": "./assets/images/Student_Design_img1.jpg",
   "img2": "./assets/images/Student_Design_img2.jpg",
   "web": "https://www.fit.edu/machine-shop/"
+},
+{
+  "id": "Varsity",
+  "tooltip": "Anthony J. Catanese Varsity Training Center",
+  "lat": 28.060094,
+  "lng": -80.625256,
+  "color": "#1c1b1b",
+  "icon": "dumbell.svg",
+  "type": "Gym",
+  "img1": "./assets/images/Varisty_img1.jpg",
+  "img2": "./assets/images/Varisty_img2.jpg",
+  "web": "https://www.fit.edu/machine-shop/"
 }
 
 
