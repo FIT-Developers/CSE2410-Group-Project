@@ -741,6 +741,18 @@
   "type": "Gym",
   "img1": "./assets/images/Varisty_img1.jpg",
   "img2": "./assets/images/Varisty_img2.jpg",
+  "web": "https://floridatechsports.com/facilities/varsity-training-center/1302"
+},
+{
+  "id": "Panther_Field",
+  "tooltip": "Panther Field",
+  "lat": 28.059382,
+  "lng": -80.625114,
+  "color": "#367b45",
+  "icon": "tennis.svg",
+  "type": "Sport",
+  "img1": "needpics",
+  "img2": "needpics",
   "web": "https://www.fit.edu/machine-shop/"
 }
 
