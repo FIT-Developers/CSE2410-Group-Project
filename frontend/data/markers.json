@@ -670,6 +670,30 @@
   "img1": "./assets/images/L3common_img1.jpg",
   "img2": "./assets/images/L3common_img2.png",
   "web": "needurl"
+},
+{
+  "id": "Sunrise",
+  "tooltip": "Sunrise Center",
+  "lat": 28.062864,
+  "lng": -80.622059,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Admin",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/health/"
+},
+{
+  "id": "Scott_Center",
+  "tooltip": "The Scott Center for Autism Treatment",
+  "lat": 28.060923,
+  "lng": -80.622002,
+  "color": "#c5a336",
+  "icon": "grad_cap.svg",
+  "type": "Facility",
+  "img1": "./assets/images/Scott_Center_img1.jpg",
+  "img2": "./assets/images/Scott_Center_img2.jpg",
+  "web": "https://www.fit.edu/psychology/faculty-and-research/centers-and-institutes/the-scott-center-for-autism-treatment/"
 }
 
   
