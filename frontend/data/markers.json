@@ -718,6 +718,18 @@
   "img1": "./assets/images/Machine_Shop_img1.png",
   "img2": "./assets/images/Machine_Shop_img2.png",
   "web": "https://www.fit.edu/machine-shop/"
+},
+{
+  "id": "L3_Design",
+  "tooltip": "L3Harris Student Design Center",
+  "lat": 28.060762,
+  "lng": -80.624121,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/Student_Design_img1.jpg",
+  "img2": "./assets/images/Student_Design_img2.jpg",
+  "web": "https://www.fit.edu/machine-shop/"
 }
 
 
