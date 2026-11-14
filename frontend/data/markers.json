@@ -642,10 +642,34 @@
   "lng": -80.621954,
   "color": "#65abcc",
   "icon": "shield.svg",
-  "type": "Service",
-  "img1": "./assets/images/Southgate_Img1.jpg",
-  "img2": "./assets/images/Southgate_Img2.jpg",
+  "type": "Admin",
+  "img1": "needpics",
+  "img2": "needpics",
   "web": "https://www.fit.edu/security/"
+},
+{
+  "id": "Parking_25",
+  "tooltip": "Parking Lot 25",
+  "lat": 28.063344,
+  "lng": -80.621892,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/security/parking/"
+},
+{
+  "id": "L3_Common",
+  "tooltip": "L3Harris Commons",
+  "lat": 28.063247,
+  "lng": -80.620827,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Admin",
+  "img1": "./assets/images/L3common_img1.jpg",
+  "img2": "./assets/images/L3common_img2.png",
+  "web": "needurl"
 }
 
   
