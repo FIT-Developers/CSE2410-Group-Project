@@ -246,6 +246,8 @@ div #container {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    cursor: grab;
+    touch-action: none;
 }
 .drag-handle img {
     display: inline-block;
@@ -253,8 +255,14 @@ div #container {
     filter: var(--light-color-filter);
     margin-top: -18px;
 }
+.marker-popup .drag-handle:active {
+    cursor: grabbing;
+}
+.marker-popup.dragging {
+    transition: none;
+}
 
-
+/* Inside text formatting for the popup */
 div #container {
     display: flex;
     align-items: center;
