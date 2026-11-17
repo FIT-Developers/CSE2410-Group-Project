@@ -227,10 +227,7 @@ div #container {
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
     z-index: 2000;
-
-    /* Inside content, overall padding of popup */
-    padding: 20px 26px 20px 26px;
-    /* Top, Right, Bottom, Left */
+    padding: 20px 30px;
     box-sizing: border-box;
 
     /* Have it hidden off screen */
@@ -262,16 +259,12 @@ div #container {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-left:8px;
-    margin-right: 8px;
 }
 div #icontainer {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-left: 8px;
-    margin-right: 8px;
 }
 .marker-popup .label {
     margin: 0px;
@@ -282,6 +275,8 @@ div #icontainer {
     font-variation-settings: 'wght' 500;
 }
 .marker-popup .input {
+    box-sizing: border-box;
+    width: 100%;
     margin-bottom: 10px;
     white-space: nowrap;
     overflow: hidden;
@@ -289,7 +284,7 @@ div #icontainer {
     outline: none;
     border-radius: 15px;
     border: 2px solid var(--light-grey-color);
-    height:30px;
+    height:36px;
     /* Caret stuff */
     font-size: 20px;
     text-indent: 10px;
@@ -302,7 +297,7 @@ div #icontainer {
     border: 2px solid var(--accent-color);
 }
 .grid {
-    margin-left: 8px;
+    margin-left: 0px;
     display: grid;
     column-gap: 30px;
     row-gap: 0px;
