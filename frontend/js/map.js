@@ -760,7 +760,7 @@ function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
     return {
         miles: +((u.d + d[m.i] + m.d) / 1609.34).toFixed(1),
         // Subtract 2 minutes as its a little too high
-        minutes: +((u.t + t[m.i] + m.t) / 60 - 2).toFixed(1),
+        minutes: +((u.t + t[m.i] + m.t) / 60 - 1).toFixed(1),
         path: pathCoords
     };
 }

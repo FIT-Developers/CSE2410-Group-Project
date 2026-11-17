@@ -14,11 +14,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 /* Colors to use for the frontend design */
 :root {
     --accent-color: #B65050;
     --base-color: #9F9F9F;
+    --light-grey-color: #B3B3B3;
     --light-color: #E7E7E7;
     --light-blue-color: #6fb2ff;
     --opacity-blue-color: #6fb2ff0f;
@@ -82,32 +82,37 @@ div #container {
 
 
 
+
+
+
+
 /* =====> Grid Layout <===== */
 /* Container holding the scrollable area */
-.schedule-viewport {
+.schedule-area {
     width: 100%;
     height: 100vh;
     overflow: auto;
     background-color: #ffffff;
     cursor: grab;
 }
-.schedule-viewport:active {
+.schedule-area:active {
     cursor: grabbing;
 }
 /* The grid setup */
 .schedule-grid {
     display: grid;
-    grid-template-columns: 45px repeat(5, 32vw);
+    grid-template-columns: 37px repeat(5, 28vw);
     grid-template-rows: 60px 1fr;
     min-width: max-content;
 }
 /* Padding corner (sets up grid) */
 .corner-cell {
     position: sticky;
-    top: 0;
-    left: 0;
+    left: -30px;
+    width: 30px;
     background-color: #ffffff;
     z-index: 30;
+    
 }
 .head {
     position: sticky;
@@ -120,21 +125,24 @@ div #container {
     justify-content: center;
     color: var(--base-color);
     font-family: sans-serif;
+    margin-left:-5px;
 }
 .head .name {
     font-size: 18px;
-    font-weight: 500;
-}
-.head .date {
-    font-size: 12px;
+    font-weight: 600;
 }
 .head.active {
     color: var(--light-blue-color);
+    font-size: 20px;
+    font-weight: 700;
 }
 /* row times */
 .time-col {
+    /* Should stop the clipping */
+    padding-top: 10px;
     position: sticky;
-    left: 0;
+    left: -40px;
+    width: 40px;
     background-color: #ffffff;
     z-index: 15;
     height: 960px;
@@ -151,15 +159,195 @@ div #container {
 /* time grid lines */
 .day-col {
     position: relative;
-    height: 960px;
-    /* Draws horizontal lines every 80px using a gradient */
+    height: 1080px;
+    box-sizing: border-box;
+
+    /* For clipping issues */
+    padding-top: 10px;
+
+    /* 2. Force background colors to respect the padding gap */
+    background-clip: content-box;
+
+    /* 3. Force background images (the lines) to start after the padding gap */
+    background-origin: content-box;
+
+    /* 4. Draw the lines normally starting at 0px */
     background-image: repeating-linear-gradient(to bottom,
-        transparent,
-        transparent 79px,
-        var(--light-color) 79px,
-        var(--light-color) 80px);
+            var(--light-color) 0px,
+            var(--light-color) 1px,
+            transparent 1px,
+            transparent 80px);
+
     border-right: 1px solid transparent;
 }
 .day-col.active-bg {
     background-color: var(--opacity-blue-color);
+}
+
+
+
+
+/* Add schedule button (Same code form navigator btn)*/
+.add-btn {
+    z-index: 3;
+    position: fixed;
+    bottom: 105px;
+    right: 20px;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--accent-color);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0px;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+
+    cursor: pointer;
+}
+
+.add-btn .icon {
+    width: 2rem;
+    filter: var(--white-filter);
+}
+
+
+
+
+
+
+
+/* Popup Menu */
+.marker-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    z-index: 2000;
+
+    /* Inside content, overall padding of popup */
+    padding: 20px 26px 20px 26px;
+    /* Top, Right, Bottom, Left */
+    box-sizing: border-box;
+
+    /* Have it hidden off screen */
+    transform: translateY(110%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.marker-popup.open {
+    transform: translateY(0);
+}
+/* Blurring Background */
+.schedule-area.blur-active {
+    filter: blur(1px) brightness(90%);
+}
+.marker-popup .drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.drag-handle img {
+    display: inline-block;
+    width: 6rem;
+    filter: var(--light-color-filter);
+    margin-top: -18px;
+}
+
+
+div #container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-left:8px;
+    margin-right: 8px;
+}
+div #icontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.marker-popup .label {
+    margin: 0px;
+    margin-bottom: 4px;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    font-variation-settings: 'wght' 500;
+}
+.marker-popup .input {
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    outline: none;
+    border-radius: 15px;
+    border: 2px solid var(--light-grey-color);
+    height:30px;
+    /* Caret stuff */
+    font-size: 20px;
+    text-indent: 10px;
+    caret-color: var(--light-blue-color);
+    color: #000000;
+
+    box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.10);
+}
+.marker-popup .input:focus {
+    border: 2px solid var(--accent-color);
+}
+.grid {
+    margin-left: 8px;
+    display: grid;
+    column-gap: 30px;
+    row-gap: 0px;
+    text-align: left;
+}
+.grid .label {
+    margin: 0;
+    margin-bottom: 4px;
+}
+.grid .input {
+    width: 100%;
+}
+/* How to change the input color element */
+.input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+.input[type="color"]::-webkit-color-swatch {
+    margin-top:-2px;
+    border: transparent;
+    border-radius: 11px;
+    block-size: 28px;
+}
+#button {
+    width: 100%;
+    height:50px;
+    background-color: var(--accent-color);
+    border-radius: 30px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#button h1 {
+    color: #ffffff;
+    font-variation-settings: 'wght' 700;
+    font-size: 31px;
+
+    margin:0px;
+    white-space: nowrap;
+    overflow: hidden;
 }

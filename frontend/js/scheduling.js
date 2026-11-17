@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // getDay() returns 0 (Sun) to 6 (Sat)
-    const today = new Date().getDay(); 
+    //const today = new Date().getDay(); 
+    const today = 2
 
     
     // Dictionary mapping the day number to your HTML IDs
@@ -19,4 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(`${dayId}-head`).classList.add('active');
         document.getElementById(`${dayId}-col`).classList.add('active-bg');
     }
+});
+
+
+
+// Popup Menu
+document.querySelector('#add-btn').addEventListener('click', function() {
+
+    // Adds the open class to the html marker popup, allowing it to slide up and be visible
+    document.getElementById('marker-popup').classList.add('open');
+    document.getElementById('scheduleArea').classList.add('blur-active');
+
+});
+document.getElementById('marker-popup').addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+document.getElementById('scheduleArea').addEventListener('click', (e) => {
+    document.getElementById('marker-popup').classList.remove('open');
+    document.getElementById('scheduleArea').classList.remove('blur-active');
 });
