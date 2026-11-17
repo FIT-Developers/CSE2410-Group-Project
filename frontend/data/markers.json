@@ -846,11 +846,132 @@
   "lng": -80.620511,
   "color": "#4cdd9e",
   "icon": "house.svg",
-  "type": "Service",
+  "type": "Dorm",
   "img1": "needpics",
   "img2": "needpics",
   "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "Frueauff_Building",
+  "tooltip": "Frueauff Energy Research Building",
+  "lat": 28.065138,
+  "lng": -80.621852,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://news.fit.edu/archive/the-secret-history-of-the-frueauff-energy-building/"
+},
+{
+  "id": "Sheppard_Building",
+  "tooltip": "Sheppard Building",
+  "lat": 28.065282,
+  "lng": -80.622402,
+  "color": "#c5a336",
+  "icon": "grad_cap.svg",
+  "type": "Facility",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/university-events-and-protocol//venues-and-campus-facilities/shephard-building/"
+},
+{
+  "id": "FIT_Work",
+  "tooltip": "FIT Work Building",
+  "lat": 28.065024,
+  "lng": -80.624430,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Facility",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": ""
+},
+{
+  "id": "Alumni_Center",
+  "tooltip": "Alumni Center",
+  "lat": 28.070030,
+  "lng": -80.625170,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Facility",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/alumni-and-giving/"
+},
+{
+  "id": "Holzer_Health",
+  "tooltip": "Holzer Health Center",
+  "lat": 28.064371,
+  "lng": -80.625358,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": ""
+},
+{
+  "id": "CAPS_Counseling",
+  "tooltip": "FIT CAPS Counseling Center",
+  "lat": 28.064139,
+  "lng": -80.625438,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": ""
+},
+{
+  "id": "Music_Studio",
+  "tooltip": "FIT Music Program Studios",
+  "lat": 28.064113,
+  "lng": -80.625870,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": ""
+},
+{
+  "id": "Crismon_Crossing",
+  "tooltip": "Crimson Crossing",
+  "lat": 28.064691,
+  "lng": -80.620648,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": ""
+},
+{
+  "id": "Firehouse",
+  "tooltip": "Firehouse Subs",
+  "lat": 28.066613,
+  "lng": -80.623553,
+  "color": "#c0ca85",
+  "icon": "fork.svg",
+  "type": "Food",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": ""
+},
+{
+  "id": "Einstein_Bros",
+  "tooltip": "Einstein Bros. Bagels",
+  "lat": 28.066624,
+  "lng": -80.623748,
+  "color": "#c0ca85",
+  "icon": "fork.svg",
+  "type": "Food",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": ""
 }
+
 
 
   
