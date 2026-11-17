@@ -749,11 +749,47 @@
   "lat": 28.059382,
   "lng": -80.625114,
   "color": "#367b45",
-  "icon": "tennis.svg",
+  "icon": "trophy.svg",
   "type": "Sport",
   "img1": "needpics",
   "img2": "needpics",
   "web": "https://www.fit.edu/machine-shop/"
+},
+{
+  "id": "Andy_Field",
+  "tooltip": "Andy Seminick Les Hall Baseball Field",
+  "lat": 28.059394,
+  "lng": -80.624057,
+  "color": "#367b45",
+  "icon": "trophy.svg",
+  "type": "Sport",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://floridatechsports.com/facilities/andy-seminick-les-hall-field/5"
+},
+{
+  "id": "Nancy_Field",
+  "tooltip": "Nancy Bottge Varsity Softball Field",
+  "lat": 28.058523,
+  "lng": -80.625033,
+  "color": "#367b45",
+  "icon": "trophy.svg",
+  "type": "Sport",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://floridatechsports.com/facilities/andy-seminick-les-hall-field/5"
+},
+{
+  "id": "Rick_Field",
+  "tooltip": "Rick Stottler Soccer Field",
+  "lat": 28.058357,
+  "lng": -80.623885,
+  "color": "#367b45",
+  "icon": "trophy.svg",
+  "type": "Sport",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://floridatechsports.com/facilities/andy-seminick-les-hall-field/5"
 }
 
 
