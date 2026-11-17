@@ -777,7 +777,7 @@
   "type": "Sport",
   "img1": "needpics",
   "img2": "needpics",
-  "web": "https://floridatechsports.com/facilities/andy-seminick-les-hall-field/5"
+  "web": "https://floridatechsports.com/facilities/nancy-bottge-field/3"
 },
 {
   "id": "Rick_Field",
@@ -789,7 +789,67 @@
   "type": "Sport",
   "img1": "needpics",
   "img2": "needpics",
-  "web": "https://floridatechsports.com/facilities/andy-seminick-les-hall-field/5"
+  "web": "https://floridatechsports.com/facilities/rick-stottler-field/6"
+},
+{
+  "id": "Hartley_Hall",
+  "tooltip": "Hartley Hall",
+  "lat": 28.059375,
+  "lng": -80.622708,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "Building_C",
+  "tooltip": "Building C",
+  "lat": 28.058260,
+  "lng": -80.622292,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "Farmer_Hall",
+  "tooltip": "Farmer Hall",
+  "lat": 28.058814,
+  "lng": -80.622509,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "All_Faith",
+  "tooltip": "All Faiths Center",
+  "lat": 28.060172,
+  "lng": -80.623896,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "Mary_Star",
+  "tooltip": "Mary Star of the Sea Newman Hall",
+  "lat": 28.059297,
+  "lng": -80.620511,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Service",
+  "img1": "needpics",
+  "img2": "needpics",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
 }
 
 
