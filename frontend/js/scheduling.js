@@ -109,6 +109,7 @@ async function loadLocations() {
 
         // Create dropdown items with the tooltip
         const option = document.createElement('option');
+        option.value = place.tooltip;
         option.textContent = place.tooltip;
         locationSelect.appendChild(option);
     });
@@ -128,14 +129,9 @@ clsBtn.addEventListener('click', function() {
     const day = document.getElementById('day-select').value;
     const starttime = document.getElementById('starttime').value;
     const endtime = document.getElementById('endtime').value;
-    const location = document.getElementById('location').value;
-    //const location = document.getElementById('location').value;
+    const location = document.getElementById('location-select').value;
     const rmnum = document.getElementById('rmnum').value;
     const color = document.getElementById('color').value;
-
-    console.log(clsname);
-    console.log(day);
-    console.log(color);
 
     if (clsname == null || clsname == "") {
         console.warn("Class Name is empty");
@@ -145,7 +141,6 @@ clsBtn.addEventListener('click', function() {
         console.warn("Room Number is empty");
         return;
     }
-
     if (starttime == null || starttime == "") {
         console.warn("Start Time is empty");
         return;
