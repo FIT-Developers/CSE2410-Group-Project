@@ -59,7 +59,6 @@ dragHandle.addEventListener('pointerdown', (e) => {
     startY = e.clientY;
     currentDeltaY = 0;
     popup.classList.add('dragging');
-    dragHandle.setPointerCapture(e.pointerId); // Keeps tracking even if finger slides off the handle
 });
 
 dragHandle.addEventListener('pointermove', (e) => {
@@ -74,9 +73,6 @@ function endDrag(e) {
     isDragging = false;
 
     popup.classList.remove('dragging');
-    if (dragHandle.hasPointerCapture(e.pointerId)) {
-        dragHandle.releasePointerCapture(e.pointerId);
-    }
 
     // Close if dragged down more than 100px (25%)
     if (currentDeltaY > Math.min(120, popup.offsetHeight * 0.25)) {
@@ -91,6 +87,8 @@ function endDrag(e) {
 // Detects finishing the mouse event and calls the function to determine to close or not
 dragHandle.addEventListener('pointerup', endDrag);
 dragHandle.addEventListener('pointercancel', endDrag);
+
+
 
 
 
@@ -128,8 +126,9 @@ const clsBtn = document.getElementById('cls-btn');
 clsBtn.addEventListener('click', function() {
     const clsname = document.getElementById('clsname').value;
     const day = document.getElementById('day-select').value;
-    const starttime = document.getElementById('starttime').value;;
+    const starttime = document.getElementById('starttime').value;
     const endtime = document.getElementById('endtime').value;
+    const location = document.getElementById('location').value;
     //const location = document.getElementById('location').value;
     const rmnum = document.getElementById('rmnum').value;
     const color = document.getElementById('color').value;
@@ -169,7 +168,7 @@ clsBtn.addEventListener('click', function() {
     }
 
     console.log("Success");
-    addClass(clsname, day, starttime, endtime, rmnum, color);
+    addClass(clsname, day, starttime, endtime, location, rmnum, color);
 
     console.log(classes);
 

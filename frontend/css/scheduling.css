@@ -107,10 +107,17 @@ div #container {
 /* The grid setup */
 .schedule-grid {
     display: grid;
-    grid-template-columns: 37px repeat(5, 28vw);
+    grid-template-columns: 37px repeat(5, 1fr);
     grid-template-rows: 60px 1fr;
     min-width: max-content;
-
+}
+@media screen and (max-width: 768px) {
+    .schedule-grid {
+        display: grid;
+        grid-template-columns: 37px repeat(5, 28vw);
+        grid-template-rows: 60px 1fr;
+        min-width: max-content;
+    }
 }
 /* Padding corner (sets up grid) */
 .corner-cell {
@@ -250,18 +257,21 @@ div #container {
     overflow: auto;
     filter: blur(1px) brightness(90%);
 }
+
+/* Handle Dragging */
 .marker-popup .drag-handle {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    padding: 6px 0 16px;
+    margin-top: -20px;
     cursor: grab;
     touch-action: none;
 }
 .drag-handle img {
-    display: inline-block;
     width: 6rem;
-    margin-top: -18px;
+    pointer-events: none;
 }
 .marker-popup .drag-handle:active {
     cursor: grabbing;
