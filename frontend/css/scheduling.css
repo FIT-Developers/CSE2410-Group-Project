@@ -252,7 +252,6 @@ div #container {
 .drag-handle img {
     display: inline-block;
     width: 6rem;
-    filter: var(--light-color-filter);
     margin-top: -18px;
 }
 .marker-popup .drag-handle:active {
@@ -277,7 +276,7 @@ div #icontainer {
 .marker-popup .label {
     margin: 0px;
     margin-bottom: 4px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     font-variation-settings: 'wght' 500;
@@ -294,10 +293,11 @@ div #icontainer {
     border: 2px solid var(--light-grey-color);
     height:36px;
     /* Caret stuff */
-    font-size: 20px;
-    text-indent: 10px;
+    font-size: 16px;
+    text-indent: 8px;
     caret-color: var(--light-blue-color);
     color: #000000;
+    padding-inline: 0px;
 
     box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.10);
 }
@@ -328,10 +328,17 @@ div #icontainer {
     cursor: pointer;
 }
 .input[type="color"]::-webkit-color-swatch {
-    margin-top:-2px;
     border: transparent;
     border-radius: 11px;
-    block-size: 28px;
+    block-size: 100%;
+    inline-size: 100%;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: 11px;
 }
 #cls-btn {
     width: 100%;
