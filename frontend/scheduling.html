@@ -109,35 +109,43 @@
 			<h1 class="label">Class Name</h1>
 		</div>
 		<div id="icontainer">
-			<input type="text" style="width:100%" class="input" placeholder="" />
+			<input type="text" style="width:100%" class="input" id="clsname" placeholder="" />
 		</div>
 
-		<div class="grid" style="grid-template-columns: 70px 1fr 1fr;">
+		<div class="grid" style="grid-template-columns: 100px 1fr 1fr;">
 			<h1 class="label">Day</h1>
 			<h1 class="label">Start Time</h1>
 			<h1 class="label">End Time</h1>
 		
-			<input type="text" class="input" placeholder="" />
-			<input type="text" class="input" placeholder="" />
-			<input type="text" class="input" placeholder="" />
+			<select class="input" id="day-select">
+				<option value="Mon">Mon</option>
+				<option value="Tues">Tues</option>
+				<option value="Wed">Wed</option>
+				<option value="Thurs">Thurs</option>
+				<option value="Fri">Fri</option>
+			</select>
+			<input type="text" class="input" id="starttime" placeholder="" />
+			<input type="text" class="input" id="endtime" placeholder="" />
 		</div>
 
 		<div id="container">
 			<h1 class="label">Location</h1>
 		</div>
 		<div id="icontainer">
-			<input type="text" style="width:100%" class="input" placeholder="" />
+			<select id="location-select" style="width:100%" class="input" id="location">
+				<option value="" disabled selected></option>
+			</select>
 		</div>
 
 		<div class="grid" style="grid-template-columns: 1fr 90px;">
 			<h1 class="label">Room Number</h1>
 			<h1 class="label">Color</h1>
 
-			<input type="text" class="input" placeholder="" />
-			<input type="color" class="input"/>
+			<input type="text" class="input" id="rmnum" placeholder="" />
+			<input type="color" class="input" id="color"/>
 		</div>
 		<div id="container" style="margin-top: 20rem;">
-			<div id="button">
+			<div id="cls-btn">
 				<h1>Add Class</h1>
 			</div>
 		</div>

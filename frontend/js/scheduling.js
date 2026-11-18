@@ -91,3 +91,125 @@ function endDrag(e) {
 // Detects finishing the mouse event and calls the function to determine to close or not
 dragHandle.addEventListener('pointerup', endDrag);
 dragHandle.addEventListener('pointercancel', endDrag);
+
+
+
+
+/* Dropdown for Location obtained from Json */
+const locationSelect = document.getElementById('location-select');
+
+async function loadLocations() {
+    const response = await fetch('./data/markers.json');
+    const locations = await response.json();
+
+    // Sort tooltip alphabetically
+    locations.sort((a, b) => a.tooltip.localeCompare(b.tooltip));
+
+    locations.forEach(place => {
+        // If no tooltip exists for one
+        if (!place.tooltip) return;
+
+        // Create dropdown items with the tooltip
+        const option = document.createElement('option');
+        option.textContent = place.tooltip;
+        locationSelect.appendChild(option);
+    });
+}
+
+loadLocations();
+
+// ============================================================================================================================================================
+// ===================================================Storing, Showing, Adding, Error Handling of Classes======================================================
+// ============================================================================================================================================================
+/*
+let tasks = JSON.parse(localStorage.getItem("myTasks")) || [];
+
+const tasks = [
+  { id: 1, title: "Finish map layout", completed: true, priority: "high" },
+  { id: 2, title: "Fix scheduling bug", completed: false, priority: "medium" },
+  { id: 3, title: "Update CSS styles", completed: false, priority: "low" }
+];
+localStorage.setItem("myTasks", JSON.stringify(tasks));
+
+const rawData = localStorage.getItem("myTasks");
+const savedTasks = rawData ? JSON.parse(rawData) : [];
+
+// 2. Access properties just like a normal array of objects
+console.log(savedTasks[0].title); // "Finish map layout"
+console.log(savedTasks[1].completed);
+
+const currentTasks = JSON.parse(localStorage.getItem("myTasks")) || [];
+
+// 2. Add a new object to the array
+currentTasks.push({
+  id: 4,
+  title: "Deploy site",
+  completed: false,
+  priority: "high"
+});
+
+// 3. Save the updated array back to localStorage
+localStorage.setItem("myTasks", JSON.stringify(currentTasks));
+*/
+
+const clsBtn = document.getElementById('cls-btn');
+clsBtn.addEventListener('click', function() {
+    const clsname = document.getElementById('clsname').value;
+    const day = document.getElementById('day-select').value;
+    const starttime = document.getElementById('starttime').value;;
+    const endtime = document.getElementById('endtime').value;
+    //const location = document.getElementById('location').value;
+    const rmnum = document.getElementById('rmnum').value;
+    const color = document.getElementById('color').value;
+
+    console.log(clsname);
+    console.log(day);
+    console.log(color);
+
+    if (clsname == null || clsname == "") {
+        console.warn("Class Name is empty");
+        return;
+    }
+    if (rmnum == null || rmnum == "") {
+        console.warn("Room Number is empty");
+        return;
+    }
+
+    if (starttime == null || starttime == "") {
+        console.warn("Start Time is empty");
+        return;
+    } else if (!(/^((8|9|10|11)(:[0-5][0-9])?\s?am|(12|[1-7])(:[0-5][0-9])?\s?pm|8(:00)?\s?pm)$/i.test(starttime.trim()))) { //Regex formatting checking if its in the correct format 
+        console.warn("Start Time wrong format/range (8:15pm)");
+        return;
+    }
+    // Javascripts built in Date Parser function, found examples and modified
+    // Useful for converting these string times to values and comparing which one is later in the day
+    const toMs = t => Date.parse(`1/1/2000 ${t.replace(/^(\d{1,2})\s*(am|pm)$/i, "$1:00 $2").replace(/(am|pm)$/i, " $1")}`);
+    if (endtime == null || endtime == "") {
+        console.warn("End Time is empty");
+        return;
+    } else if (!(/^((8|9|10|11)(:[0-5][0-9])?\s?am|(12|[1-7])(:[0-5][0-9])?\s?pm|8(:00)?\s?pm)$/i.test(endtime.trim()))) { //Regex formatting checking if its in the correct format 
+        console.warn("End Time wrong format/range (8:15pm)");
+        return;
+    } else if (toMs(starttime) >= toMs(endtime)) {
+        console.warn("End Time must be later than Start Time");
+        return;
+    }
+
+    console.log("Success");
+
+});
+/*
+function addClass(title, priority) {
+    currentTasks.push({
+        name: 4,
+        day: "Deploy site",
+        start: false,
+        end: "high",
+        loc: "dasfoewi",
+        room: "sdasd",
+        color: ""
+    });
+    localStorage.setItem("myTasks", JSON.stringify(tasks));
+}
+*/
