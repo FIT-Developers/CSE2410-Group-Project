@@ -121,36 +121,8 @@ loadLocations();
 // ============================================================================================================================================================
 // ===================================================Storing, Showing, Adding, Error Handling of Classes======================================================
 // ============================================================================================================================================================
-/*
-let tasks = JSON.parse(localStorage.getItem("myTasks")) || [];
 
-const tasks = [
-  { id: 1, title: "Finish map layout", completed: true, priority: "high" },
-  { id: 2, title: "Fix scheduling bug", completed: false, priority: "medium" },
-  { id: 3, title: "Update CSS styles", completed: false, priority: "low" }
-];
-localStorage.setItem("myTasks", JSON.stringify(tasks));
-
-const rawData = localStorage.getItem("myTasks");
-const savedTasks = rawData ? JSON.parse(rawData) : [];
-
-// 2. Access properties just like a normal array of objects
-console.log(savedTasks[0].title); // "Finish map layout"
-console.log(savedTasks[1].completed);
-
-const currentTasks = JSON.parse(localStorage.getItem("myTasks")) || [];
-
-// 2. Add a new object to the array
-currentTasks.push({
-  id: 4,
-  title: "Deploy site",
-  completed: false,
-  priority: "high"
-});
-
-// 3. Save the updated array back to localStorage
-localStorage.setItem("myTasks", JSON.stringify(currentTasks));
-*/
+let classes = JSON.parse(localStorage.getItem("myClasses")) || [];
 
 const clsBtn = document.getElementById('cls-btn');
 clsBtn.addEventListener('click', function() {
@@ -197,19 +169,21 @@ clsBtn.addEventListener('click', function() {
     }
 
     console.log("Success");
+    addClass(clsname, day, starttime, endtime, rmnum, color);
+
+    console.log(classes);
 
 });
-/*
-function addClass(title, priority) {
-    currentTasks.push({
-        name: 4,
-        day: "Deploy site",
-        start: false,
-        end: "high",
-        loc: "dasfoewi",
-        room: "sdasd",
-        color: ""
+
+function addClass(name, day, start, end, loc, room, color) {
+    classes.push({
+        name: name,
+        day: day,
+        start: start,
+        end: end,
+        loc: loc,
+        room: room,
+        color: color
     });
-    localStorage.setItem("myTasks", JSON.stringify(tasks));
+    localStorage.setItem("myClasses", JSON.stringify(classes));
 }
-*/
