@@ -94,6 +94,12 @@ div #container {
     overflow: auto;
     background-color: #ffffff;
     cursor: grab;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.schedule-area::-webkit-scrollbar {
+    display: none;
 }
 .schedule-area:active {
     cursor: grabbing;
@@ -104,6 +110,7 @@ div #container {
     grid-template-columns: 37px repeat(5, 28vw);
     grid-template-rows: 60px 1fr;
     min-width: max-content;
+
 }
 /* Padding corner (sets up grid) */
 .corner-cell {
@@ -239,6 +246,8 @@ div #container {
 }
 /* Blurring Background */
 .schedule-area.blur-active {
+    transform: scale(1.008);
+    overflow: auto;
     filter: blur(1px) brightness(90%);
 }
 .marker-popup .drag-handle {
