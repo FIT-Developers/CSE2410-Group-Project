@@ -409,5 +409,5 @@ select.input:focus {
     filter: var(--accent-color-filter);
 }
 .trash-btn img {
-    padding: 6px 6px;
+    padding: 3px 3px 3px 15px;
 }

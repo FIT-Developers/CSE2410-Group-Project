@@ -99,6 +99,7 @@ function renderClasses() {
         const topPx = (timeToMinutes(cls.start) - (8*60)) * (80/60) + 10;
         // Find the difference between start and end time and convert those minutes to the pixels to determine the height
         const heightPx = (timeToMinutes(cls.end) - timeToMinutes(cls.start)) * (80/60);
+        const isSmall = heightPx <= 70;
 
         /* Styling the class block */
         clsBlock.className = 'class-block';
@@ -116,12 +117,33 @@ function renderClasses() {
 
         // Html added inside the div element created
         // Includes the class name at the top, then the times then location with room number
-        clsBlock.innerHTML = `
-            <div style="font-weight: 600; font-size: 13px;">${cls.name}</div>
-            <div style="font-size: 11px; opacity: 0.9;">${cls.start} - ${cls.end}</div>
-            <div style="font-size: 11px; opacity: 0.9;">${cls.loc} • ${cls.room}</div>
-            <div style="position: absolute; bottom: 1px; left: 3px;" class="trash-btn" data-index="${index}" id="trash"><img src="./assets/icons/menu-icons/trash.svg" alt="" style="width: 14px;"></div>
-        `;
+        if (isSmall) {
+            // Compact layout
+            clsBlock.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px;">
+                    <div style="font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${cls.name}</div>
+                    <div class="trash-btn" data-index="${index}" style="flex-shrink: 0; line-height: 0; cursor: pointer;">
+                        <img src="./assets/icons/menu-icons/trash.svg" alt="" style="width: 14px;">
+                    </div>
+                </div>
+
+                <div style="font-size: 10px; opacity: 0.9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">
+                    ${cls.start} - ${cls.end} • ${cls.loc} ${cls.room}
+                </div>
+            `;
+        } else {
+            // Standard layout
+            clsBlock.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px;">
+                    <div style="font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${cls.name}</div>
+                    <div class="trash-btn" data-index="${index}" style="flex-shrink: 0; line-height: 0; cursor: pointer;">
+                        <img src="./assets/icons/menu-icons/trash.svg" alt="" style="width: 14px;">
+                    </div>
+                </div>
+                <div style="font-size: 11px; opacity: 0.9;">${cls.start} - ${cls.end}</div>
+                <div style="font-size: 11px; opacity: 0.9;">${cls.loc} • ${cls.room}</div>
+            `;
+        }
 
         col.appendChild(clsBlock);
     });
