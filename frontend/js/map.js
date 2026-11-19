@@ -680,27 +680,7 @@ const findNode = (y, x, N) => {
     let m = 1/0, id = null;
     for (let i in N) {
         let d = dist(y, x, N[i].lat, N[i].lng);
-        if (d < m) { m = d; id = i; }
-    }
-    return { i: id, d: m, t: m / S };
-};
-
-const findEdge = (y, x, N, E) => {
-    let m = 1/0, id = null;
-    for (let i in N) {
-        let d = dist(y, x, N[i].lat, N[i].lng);
-        if (d < m) { m = d; id = i; }
-    }
-    for (let k in E) {
-        let u = N[E[k].u], v = N[E[k].v];
-        if (!u || !v) continue;
-        let my = (u.lat + v.lat) / 2, mx = (u.lng + v.lng) / 2;
-        let dM = dist(y, x, my, mx);
-        if (dM < m) {
-            let du = dist(my, mx, u.lat, u.lng), dv = dist(my, mx, v.lat, v.lng);
-            m = dM + Math.min(du, dv);
-            id = du < dv ? u.id : v.id;
-        }
+        if (d < m) { m = d; id = String(i); }
     }
     return { i: id, d: m, t: m / S };
 };
@@ -710,9 +690,9 @@ function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
     let N = {};
     G.nodes.forEach(node => { N[node.id] = node; });
     
-    let E = G.edges, A = G.adjacencyList;
+    let A = G.adjacencyList;
 
-    let u = findEdge(userLat, userLng, N, E), m = findNode(markerLat, markerLng, N);
+    let u = findNode(userLat, userLng, N), m = findNode(markerLat, markerLng, N);
     if (!u.i || !m.i) return { miles: 0, minutes: 0, path: [] };
     
     let t = {}, d = {}, prev = {}, U = new Set(Object.keys(A));
@@ -726,12 +706,13 @@ function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
         U.delete(c);
         
         for (let nb of (A[c] || [])) {
-            if (!U.has(nb.node)) continue;
+            let nextNode = String(nb.node);
+            if (!U.has(nextNode)) continue;
             let alt = t[c] + nb.weight;
-            if (alt < t[nb.node]) {
-                t[nb.node] = alt;
-                d[nb.node] = d[c] + nb.distance;
-                prev[nb.node] = c; // Track the previous node for the path
+            if (alt < t[nextNode]) {
+                t[nextNode] = alt;
+                d[nextNode] = d[c] + nb.distance;
+                prev[nextNode] = c; // Track the previous node for the path
             }
         }
     }
