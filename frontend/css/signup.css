@@ -1,0 +1,66 @@
+
+
+/* Header */
+#signup-page-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: goldenrod;
+	position: relative;
+	height: 100px;
+	width: 100%;
+}
+
+#signup-title {
+	margin: 0;
+	background-color: green;
+	text-align: center;
+}
+
+/* signup Page Content */
+#signup-page-content {
+	display: flex;
+    justify-content: center;
+	background-color: beige;
+	height: 100vh;
+	width: 100%;
+}
+
+/* sign Form */
+#signup-form-div {
+    margin-top: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 50vh;
+    width: 55vh;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#signup-form label {
+    font-size: 25px;
+}
+
+#signup-form input {
+    font-size: 25px;
+    border: 2px solid black;
+}
+
+#signup-form input[type=username],
+#signup-form input[type=password] {
+    position: relative;
+    background: none;
+    box-sizing: content-box;
+    color: black;
+    padding: 10px;
+}
+
+#signup-form input[type=submit] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+}
