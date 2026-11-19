@@ -209,7 +209,7 @@ function renderClasses() {
 
     const classes = JSON.parse(localStorage.getItem('myClasses')) || [];
 
-    classes.forEach(cls => {
+    classes.forEach((cls, index) => {
         const col = document.getElementById(`${cls.day.toLowerCase()}-col`);
         const clsBlock = document.createElement('div');
 
@@ -237,9 +237,9 @@ function renderClasses() {
         // Includes the class name at the top, then the times then location with room number
         clsBlock.innerHTML = `
             <div style="font-weight: 600; font-size: 13px;">${cls.name}</div>
-            <div style="font-size: 11px; opacity: 0.9;">${cls.start} • ${cls.end}</div>
+            <div style="font-size: 11px; opacity: 0.9;">${cls.start} - ${cls.end}</div>
             <div style="font-size: 11px; opacity: 0.9;">${cls.loc} • ${cls.room}</div>
-            <div style="position: absolute; bottom: 4px; left: 6px;" class="trash-btn"><img src="./assets/icons/menu-icons/trash.svg" alt="" style="width: 14px;"></div>
+            <div style="position: absolute; bottom: 1px; left: 3px;" class="trash-btn" data-index="${index}" id="trash"><img src="./assets/icons/menu-icons/trash.svg" alt="" style="width: 14px;"></div>
         `;
 
         col.appendChild(clsBlock);
@@ -247,3 +247,17 @@ function renderClasses() {
 }
 // On page load
 renderClasses()
+
+document.getElementById('scheduleArea').addEventListener('click', (e) => {
+    const trashBtn = e.target.closest('.trash-btn');
+    if (!trashBtn) return; // Ignore clicks that weren't on a trash icon
+    e.stopPropagation(); // Prevents triggering any background clicks
+
+    const index = parseInt(trashBtn.dataset.index, 10); // Turns string to decimal int
+    // Remove that specific class object from the array using that index
+    classes.splice(index, 1);
+
+    // Save updated array to localStorage and rerender
+    localStorage.setItem("myClasses", JSON.stringify(classes));
+    renderClasses();
+});

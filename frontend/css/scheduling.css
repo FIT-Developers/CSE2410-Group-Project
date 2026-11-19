@@ -405,6 +405,9 @@ select.input:focus {
 }
 
 
-trash-btn:hover img {
-    filter: var(--accent-color);
+.trash-btn:hover img{
+    filter: var(--accent-color-filter);
+}
+.trash-btn img {
+    padding: 6px 6px;
 }
