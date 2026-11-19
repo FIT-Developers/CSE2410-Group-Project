@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=overlays-content">
 
     <!-- Enable Standalone Fullscreen Mode for iOS Safari (Obtained from online sources/documentation)-->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -82,9 +83,15 @@
         </a>
     </div>
 
+    
+
 
     <div class="active-location-btn">
         <img src="./assets/icons/menu-icons/navigator.svg" alt="" class="icon">
+    </div>
+
+    <div class="weather-showcase">
+        <img src="./assets/icons/weather/Sunny.svg" alt="" class="icon" id="weather-icon">
     </div>
 
     <div class="filter-container">
@@ -101,10 +108,16 @@
         </div>
     </div>
 
+
+
+
+
     <div class="search-bar">
         <img src="./assets/icons/menu-icons/pin.svg" alt="" class="icon">
         <input type="text" class="input" placeholder="Search here" />
     </div>
+    
+
 
     <!-- Leaflet's JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

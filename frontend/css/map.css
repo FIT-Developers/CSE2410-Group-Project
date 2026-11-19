@@ -106,6 +106,11 @@ body {
     transform: scale(1.6);
     transition: transform 0.2s ease-in-out;
 }
+/* Used for checking if a active exists change all non actives to be smaller and transparent */
+body:has(.custom-pin.active-pin) .custom-pin:not(.active-pin) svg {
+    opacity: 0.5;
+    transform: scale(0.8);
+}
 
 
 
@@ -129,6 +134,11 @@ div #container {
     justify-content: space-around;
     align-items: center;
     padding: 0 0px;
+} /* Fixes a crucial bug of having the mobile keyboard push the bottom nav up */
+@media (max-height: 600px) {
+    .bottom-nav {
+        display: none;
+    }
 }
 .bottom-nav .nav-item {
     display:flex;
@@ -157,6 +167,8 @@ div #container {
 }
 
 
+
+
 /* =====> Location Button <===== */
 .active-location-btn {
     z-index: 1002;
@@ -172,6 +184,8 @@ div #container {
     align-items: center;
     padding: 0 0px;
     filter:drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+
+    cursor: pointer;
 }
 .active-location-btn .icon {
     width: 2rem;
@@ -201,6 +215,7 @@ div #container {
     justify-content: center;
     align-items: center;
     padding: 0 0px;
+    cursor: pointer;
 
     filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2));
 }
@@ -315,6 +330,30 @@ div #container {
 }
 
 
+/* =====> Weather Showcase <===== */
+.weather-showcase {
+    z-index: 1002;
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    width: 2.6rem;
+    height: 2.6rem;
+    background-color: #FFFFFF;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0px;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.weather-showcase .icon {
+    width: 2rem;
+    filter: var(--accent-color-filter);
+}
+
+
+
 
 
 /* =====> Icon Styling <===== */
@@ -373,6 +412,7 @@ div #container {
 }
 .campus_mask { /* Added a blur and drop shadow because the lines felt too strict */
     filter: blur(3px) drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.7));
+    cursor: grab;
 }
 .user-pin {
     filter: drop-shadow(0px 8px 8px rgba(182, 80, 80, 0.6));
@@ -389,4 +429,47 @@ div #container {
     .custom-pin svg {
         transform: scale(1.1);
     }
+}
+
+
+
+
+/* Card Container */
+.search-card-container {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 420px;
+    background: #ffffff;
+    border-radius: 28px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header Row */
+.search-bar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    background: #f1f2f6;
+    border-radius: 20px;
+    padding: 8px 14px;
+}
+
+.pin-icon {
+    width: 18px;
+    height: 18px;
+    filter: invert(33%) sepia(85%) saturate(1450%) hue-rotate(335deg);
 }

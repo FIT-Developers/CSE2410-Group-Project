@@ -18,10 +18,10 @@ git push origin Prototype
 // ============================================================================================================================================================
 // ==> Polygon covering the whole world, needed for inversion polygon
 var worldPolygon = [
-  [360, -180],
-  [360, 180],
-  [-360, 180],
-  [-360, -180]
+    [360, -180],
+    [360, 180],
+    [-360, 180],
+    [-360, -180]
 ];
 
 // ==> Complex Polygon that covers important parts of campus (This polygon was created from a polygon drawing website on maps)
@@ -31,6 +31,11 @@ const campusBounds = L.latLngBounds(campusPolygon);
 
 // ==> Creating a inverted polygon where its a polygon of the world besides the campus
 var invertedPolygon = [worldPolygon, campusPolygon];
+
+// Create global variables to fix multiple markers being placed with reload
+let currentCoords = null; 
+let userMarker = null;
+let accuracyCircle = null;
 
 
 // ==> Setting up the bounds of the campus
@@ -138,20 +143,52 @@ function createCustomPin(bgColor, iconName) {
     });
 }
 
-// ==> Show a highlighted rectangle where the parking area is when hovering over parking, animation and rounding is done by CSS
-// More about rectangles and its properties, were found on https://leafletjs.com/reference.html#rectangle
-// Later this needs to be turned into a function so multiple parking markers can work (needs marker and bounds parameter)
-const area = L.rectangle([[28.069694059142638, -80.6253013744353], 
-    [28.06765795584343, -80.62506137512882]], {
-    color: '#7ab8ff', fillColor: '#0078FF', fillOpacity: 0.15, weight: 1,
-    className: 'parking_7', interactive: false
-}).addTo(map);
+// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
+// Grabbed online for how to parse and obtain .json data as this is new to me
+// Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
+// Error catching added
+let allLocations = []; // Global variable to store/pass all markers at once to a function
+fetch('./data/markers.json')
+    .then(response => response.json())
+    .then(locations => {
+    locations.forEach(loc => {
+        allLocations = locations;
+
+        // Creates custom marker with icon and color data
+        const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
+
+        // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
+        marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web, loc.color, loc.icon, loc.id);
+    });
+})
+.catch(error => console.error('Error loading markers:', error));
+
+
+
+
+
 
 // ==> Function to add marker popup with each marker data from json
 let selectedBuilding = null;
+
 let routeLine = null;
 let markerWebsite = null;
-function marker_Popup(marker, titleData, typeData, img1, img2, web) {
+
+let recentMarkers = [];
+
+// Grab the json graph data with nodes, edges and adjancey list
+// => Done similarly for markers.json using the same documentation
+let graphData = null;
+
+fetch('./data/graph.json')
+    .then(response => response.json())
+    .then(data => {
+        graphData = data;
+    })
+    .catch(error => console.error('Error loading graph data:', error));
+    
+
+function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
     marker.on('click', (e) => {
         
         // Prevent map click event from immediately closing the sheet
@@ -175,8 +212,41 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
         document.getElementById('img-1').src = img1;
         document.getElementById('img-2').src = img2;
 
-       
+        console.log("Marker data obtained successfully at: " + marker.getLatLng());
 
+        // Do routing to find distance and time and draw a polyline on the map
+        if (currentCoords != null && graphData != null) {
+                const result = calculateRoute(currentCoords[0], currentCoords[1], marker.getLatLng().lat, marker.getLatLng().lng, graphData); 
+                document.getElementById('Distance').textContent = result.miles + " mi";
+                document.getElementById('TimeAway').textContent = result.minutes + " min";
+
+                recordMarkerClick(titleData, typeData, color, icon, result.miles, result.minutes, id);
+
+                // Clear the old route line before drawing a new one
+                if (routeLine) {
+                    map.removeLayer(routeLine);
+                }
+
+                // Check if length is real and then draw the new path
+                if (result.path && result.path.length > 0) {
+                    // Info for polyline can be found: https://leafletjs.com/reference.html#polyline
+                    // result.path is a list of [lat, long]
+
+                    console.log("Successfully obtained fastest route from user to marker with " + result.path.length + " nodes.");
+
+                    // Draw the polyline following the outputted path data
+                    routeLine = L.polyline(result.path, {
+                        color: '#B65050',
+                        weight: 6,
+                        opacity: 0.9
+                    }).addTo(map);
+                }
+        // If json data fails / Graphdata and if currentCoords / player location is off then don't calculate routes
+        } else {
+            document.getElementById('Distance').textContent = "? mi";
+            document.getElementById('TimeAway').textContent = "? min";
+        }
+        
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
 
@@ -191,6 +261,10 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web) {
 
 }
 
+
+
+
+
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
     document.getElementById('marker-popup').classList.remove('open');
@@ -198,17 +272,25 @@ document.querySelector('#close').addEventListener('click', function() {
     document.querySelectorAll('.custom-pin').forEach(pin => {
         pin.classList.remove('active-pin');
     });
+
+    // If there is a polyline, remove that line and set that bool off
+    // Gets rid of the route when popup drops
+    if (routeLine) {
+        map.removeLayer(routeLine);
+        routeLine = null;
+    }
 });
-//website button now redirects to website in json
+
+// Website button now redirects to website in json
 document.querySelector('#website').addEventListener('click', function(){
     window.open(markerWebsite, '_blank');
 })
 
-//when direction button is pressed start nav
+// When direction button is pressed start nav -Robert (backend)
 let navigating = false;
 document.querySelector('#directions').addEventListener('click', async function(event) {
     event.preventDefault();
-    //kills nav if button pressed again and removes route line
+    // Kills nav if button pressed again and removes route line
     if (navigating) {
         navigating = false;
 
@@ -224,25 +306,6 @@ document.querySelector('#directions').addEventListener('click', async function(e
     await updateRoute();
 });
 
-
-
-// ==> Documentation on markers for future reference: https://leafletjs.com/reference.html#marker
-// Grabbed online for how to parse and obtain .json data as this is new to me
-// Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
-// Error catching added
-fetch('./data/markers.json')
-  .then(response => response.json())
-  .then(locations => {
-    locations.forEach(loc => {
-      const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
-      // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
-    });
-  })
-  .catch(error => console.error('Error loading markers:', error));
-
-
-
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
     document.getElementById('marker-popup').classList.remove('open');
@@ -250,18 +313,55 @@ map.on('click', () => {
     document.querySelectorAll('.custom-pin').forEach(pin => {
         pin.classList.remove('active-pin');
     });
+
+    // If there is a polyline, remove that line and set that bool off
+    // Gets rid of the route when popup drops
+    if (routeLine) {
+        map.removeLayer(routeLine);
+        routeLine = null;
+    }
     
-}); // This prevents clicks on the actually popup to slide it down
+}); 
+
+// This prevents clicks on the actually popup to slide it down
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
 
-//**********************************************************
-// Detecting mouseover to make the highlighted area visible ### NO LONGER WORKS WITH .json ###
-//Parking_7.on('mouseover', () => area.getElement()?.classList.add('active')); // Optional Chaining is used so errors dont occur if null
+
+
+
+/* Top 4 Recent Marker Array */
+function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id) {
+    // Make an object to store
+    const markerObject = {
+    id,
+    title: titleData,
+    type: typeData,
+    color,
+    icon,
+    miles,
+    minutes,
+    };
+
+    // Remove the existing item if already present (prevents duplicates and promotes to top)
+    recentMarkers = recentMarkers.filter(item => item.id !== id);
+
+    // Push to the front of the array (most recent at index 0)
+    recentMarkers.unshift(markerObject);
+
+    if (recentMarkers.length > 4) {
+        recentMarkers.pop();
+    }
+
+    console.log("Recent marker list: " + recentMarkers);
+}
+
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
+
+
 
 
 // ============================================================================================================================================================
@@ -327,10 +427,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================================================================================================================================
 // ======================================================LIVE USER GPS, With User Marker=======================================================================
 // ============================================================================================================================================================
-// Create global variables to fix multiple markers being placed with reload
-let currentCoords = null; 
-let userMarker = null;
-let accuracyCircle = null;
+function updateData() {
+    console.log("Function executed at:", new Date().toLocaleTimeString());
+  // Your update logic here
+}
+const intervalId = setInterval(updateData, 3600000);
+
 // ==> Grabs correct coords and location of a user (Followed by https://www.youtube.com/watch?v=4D6nJd_ORX4)
 // Watches the users position and updates it accurately and connects to better signals if possible for better accuracy *watchPosition()
 if (navigator.geolocation) {
@@ -345,8 +447,16 @@ function successLocation(position) {
     // Storing and grabbing cords
     const {latitude, longitude, accuracy} = position.coords;
 
+
     // Store code for outside function use
     currentCoords = [latitude, longitude];
+
+    showClassRoutes(allLocations);
+
+    if (currentCoords != null) {
+        getWeatherCode(currentCoords[0], currentCoords[1]);
+        setInterval(getWeatherCode(currentCoords[0], currentCoords[1]), 3600000);
+    }
 
     // Deletes Markers if there already present, to have room to create new ones
     if (userMarker) {
@@ -378,6 +488,8 @@ function successLocation(position) {
 
 
     userMarker = L.marker([latitude, longitude], { icon: User}).addTo(map)
+    // Notify the location is working
+    console.log("Location obtained successfully at: " + latitude + ", " + longitude);
 
     // Blue Accuracy Circle
     accuracyCircle = L.circle([latitude, longitude], {
@@ -414,26 +526,15 @@ document.querySelector('.active-location-btn').addEventListener('click', functio
         console.log("Location doesn't exist or permission denied.");
 }
 });
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ============================================================================================================================================================
+// ===============================================================Backend Stuff================================================================================
+// ============================================================================================================================================================
 // ==> Draws the route gotten from backend on screen every 5 seconds
 // Uses fetch request to backend
 let routeInProgress = false;
@@ -444,7 +545,7 @@ async function updateRoute() {
 
     routeInProgress = true;
 
-      try {
+    try {
         const position = userMarker.getLatLng();
         const response = await fetch('/api/route', {
             method: 'POST',
@@ -497,3 +598,241 @@ async function updateRoute() {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 
+
+
+
+// ============================================================================================================================================================
+// ===============================================================Weather API==================================================================================
+// ============================================================================================================================================================
+
+async function getWeatherCode(lat, lon) {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code`;
+    
+    try {
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        const weatherCodes = data.hourly.weather_code;
+        const times = data.hourly.time;
+
+        // Find the index of the hour closest to the current time
+        // Grabbed from documentation to parse the list of hourly weather codes and find the one current one
+        const nowISO = new Date().toISOString().slice(0, 13) + ":00"; // Formats to "YYYY-MM-DDTHH:00"
+        const currentIndex = times.findIndex(t => t.startsWith(nowISO));
+        const targetIndex = currentIndex !== -1 ? currentIndex : 0;
+
+        const currentWeatherCode = weatherCodes[targetIndex];
+
+        console.log(`weatherCode is ${currentWeatherCode}`)
+
+        changeWeatherIcon(currentWeatherCode)
+    }
+    catch(error) {
+        console.warn("Weather Error " + error);
+    };
+    
+}
+function changeWeatherIcon(code) {
+    const mapping = {
+        0: "Sunny.svg",
+        1: "Sunny.svg",
+        2: "Cloudy.svg",
+        3: "Cloudy.svg",
+        45: "Foggy.svg",
+        48: "Foggy.svg",
+        51: "Heavy_Rain.svg",
+        53: "Heavy_Rain.svg",
+        55: "Heavy_Rain.svg",
+        56: "Heavy_Rain.svg",
+        57: "Heavy_Rain.svg",
+        61: "Heavy_Rain.svg",
+        63: "Heavy_Rain.svg",
+        65: "Heavy_Rain.svg",
+        66: "Heavy_Rain.svg",
+        67: "Heavy_Rain.svg",
+        95: "Thunder.svg",
+        97: "Thunder.svg",
+    }
+
+    const weatherElement = document.getElementById("weather-icon");
+    weatherElement.src = `./assets/icons/weather/${mapping[code]}`;
+}
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+
+
+
+
+
+
+
+// ============================================================================================================================================================
+// ==============================================Routing Engine (Dijistraks on Graph)==========================================================================
+// ============================================================================================================================================================
+// Optimized and Short Path Finding Code grabbed from the internet, can't remember where, as I didn't document it but modified to fit for my nodes and edges
+const S = 1.4;
+const dist = (y1, x1, y2, x2) => Math.hypot(y1 - y2, x1 - x2) * 111139;
+
+const findNode = (y, x, N) => {
+    let m = 1/0, id = null;
+    for (let i in N) {
+        let d = dist(y, x, N[i].lat, N[i].lng);
+        if (d < m) { m = d; id = i; }
+    }
+    return { i: id, d: m, t: m / S };
+};
+
+const findEdge = (y, x, N, E) => {
+    let m = 1/0, id = null;
+    for (let i in N) {
+        let d = dist(y, x, N[i].lat, N[i].lng);
+        if (d < m) { m = d; id = i; }
+    }
+    for (let k in E) {
+        let u = N[E[k].u], v = N[E[k].v];
+        if (!u || !v) continue;
+        let my = (u.lat + v.lat) / 2, mx = (u.lng + v.lng) / 2;
+        let dM = dist(y, x, my, mx);
+        if (dM < m) {
+            let du = dist(my, mx, u.lat, u.lng), dv = dist(my, mx, v.lat, v.lng);
+            m = dM + Math.min(du, dv);
+            id = du < dv ? u.id : v.id;
+        }
+    }
+    return { i: id, d: m, t: m / S };
+};
+
+function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
+    let G = typeof graphData === 'string' ? JSON.parse(graphData) : graphData;
+    let N = {};
+    G.nodes.forEach(node => { N[node.id] = node; });
+    
+    let E = G.edges, A = G.adjacencyList;
+
+    let u = findEdge(userLat, userLng, N, E), m = findNode(markerLat, markerLng, N);
+    if (!u.i || !m.i) return { miles: 0, minutes: 0, path: [] };
+    
+    let t = {}, d = {}, prev = {}, U = new Set(Object.keys(A));
+    for (let n of U) { t[n] = 1/0; d[n] = 1/0; prev[n] = null; }
+    t[u.i] = 0; d[u.i] = 0;
+
+    while (U.size > 0) {
+        let c = null;
+        for (let n of U) if (c === null || t[n] < t[c]) c = n;
+        if (t[c] === 1/0 || c === m.i) break;
+        U.delete(c);
+        
+        for (let nb of (A[c] || [])) {
+            if (!U.has(nb.node)) continue;
+            let alt = t[c] + nb.weight;
+            if (alt < t[nb.node]) {
+                t[nb.node] = alt;
+                d[nb.node] = d[c] + nb.distance;
+                prev[nb.node] = c; // Track the previous node for the path
+            }
+        }
+    }
+    
+    // Debugging, as it informs the start node and end node for problem solving
+    if (t[m.i] === 1/0) {
+        console.warn("No path found! Start node:", u.i, "End node:", m.i);
+        return { miles: 0, minutes: 0, path: [] };
+    }
+
+    // Reconstruct the physical path coordinates
+    let pathCoords = [];
+    let curr = m.i;
+
+    while (curr !== null) {
+        pathCoords.push([N[curr].lat, N[curr].lng]);
+        curr = prev[curr];
+    }
+    
+    pathCoords.reverse(); // Flip it so it goes from Start -> End
+    
+    // Connect the user's exact location to the start of the node path
+    pathCoords.unshift([userLat, userLng]);
+
+    return {
+        miles: +((u.d + d[m.i] + m.d) / 1609.34).toFixed(1),
+        // Do 70% from the actual calculated time as its too high on average
+        minutes: +(((u.t + t[m.i] + m.t) / 60) * 0.70).toFixed(1),
+        path: pathCoords
+    };
+}
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+
+
+let classRouteLines = [];
+function showClassRoutes(locations) {
+
+    if (currentCoords == null && graphData == null || !locations) return; // If no user location or routing failure abort
+
+    const classes = JSON.parse(localStorage.getItem('myClasses')) || [];
+
+    const today = new Date(); 
+    const dayMap = {
+        1: 'Mon',
+        2: 'Tues',
+        3: 'Wed',
+        4: 'Thurs',
+        5: 'Fri'
+    };
+    const theDay = dayMap[today.getDay()]
+    console.log(theDay);
+    if (!theDay) return; // Weekends
+
+    const totalMinutes = today.getHours() * 60 + today.getMinutes();
+
+    const todaysClasses = classes.filter(cls => cls.day === theDay); // If the objects variable day has the string of today's date then add to array
+    if (todaysClasses.length === 0) return; // If no classes exist, no routes can be drawn so abort
+
+    // Clear the old routes before drawing a new ones
+    classRouteLines.forEach(line => map.removeLayer(line));
+    classRouteLines = [];
+
+    todaysClasses.forEach(cls => {
+        const place = locations.find(loc => loc.tooltip === cls.loc || loc.id === cls.loc);
+
+        const result = calculateRoute(currentCoords[0], currentCoords[1], place.lat, place.lng, graphData);
+        
+        const difference = Math.abs(totalMinutes - timeToMinutes(cls.start)); // Grab abs difference
+        const opacity = Math.exp(-0.0057 * difference); // Exponential decay function to help increase opacity quicker when time is closer
+
+        // Check if length is real and then draw the new path
+        if (result.path && result.path.length > 0) {
+
+            const line = L.polyline(result.path, {
+                color: cls.color || '#B65050',
+                weight: 6,
+                opacity: opacity
+            }).addTo(map);
+            classRouteLines.push(line); // Have that line stored for removal process later
+        }
+
+    });
+}
+// Convert weird time string to total minutes
+function timeToMinutes(time) {
+
+    let dayOrNight = time.toLowerCase().slice(-2);
+    let theTime = time.trim().toLowerCase().slice(0, -2).trim();
+
+    // Separate by colon for hours and minutes
+    // Give back a 0 if no colon exists
+    let [front, back = '0'] = theTime.split(':');
+    front = parseInt(front, 10); // The 10 means decimal int not octal or hex
+    back = parseInt(back, 10);
+
+    // 4. Convert to 24-hour format
+    if (dayOrNight === 'pm' && front !== 12) {front += 12;}
+    if (theTime === 'am' && front === 12) {front = 0;}
+
+    // Returns the minutes by multiplying the front by 60 and adding the leftover minutes
+    return front * 60 + back;
+}
