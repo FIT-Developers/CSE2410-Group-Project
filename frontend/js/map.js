@@ -160,8 +160,6 @@ fetch('./data/markers.json')
         // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
         marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web, loc.color, loc.icon, loc.id);
     });
-
-    showClassRoutes(allLocations);
 })
 .catch(error => console.error('Error loading markers:', error));
 
@@ -186,7 +184,6 @@ fetch('./data/graph.json')
     .then(response => response.json())
     .then(data => {
         graphData = data;
-        showClassRoutes(allLocations);
     })
     .catch(error => console.error('Error loading graph data:', error));
     
@@ -778,7 +775,7 @@ function showClassRoutes(locations) {
 
     const classes = JSON.parse(localStorage.getItem('myClasses')) || [];
 
-    const today = new Date().getDay(); 
+    const today = new Date(); 
     const dayMap = {
         1: 'Mon',
         2: 'Tues',
@@ -786,9 +783,11 @@ function showClassRoutes(locations) {
         4: 'Thurs',
         5: 'Fri'
     };
-    const theDay = dayMap[today]
+    const theDay = dayMap[today.getDay()]
     console.log(theDay);
     if (!theDay) return; // Weekends
+
+    const totalMinutes = today.getHours() * 60 + today.getMinutes();
 
     const todaysClasses = classes.filter(cls => cls.day === theDay); // If the objects variable day has the string of today's date then add to array
     if (todaysClasses.length === 0) return; // If no classes exist, no routes can be drawn so abort
@@ -800,8 +799,10 @@ function showClassRoutes(locations) {
     todaysClasses.forEach(cls => {
         const place = locations.find(loc => loc.tooltip === cls.loc || loc.id === cls.loc);
 
-
-        const result = calculateRoute(currentCoords[0], currentCoords[1], place.lat, place.lng, graphData); 
+        const result = calculateRoute(currentCoords[0], currentCoords[1], place.lat, place.lng, graphData);
+        
+        const difference = Math.abs(totalMinutes - timeToMinutes(cls.start)); // Grab abs difference
+        const opacity = Math.exp(-0.0057 * difference); // Exponential decay function to help increase opacity quicker when time is closer
 
         // Check if length is real and then draw the new path
         if (result.path && result.path.length > 0) {
@@ -809,10 +810,29 @@ function showClassRoutes(locations) {
             const line = L.polyline(result.path, {
                 color: cls.color || '#B65050',
                 weight: 6,
-                opacity: 0.3
+                opacity: opacity
             }).addTo(map);
             classRouteLines.push(line); // Have that line stored for removal process later
         }
 
     });
+}
+// Convert weird time string to total minutes
+function timeToMinutes(time) {
+
+    let dayOrNight = time.toLowerCase().slice(-2);
+    let theTime = time.trim().toLowerCase().slice(0, -2).trim();
+
+    // Separate by colon for hours and minutes
+    // Give back a 0 if no colon exists
+    let [front, back = '0'] = theTime.split(':');
+    front = parseInt(front, 10); // The 10 means decimal int not octal or hex
+    back = parseInt(back, 10);
+
+    // 4. Convert to 24-hour format
+    if (dayOrNight === 'pm' && front !== 12) {front += 12;}
+    if (theTime === 'am' && front === 12) {front = 0;}
+
+    // Returns the minutes by multiplying the front by 60 and adding the leftover minutes
+    return front * 60 + back;
 }
