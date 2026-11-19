@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // getDay() returns 0 (Sun) to 6 (Sat)
-    //const today = new Date().getDay(); 
-    const today = 2
+    const today = new Date().getDay(); 
 
     
     // Dictionary mapping the day number to your HTML IDs

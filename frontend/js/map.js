@@ -147,18 +147,21 @@ function createCustomPin(bgColor, iconName) {
 // Grabbed online for how to parse and obtain .json data as this is new to me
 // Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
 // Error catching added
+let allLocations = []; // Global variable to store/pass all markers at once to a function
 fetch('./data/markers.json')
     .then(response => response.json())
     .then(locations => {
     locations.forEach(loc => {
+        allLocations = locations;
 
         // Creates custom marker with icon and color data
         const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
 
         // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
         marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web, loc.color, loc.icon, loc.id);
-        
     });
+
+    showClassRoutes(allLocations);
 })
 .catch(error => console.error('Error loading markers:', error));
 
@@ -183,6 +186,7 @@ fetch('./data/graph.json')
     .then(response => response.json())
     .then(data => {
         graphData = data;
+        showClassRoutes(allLocations);
     })
     .catch(error => console.error('Error loading graph data:', error));
     
@@ -330,7 +334,7 @@ document.getElementById('marker-popup').addEventListener('click', (e) => {
 
 
 
-
+/* Top 4 Recent Marker Array */
 function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id) {
     // Make an object to store
     const markerObject = {
@@ -356,20 +360,11 @@ function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id)
     console.log("Recent marker list: " + recentMarkers);
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
+
+
 
 
 // ============================================================================================================================================================
@@ -458,6 +453,8 @@ function successLocation(position) {
 
     // Store code for outside function use
     currentCoords = [latitude, longitude];
+
+    showClassRoutes(allLocations);
 
     if (currentCoords != null) {
         getWeatherCode(currentCoords[0], currentCoords[1]);
@@ -607,7 +604,9 @@ async function updateRoute() {
 
 
 
-
+// ============================================================================================================================================================
+// ===============================================================Weather API==================================================================================
+// ============================================================================================================================================================
 
 async function getWeatherCode(lat, lon) {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code`;
@@ -663,6 +662,9 @@ function changeWeatherIcon(code) {
     const weatherElement = document.getElementById("weather-icon");
     weatherElement.src = `./assets/icons/weather/${mapping[code]}`;
 }
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+// ============================================================================================================================================================
 
 
 
@@ -767,3 +769,50 @@ function calculateRoute(userLat, userLng, markerLat, markerLng, graphData) {
 // ============================================================================================================================================================
 // ============================================================================================================================================================
 // ============================================================================================================================================================
+
+
+let classRouteLines = [];
+function showClassRoutes(locations) {
+
+    if (currentCoords == null && graphData == null || !locations) return; // If no user location or routing failure abort
+
+    const classes = JSON.parse(localStorage.getItem('myClasses')) || [];
+
+    const today = new Date().getDay(); 
+    const dayMap = {
+        1: 'Mon',
+        2: 'Tues',
+        3: 'Wed',
+        4: 'Thurs',
+        5: 'Fri'
+    };
+    const theDay = dayMap[today]
+    console.log(theDay);
+    if (!theDay) return; // Weekends
+
+    const todaysClasses = classes.filter(cls => cls.day === theDay); // If the objects variable day has the string of today's date then add to array
+    if (todaysClasses.length === 0) return; // If no classes exist, no routes can be drawn so abort
+
+    // Clear the old routes before drawing a new ones
+    classRouteLines.forEach(line => map.removeLayer(line));
+    classRouteLines = [];
+
+    todaysClasses.forEach(cls => {
+        const place = locations.find(loc => loc.tooltip === cls.loc || loc.id === cls.loc);
+
+
+        const result = calculateRoute(currentCoords[0], currentCoords[1], place.lat, place.lng, graphData); 
+
+        // Check if length is real and then draw the new path
+        if (result.path && result.path.length > 0) {
+
+            const line = L.polyline(result.path, {
+                color: cls.color || '#B65050',
+                weight: 6,
+                opacity: 0.3
+            }).addTo(map);
+            classRouteLines.push(line); // Have that line stored for removal process later
+        }
+
+    });
+}
