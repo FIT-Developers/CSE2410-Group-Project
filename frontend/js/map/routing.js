@@ -112,7 +112,8 @@ function showClassRoutes(locations) {
         const result = calculateRoute(currentCoords[0], currentCoords[1], place.lat, place.lng, graphData);
         
         const difference = Math.abs(totalMinutes - timeToMinutes(cls.start)); // Grab abs difference
-        const opacity = Math.exp(-0.0057 * difference); // Exponential decay function to help increase opacity quicker when time is closer
+        const opacity = Math.min(0.80 ,Math.exp(-0.0057 * difference)); // Exponential decay function to help increase opacity quicker when time is closer
+        console.log(difference);
 
         // Check if length is real and then draw the new path
         if (result.path && result.path.length > 0) {
