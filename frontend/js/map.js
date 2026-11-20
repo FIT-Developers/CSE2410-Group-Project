@@ -50,19 +50,19 @@ bounds = L.latLngBounds(corner1, corner2);
 // MaxBounds is set the variable bounds which is from two corners that hold lat and long
 // maxBoundsViscosity is how elastic it feels when going out, (0 is smooth, 1 is like a hard wall, the rest is bounce back)
 var map = L.map('map', {
-    MaxBounds: bounds,
-    maxBoundsViscosity: 1.0,
-    minZoom: 16,
-    maxZoom: 22,
-    zoomControl: false,
-    attributionControl: false,
+	MaxBounds: bounds,
+	maxBoundsViscosity: 1.0,
+	minZoom: 16,
+	maxZoom: 22,
+	zoomControl: false,
+	attributionControl: false,
 
-    tileSize: 256,
+	tileSize: 256,
 
-    inertia: false, // Stops the flicking, going out of bounds
-    
-    // Smoothness:
-    crossOrigin: true
+	inertia: false, // Stops the flicking, going out of bounds
+	
+	// Smoothness:
+	crossOrigin: true
 }).setView([28.063810, -80.623834], 18);
 
 
@@ -70,20 +70,20 @@ var map = L.map('map', {
 // States when dragging make sure its inside of the bounds set earlier
 // Animate messes stuff up so keep it false
 map.on('drag', function() {
-    map.panInsideBounds(bounds, { animate: false });
+	map.panInsideBounds(bounds, { animate: false });
 });
 
 
 // Searched and found a random url that works for leaflet and its in satellite view, might scrap carto roadmap view
 var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-    subdomains: 'abcd',
-    maxNativeZoom: 20,
-    maxZoom: 22,
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+	subdomains: 'abcd',
+	maxNativeZoom: 20,
+	maxZoom: 22,
 
-    keepBuffer: 12,                 
-    updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
-    updateWhenZooming: true,        // Keeps rendering tiles while zoom animations play
+	keepBuffer: 12,                 
+	updateWhenIdle: false,          // Loads tiles immediately during panning/zooming, not after stopping
+	updateWhenZooming: true,        // Keeps rendering tiles while zoom animations play
 }).addTo(map);
 
 
@@ -91,11 +91,11 @@ var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/se
 // This allows a pre render of the grey far outside the visible screen
 const customRenderer = L.svg({ padding: 1.0 });
 L.polygon(invertedPolygon, {
-    renderer: customRenderer,
-    color: 'transparent',
-    fillColor: 'black',
-    fillOpacity: 0.6,
-    className: "campus_mask"
+	renderer: customRenderer,
+	color: 'transparent',
+	fillColor: 'black',
+	fillOpacity: 0.6,
+	className: "campus_mask"
 }).addTo(map);
 // ============================================================================================================================================================
 // ============================================================================================================================================================
@@ -109,42 +109,42 @@ L.polygon(invertedPolygon, {
 // ==> Returns a divIcon class that uses the variable that contains the html (svg icon stuff), which can then be read by L.marker creation in its icon: (properties)
 // Adds icons from assets aswell, sourced from: https://www.svgrepo.com/collection/dazzle-line-icons/7?search=book
 function createCustomPin(bgColor, iconName) {
-    var Pin = `
-        <!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="30" height="38">
+	var Pin = `
+		<!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="30" height="38">
 
-            <!-- Custom Svg Path of a teardrop, drawn with https://yqnn.github.io/svg-path-editor/ -->
-            <path d="M 50 10 A 38 38 0 0 1 88 48 C 88 68 65 90 50 94 C 35 90 12 68 12 48 A 38 38 0 0 1 50 10 Z" 
-                    fill="#FFFFFF" />
-                
-            <!-- Create a inner circle of the arguement color -->
-            <circle cx="50" cy="48" r="32" fill="${bgColor}" />
-            
-            <!-- Create a basic svg img and have its colors and brightness set so its all white -->
-            <image href="./assets/icons/${iconName}" x="26" y="26" width="48" height="48" style="filter: brightness(0) invert(1);" />
-            
+			<!-- Custom Svg Path of a teardrop, drawn with https://yqnn.github.io/svg-path-editor/ -->
+			<path d="M 50 10 A 38 38 0 0 1 88 48 C 88 68 65 90 50 94 C 35 90 12 68 12 48 A 38 38 0 0 1 50 10 Z" 
+					fill="#FFFFFF" />
+				
+			<!-- Create a inner circle of the arguement color -->
+			<circle cx="50" cy="48" r="32" fill="${bgColor}" />
+			
+			<!-- Create a basic svg img and have its colors and brightness set so its all white -->
+			<image href="../assets/icons/${iconName}" x="26" y="26" width="48" height="48" style="filter: brightness(0) invert(1);" />
+			
 
-        </svg>
-    `;
+		</svg>
+	`;
 
-    // ==> Creates a divIcon from leaflet documentation, this includes the htmk/svg icon stuff, icon size, where the origin point of icon is
-    // Also className is literally the class name for when operating css, so use .custom-pin for changing the CSS of these pins
-    // Documentation on this: https://leafletjs.com/reference.html#icon
-    return L.divIcon({
-        className: 'custom-pin',
-        html: Pin,
-        iconSize: [30, 38],
-        iconAnchor: [15, 28]
-    });
+	// ==> Creates a divIcon from leaflet documentation, this includes the htmk/svg icon stuff, icon size, where the origin point of icon is
+	// Also className is literally the class name for when operating css, so use .custom-pin for changing the CSS of these pins
+	// Documentation on this: https://leafletjs.com/reference.html#icon
+	return L.divIcon({
+		className: 'custom-pin',
+		html: Pin,
+		iconSize: [30, 38],
+		iconAnchor: [15, 28]
+	});
 }
 
 // ==> Show a highlighted rectangle where the parking area is when hovering over parking, animation and rounding is done by CSS
 // More about rectangles and its properties, were found on https://leafletjs.com/reference.html#rectangle
 // Later this needs to be turned into a function so multiple parking markers can work (needs marker and bounds parameter)
 const area = L.rectangle([[28.069694059142638, -80.6253013744353], 
-    [28.06765795584343, -80.62506137512882]], {
-    color: '#7ab8ff', fillColor: '#0078FF', fillOpacity: 0.15, weight: 1,
-    className: 'parking_7', interactive: false
+	[28.06765795584343, -80.62506137512882]], {
+	color: '#7ab8ff', fillColor: '#0078FF', fillOpacity: 0.15, weight: 1,
+	className: 'parking_7', interactive: false
 }).addTo(map);
 
 // ==> Function to add marker popup with each marker data from json
@@ -152,70 +152,84 @@ let selectedBuilding = null;
 let routeLine = null;
 let markerWebsite = null;
 function marker_Popup(marker, titleData, typeData, img1, img2, web) {
-    marker.on('click', (e) => {
-        
-        // Prevent map click event from immediately closing the sheet
-        // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
-        L.DomEvent.stopPropagation(e);
+	marker.on('click', (e) => {
+		
+		// Prevent map click event from immediately closing the sheet
+		// Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
+		L.DomEvent.stopPropagation(e);
 
 
-        selectedBuilding = marker.getLatLng();
-        markerWebsite = web
+		selectedBuilding = marker.getLatLng();
+		markerWebsite = web
 
-        // Grabs the html id, and replaces the content in it with unique marker data
-        document.getElementById('MarkerName').textContent = titleData;
-        document.getElementById('TypeName').textContent = typeData;
+		// Grabs the html id, and replaces the content in it with unique marker data
+		document.getElementById('MarkerName').textContent = titleData;
+		document.getElementById('TypeName').textContent = typeData;
 
-        document.getElementById('img-1').src = img1;
-        document.getElementById('img-2').src = img2;
+		// ----------------------------------------------------------------------------
 
-       
+		// Edited so it works with my (Michael) changes.
+		// Moved all the .html files into the html folder, paths needed to be changed.
 
-        // Adds the open class to the html marker popup, allowing it to slide up and be visible
-        document.getElementById('marker-popup').classList.add('open');
+		// This grabs the popup image elements so we can update their paths and visibility
+		const img1El = document.getElementById('img-1');
+		const img2El = document.getElementById('img-2');
 
-        // Used to keep the marker centered higher, Math.pow counteracts the zooming issue
-        const offset = (.0008 / Math.pow(2, map.getZoom() - 18));
-        // Make user go to that marker they clicked, only goto, keep the same zoom
-        map.setView([marker.getLatLng().lat - offset, marker.getLatLng().lng], map.getZoom(), {
-            animate: true,
-            pan: { duration: 0.5 }
-        });
-    });
+		// This rewrites "./assets/" from markers.json to "../assets/" because map.html now lives inside frontend/html/
+		// It also hides the <img> tag if a building has no image path ("") so broken image icons won't show up
+		img1El.src = img1 ? img1.replace(/^\.\/assets\//, '../assets/') : '';
+		img1El.style.display = img1 ? 'block' : 'none';
+
+		img2El.src = img2 ? img2.replace(/^\.\/assets\//, '../assets/') : '';
+		img2El.style.display = img2 ? 'block' : 'none';
+
+		// ----------------------------------------------------------------------------
+
+		// Adds the open class to the html marker popup, allowing it to slide up and be visible
+		document.getElementById('marker-popup').classList.add('open');
+
+		// Used to keep the marker centered higher, Math.pow counteracts the zooming issue
+		const offset = (.0008 / Math.pow(2, map.getZoom() - 18));
+		// Make user go to that marker they clicked, only goto, keep the same zoom
+		map.setView([marker.getLatLng().lat - offset, marker.getLatLng().lng], map.getZoom(), {
+			animate: true,
+			pan: { duration: 0.5 }
+		});
+	});
 
 }
 
 // Little code that makes the X icon work, so when clicked removes class of marker popup therefore closing it
 document.querySelector('#close').addEventListener('click', function() {
-    document.getElementById('marker-popup').classList.remove('open');
-    // Removes the active markers class when exiting popup
-    document.querySelectorAll('.custom-pin').forEach(pin => {
-        pin.classList.remove('active-pin');
-    });
+	document.getElementById('marker-popup').classList.remove('open');
+	// Removes the active markers class when exiting popup
+	document.querySelectorAll('.custom-pin').forEach(pin => {
+		pin.classList.remove('active-pin');
+	});
 });
 //website button now redirects to website in json
 document.querySelector('#website').addEventListener('click', function(){
-    window.open(markerWebsite, '_blank');
+	window.open(markerWebsite, '_blank');
 })
 
 //when direction button is pressed start nav
 let navigating = false;
 document.querySelector('#directions').addEventListener('click', async function(event) {
-    event.preventDefault();
-    //kills nav if button pressed again and removes route line
-    if (navigating) {
-        navigating = false;
+	event.preventDefault();
+	//kills nav if button pressed again and removes route line
+	if (navigating) {
+		navigating = false;
 
-        if (routeLine) {
-            map.removeLayer(routeLine);
-            routeLine = null;
-        }
+		if (routeLine) {
+			map.removeLayer(routeLine);
+			routeLine = null;
+		}
 
-        return;
-    }
-    navigating = true;
-    lastRouteUpdate = Date.now();
-    await updateRoute();
+		return;
+	}
+	navigating = true;
+	lastRouteUpdate = Date.now();
+	await updateRoute();
 });
 
 
@@ -224,14 +238,14 @@ document.querySelector('#directions').addEventListener('click', async function(e
 // Grabbed online for how to parse and obtain .json data as this is new to me
 // Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
 // Error catching added
-fetch('./data/markers.json')
+fetch('../data/markers.json')
   .then(response => response.json())
   .then(locations => {
-    locations.forEach(loc => {
-      const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
-      // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
-      marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
-    });
+	locations.forEach(loc => {
+	  const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
+	  // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
+	  marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web);
+	});
   })
   .catch(error => console.error('Error loading markers:', error));
 
@@ -239,15 +253,15 @@ fetch('./data/markers.json')
 
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
-    document.getElementById('marker-popup').classList.remove('open');
-    // Removes the active markers class when exiting popup
-    document.querySelectorAll('.custom-pin').forEach(pin => {
-        pin.classList.remove('active-pin');
-    });
-    
+	document.getElementById('marker-popup').classList.remove('open');
+	// Removes the active markers class when exiting popup
+	document.querySelectorAll('.custom-pin').forEach(pin => {
+		pin.classList.remove('active-pin');
+	});
+	
 }); // This prevents clicks on the actually popup to slide it down
 document.getElementById('marker-popup').addEventListener('click', (e) => {
-    e.stopPropagation();
+	e.stopPropagation();
 });
 
 //**********************************************************
@@ -264,53 +278,53 @@ document.getElementById('marker-popup').addEventListener('click', (e) => {
 // Local Storage gets also dictionary stuff, to set the value for each day, if nothing grabs defaults to false
 // Info about it https://www.w3schools.com/jsref/prop_win_localstorage.asp
 const filterStates = {
-    M: localStorage.getItem('filter_state_M') === "true",
-    Tu: localStorage.getItem('filter_state_Tu') === "true",
-    W: localStorage.getItem('filter_state_W') === "true",
-    Th: localStorage.getItem('filter_state_Th') === "true",
-    F: localStorage.getItem('filter_state_F') === "true"
+	M: localStorage.getItem('filter_state_M') === "true",
+	Tu: localStorage.getItem('filter_state_Tu') === "true",
+	W: localStorage.getItem('filter_state_W') === "true",
+	Th: localStorage.getItem('filter_state_Th') === "true",
+	F: localStorage.getItem('filter_state_F') === "true"
 };
 // Adds a dropdown when clicking the filter button, which shows the days of the week
 document.addEventListener("DOMContentLoaded", () => {
-    // Have variables for the HTML ID's, fetch them
-    const filterContainer = document.querySelector(".filter-container");
-    const filterBtn = document.getElementById("filterBtn");
+	// Have variables for the HTML ID's, fetch them
+	const filterContainer = document.querySelector(".filter-container");
+	const filterBtn = document.getElementById("filterBtn");
 
-    // When btn clicked sets filter container to have .active
-    filterBtn.addEventListener("click", (event) => {
-        event.stopPropagation(); // Prevents immediate close from bubbling up to document
-        filterContainer.classList.toggle("active");
-    });
+	// When btn clicked sets filter container to have .active
+	filterBtn.addEventListener("click", (event) => {
+		event.stopPropagation(); // Prevents immediate close from bubbling up to document
+		filterContainer.classList.toggle("active");
+	});
 
-    // If clicking outside contained, then get rid of dropdown/.active
-    document.addEventListener("click", (event) => {
-        if (!filterContainer.contains(event.target)) {
-            filterContainer.classList.remove("active");
-        }
-    });
+	// If clicking outside contained, then get rid of dropdown/.active
+	document.addEventListener("click", (event) => {
+		if (!filterContainer.contains(event.target)) {
+			filterContainer.classList.remove("active");
+		}
+	});
 
-    // The list of id's in the html
-    const filterDays = ['M', 'Tu', 'W', 'Th', 'F'];
-    // Loop through those ids
-    filterDays.forEach(dayId => {
-        // store the id as a element in a variable
-        const dayElement = document.getElementById(dayId);
-        
-        // If that global list is true for that id then give it the class to change css
-        if (filterStates[dayId]) {
-            dayElement.classList.add('active-filter');
-        }
-        // When clicking that element change its global boolean value
-        dayElement.addEventListener('click', (event) => {
-            event.stopPropagation(); 
-            // Simple invert boolean
-            filterStates[dayId] = !filterStates[dayId];
-            // Toggle the CSS class based on the new boolean value
-            dayElement.classList.toggle('active-filter', filterStates[dayId]);
-            // Save new boolean to localStorage by using setItem, this is so it can persist on reload
-            localStorage.setItem(`filter_state_${dayId}`, filterStates[dayId]);
-        });
-    });
+	// The list of id's in the html
+	const filterDays = ['M', 'Tu', 'W', 'Th', 'F'];
+	// Loop through those ids
+	filterDays.forEach(dayId => {
+		// store the id as a element in a variable
+		const dayElement = document.getElementById(dayId);
+		
+		// If that global list is true for that id then give it the class to change css
+		if (filterStates[dayId]) {
+			dayElement.classList.add('active-filter');
+		}
+		// When clicking that element change its global boolean value
+		dayElement.addEventListener('click', (event) => {
+			event.stopPropagation(); 
+			// Simple invert boolean
+			filterStates[dayId] = !filterStates[dayId];
+			// Toggle the CSS class based on the new boolean value
+			dayElement.classList.toggle('active-filter', filterStates[dayId]);
+			// Save new boolean to localStorage by using setItem, this is so it can persist on reload
+			localStorage.setItem(`filter_state_${dayId}`, filterStates[dayId]);
+		});
+	});
 });
 // ============================================================================================================================================================
 // ============================================================================================================================================================
@@ -328,122 +342,122 @@ let accuracyCircle = null;
 // ==> Grabs correct coords and location of a user (Followed by https://www.youtube.com/watch?v=4D6nJd_ORX4)
 // Watches the users position and updates it accurately and connects to better signals if possible for better accuracy *watchPosition()
 if (navigator.geolocation) {
-    const watchId = navigator.geolocation.watchPosition(successLocation, errorLocation, {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0
-    });
+	const watchId = navigator.geolocation.watchPosition(successLocation, errorLocation, {
+		enableHighAccuracy: true,
+		timeout: 10000,
+		maximumAge: 0
+	});
 }
 
 function successLocation(position) {
-    // Storing and grabbing cords
-    const {latitude, longitude, accuracy} = position.coords;
+	// Storing and grabbing cords
+	const {latitude, longitude, accuracy} = position.coords;
 
-    // Store code for outside function use
-    currentCoords = [latitude, longitude];
+	// Store code for outside function use
+	currentCoords = [latitude, longitude];
 
-    // Deletes Markers if there already present, to have room to create new ones
-    if (userMarker) {
-        map.removeLayer(userMarker);
-    }
-    if (accuracyCircle) {
-        map.removeLayer(accuracyCircle);
-    }
+	// Deletes Markers if there already present, to have room to create new ones
+	if (userMarker) {
+		map.removeLayer(userMarker);
+	}
+	if (accuracyCircle) {
+		map.removeLayer(accuracyCircle);
+	}
 
-    // Specific User Marker
-    var GPS_Pin = `
-        <!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="30">
+	// Specific User Marker
+	var GPS_Pin = `
+		<!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="30" height="30">
 
-            <!-- Custom Svg Path of a teardrop, drawn with https://yqnn.github.io/svg-path-editor/ -->
-            <circle cx="50" cy="50" r="38" fill="#FFFFFF" />
-                
-            <!-- Create a inner circle of the arguement color -->
-            <circle cx="50" cy="50" r="32" fill="#B65050" />
-        </svg>
-    `;
+			<!-- Custom Svg Path of a teardrop, drawn with https://yqnn.github.io/svg-path-editor/ -->
+			<circle cx="50" cy="50" r="38" fill="#FFFFFF" />
+				
+			<!-- Create a inner circle of the arguement color -->
+			<circle cx="50" cy="50" r="32" fill="#B65050" />
+		</svg>
+	`;
 
-    var User = L.divIcon({
-        className: 'user-pin',
-        html: GPS_Pin,
-        iconSize: [40, 40],
-        iconAnchor: [20, 20]
-    });
+	var User = L.divIcon({
+		className: 'user-pin',
+		html: GPS_Pin,
+		iconSize: [40, 40],
+		iconAnchor: [20, 20]
+	});
 
 
-    userMarker = L.marker([latitude, longitude], { icon: User}).addTo(map)
+	userMarker = L.marker([latitude, longitude], { icon: User}).addTo(map)
 
-    // Blue Accuracy Circle
-    accuracyCircle = L.circle([latitude, longitude], {
-        radius: accuracy,
-        fillOpacity: .2,
-        color: '#B65050'
-    }).addTo(map);
-    if (navigating && Date.now() - lastRouteUpdate >= 5000) {
-        lastRouteUpdate = Date.now();
-        updateRoute();
-    }
+	// Blue Accuracy Circle
+	accuracyCircle = L.circle([latitude, longitude], {
+		radius: accuracy,
+		fillOpacity: .2,
+		color: '#B65050'
+	}).addTo(map);
+	if (navigating && Date.now() - lastRouteUpdate >= 5000) {
+		lastRouteUpdate = Date.now();
+		updateRoute();
+	}
 }
 function errorLocation(error) {
-    console.error(error);
-    alert("Location access failed. Loading default view")
+	console.error(error);
+	alert("Location access failed. Loading default view")
 }
 // ==> Draws the route gotten from backend on screen every 5 seconds
 // Uses fetch request to backend
 let routeInProgress = false;
 let lastRouteUpdate = 0;
 async function updateRoute() {
-    
-    if(!userMarker || !selectedBuilding || routeInProgress || !campusBounds.contains(userMarker.getLatLng())) return;
+	
+	if(!userMarker || !selectedBuilding || routeInProgress || !campusBounds.contains(userMarker.getLatLng())) return;
 
-    routeInProgress = true;
+	routeInProgress = true;
 
-      try {
-        const position = userMarker.getLatLng();
-        const response = await fetch('/api/route', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                start: {
-                    lat: position.lat,
-                    lng: position.lng
-                },
-                destination: {
-                    lat: selectedBuilding.lat,
-                    lng: selectedBuilding.lng
-                }
-            })
-        });
+	  try {
+		const position = userMarker.getLatLng();
+		const response = await fetch('/api/route', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				start: {
+					lat: position.lat,
+					lng: position.lng
+				},
+				destination: {
+					lat: selectedBuilding.lat,
+					lng: selectedBuilding.lng
+				}
+			})
+		});
 
-        if (!response.ok) {
-            throw new Error(`Route request failed (${response.status})`);
-        }
+		if (!response.ok) {
+			throw new Error(`Route request failed (${response.status})`);
+		}
 
-        const data = await response.json();
+		const data = await response.json();
 
 
-        if (routeLine) {
-            map.removeLayer(routeLine);
-        }
+		if (routeLine) {
+			map.removeLayer(routeLine);
+		}
 
-        routeLine = L.polyline(data.path, {
-            color: '#0078ff',
-            weight: 5
-        }).addTo(map);
+		routeLine = L.polyline(data.path, {
+			color: '#0078ff',
+			weight: 5
+		}).addTo(map);
 
-        document.getElementById('marker-popup').classList.remove('open');
+		document.getElementById('marker-popup').classList.remove('open');
 
-        map.fitBounds(routeLine.getBounds(), {
-            padding: [30, 30]
-        });
-    } catch (error) {
-        console.error(error);
-        
-    } finally{
-        routeInProgress = false
-    }
+		map.fitBounds(routeLine.getBounds(), {
+			padding: [30, 30]
+		});
+	} catch (error) {
+		console.error(error);
+		
+	} finally{
+		routeInProgress = false
+	}
 
 }
 
