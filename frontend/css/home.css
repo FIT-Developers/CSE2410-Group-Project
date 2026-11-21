@@ -5,24 +5,12 @@
    /*
 
 	Author: Michael Woodyard
-	Used by: frontend/home.html
+	Used by: frontend/html/home.html
 
 	Note: I (Michael) added better SECTION comments.
 		  I also added new CSS, and fixed existing CSS.
 
    */
-
-/* ==========================================================================
-   SECTION: HOME PAGE WRAPPER & SCROLLING
-   ========================================================================== */
-
-#home-page {
-	display: block;
-	background-color: #000000;
-	position: relative;
-	min-height: 100vh;
-	width: 100%;
-}
 
 
 /* ==========================================================================
@@ -96,7 +84,6 @@
 	transform: translateY(-1px);
 }
 
-
 /* ==========================================================================
    SECTION: HOME PAGE FEATURE CARDS
    ========================================================================== */
@@ -104,8 +91,56 @@
 #home-page-content {
 	position: relative;
 	display: block;
-	background-color: beige;
+	background-color: #141414;
 	min-height: 60vh;
 	width: 100%;
+	padding: 48px 20px;
 	box-sizing: border-box;
+}
+
+/* --- Subsection: Features Grid --- */
+.features-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 24px;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.feature-card {
+	background-color: #1E1E1E;
+	border: 1px solid #2E2E2E;
+	border-top: 4px solid var(--accent-color);
+	border-radius: 16px;
+	padding: 28px 24px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+	transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card:hover {
+	transform: translateY(-4px);
+	border-color: var(--accent-color);
+}
+
+.card-badge {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--accent-color);
+	margin-bottom: 10px;
+}
+
+.feature-card h2 {
+	margin: 0 0 10px 0;
+	font-size: 1.25rem;
+	color: #FFFFFF;
+}
+
+.feature-card p {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.6;
+	color: var(--light-color);
 }
