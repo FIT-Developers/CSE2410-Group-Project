@@ -34,7 +34,7 @@ function createCustomPin(bgColor, iconName) {
 }
 
 
-    
+let parkingPolygon = null; 
 
 function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
     marker.on('click', (e) => {
@@ -94,6 +94,28 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
             document.getElementById('Distance').textContent = "? mi";
             document.getElementById('TimeAway').textContent = "? min";
         }
+
+
+        // This is to check and see if a marker has "parking" in it's name, if it does
+        // then search for it's polygon definition in the "parking-borders.json"
+        let parkingString = "parking";  
+        if (id.toLowerCase().includes(parkingString)) {
+            fetch('./data/parking-borders.json')
+            .then(response => response.json())
+            .then(items => {
+                items.definitions.forEach(def => {
+                    if (def.id == id) {
+                        let coordinates = def.coordinates; 
+                        parkingPolygon = L.polygon(coordinates, {
+                            color : 'red', 
+                            weight : 3, 
+                            fillColor : 'red',
+                            fillOpacity : 0.5
+                        }).addTo(map); 
+                    }
+                });
+            })
+        } 
         
         // Adds the open class to the html marker popup, allowing it to slide up and be visible
         document.getElementById('marker-popup').classList.add('open');
@@ -124,6 +146,12 @@ document.querySelector('#close').addEventListener('click', function() {
     if (routeLine) {
         map.removeLayer(routeLine);
         routeLine = null;
+    }
+
+    // If there is a parking polygon outline, remove it and set it back to null
+    if (parkingPolygon) {
+    map.removeLayer(parkingPolygon); 
+    parkingPolygon = null; 
     }
 });
 
