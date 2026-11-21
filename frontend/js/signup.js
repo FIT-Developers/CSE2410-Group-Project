@@ -32,7 +32,7 @@ form.addEventListener('submit', async function (event) {
         return;
     }
 
-    window.location.href = '/login.html';
+    window.location.href = '/html/login.html';
 } catch (error) {
     errorMessage.textContent = 'Could not complete signup. Please try again.';
 }

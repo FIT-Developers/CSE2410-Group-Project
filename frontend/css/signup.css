@@ -1,66 +1,180 @@
+/* ==========================================================================
+   SECTION: INFORMATION
+   ========================================================================== */
+
+   /*
+
+	Author: Michael Woodyard
+	Used by: frontend/html/sign-up.html
+
+	Note: Uses formatting established in global.css.
+
+		  Replaced the old CSS.
+
+   */
 
 
-/* Header */
+/* ==========================================================================
+   SECTION: SIGN UP PAGE HERO HEADER
+   ========================================================================== */
+
 #signup-page-header {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color: goldenrod;
-	position: relative;
-	height: 100px;
+	text-align: center;
+	background-color: #1E1E1E;
+	color: #FFFFFF;
 	width: 100%;
+	padding: 48px 20px;
+	box-sizing: border-box;
+	gap: 12px;
 }
 
-#signup-title {
+#header-title {
 	margin: 0;
-	background-color: green;
+	font-size: clamp(1.8rem, 4vw, 2.5rem);
+	font-weight: 700;
+	color: #FFFFFF;
+}
+
+#header-subtitle {
+	margin: 0;
+	max-width: 520px;
+	font-size: 0.95rem;
+	line-height: 1.5;
+	color: var(--light-color);
+}
+
+
+/* ==========================================================================
+   SECTION: SIGN UP FORM CONTAINER & CARD
+   ========================================================================== */
+
+#signup-page-content {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	background-color: #141414;
+	min-height: 65vh;
+	width: 100%;
+	padding: 40px 20px;
+	box-sizing: border-box;
+}
+
+/* --- Subsection: Form Card --- */
+#signup-form-div {
+	width: 100%;
+	max-width: 420px;
+	background-color: #1E1E1E;
+	border: 1px solid #2E2E2E;
+	border-top: 4px solid var(--accent-color);
+	border-radius: 16px;
+	padding: 32px 28px;
+	box-sizing: border-box;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+#signup-form {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+
+/* ==========================================================================
+   SECTION: FORM INPUTS, LABELS & VALIDATION
+   ========================================================================== */
+
+/* --- Subsection: Error Alert Message --- */
+#signup-error {
+	margin: 0;
+	font-size: 0.9rem;
+	font-weight: 500;
+	color: #FF6B6B;
 	text-align: center;
 }
 
-/* signup Page Content */
-#signup-page-content {
-	display: flex;
-    justify-content: center;
-	background-color: beige;
-	height: 100vh;
-	width: 100%;
+#signup-error:empty {
+	display: none;
 }
 
-/* sign Form */
-#signup-form-div {
-    margin-top: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    height: 50vh;
-    width: 55vh;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 10px;
+
+/* --- Subsection: Input Groups --- */
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 }
 
 #signup-form label {
-    font-size: 25px;
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: var(--light-color);
 }
 
-#signup-form input {
-    font-size: 25px;
-    border: 2px solid black;
+#signup-form input[type="text"],
+#signup-form input[type="password"] {
+	width: 100%;
+	padding: 12px 14px;
+	font-family: inherit;
+	font-size: 1rem;
+	color: #FFFFFF;
+	background-color: #141414;
+	border: 1px solid #3A3A3A;
+	border-radius: 10px;
+	box-sizing: border-box;
+	outline: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-#signup-form input[type=username],
-#signup-form input[type=password] {
-    position: relative;
-    background: none;
-    box-sizing: content-box;
-    color: black;
-    padding: 10px;
+#signup-form input[type="text"]::placeholder,
+#signup-form input[type="password"]::placeholder {
+	color: var(--base-color);
 }
 
-#signup-form input[type=submit] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
+#signup-form input[type="text"]:focus,
+#signup-form input[type="password"]:focus {
+	border-color: var(--accent-color);
+	box-shadow: 0 0 0 3px rgba(182, 80, 80, 0.25);
+}
+
+
+/* --- Subsection: Submit Button & Login Link --- */
+#signup-form input[type="submit"] {
+	margin-top: 6px;
+	width: 100%;
+	padding: 12px 20px;
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 600;
+	color: #FFFFFF;
+	background-color: var(--accent-color);
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+#signup-form input[type="submit"]:hover {
+	opacity: 0.9;
+	transform: translateY(-1px);
+}
+
+.auth-switch {
+	margin: 4px 0 0 0;
+	text-align: center;
+	font-size: 0.9rem;
+	color: var(--base-color);
+}
+
+.auth-switch a {
+	color: var(--accent-color);
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.auth-switch a:hover {
+	text-decoration: underline;
 }

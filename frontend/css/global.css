@@ -1,45 +1,36 @@
-/* ============================================
-	==> global.css
+/* ==========================================================================
+   SECTION: INFORMATION
+   ========================================================================== */
 
-	==> Used across all HTML files.
-   ============================================ */
+	/*
 
-/* Imports */
-@import url('https://googleapis.com');
+	Author: Michael Woodyard
+	Used by: All HTML files in frontend/html/
 
-
-/* ============================================ */
-
-
-/* HTML, body*/
-html,
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	overflow: hidden;
-	background-color: #000000;
-	/* CSS Font stuff to help match it with the renders from figma */
-	font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
-	font-weight: 400 !important;
-	font-optical-sizing: auto;
-	font-variation-settings: "wght" 400;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
+	Note: Global resets, CSS variables, typography, and the shared navigation
+		  bar component live here so individual page CSS files stay clean.
+	
+	*/
 
 
-/* ============================================ */
+/* ==========================================================================
+   SECTION: FONT IMPORTS
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&display=swap');
 
 
-/* :root */
+/* ==========================================================================
+   SECTION: ROOT VARIABLES & ICON COLOR FILTERS
+   ========================================================================== */
+
 :root {
+	/* --- Subsection: Brand Color Palette --- */
 	--accent-color: #B65050;
 	--base-color: #9F9F9F;
 	--light-color: #E7E7E7;
 
-	/* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
-	/* https: //codepen.io/sosuke/pen/Pjoqqp */
+	/* --- Subsection: SVG <img> Color Filters (via codepen.io/sosuke/pen/Pjoqqp) --- */
 	--accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
 	--base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
 	--light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
@@ -48,50 +39,100 @@ body {
 }
 
 
-/* ============================================ */
+/* ==========================================================================
+   SECTION: GLOBAL RESET & BASE TYPOGRAPHY
+   ========================================================================== */
 
-/* Nav Bar */
-#nav-bar {
-	display: flex;
-	align-items: center;
-	background-color: #B65050;
-	border-bottom: 5px solid darkred;
+html,
+body {
+	width: 100%;
+	min-height: 100vh;
+	margin: 0;
+	overflow-x: hidden;
+	background-color: #141414;
+
+	/* Lexend Typography */
+	font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 400;
+	font-optical-sizing: auto;
+	font-variation-settings: "wght" 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-#nav-ul {
+
+/* ==========================================================================
+   SECTION: SHARED NAVIGATION BAR (components/navbar.html)
+   ========================================================================== */
+
+/* --- Subsection: Main Navbar Container --- */
+#nav-bar {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
 	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	background-color: var(--accent-color);
+	border-bottom: 3px solid #7E2E2E;
+	padding: 0 16px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Subsection: Link Lists (Left & Right) --- */
+#nav-ul,
+#nav-login-signup {
+	display: flex;
+	align-items: center;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
 #nav-login-signup {
-	display: flex;
-	list-style: none;
-	margin: 0 0 0 auto;
-	padding: 0;
+	margin-left: auto;
 }
 
-#nav-ul li a, #nav-login-signup li a {
+#nav-ul li a,
+#nav-login-signup li a {
 	display: block;
 	color: #FFFFFF;
+	font-weight: 500;
+	font-size: 0.95rem;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+	transition: background-color 0.2s ease;
 }
 
-#nav-ul li a:hover, #nav-login-signup li a:hover {
-	background-color: aquamarine;
+#nav-ul li a:hover,
+#nav-login-signup li a:hover {
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Subsection: Active Page Indicator & Divider --- */
+#nav-ul li a.active,
+#nav-login-signup li a.active {
+	background-color: rgba(0, 0, 0, 0.25);
+	box-shadow: inset 0 -3px 0 #FFFFFF;
 }
 
 #nav-login-signup-vertical-bar {
-	background-color: black;
-	position: relative;
-	margin: auto;
-	width: 2px;
-	height: 25px;
+	background-color: rgba(255, 255, 255, 0.4);
+	width: 1px;
+	height: 20px;
+	margin: 0 4px;
 }
 
+/* --- Subsection: Mobile Navbar Adjustments --- */
+@media screen and (max-width: 600px) {
+	#nav-bar {
+		padding: 0 8px;
+	}
 
-/* ============================================ */
-
+	#nav-ul li a,
+	#nav-login-signup li a {
+		padding: 12px 10px;
+		font-size: 0.85rem;
+	}
+}

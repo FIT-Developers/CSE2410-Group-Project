@@ -1,165 +1,148 @@
-@import url('https://googleapis.com');
-html,
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	overflow: hidden;
-	background-color: #000000;
-	/* CSS Font stuff to help match it with the renders from figma */
-	font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
-	font-weight: 400 !important;
-	font-optical-sizing: auto;
-	font-variation-settings: "wght" 400;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-/* Colors to use for the frontend design */
-:root {
-	--accent-color: #B65050;
-	--base-color: #9F9F9F;
-	--light-color: #E7E7E7;
+/* ==========================================================================
+   SECTION: Information
+   ========================================================================== */
 
-	/* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
-	/* https: //codepen.io/sosuke/pen/Pjoqqp */
-	--accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
-	--base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
-	--light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
-	--white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
-	--black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
-}
-/* ============================================
+   /*
 
-	==> home.css
+	Author: Michael Woodyard
+	Used by: frontend/html/home.html
 
-   ============================================ */
+	Note: Uses formatting established in global.css.
+	
+		  I (Michael) added better SECTION comments.
+		  I also added new CSS, and fixed existing CSS.
 
-#map {
-	height: 100%;
-	width: 100%;
-}
+   */
 
 
+/* ==========================================================================
+   SECTION: HERO HEADER & CALL-TO-ACTION BUTTONS
+   ========================================================================== */
 
-div #container {
-	display: flex;
-	align-items: center;
-	width: 100%;
-}
-
-#close {
-	filter: var(--accent-color-filter);
-}
-#walking {
-	filter: var(--base-color-filter);
-	margin-top: 0px;
-	width: 1.1rem;
-}
-#TimeAway {
-	font-variation-settings: 'wght' 700;
-}
-#OpenStatus {
-	font-variation-settings: 'wght' 700;
-	color: var(--accent-color)
-}
-#directions {
-	background-color: var(--accent-color);
-	color:#ffffff;
-}
-#website {
-	background-color: var(--light-color);
-	color:#000000;
-}
-#nav {
-	filter: var(--white-filter)
-}
-#send {
-	filter: var(--black-filter)
-}
-
-
-/* Nav Bar */
-#nav-bar {
-	display: flex;
-	align-items: center;
-	background-color: #B65050;
-	border-bottom: 5px solid darkred;
-}
-
-#nav-ul {
-	display: flex;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-#nav-login-signup {
-	display: flex;
-	list-style: none;
-	margin: 0 0 0 auto;
-	padding: 0;
-}
-
-#nav-ul li a, #nav-login-signup li a {
-	display: block;
-	color: #FFFFFF;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-
-#nav-ul li a:hover, #nav-login-signup li a:hover {
-	background-color: aquamarine;
-}
-
-#nav-login-signup-vertical-bar {
-	background-color: black;
-	position: relative;
-	margin: auto;
-	width: 2px;
-	height: 25px;
-}
-
-
-/* Home Page */
-#home-page {
-	display: block;
-	background-color: #000000;
-	position: relative;
-	height: 100vh;
-	width: 100%;
-}
-
-/* Header */
+/* --- Subsection: Hero Container --- */
 #home-page-header {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color: goldenrod;
-	position: relative;
-	height: 100px;
+	text-align: center;
+	background-color: #1E1E1E;
+	color: #FFFFFF;
 	width: 100%;
+	padding: 60px 20px;
+	box-sizing: border-box;
+	gap: 16px;
 }
 
 #header-title {
 	margin: 0;
-	background-color: green;
-	text-align: center;
+	font-size: clamp(1.8rem, 4vw, 2.8rem);
+	font-weight: 700;
+	color: #FFFFFF;
 }
 
-/* Home Page Content */
+#header-subtitle {
+	margin: 0;
+	max-width: 600px;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--light-color);
+}
+
+/* --- Subsection: Hero CTA Buttons --- */
+.hero-cta-group {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+	display: inline-block;
+	padding: 12px 24px;
+	border-radius: 30px;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 1rem;
+	transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary {
+	background-color: var(--accent-color);
+	color: #FFFFFF;
+}
+
+.btn-secondary {
+	background-color: transparent;
+	color: #FFFFFF;
+	border: 2px solid var(--light-color);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+	opacity: 0.88;
+	transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   SECTION: HOME PAGE FEATURE CARDS
+   ========================================================================== */
+
 #home-page-content {
 	position: relative;
 	display: block;
-	background-color: beige;
-	height: 100vh;
+	background-color: #141414;
+	min-height: 60vh;
 	width: 100%;
+	padding: 48px 20px;
+	box-sizing: border-box;
 }
 
+/* --- Subsection: Features Grid --- */
+.features-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 24px;
+	max-width: 1100px;
+	margin: 0 auto;
+}
 
-/* Target Mobile Viewports */
-@media screen and (max-width: 768px) {
-	.custom-pin svg {
-		transform: scale(1.2);
-	}
+.feature-card {
+	background-color: #1E1E1E;
+	border: 1px solid #2E2E2E;
+	border-top: 4px solid var(--accent-color);
+	border-radius: 16px;
+	padding: 28px 24px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+	transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card:hover {
+	transform: translateY(-4px);
+	border-color: var(--accent-color);
+}
+
+.card-badge {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--accent-color);
+	margin-bottom: 10px;
+}
+
+.feature-card h2 {
+	margin: 0 0 10px 0;
+	font-size: 1.25rem;
+	color: #FFFFFF;
+}
+
+.feature-card p {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.6;
+	color: var(--light-color);
 }
