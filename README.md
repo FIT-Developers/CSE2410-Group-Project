@@ -10,3 +10,4 @@
 - [Filter Conversion](https://codepen.io/sosuke/pen/Pjoqqp)
 - [Regex Code For Time](https://www.geeksforgeeks.org/dsa/how-to-validate-time-in-24-hour-format-using-regular-expression/)
 - [Youtube Tutorials](https://www.youtube.com/)
+- [Weather API Doc](https://open-meteo.com/en/docs)
