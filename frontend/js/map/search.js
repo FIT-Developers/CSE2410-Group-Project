@@ -2,6 +2,8 @@
 // ======================================================Search Algorithm and Arrays===========================================================================
 // ============================================================================================================================================================
 /* Top 4 Recent Marker Array */
+// This function gets called when clicking a marker inside Marker popup function which it passes that data
+// This data is stored to recreate it in the Search Bar Dropdown
 function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id) {
     // Make an object to store
     const markerObject = {
@@ -14,7 +16,7 @@ function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id)
     minutes,
     };
 
-    // Remove the existing item if already present (prevents duplicates and promotes to top)
+    // Remove the existing item if already present (prevents duplicates and promotes to top) as top is most recent
     recentMarkers = recentMarkers.filter(item => item.id !== id);
 
     // Push to the front of the array (most recent at index 0)
@@ -42,18 +44,19 @@ function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id)
 // ============================================================================================================================================================
 // =========================================================Percent of Crosswalk===============================================================================
 // ============================================================================================================================================================
-// SetInverval helps with calling a function every certain amt of time
+// SetInterval helps with calling a function every certain amt of time
 // Info about it https://www.w3schools.com/jsref/met_win_setinterval.asp
 let percent = 0;
 function startProgress() {
 const intervalId = setInterval(() => {
 if (percent <= 100) {
+    // Update percent by 1/4 of 1%
         percent += 0.250;
-        document.querySelector('.crosswalk-container').style.setProperty('--progress', percent);
+        document.querySelector('.crosswalk-container').style.setProperty('--progress', percent); // Show progress on the arc
     } else {
-        clearInterval(intervalId);
+        clearInterval(intervalId); // Clear that interval and reset percent
         percent = 0;
-        setTimeout(() => {
+        setTimeout(() => { // Used to wait how ever long the crosswalk is
     // Hold before restarting the progress
     }, 6000); // milliseconds so 6 seconds
     }
