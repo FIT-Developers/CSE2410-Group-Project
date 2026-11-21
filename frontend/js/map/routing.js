@@ -83,8 +83,10 @@ function showClassRoutes(locations) {
 
     if (currentCoords == null && graphData == null || !locations) return; // If no user location or routing failure abort
 
+    // Grab the localStorage classes, might need replaced with database stuff later
     const classes = JSON.parse(localStorage.getItem('myClasses')) || [];
 
+    // Grab current date, then access its day, map it to that dictionary
     const today = new Date(); 
     const dayMap = {
         1: 'Mon',
@@ -95,35 +97,54 @@ function showClassRoutes(locations) {
     };
     const theDay = dayMap[today.getDay()]
     console.log(theDay);
-    if (!theDay) return; // Weekends
+    if (!theDay) return; // If Weekends abort
 
+    // Find total minutes after midnight, using current hours (convert to minutes) then add the minutes
     const totalMinutes = today.getHours() * 60 + today.getMinutes();
 
-    const todaysClasses = classes.filter(cls => cls.day === theDay); // If the objects variable day has the string of today's date then add to array
+    // If the objects variable day has the string of today's date then add to array
+    // Filter is a method to get that correct classes
+    // Info: https://www.w3schools.com/jsref/jsref_filter.asp
+    const todaysClasses = classes.filter(checkClass); 
+    function checkClass(cls) {
+        return cls.day === theDay;
+    }
     if (todaysClasses.length === 0) return; // If no classes exist, no routes can be drawn so abort
 
-    // Clear the old routes before drawing a new ones
+    // Clear the old routes before drawing a new ones (goes through each polyline on that layer and runs the function to remove that line)
     classRouteLines.forEach(line => map.removeLayer(line));
-    classRouteLines = [];
+    classRouteLines = []; // Empty out that layer
 
+    // Go through each of correct classes
     todaysClasses.forEach(cls => {
-        const place = locations.find(loc => loc.tooltip === cls.loc || loc.id === cls.loc);
+        // .find is the same thing as .filter, but finds the first element, instead of returning that array, format is the same
+        // Info: https://www.w3schools.com/jsref/jsref_find.asp
+        const place = locations.find(findPlace);
+        function findPlace(loc) {
+            return loc.tooltip === cls.loc || loc.id === cls.loc; // ===, in this instance means the exact same data type, so a more secure ==
+        }
 
+        // Run the Route pathfinding with user lat, long, the matching place/marker (from class location) found, then the JSON graphData
         const result = calculateRoute(currentCoords[0], currentCoords[1], place.lat, place.lng, graphData);
         
+        // Find the basic difference between today's actual time (converted to minutes after midnight), and the start time of the class
         const difference = Math.abs(totalMinutes - timeToMinutes(cls.start)); // Grab abs difference
+
+        // This is needed to use in a function that makes the routes be more visible when closer to the hour, this is clamped at 80% to not obscure too much
         const opacity = Math.min(0.80 ,Math.exp(-0.0057 * difference)); // Exponential decay function to help increase opacity quicker when time is closer
         console.log(difference);
 
-        // Check if length is real and then draw the new path
+        // Check if length is real and then draw the new path, this is to prevent crashes from accidental islands in the JSON graphData
         if (result.path && result.path.length > 0) {
 
+            // Leaflet has a polyline tool that takes in color, weight and opacity, it uses a array from coordinates to draw then styles it
+            // Color is from the class we grabbed, and weight is stroke width and opacity set to that function
             const line = L.polyline(result.path, {
-                color: cls.color || '#B65050',
+                color: cls.color,
                 weight: 6,
                 opacity: opacity
             }).addTo(map);
-            classRouteLines.push(line); // Have that line stored for removal process later
+            classRouteLines.push(line); // Have that line stored in localStorage for removing it correctly later
         }
 
     });
