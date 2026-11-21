@@ -50,6 +50,9 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         // Enlarge active marker, similar to google maps
         marker.getElement().classList.add('active-pin');
 
+        //Remove parking outline, if any
+        removeParkingPolygon(); 
+
         selectedBuilding = marker.getLatLng();
         markerWebsite = web
 
@@ -149,10 +152,7 @@ document.querySelector('#close').addEventListener('click', function() {
     }
 
     // If there is a parking polygon outline, remove it and set it back to null
-    if (parkingPolygon) {
-    map.removeLayer(parkingPolygon); 
-    parkingPolygon = null; 
-    }
+    removeParkingPolygon(); 
 });
 
 // Website button now redirects to website in json
@@ -195,11 +195,8 @@ map.on('click', () => {
         routeLine = null;
     }
 
-    // If there is a parking polygon outline, remove it and set it back to null
-    if (parkingPolygon) {
-    map.removeLayer(parkingPolygon); 
-    parkingPolygon = null; 
-    }
+    // Remove parking polygon
+    removeParkingPolygon(); 
     
 }); 
 
@@ -207,3 +204,10 @@ map.on('click', () => {
 document.getElementById('marker-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
+
+function removeParkingPolygon() {
+    if(parkingPolygon) {
+        map.removeLayer(parkingPolygon); 
+        parkingPolygon = null; 
+    }
+}
