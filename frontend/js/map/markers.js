@@ -194,6 +194,12 @@ map.on('click', () => {
         map.removeLayer(routeLine);
         routeLine = null;
     }
+
+    // If there is a parking polygon outline, remove it and set it back to null
+    if (parkingPolygon) {
+    map.removeLayer(parkingPolygon); 
+    parkingPolygon = null; 
+    }
     
 }); 
 
