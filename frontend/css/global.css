@@ -9,6 +9,8 @@
 
 	Note: Global resets, CSS variables, typography, and the shared navigation
 		  bar component live here so individual page CSS files stay clean.
+
+		  New: Light/Dark Mode
 	
 	*/
 
@@ -38,6 +40,29 @@
 	--black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
 }
 
+/* --- Subsection: Theme Surface & Text Tokens --- */
+
+/* Dark Theme */
+:root,
+:root[data-theme="dark"] {
+	--bg-page: #141414;
+	--bg-surface: #1E1E1E;
+	--bg-surface-alt: #2A2A2A;
+	--text-primary: #FFFFFF;
+	--text-secondary: #B8B8B8;
+	--border-subtle: #333333;
+}
+
+/* Light Theme */
+:root[data-theme="light"] {
+	--bg-page: #F5F5F5;
+	--bg-surface: #FFFFFF;
+	--bg-surface-alt: #E7E7E7;
+	--text-primary: #141414;
+	--text-secondary: #555555;
+	--border-subtle: #DCDCDC;
+}
+
 
 /* ==========================================================================
    SECTION: GLOBAL RESET & BASE TYPOGRAPHY
@@ -49,7 +74,9 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	overflow-x: hidden;
-	background-color: #141414;
+	background-color: var(--bg-page);
+	color: var(--text-primary);
+	transition: background-color 0.2s ease, color 0.2s ease;
 
 	/* Lexend Typography */
 	font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
