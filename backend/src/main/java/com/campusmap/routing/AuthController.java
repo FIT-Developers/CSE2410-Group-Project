@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.nio.charset.StandardCharsets;
+import java.security.Principal;
 import java.util.Map;
 
 @Controller
@@ -35,10 +36,9 @@ public class AuthController {
             );
         }
 
-        if (password.length() < 15 ||
-                password.getBytes(StandardCharsets.UTF_8).length > 72) {
+        if (password.length() < 5 || password.getBytes(StandardCharsets.UTF_8).length > 72) {
             return ResponseEntity.badRequest().body(
-                    Map.of("error", "Your password must have at least 15 characters and fit within 72 bytes.")
+                    Map.of("error", "Your password must have at least 5 characters")
             );
         }
 
@@ -77,6 +77,19 @@ public class AuthController {
     @ResponseBody
     public CsrfToken csrf(CsrfToken token) {
         return token;
+    }
+
+    @GetMapping("/api/me")
+    public ResponseEntity<Map<String, String>> currentUser(Principal principal) {
+        if (principal == null) {
+            return ResponseEntity.status(401).body(
+                    Map.of("error", "You are not logged in.")
+            );
+        }
+
+        return ResponseEntity.ok(
+                Map.of("username", principal.getName())
+        );
     }
 }
 
