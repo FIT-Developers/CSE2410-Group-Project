@@ -49,7 +49,7 @@
 		// Persist the selection across page reloads, and tab navigations
 		localStorage.setItem(STORAGE_KEY, theme);
 
-		// Sync the Settings page checkbox toggle if it exists on the current page
+		// Sync the Settings page checkbox toggle, if it exists on the current page
 		const settingsToggle = document.getElementById('dark-mode-toggle');
 		if (settingsToggle) {
 			settingsToggle.checked = theme === 'dark';
@@ -58,6 +58,7 @@
 		// Sync the shared navbar quick-toggle button icon and accessibility label
 		const navBtn = document.getElementById('theme-toggle-btn');
 		if (navBtn) {
+			// Emoji's, depending on the chosen theme
 			navBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
 			navBtn.setAttribute(
 				'aria-label',
@@ -69,11 +70,11 @@
 	/* --- Subsection: Initial Execution & Event Listeners --- */
 
 	// Run immediately when this script is parsed, before DOMContentLoaded
-	// so the root <html> element has the right theme before the first paint,
+	// so the root element has the right theme before the first paint,
 	// preventing a brief flash of the wrong background color
 	applyTheme(getPreferredTheme());
 
-	// Once the DOM is fully constructed, re-sync UI controls and attach listeners
+	// Once the DOM is fully constructed, resync UI controls and attach listeners
 	document.addEventListener('DOMContentLoaded', () => {
 		// Re-run applyTheme now that body elements (#dark-mode-toggle, etc.) exist
 		applyTheme(getPreferredTheme());
@@ -81,15 +82,15 @@
 		// Listen for changes on the Settings page toggle switch
 		const settingsToggle = document.getElementById('dark-mode-toggle');
 		if (settingsToggle) {
-			settingsToggle.addEventListener('change', (e) => {
-				applyTheme(e.target.checked ? 'dark' : 'light');
+			settingsToggle.addEventListener('change', (event) => {
+				applyTheme(event.target.checked ? 'dark' : 'light');
 			});
 		}
 
 		// Use document-level event delegation for the navbar toggle button
 		// components/navbar.html is injected asynch. via fetch()
-		document.addEventListener('click', (e) => {
-			if (e.target.closest('#theme-toggle-btn')) {
+		document.addEventListener('click', (event) => {
+			if (event.target.closest('#theme-toggle-btn')) {
 				const currentTheme = document.documentElement.getAttribute('data-theme');
 				const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
 				applyTheme(nextTheme);
