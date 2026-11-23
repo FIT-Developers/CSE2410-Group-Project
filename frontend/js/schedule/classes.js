@@ -1,11 +1,13 @@
 // ============================================================================================================================================================
 // ===================================================Storing, Showing, Adding, Error Handling of Classes======================================================
 // ============================================================================================================================================================
-
+// Grabs the localStorage data, if none then empty array
 let classes = JSON.parse(localStorage.getItem("myClasses")) || [];
+
 
 const clsBtn = document.getElementById('cls-btn');
 clsBtn.addEventListener('click', function() {
+    // Dictionary of all info, this is grabbing all input fields
     const clsname = document.getElementById('clsname').value;
     const day = document.getElementById('day-select').value;
     const starttime = document.getElementById('starttime').value;
@@ -14,6 +16,7 @@ clsBtn.addEventListener('click', function() {
     const rmnum = document.getElementById('rmnum').value;
     const color = document.getElementById('color').value;
 
+    // We then error check all those fields, if they are empty or time is in acceptable format
     if (clsname == null || clsname == "") {
         console.warn("Class Name is empty");
         return;
@@ -42,8 +45,9 @@ clsBtn.addEventListener('click', function() {
         console.warn("End Time must be later than Start Time");
         return;
     }
-
+    // Go to add class function which simply pushes all that data to the localStorage 
     addClass(clsname, day, starttime, endtime, location, rmnum, color);
+    // This actually places the html blocks with that info on the correct day and times
     renderClasses();
 
     // Show the list of class objects obtained
@@ -64,7 +68,7 @@ function addClass(name, day, start, end, loc, room, color) {
     localStorage.setItem("myClasses", JSON.stringify(classes));
 }
 
-
+// Simple slicing function to convert that time to minutes after midnight
 function timeToMinutes(time) {
 
     let dayOrNight = time.toLowerCase().slice(-2);
@@ -84,6 +88,7 @@ function timeToMinutes(time) {
     return front * 60 + back;
 }
 
+// Actually implementing the html div, of the classes
 function renderClasses() {
     // Clear existing blocks before redrawing them
     document.querySelectorAll('.class-block').forEach(el => el.remove());
@@ -148,10 +153,12 @@ function renderClasses() {
         col.appendChild(clsBlock);
     });
 }
-// On page load
+// On page load, if not, it won't show up
 renderClasses()
 
+// find the schedule area, detect a click in it
 document.getElementById('scheduleArea').addEventListener('click', (e) => {
+    // Finds closest trash icon that was clicked
     const trashBtn = e.target.closest('.trash-btn');
     if (!trashBtn) return; // Ignore clicks that weren't on a trash icon
     e.stopPropagation(); // Prevents triggering any background clicks

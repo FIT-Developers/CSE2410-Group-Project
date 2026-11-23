@@ -20,6 +20,21 @@ var map = L.map('map', {
     crossOrigin: true
 }).setView([28.063810, -80.623834], 18);
 
+// White lines fix, from leaflets tiles
+// Bug is: https://github.com/Leaflet/Leaflet/issues/3575
+// Code/Solution was found online via a github: https://gist.github.com/cmulders/acbbe8a8ff170e34c37b
+(function() {
+    var originalInitTile = L.GridLayer.prototype._initTile;
+    L.GridLayer.include({
+        _initTile: function(tile) {
+            originalInitTile.call(this, tile);
+            var tileSize = this.getTileSize();
+            tile.style.width = tileSize.x + 0.1 + 'px';
+            tile.style.height = tileSize.y + 0.1 + 'px';
+        }
+    });
+})();
+
 
 // ==> A fix for getting the bounds to actually limit the user's drag
 // States when dragging make sure its inside of the bounds set earlier

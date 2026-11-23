@@ -47,6 +47,7 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         document.querySelectorAll('.custom-pin').forEach(pin => {
             pin.classList.remove('active-pin');
         });
+
         // Enlarge active marker, similar to google maps
         marker.getElement().classList.add('active-pin');
 
@@ -54,6 +55,7 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         removeParkingPolygon(); 
 
         selectedBuilding = marker.getLatLng();
+        // Store website url, used for when clicking the btn
         markerWebsite = web
 
         // Grabs the html id, and replaces the content in it with unique marker data
@@ -63,14 +65,18 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         document.getElementById('img-1').src = img1;
         document.getElementById('img-2').src = img2;
 
+        // Checks
         console.log("Marker data obtained successfully at: " + marker.getLatLng());
 
         // Do routing to find distance and time and draw a polyline on the map
         if (currentCoords != null && graphData != null) {
+                // Routing function that returns a path, miles and minutes
                 const result = calculateRoute(currentCoords[0], currentCoords[1], marker.getLatLng().lat, marker.getLatLng().lng, graphData); 
+                // Replace elements with accurate routing info
                 document.getElementById('Distance').textContent = result.miles + " mi";
                 document.getElementById('TimeAway').textContent = result.minutes + " min";
 
+                // Record the marker being clicked, inside here because we want miles and minutes already calculated so its easier for Search Bar recents
                 recordMarkerClick(titleData, typeData, color, icon, result.miles, result.minutes, id);
 
                 // Clear the old route line before drawing a new one
@@ -163,21 +169,7 @@ document.querySelector('#website').addEventListener('click', function(){
 // When direction button is pressed start nav -Robert (backend)
 let navigating = false;
 document.querySelector('#directions').addEventListener('click', async function(event) {
-    event.preventDefault();
-    // Kills nav if button pressed again and removes route line
-    if (navigating) {
-        navigating = false;
-
-        if (routeLine) {
-            map.removeLayer(routeLine);
-            routeLine = null;
-        }
-
-        return;
-    }
-    navigating = true;
-    lastRouteUpdate = Date.now();
-    await updateRoute();
+    // Need Code
 });
 
 // Any clicks outside on map, slide the popup down and is no longer visible
