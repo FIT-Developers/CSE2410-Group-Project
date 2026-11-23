@@ -34,6 +34,18 @@ document.getElementById('search-bar').addEventListener('click', (e) => {
 
     document.getElementById('search-popup').classList.add('open');
     document.getElementById('search-bar').classList.add('show');
+
+    // If marker popup is open, then remove it and any active markers and remove route
+    if (document.getElementById('marker-popup').classList.contains('open')) {
+        document.getElementById('marker-popup').classList.remove('open');
+        document.querySelectorAll('.custom-pin').forEach(pin => {
+            pin.classList.remove('active-pin');
+        });
+        if (routeLine) {
+            map.removeLayer(routeLine);
+            routeLine = null;
+        }
+    }
 });
 
 document.getElementById('cancel').addEventListener('click', (e) => {

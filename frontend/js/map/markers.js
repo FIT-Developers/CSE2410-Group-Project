@@ -37,6 +37,25 @@ function createCustomPin(bgColor, iconName) {
     
 
 function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
+    // Find all pills and loop through each one finding a click
+    document.querySelectorAll('.pill').forEach((pill) => {
+        pill.addEventListener('click', () => {  
+            // Remove all active markers before
+            marker.getElement().classList.remove('active-pin');
+
+            // Get what type was clicked
+            const heading = (pill.querySelector('h1')).textContent;
+
+            if (typeData == heading) {
+                marker.getElement().classList.add('active-pin');
+            }
+            
+                    // Zooms out smoothly
+            map.setZoom(16, { animate: true });
+
+        });
+    });
+
     marker.on('click', (e) => {
         
         // Prevent map click event from immediately closing the sheet
