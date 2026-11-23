@@ -51,17 +51,17 @@ function startProgress() {
 const intervalId = setInterval(() => {
 if (percent <= 100) {
     // Update percent by 1/4 of 1%
-        percent += 0.250;
+        percent += .2193;
         document.querySelector('.crosswalk-container').style.setProperty('--progress', percent); // Show progress on the arc
     } else {
         clearInterval(intervalId); // Clear that interval and reset percent
         percent = 0;
         setTimeout(() => { // Used to wait how ever long the crosswalk is
     // Hold before restarting the progress
-    }, 6000); // milliseconds so 6 seconds
+    }, 35000); // milliseconds so 6 seconds
     }
-}, 500);
-} // Total time for 100% is 200s -> 3:20
+}, 250);
+} // Total time for 100% is 114s -> 1:54
 
 // Start the function/loop
 startProgress();

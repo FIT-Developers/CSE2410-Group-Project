@@ -7425,7 +7425,7 @@
       "v": "n328",
       "type": "crosswalk",
       "distanceMeters": 44.5,
-      "extraSeconds": 180,
+      "extraSeconds": 114,
       "weightSeconds": 217
     },
     {
@@ -7632,7 +7632,7 @@
       "v": "n355",
       "type": "crosswalk",
       "distanceMeters": 28.5,
-      "extraSeconds": 180,
+      "extraSeconds": 114,
       "weightSeconds": 203
     },
     {
@@ -7659,7 +7659,7 @@
       "v": "n358",
       "type": "crosswalk",
       "distanceMeters": 32.1,
-      "extraSeconds": 180,
+      "extraSeconds": 114,
       "weightSeconds": 206
     },
     {
@@ -7668,7 +7668,7 @@
       "v": "n359",
       "type": "crosswalk",
       "distanceMeters": 34.7,
-      "extraSeconds": 180,
+      "extraSeconds": 114,
       "weightSeconds": 209
     },
     {
@@ -7677,7 +7677,7 @@
       "v": "n359",
       "type": "crosswalk",
       "distanceMeters": 29.2,
-      "extraSeconds": 180,
+      "extraSeconds": 114,
       "weightSeconds": 204
     },
     {
@@ -7965,7 +7965,7 @@
       "v": "n391",
       "type": "crosswalk",
       "distanceMeters": 25.4,
-      "extraSeconds": 180,
+      "extraSeconds": 114,
       "weightSeconds": 201
     },
     {
@@ -11124,7 +11124,7 @@
       "v": "n440",
       "type": "crosswalk",
       "distanceMeters": 27.3,
-      "extraSeconds": 180,
+      "extraSeconds": 114,
       "weightSeconds": 202
     },
     {
