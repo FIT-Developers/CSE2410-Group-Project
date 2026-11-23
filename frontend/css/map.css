@@ -327,10 +327,42 @@ div #container {
     width: fit-content;
     margin-left: auto;
 }
-.search-popup .icon {
+.search-popup .close-container .icon {
     width: 55px;
     height: auto;
     filter: var(--accent-color-filter);
+}
+
+/* ====> Types or categories of markers selection <== */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 14px 4px 4px;
+    /* Top, Right, Bottom, Left */
+    background-color: var(--light-color);
+    border-radius: 50px;
+}
+.pill .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.pill .icon {
+    width: 22px;
+    height: 22px;
+    translate: 0px 1px;
+    filter: brightness(0) invert(1); /*Turns it white*/
+}
+.pill h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-variation-settings: 'wght' 400;
 }
 
 

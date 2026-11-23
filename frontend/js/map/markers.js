@@ -54,6 +54,10 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         // Store website url, used for when clicking the btn
         markerWebsite = web
 
+        // If search bar is open, then remove it, clicking on marker, but check first
+        if (document.getElementById('search-popup').classList.contains('open')) {
+            document.getElementById('search-popup').classList.remove('open');
+        }
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;
         document.getElementById('TypeName').textContent = typeData;
