@@ -3,7 +3,7 @@
 // ============================================================================================================================================================
 // ==> Returns a divIcon class that uses the variable that contains the html (svg icon stuff), which can then be read by L.marker creation in its icon: (properties)
 // Adds icons from assets aswell, sourced from: https://www.svgrepo.com/collection/dazzle-line-icons/7?search=book
-function createCustomPin(bgColor, iconName) {
+function createCustomPin(bgColor, iconName, id) {
     var Pin = `
         <!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="30" height="38">
@@ -27,6 +27,7 @@ function createCustomPin(bgColor, iconName) {
     // Documentation on this: https://leafletjs.com/reference.html#icon
     return L.divIcon({
         className: 'custom-pin',
+        id: `${id}`,
         html: Pin,
         iconSize: [30, 38],
         iconAnchor: [15, 28]
@@ -57,10 +58,18 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
     });
 
     marker.on('click', (e) => {
-        
         // Prevent map click event from immediately closing the sheet
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
+        
+        show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id);
+    });
+
+}
+
+
+
+function show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
 
         // Removes all the active markers class 
         document.querySelectorAll('.custom-pin').forEach(pin => {
@@ -133,9 +142,8 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
             animate: true,
             pan: { duration: 0.5 }
         });
-    });
-
 }
+
 
 
 

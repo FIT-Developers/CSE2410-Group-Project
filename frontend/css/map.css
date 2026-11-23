@@ -108,7 +108,7 @@ body {
 }
 /* Used for checking if a active exists change all non actives to be smaller and transparent */
 body:has(.custom-pin.active-pin) .custom-pin:not(.active-pin) svg {
-    opacity: 0.5;
+    opacity: 0.3;
     transform: scale(0.8);
 }
 
@@ -328,6 +328,7 @@ div #container {
     margin-left: auto;
 }
 .search-popup .close-container .icon {
+    cursor: pointer;
     width: 55px;
     height: auto;
     filter: var(--accent-color-filter);
@@ -349,6 +350,7 @@ div #container {
     /* Top, Right, Bottom, Left */
     background-color: var(--light-color);
     border-radius: 50px;
+    cursor: pointer;
 }
 .pill .icon-container {
     display: flex;
@@ -382,6 +384,7 @@ div #container {
     display: inline-flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
     padding: 4px 14px 4px 4px;
     /* Top, Right, Bottom, Left */
 }
