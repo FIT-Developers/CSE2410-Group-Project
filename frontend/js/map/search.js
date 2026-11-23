@@ -73,7 +73,7 @@ function renderRecents() {
 
             rBlock.innerHTML = `
                 <div class="icon-container" style="background-color: ${markers.color};">
-                    <img src="./assets/icons/${markers.icon}.svg" alt="" class="icon" id="icon">
+                    <img src="./assets/icons/${markers.icon}" alt="" class="icon" id="icon">
                 </div>
                 <div class="text">
                     <h1>${markers.title}</h1>
