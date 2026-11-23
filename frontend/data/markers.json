@@ -751,8 +751,8 @@
   "color": "#367b45",
   "icon": "trophy.svg",
   "type": "Sport",
-  "img1": "needpics",
-  "img2": "needpics",
+  "img1": "./assets/images/Panther-Field-img1.jpg",
+  "img2": "./assets/images/Panther-Field-img2.jpg",
   "web": "https://www.fit.edu/machine-shop/"
 },
 {
@@ -775,8 +775,8 @@
   "color": "#367b45",
   "icon": "trophy.svg",
   "type": "Sport",
-  "img1": "needpics",
-  "img2": "needpics",
+  "img1": "./assets/images/Nancy-img1.jpg",
+  "img2": "./assets/images/Nancy-img2.jpg",
   "web": "https://floridatechsports.com/facilities/nancy-bottge-field/3"
 },
 {
@@ -787,8 +787,8 @@
   "color": "#367b45",
   "icon": "trophy.svg",
   "type": "Sport",
-  "img1": "needpics",
-  "img2": "needpics",
+  "img1": "./assets/images/Rick-img1.jpg",
+  "img2": "./assets/images/Rick-img2.jpg",
   "web": "https://floridatechsports.com/facilities/rick-stottler-field/6"
 },
 {
