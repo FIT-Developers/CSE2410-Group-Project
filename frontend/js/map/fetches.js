@@ -5,7 +5,6 @@
 // Grabbed online for how to parse and obtain .json data as this is new to me
 // Grabs .json data then for each instance creates a marker with its color, icon, tooltip and coords added to it
 // Error catching added
-
 let allLocations = []; // Global variable to store/pass all markers at once to a function
 fetch('./data/markers.json')
     .then(response => response.json())
@@ -22,13 +21,14 @@ fetch('./data/markers.json')
 })
 .catch(error => console.error('Error loading markers:', error));
 
-
+// Info on how the fetch works: https://www.w3schools.com/js/js_api_fetch.asp
+// Basic fetching off the graph, where it grabbed that json file and all its data, and stored that data in the global variable graphData (used for routing)
 fetch('./data/graph.json')
     .then(response => response.json())
     .then(data => {
         graphData = data;
     })
-    .catch(error => console.error('Error loading graph data:', error));
+    .catch(error => console.error('Error loading graph data:', error)); // Error handling 
 
 
 
@@ -36,36 +36,35 @@ fetch('./data/graph.json')
 // ===============================================================Weather API==================================================================================
 // ============================================================================================================================================================
 
+// Using the documentation from https://open-meteo.com/en/docs (which was poorly designed)
 async function getWeatherCode(lat, lon) {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code`;
-    
-    try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`; // Weather_code needs to be here to obtain
+    // You grab that api fetch url
 
+    try { // Try and catches were needed (most likely for fetch errors)
+
+        // Basic way to get info
         const response = await fetch(url);
 
+        // Another required piece from the documentation
         const data = await response.json();
 
-        const weatherCodes = data.hourly.weather_code;
-        const times = data.hourly.time;
+        // From that data, its a JSON with a good amount of information, and holds format data, which we want the one updating hourly, then inside that grab info
+        // Changed to now give the current weather code, so no need for any time, targetIndex checks
+        const weatherCode = data.current.weather_code; // Weather code is summary of the weather, where it gives a code that can mean rainy or sunny
 
-        // Find the index of the hour closest to the current time
-        // Grabbed from documentation to parse the list of hourly weather codes and find the one current one
-        const nowISO = new Date().toISOString().slice(0, 13) + ":00"; // Formats to "YYYY-MM-DDTHH:00"
-        const currentIndex = times.findIndex(t => t.startsWith(nowISO));
-        const targetIndex = currentIndex !== -1 ? currentIndex : 0;
+        console.log(`weatherCode is ${weatherCode}`)
 
-        const currentWeatherCode = weatherCodes[targetIndex];
-
-        console.log(`weatherCode is ${currentWeatherCode}`)
-
-        changeWeatherIcon(currentWeatherCode)
+        // Calls this function which maps that int weatherCode to an icon that represents it
+        // Weather code dictionary is at the bottom: https://open-meteo.com/en/docs?hourly=temperature_2m,weather_code
+        changeWeatherIcon(weatherCode)
     }
     catch(error) {
         console.warn("Weather Error " + error);
     };
     
 }
-function changeWeatherIcon(code) {
+function changeWeatherIcon(code) { // Int mapping to correct icon
     const mapping = {
         0: "Sunny.svg",
         1: "Sunny.svg",
@@ -86,7 +85,7 @@ function changeWeatherIcon(code) {
         95: "Thunder.svg",
         97: "Thunder.svg",
     }
-
+    // Then obtain the weather icon element and replace its src, with a new file path to the new icon
     const weatherElement = document.getElementById("weather-icon");
     weatherElement.src = `./assets/icons/weather/${mapping[code]}`;
 }

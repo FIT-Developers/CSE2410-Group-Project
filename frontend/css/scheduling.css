@@ -24,7 +24,7 @@ body {
     --opacity-blue-color: #6fb2ff0f;
 
     /* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
-    /* https: //codepen.io/sosuke/pen/Pjoqqp */
+    /* https://codepen.io/sosuke/pen/Pjoqqp */
     --accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
     --base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
     --light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
@@ -393,7 +393,7 @@ select.input {
     padding: 0 20px 0 0px;
 
     /* Embedded SVG down-arrow */
-    /* Information obtained from https: //stackoverflow.com/questions/9185434/using-svg-as-background-image */
+    /* Information obtained from https://stackoverflow.com/questions/9185434/using-svg-as-background-image */
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239F9F9F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
     background-repeat: no-repeat;
     background-position: right 8px center;
