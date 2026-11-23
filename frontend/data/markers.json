@@ -655,8 +655,8 @@
   "color": "#606069",
   "icon": "parking.svg",
   "type": "Parking",
-  "img1": "needpics",
-  "img2": "needpics",
+  "img1": "./assets/images/Parking-25-img1.jpg",
+  "img2": "./assets/images/Parking-25-img2.jpg",
   "web": "https://www.fit.edu/security/parking/"
 },
 {
