@@ -50,8 +50,8 @@
   {
     "id": "Parking_7",
     "tooltip": "Parking Lot 7",
-    "lat": 28.068709965835726,
-    "lng": -80.62516521548011,
+    "lat": 28.068241,
+    "lng": -80.625299,
     "color": "#606069",
     "icon": "parking.svg",
     "type": "Parking",
