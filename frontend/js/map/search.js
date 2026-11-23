@@ -34,6 +34,7 @@ document.getElementById('search-bar').addEventListener('click', (e) => {
 
     document.getElementById('search-popup').classList.add('open');
     document.getElementById('search-bar').classList.add('show');
+    renderRecents()
 
     // If marker popup is open, then remove it and any active markers and remove route
     if (document.getElementById('marker-popup').classList.contains('open')) {
@@ -60,7 +61,30 @@ document.getElementById('cancel').addEventListener('click', (e) => {
 
 });
 
+function renderRecents() {
 
+    document.querySelectorAll('.recents').forEach(el => el.remove());
+
+    recentMarkers.forEach(markers => {
+        const container = document.querySelector('.recent-container');
+        const rBlock = document.createElement('div');
+
+        rBlock.className = 'recents';
+
+            rBlock.innerHTML = `
+                <div class="icon-container" style="background-color: ${markers.color};">
+                    <img src="./assets/icons/${markers.icon}.svg" alt="" class="icon" id="icon">
+                </div>
+                <div class="text">
+                    <h1>${markers.title}</h1>
+                    <h2>${markers.type} • ${markers.miles} mi • ${markers.minutes} min</h2>
+                </div>
+            `;
+        
+
+        container.appendChild(rBlock);
+    });
+}
 
 // ============================================================================================================================================================
 // =========================================================Filter Button======================================================================================

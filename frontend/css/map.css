@@ -332,6 +332,13 @@ div #container {
     height: auto;
     filter: var(--accent-color-filter);
 }
+.break {
+    margin-top: 12px;
+    width: 85%;
+    border: none;
+    height: 2px;
+    background-color: var(--light-color);
+}
 
 /* ====> Types or categories of markers selection <== */
 .pill {
@@ -365,6 +372,50 @@ div #container {
     font-variation-settings: 'wght' 400;
 }
 
+/* ==> Recents list <== */
+.search-popup h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-variation-settings: 'wght' 400;
+}
+.recents {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 14px 4px 4px;
+    /* Top, Right, Bottom, Left */
+}
+.recents .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.recents .icon {
+    width: 22px;
+    height: 22px;
+    translate: 0px 1px;
+    filter: brightness(0) invert(1);
+    /*Turns it white*/
+}
+.recents text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.recents h1 {
+    margin: 0;
+    font-size: 1rem;
+    color: black;
+}
+.recents h2 {
+    margin: 0;
+    font-size: .8rem;
+    color: var(--base-color);
+}
 
 
 
