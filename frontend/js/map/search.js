@@ -63,6 +63,13 @@ document.getElementById('cancel').addEventListener('click', (e) => {
 
 function renderRecents() {
 
+    if (recentMarkers.length == 0) {
+        document.getElementById('r-text').hidden = true;
+    }
+    else {
+        document.getElementById('r-text').hidden = false;
+    }
+
     document.querySelectorAll('.recents').forEach(el => el.remove());
 
     recentMarkers.forEach(markers => {
