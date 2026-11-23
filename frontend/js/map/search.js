@@ -31,10 +31,21 @@ function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id)
 
 
 document.getElementById('search-bar').addEventListener('click', (e) => {
-    console.log("yes");
 
     document.getElementById('search-popup').classList.add('open');
     document.getElementById('search-bar').classList.add('show');
+});
+
+document.getElementById('cancel').addEventListener('click', (e) => {
+
+    // If input is empty, function is closing popup
+    if (document.querySelector('input').value.trim() === '') {
+        document.getElementById('search-popup').classList.remove('open');
+        document.getElementById('search-bar').classList.remove('show');
+    } else {
+        document.getElementById('input').value = "";
+    }
+
 });
 
 
