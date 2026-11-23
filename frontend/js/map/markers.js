@@ -35,9 +35,13 @@ function createCustomPin(bgColor, iconName, id) {
 }
 
 
-    
+const markerDataMap = {};
 
 function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
+
+    /* Lookup table, so outside functions just need id, to get all the information for a popup */
+    markerDataMap[id] = { marker, titleData, typeData, img1, img2, web, color, icon, id };
+
     // Find all pills and loop through each one finding a click
     document.querySelectorAll('.pill').forEach((pill) => {
         pill.addEventListener('click', () => {  
@@ -61,7 +65,7 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         // Prevent map click event from immediately closing the sheet
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
-        
+
         show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id);
     });
 

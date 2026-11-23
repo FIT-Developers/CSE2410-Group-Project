@@ -88,6 +88,18 @@ function renderRecents() {
                 </div>
             `;
         
+        /* To each element add a event listener for clicks */
+        rBlock.addEventListener('click', (e) => {
+            // Prevents instantly closing it
+            e.stopPropagation();
+            
+            /* Access the global look up table which uses id and gives back everything about the marker */
+            const m = markerDataMap[markers.id];
+            /* Check if exists then use that lookup table data for calling the popup function */
+            if (m) {
+                show_Popup(m.marker, m.titleData, m.typeData, m.img1, m.img2, m.web, m.color, m.icon, m.id);
+            }
+        });
 
         container.appendChild(rBlock);
     });
