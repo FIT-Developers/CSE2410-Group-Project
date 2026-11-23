@@ -146,6 +146,9 @@ document.querySelector('#directions').addEventListener('click', async function(e
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
     document.getElementById('marker-popup').classList.remove('open');
+
+    document.getElementById('search-popup').classList.remove('open');
+    document.getElementById('search-bar').classList.remove('show');
     // Removes the active markers class when exiting popup
     document.querySelectorAll('.custom-pin').forEach(pin => {
         pin.classList.remove('active-pin');
@@ -161,6 +164,6 @@ map.on('click', () => {
 }); 
 
 // This prevents clicks on the actually popup to slide it down
-document.getElementById('marker-popup').addEventListener('click', (e) => {
+document.getElementById('marker-popup').addEventListener('focus', (e) => {
     e.stopPropagation();
 });

@@ -290,6 +290,55 @@ div #container {
 }
 
 
+
+
+
+
+/* ======> Search Popup <====== */
+.search-bar.show {
+    z-index: 2001;
+    filter: none;
+    background-color: var(--light-color);
+}
+.search-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    z-index: 2000;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
+
+    /* Inside content, overall padding of popup */
+    padding: 21px 16px 20px 18px;
+    /* Top, Right, Bottom, Left */
+    box-sizing: border-box;
+
+    /* Have it hidden off screen */
+    transform: translateY(-110%);
+    transition: transform 0s
+}
+.search-popup.open {
+    transform: translateY(0);
+}
+.search-popup .close-container {
+    width: fit-content;
+    margin-left: auto;
+}
+.search-popup .icon {
+    width: 55px;
+    height: auto;
+    filter: var(--accent-color-filter);
+}
+
+
+
+
+
+
+
 /* =====> Weather Showcase <===== */
 .weather-showcase {
     z-index: 1002;

@@ -30,6 +30,13 @@ function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id)
 }
 
 
+document.getElementById('search-bar').addEventListener('click', (e) => {
+    console.log("yes");
+
+    document.getElementById('search-popup').classList.add('open');
+    document.getElementById('search-bar').classList.add('show');
+});
+
 
 
 // ============================================================================================================================================================
