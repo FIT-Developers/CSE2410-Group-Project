@@ -50,8 +50,8 @@
   {
     "id": "Parking_7",
     "tooltip": "Parking Lot 7",
-    "lat": 28.068241,
-    "lng": -80.625299,
+    "lat": 28.068760589068464,
+    "lng": -80.62518188391294,
     "color": "#606069",
     "icon": "parking.svg",
     "type": "Parking",
@@ -297,7 +297,7 @@
     "icon": "grad_cap.svg",
     "type": "Facility",
     "img1": "./assets/images/Crawford-img1.jpg",
-    "img2":"./assets/images/Crawford-img1.jpg",
+    "img2":"./assets/images/Crawford-img2.jpg",
     "web":""
   },
   {
@@ -320,9 +320,9 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"./assets/images/Quad-403-img1.jpg",
-    "web":"./assets/images/Quad-403-img2.jpg"
+    "img1": "./assets/images/Quad-403-img1.jpg",
+    "img2":"./assets/images/Quad-403-img2.jpg",
+    "web":""
   },
   {
     "id": "Academic_402",
@@ -1183,6 +1183,18 @@
   "color": "#e59ba8",
   "icon": "bell.svg",
   "type": "Service",
+  "img1": "./assets/images/Surf-img1.jpg",
+  "img2": "./assets/images/Surf-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_Mary",
+  "tooltip": "Mary Star of the Sea Parking Lot",
+  "lat": 28.059146,
+  "lng": -80.620771,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
   "img1": "./assets/images/Surf-img1.jpg",
   "img2": "./assets/images/Surf-img2.jpg",
   "web": ""
