@@ -41,6 +41,8 @@ document.getElementById('search-bar').addEventListener('click', (e) => {
     } else {
         document.getElementById('r-text').hidden = true;
         document.querySelectorAll('.recents').forEach(el => el.remove());
+
+        renderSearch(document.querySelector('input').value.trim());
     }
 
     // If marker popup is open, then remove it and any active markers and remove route
@@ -62,6 +64,9 @@ document.getElementById('search-bar').addEventListener('input', function(event) 
     } else {
         document.getElementById('r-text').hidden = true;
         document.querySelectorAll('.recents').forEach(el => el.remove());
+
+        // Start search algorithm and update when typing
+        renderSearch(document.querySelector('input').value.trim());
     }
 });
 
@@ -120,9 +125,75 @@ function renderRecents() {
     });
 }
 
+// Multi-word prefix search algorithm and renders the searches in div blocks
+function renderSearch(prefix) {
+    // Standardize it so no issues arrise
+    trimmedPrefix = prefix.trim().toLowerCase();
 
-function renderSearch() {
-    
+    // If the input is nothing then don't waste algorithm time
+    if(trimmedPrefix === "") return;
+
+    // Call the filter function to return a list matching a boolean set in that function
+    const results = markerNames.filter(checkSearch); 
+
+    // Function that returns modified list that meets boolean standards
+    function checkSearch([, words]) {
+        return Array.isArray(words) && words.some(word => word.toLowerCase().startsWith(trimmedPrefix));
+    }
+
+    // Grabs the first element in each of the arrays to obtain ID
+    // Information obtained from documentation: https://javascript.plainenglish.io/get-the-first-element-of-an-array-in-javascript-488a31cfc940 which gives code examples for this
+    let idList = results.map(id => id[0])
+    console.log(idList);
+
+
+    // Copied code from the recents list, slightly modified, works on the same principles
+    // But uses just an id which for marker data is grabbed from the mapping list
+    document.querySelectorAll('.recents').forEach(el => el.remove());
+
+    // This slice here just truncates anything after 8, so it only grabbed the first 8 in the list to reduce clutter on screen
+    idList.slice(0, 8).forEach(id => {
+        const container = document.querySelector('.recent-container');
+        const Block = document.createElement('div');
+
+        // Need the marker info, so just use the mapping list to obtain that from id stored, used for div styling
+        const data = markerDataMap[id];
+
+        // For each result having its routing info given
+        let dist = 0;
+        let time = 0;
+
+        // Grab that data used for time and distance away (it's only 8 operations max per search so shouldn't be slow)
+        if (currentCoords != null && graphData != null) {
+            const result = calculateRoute(currentCoords[0], currentCoords[1], data.marker.getLatLng().lat, data.marker.getLatLng().lng, graphData); 
+            dist = result.miles;
+            time = result.minutes;
+        }
+
+        Block.className = 'recents';
+
+            Block.innerHTML = `
+                <div class="icon-container" style="background-color: ${data.color};">
+                    <img src="./assets/icons/${data.icon}" alt="" class="icon" id="icon">
+                </div>
+                <div class="text">
+                    <h1>${data.titleData}</h1>
+                    <h2>${data.typeData} • ${dist} mi • ${time} min</h2>
+                </div>
+            `;
+        
+        /* Same code before */
+        Block.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            const m = markerDataMap[id];
+            if (m) {
+                show_Popup(m.marker, m.titleData, m.typeData, m.img1, m.img2, m.web, m.color, m.icon, m.id);
+            }
+        });
+
+        container.appendChild(Block);
+    });
 }
 
 // ============================================================================================================================================================
