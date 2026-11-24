@@ -2578,8 +2578,8 @@
     },
     {
       "id": "n423",
-      "lat": 28.065941583336745,
-      "lng": -80.62319710850717,
+      "lat": 28.065969984923285,
+      "lng": -80.62319174408916,
       "floor": 1,
       "name": "Node n423"
     },
@@ -3803,8 +3803,8 @@
     },
     {
       "id": "n618",
-      "lat": 28.069029028525414,
-      "lng": -80.62243402004243,
+      "lat": 28.069253867752828,
+      "lng": -80.62238574028015,
       "floor": 1,
       "name": "Node n618"
     },
@@ -3852,8 +3852,8 @@
     },
     {
       "id": "n626",
-      "lat": 28.068134400412685,
-      "lng": -80.62144964933395,
+      "lat": 28.06809889914344,
+      "lng": -80.62145233154298,
       "floor": 1,
       "name": "Node n626"
     },
@@ -4374,6 +4374,27 @@
       "lng": -80.62510281801224,
       "floor": 1,
       "name": "Node n707"
+    },
+    {
+      "id": "n709",
+      "lat": 28.070617093414857,
+      "lng": -80.62499821186066,
+      "floor": 1,
+      "name": "Node n709"
+    },
+    {
+      "id": "n711",
+      "lat": 28.071511700855407,
+      "lng": -80.62024533748628,
+      "floor": 1,
+      "name": "Node n711"
+    },
+    {
+      "id": "n712",
+      "lat": 28.067587679565772,
+      "lng": -80.62487080693245,
+      "floor": 1,
+      "name": "Node n712"
     }
   ],
   "edges": [
@@ -7426,7 +7447,7 @@
       "type": "crosswalk",
       "distanceMeters": 44.5,
       "extraSeconds": 114,
-      "weightSeconds": 217
+      "weightSeconds": 151
     },
     {
       "id": "n329_n330",
@@ -7632,7 +7653,7 @@
       "v": "n355",
       "type": "crosswalk",
       "distanceMeters": 28.5,
-      "extraSeconds": 114,
+      "extraSeconds": 180,
       "weightSeconds": 203
     },
     {
@@ -7660,7 +7681,7 @@
       "type": "crosswalk",
       "distanceMeters": 32.1,
       "extraSeconds": 114,
-      "weightSeconds": 206
+      "weightSeconds": 140
     },
     {
       "id": "n355_n359",
@@ -7669,7 +7690,7 @@
       "type": "crosswalk",
       "distanceMeters": 34.7,
       "extraSeconds": 114,
-      "weightSeconds": 209
+      "weightSeconds": 143
     },
     {
       "id": "n358_n359",
@@ -7678,7 +7699,7 @@
       "type": "crosswalk",
       "distanceMeters": 29.2,
       "extraSeconds": 114,
-      "weightSeconds": 204
+      "weightSeconds": 138
     },
     {
       "id": "n358_n360",
@@ -7966,7 +7987,7 @@
       "type": "crosswalk",
       "distanceMeters": 25.4,
       "extraSeconds": 114,
-      "weightSeconds": 201
+      "weightSeconds": 135
     },
     {
       "id": "n393_n394",
@@ -8270,9 +8291,9 @@
       "u": "n422",
       "v": "n423",
       "type": "default",
-      "distanceMeters": 6.1,
+      "distanceMeters": 9,
       "extraSeconds": 0,
-      "weightSeconds": 5
+      "weightSeconds": 7
     },
     {
       "id": "n427_n428",
@@ -8306,9 +8327,9 @@
       "u": "n423",
       "v": "n425",
       "type": "default",
-      "distanceMeters": 9.7,
+      "distanceMeters": 11.8,
       "extraSeconds": 0,
-      "weightSeconds": 7
+      "weightSeconds": 9
     },
     {
       "id": "n422_n424",
@@ -10286,9 +10307,9 @@
       "u": "n617",
       "v": "n618",
       "type": "default",
-      "distanceMeters": 8.6,
+      "distanceMeters": 17.8,
       "extraSeconds": 0,
-      "weightSeconds": 6
+      "weightSeconds": 13
     },
     {
       "id": "n616_n617",
@@ -10367,9 +10388,9 @@
       "u": "n625",
       "v": "n626",
       "type": "default",
-      "distanceMeters": 57.1,
+      "distanceMeters": 61.1,
       "extraSeconds": 0,
-      "weightSeconds": 42
+      "weightSeconds": 45
     },
     {
       "id": "n624_n625",
@@ -10385,9 +10406,9 @@
       "u": "n436",
       "v": "n626",
       "type": "default",
-      "distanceMeters": 69.5,
+      "distanceMeters": 65.6,
       "extraSeconds": 0,
-      "weightSeconds": 51
+      "weightSeconds": 49
     },
     {
       "id": "n629_n630",
@@ -11125,7 +11146,7 @@
       "type": "crosswalk",
       "distanceMeters": 27.3,
       "extraSeconds": 114,
-      "weightSeconds": 202
+      "weightSeconds": 136
     },
     {
       "id": "n596_n598",
@@ -11180,6 +11201,69 @@
       "distanceMeters": 74.9,
       "extraSeconds": 0,
       "weightSeconds": 55
+    },
+    {
+      "id": "n606_n627",
+      "u": "n606",
+      "v": "n627",
+      "type": "default",
+      "distanceMeters": 15.7,
+      "extraSeconds": 0,
+      "weightSeconds": 12
+    },
+    {
+      "id": "n637_n638",
+      "u": "n637",
+      "v": "n638",
+      "type": "default",
+      "distanceMeters": 50.8,
+      "extraSeconds": 0,
+      "weightSeconds": 38
+    },
+    {
+      "id": "n637_n709",
+      "u": "n637",
+      "v": "n709",
+      "type": "default",
+      "distanceMeters": 34.7,
+      "extraSeconds": 0,
+      "weightSeconds": 26
+    },
+    {
+      "id": "n631_n709",
+      "u": "n631",
+      "v": "n709",
+      "type": "default",
+      "distanceMeters": 43.8,
+      "extraSeconds": 0,
+      "weightSeconds": 32
+    },
+    {
+      "id": "n15_n465",
+      "u": "n15",
+      "v": "n465",
+      "type": "default",
+      "distanceMeters": 8.7,
+      "extraSeconds": 0,
+      "weightSeconds": 6
+    },
+    {
+      "id": "n551_n712",
+      "u": "n551",
+      "v": "n712",
+      "type": "default",
+      "distanceMeters": 30.9,
+      "extraSeconds": 0,
+      "weightSeconds": 23
+    },
+    {
+      "id": "n559_n712",
+      "u": "n559",
+      "v": "n712",
+      "type": "default",
+      "distanceMeters": 39.1,
+      "extraSeconds": 0,
+      "weightSeconds": 29
     }
   ],
   "adjacencyList": {
@@ -11460,6 +11544,12 @@
         "node": "n462",
         "weight": 15,
         "distance": 20.6,
+        "type": "default"
+      },
+      {
+        "node": "n465",
+        "weight": 6,
+        "distance": 8.7,
         "type": "default"
       }
     ],
@@ -15990,7 +16080,7 @@
       },
       {
         "node": "n328",
-        "weight": 217,
+        "weight": 151,
         "distance": 44.5,
         "type": "crosswalk"
       }
@@ -15998,7 +16088,7 @@
     "n328": [
       {
         "node": "n327",
-        "weight": 217,
+        "weight": 151,
         "distance": 44.5,
         "type": "crosswalk"
       },
@@ -16340,7 +16430,7 @@
       },
       {
         "node": "n359",
-        "weight": 209,
+        "weight": 143,
         "distance": 34.7,
         "type": "crosswalk"
       },
@@ -16372,7 +16462,7 @@
       },
       {
         "node": "n358",
-        "weight": 206,
+        "weight": 140,
         "distance": 32.1,
         "type": "crosswalk"
       }
@@ -16388,13 +16478,13 @@
     "n358": [
       {
         "node": "n356",
-        "weight": 206,
+        "weight": 140,
         "distance": 32.1,
         "type": "crosswalk"
       },
       {
         "node": "n359",
-        "weight": 204,
+        "weight": 138,
         "distance": 29.2,
         "type": "crosswalk"
       },
@@ -16420,13 +16510,13 @@
     "n359": [
       {
         "node": "n355",
-        "weight": 209,
+        "weight": 143,
         "distance": 34.7,
         "type": "crosswalk"
       },
       {
         "node": "n358",
-        "weight": 204,
+        "weight": 138,
         "distance": 29.2,
         "type": "crosswalk"
       },
@@ -16862,7 +16952,7 @@
       },
       {
         "node": "n391",
-        "weight": 201,
+        "weight": 135,
         "distance": 25.4,
         "type": "crosswalk"
       },
@@ -16882,7 +16972,7 @@
     "n391": [
       {
         "node": "n389",
-        "weight": 201,
+        "weight": 135,
         "distance": 25.4,
         "type": "crosswalk"
       },
@@ -17312,8 +17402,8 @@
       },
       {
         "node": "n423",
-        "weight": 5,
-        "distance": 6.1,
+        "weight": 7,
+        "distance": 9,
         "type": "default"
       },
       {
@@ -17326,14 +17416,14 @@
     "n423": [
       {
         "node": "n422",
-        "weight": 5,
-        "distance": 6.1,
+        "weight": 7,
+        "distance": 9,
         "type": "default"
       },
       {
         "node": "n425",
-        "weight": 7,
-        "distance": 9.7,
+        "weight": 9,
+        "distance": 11.8,
         "type": "default"
       }
     ],
@@ -17354,8 +17444,8 @@
       },
       {
         "node": "n423",
-        "weight": 7,
-        "distance": 9.7,
+        "weight": 9,
+        "distance": 11.8,
         "type": "default"
       }
     ],
@@ -17494,7 +17584,7 @@
       },
       {
         "node": "n440",
-        "weight": 202,
+        "weight": 136,
         "distance": 27.3,
         "type": "crosswalk"
       }
@@ -17514,8 +17604,8 @@
       },
       {
         "node": "n626",
-        "weight": 51,
-        "distance": 69.5,
+        "weight": 49,
+        "distance": 65.6,
         "type": "default"
       }
     ],
@@ -17566,7 +17656,7 @@
       },
       {
         "node": "n435",
-        "weight": 202,
+        "weight": 136,
         "distance": 27.3,
         "type": "crosswalk"
       }
@@ -17974,6 +18064,12 @@
         "node": "n464",
         "weight": 15,
         "distance": 19.9,
+        "type": "default"
+      },
+      {
+        "node": "n15",
+        "weight": 6,
+        "distance": 8.7,
         "type": "default"
       }
     ],
@@ -19349,6 +19445,12 @@
         "weight": 19,
         "distance": 25.3,
         "type": "default"
+      },
+      {
+        "node": "n712",
+        "weight": 23,
+        "distance": 30.9,
+        "type": "default"
       }
     ],
     "n553": [
@@ -19452,6 +19554,12 @@
         "node": "n561",
         "weight": 7,
         "distance": 9.3,
+        "type": "default"
+      },
+      {
+        "node": "n712",
+        "weight": 29,
+        "distance": 39.1,
         "type": "default"
       }
     ],
@@ -20187,6 +20295,12 @@
         "weight": 29,
         "distance": 39,
         "type": "default"
+      },
+      {
+        "node": "n627",
+        "weight": 12,
+        "distance": 15.7,
+        "type": "default"
       }
     ],
     "n607": [
@@ -20326,8 +20440,8 @@
     "n617": [
       {
         "node": "n618",
-        "weight": 6,
-        "distance": 8.6,
+        "weight": 13,
+        "distance": 17.8,
         "type": "default"
       },
       {
@@ -20346,8 +20460,8 @@
     "n618": [
       {
         "node": "n617",
-        "weight": 6,
-        "distance": 8.6,
+        "weight": 13,
+        "distance": 17.8,
         "type": "default"
       }
     ],
@@ -20424,8 +20538,8 @@
     "n625": [
       {
         "node": "n626",
-        "weight": 42,
-        "distance": 57.1,
+        "weight": 45,
+        "distance": 61.1,
         "type": "default"
       },
       {
@@ -20438,14 +20552,14 @@
     "n626": [
       {
         "node": "n625",
-        "weight": 42,
-        "distance": 57.1,
+        "weight": 45,
+        "distance": 61.1,
         "type": "default"
       },
       {
         "node": "n436",
-        "weight": 51,
-        "distance": 69.5,
+        "weight": 49,
+        "distance": 65.6,
         "type": "default"
       }
     ],
@@ -20460,6 +20574,12 @@
         "node": "n630",
         "weight": 15,
         "distance": 20.8,
+        "type": "default"
+      },
+      {
+        "node": "n606",
+        "weight": 12,
+        "distance": 15.7,
         "type": "default"
       }
     ],
@@ -20523,6 +20643,12 @@
         "weight": 15,
         "distance": 20.4,
         "type": "default"
+      },
+      {
+        "node": "n709",
+        "weight": 32,
+        "distance": 43.8,
+        "type": "default"
       }
     ],
     "n632": [
@@ -20571,7 +20697,20 @@
         "type": "default"
       }
     ],
-    "n637": [],
+    "n637": [
+      {
+        "node": "n638",
+        "weight": 38,
+        "distance": 50.8,
+        "type": "default"
+      },
+      {
+        "node": "n709",
+        "weight": 26,
+        "distance": 34.7,
+        "type": "default"
+      }
+    ],
     "n638": [
       {
         "node": "n646",
@@ -20583,6 +20722,12 @@
         "node": "n639",
         "weight": 19,
         "distance": 25.3,
+        "type": "default"
+      },
+      {
+        "node": "n637",
+        "weight": 38,
+        "distance": 50.8,
         "type": "default"
       }
     ],
@@ -21499,6 +21644,35 @@
         "node": "n604",
         "weight": 55,
         "distance": 74.9,
+        "type": "default"
+      }
+    ],
+    "n709": [
+      {
+        "node": "n637",
+        "weight": 26,
+        "distance": 34.7,
+        "type": "default"
+      },
+      {
+        "node": "n631",
+        "weight": 32,
+        "distance": 43.8,
+        "type": "default"
+      }
+    ],
+    "n711": [],
+    "n712": [
+      {
+        "node": "n551",
+        "weight": 23,
+        "distance": 30.9,
+        "type": "default"
+      },
+      {
+        "node": "n559",
+        "weight": 29,
+        "distance": 39.1,
         "type": "default"
       }
     ]
