@@ -842,8 +842,8 @@
 {
   "id": "Mary_Star",
   "tooltip": "Mary Star of the Sea Newman Hall",
-  "lat": 28.059297,
-  "lng": -80.620511,
+  "lat": 28.059398755713705,
+  "lng": -80.62039068082252,
   "color": "#4cdd9e",
   "icon": "house.svg",
   "type": "Dorm",
