@@ -882,7 +882,7 @@
   "lng": -80.624430,
   "color": "#65abcc",
   "icon": "shield.svg",
-  "type": "Facility",
+  "type": "Admin",
   "img1": "./assets/images/Work-img1.jpg",
   "img2": "./assets/images/Work-img2.jpg",
   "web": ""
@@ -894,7 +894,7 @@
   "lng": -80.625170,
   "color": "#65abcc",
   "icon": "shield.svg",
-  "type": "Facility",
+  "type": "Admin",
   "img1": "./assets/images/Alumni-img1.jpg",
   "img2": "./assets/images/Alumni-img2.jpg",
   "web": "https://www.fit.edu/alumni-and-giving/"
