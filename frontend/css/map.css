@@ -135,7 +135,7 @@ div #container {
     align-items: center;
     padding: 0 0px;
 } /* Fixes a crucial bug of having the mobile keyboard push the bottom nav up */
-@media (max-height: 600px) {
+@media (max-height: 300px) {
     .bottom-nav {
         display: none;
     }
