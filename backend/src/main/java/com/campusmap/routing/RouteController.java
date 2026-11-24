@@ -4,13 +4,14 @@ package com.campusmap.routing;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.campusmap.routing.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
 public class RouteController {
+
 
 	public record Coordinates(double lat, double lng) {}
 
@@ -23,16 +24,20 @@ public class RouteController {
 
 	@PostMapping("/api/route")
 	public RouteResponse getRoute(@RequestBody RouteRequest request) {
+		Coordinate start = new Coordinate(request.start().lat(), request.start().lng());
+		Coordinate destination = new Coordinate(
+				request.destination().lat(),
+				request.destination().lng()
+		);
 
-		double startLat = request.start().lat();
-		double startLng = request.start().lng();
-
-		double destinationLat = request.destination().lat();
-		double destinationLng = request.destination().lng();
+		Node startNode = NodeReference.getClosestNode(start);
+		Node destinationNode = NodeReference.getClosestNode(destination);
 
 		List<List<Double>> path = new ArrayList<>();
-		path.add(List.of(startLat, startLng));
-		path.add(List.of(destinationLat, destinationLng));
+		for (Node node : NodeReference.getRoute(startNode, destinationNode)) {
+			Coordinate point = node.getCoordinates();
+			path.add(List.of(point.getLat(), point.getLon()));
+		}
 
 		return new RouteResponse(path);
 	}
