@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Enable Standalone Fullscreen Mode for iOS Safari -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="Campus Map">
+
+	<title>Login - Campus Navigator</title>
+
+	<!-- Our CSS -->
+	<link rel="stylesheet" href="../css/global.css" />
+	<link rel="stylesheet" href="../css/login.css" />
+
+	<!-- Scripts -->
+	<script src="../js/navbar.js" defer></script>
+</head>
+
+<body>
+	<div id="login">
+
+		<!-- Nav Bar -->
+		<div id="navbar-placeholder"></div>
+
+		<!-- Login Page -->
+		<div id="login-page">
+
+			<!-- Header -->
+			<header id="login-page-header">
+				<h1 id="header-title">Welcome Back</h1>
+				<p id="header-subtitle">
+					Log in to access your saved campus buildings, custom filters, and walking routes.
+				</p>
+			</header>
+
+			<!-- Login Form Content -->
+			<main id="login-page-content">
+				<div id="login-form-div">
+					<form id="login-form" action="/api/login" method="post">
+						<p id="login-error" role="alert"></p>
+
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" placeholder="Enter your username..." id="username" name="username" autocomplete="username" required>
+						</div>
+
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" placeholder="Enter your password..." id="password" name="password" autocomplete="current-password" required>
+						</div>
+
+						<input type="submit" value="Log In">
+
+						<p class="auth-switch">
+							Don't have an account? <a href="./sign-up.html">Sign up</a>
+						</p>
+					</form>
+				</div>
+			</main>
+
+		</div>
+	</div>
+</body>
+
+</html>
