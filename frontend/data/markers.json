@@ -1186,6 +1186,18 @@
   "img1": "./assets/images/Surf-img1.jpg",
   "img2": "./assets/images/Surf-img2.jpg",
   "web": ""
+},
+{
+  "id": "Parking_Mary",
+  "tooltip": "Mary Star of the Sea Parking Lot",
+  "lat": 28.059146,
+  "lng": -80.620771,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Surf-img1.jpg",
+  "img2": "./assets/images/Surf-img2.jpg",
+  "web": ""
 }
   
 ]
