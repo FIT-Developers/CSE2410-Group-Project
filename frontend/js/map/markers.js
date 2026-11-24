@@ -89,6 +89,7 @@ function show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, i
         // If search bar is open, then remove it, clicking on marker, but check first
         if (document.getElementById('search-popup').classList.contains('open')) {
             document.getElementById('search-popup').classList.remove('open');
+            document.getElementById('search-bar').classList.remove('show');
         }
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;

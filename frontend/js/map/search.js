@@ -26,6 +26,7 @@ function recordMarkerClick(titleData, typeData, color, icon, miles, minutes, id)
         recentMarkers.pop();
     }
 
+    localStorage.setItem("recentList", JSON.stringify(recentMarkers));
     console.log("Recent marker list: " + recentMarkers);
 }
 
