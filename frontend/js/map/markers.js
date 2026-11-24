@@ -3,7 +3,7 @@
 // ============================================================================================================================================================
 // ==> Returns a divIcon class that uses the variable that contains the html (svg icon stuff), which can then be read by L.marker creation in its icon: (properties)
 // Adds icons from assets aswell, sourced from: https://www.svgrepo.com/collection/dazzle-line-icons/7?search=book
-function createCustomPin(bgColor, iconName) {
+function createCustomPin(bgColor, iconName, id) {
     var Pin = `
         <!-- Basic svg setup, xmlns sets up standard rules, viewbox is the canvas created as min-x, min-y, width, height, then renders at physical size by width and height-->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="30" height="38">
@@ -27,6 +27,7 @@ function createCustomPin(bgColor, iconName) {
     // Documentation on this: https://leafletjs.com/reference.html#icon
     return L.divIcon({
         className: 'custom-pin',
+        id: `${id}`,
         html: Pin,
         iconSize: [30, 38],
         iconAnchor: [15, 28]
@@ -34,14 +35,46 @@ function createCustomPin(bgColor, iconName) {
 }
 
 
+const markerDataMap = {};
 let parkingPolygon = null; 
 
 function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
+
+    /* Lookup table, so outside functions just need id, to get all the information for a popup */
+    markerDataMap[id] = { marker, titleData, typeData, img1, img2, web, color, icon, id };
+
+    // Find all pills and loop through each one finding a click
+    document.querySelectorAll('.pill').forEach((pill) => {
+        pill.addEventListener('click', () => {  
+            // Remove all active markers before
+            marker.getElement().classList.remove('active-pin');
+
+            // Get what type was clicked
+            const heading = (pill.querySelector('h1')).textContent;
+
+            if (typeData == heading) {
+                marker.getElement().classList.add('active-pin');
+            }
+            
+                    // Zooms out smoothly
+            map.setZoom(16, { animate: true });
+
+        });
+    });
+
     marker.on('click', (e) => {
-        
         // Prevent map click event from immediately closing the sheet
         // Documentation on this: https://leafletjs.com/reference.html#domevent-stoppropagation
         L.DomEvent.stopPropagation(e);
+
+        show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id);
+    });
+
+}
+
+
+
+function show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, id) {
 
         // Removes all the active markers class 
         document.querySelectorAll('.custom-pin').forEach(pin => {
@@ -58,6 +91,11 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
         // Store website url, used for when clicking the btn
         markerWebsite = web
 
+        // If search bar is open, then remove it, clicking on marker, but check first
+        if (document.getElementById('search-popup').classList.contains('open')) {
+            document.getElementById('search-popup').classList.remove('open');
+            document.getElementById('search-bar').classList.remove('show');
+        }
         // Grabs the html id, and replaces the content in it with unique marker data
         document.getElementById('MarkerName').textContent = titleData;
         document.getElementById('TypeName').textContent = typeData;
@@ -136,9 +174,8 @@ function marker_Popup(marker, titleData, typeData, img1, img2, web, color, icon,
             animate: true,
             pan: { duration: 0.5 }
         });
-    });
-
 }
+
 
 
 
@@ -175,6 +212,9 @@ document.querySelector('#directions').addEventListener('click', async function(e
 // Any clicks outside on map, slide the popup down and is no longer visible
 map.on('click', () => {
     document.getElementById('marker-popup').classList.remove('open');
+
+    document.getElementById('search-popup').classList.remove('open');
+    document.getElementById('search-bar').classList.remove('show');
     // Removes the active markers class when exiting popup
     document.querySelectorAll('.custom-pin').forEach(pin => {
         pin.classList.remove('active-pin');
@@ -193,7 +233,7 @@ map.on('click', () => {
 }); 
 
 // This prevents clicks on the actually popup to slide it down
-document.getElementById('marker-popup').addEventListener('click', (e) => {
+document.getElementById('marker-popup').addEventListener('focus', (e) => {
     e.stopPropagation();
 });
 

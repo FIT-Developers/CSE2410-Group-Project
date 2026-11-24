@@ -54,7 +54,10 @@ let routeLine = null;
 let markerWebsite = null;
 
 // Recent markers list, this is going to act like a stack with max 4, which can accessed and displayed in the Search dropdown
-let recentMarkers = [];
+// Grabbed from local storage before declaring its empty
+let recentMarkers = JSON.parse(localStorage.getItem('recentList')) || [];
+
+let markerNames = [];
 
 // Grab the json graph data with nodes, edges and adjancey list
 // => Done similarly for markers.json using the same documentation

@@ -13,10 +13,13 @@ fetch('./data/markers.json')
         allLocations = locations;
 
         // Creates custom marker with icon and color data
-        const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon) }).addTo(map);
+        const marker = L.marker([loc.lat, loc.lng], { icon: createCustomPin(loc.color, loc.icon, loc.id) }).addTo(map);
 
         // Uses the new marker pop function and simply passes each unique marker data to function to change out html elements
         marker_Popup(marker, loc.tooltip, loc.type, loc.img1, loc.img2, loc.web, loc.color, loc.icon, loc.id);
+
+        // Pushes new element in the form [id, [words from tooltip]], trim() is for extra spaces and it splits on the spaces
+        markerNames.push([loc.id, loc.tooltip.trim().split(/\s+/)]);
     });
 })
 .catch(error => console.error('Error loading markers:', error));
