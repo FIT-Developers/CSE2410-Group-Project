@@ -35,7 +35,13 @@ document.getElementById('search-bar').addEventListener('click', (e) => {
 
     document.getElementById('search-popup').classList.add('open');
     document.getElementById('search-bar').classList.add('show');
-    renderRecents()
+
+    if (document.querySelector('input').value.trim() === '') {
+        renderRecents();
+    } else {
+        document.getElementById('r-text').hidden = true;
+        document.querySelectorAll('.recents').forEach(el => el.remove());
+    }
 
     // If marker popup is open, then remove it and any active markers and remove route
     if (document.getElementById('marker-popup').classList.contains('open')) {
@@ -47,6 +53,15 @@ document.getElementById('search-bar').addEventListener('click', (e) => {
             map.removeLayer(routeLine);
             routeLine = null;
         }
+    }
+});
+
+document.getElementById('search-bar').addEventListener('input', function(event) {
+    if (document.querySelector('input').value.trim() === '') {
+        renderRecents();
+    } else {
+        document.getElementById('r-text').hidden = true;
+        document.querySelectorAll('.recents').forEach(el => el.remove());
     }
 });
 
@@ -63,7 +78,6 @@ document.getElementById('cancel').addEventListener('click', (e) => {
 });
 
 function renderRecents() {
-
     if (recentMarkers.length == 0) {
         document.getElementById('r-text').hidden = true;
     }
@@ -107,7 +121,9 @@ function renderRecents() {
 }
 
 
-
+function renderSearch() {
+    
+}
 
 // ============================================================================================================================================================
 // =========================================================Filter Button======================================================================================

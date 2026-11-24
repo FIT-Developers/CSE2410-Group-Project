@@ -57,6 +57,8 @@ let markerWebsite = null;
 // Grabbed from local storage before declaring its empty
 let recentMarkers = JSON.parse(localStorage.getItem('recentList')) || [];
 
+let markerNames = [];
+
 // Grab the json graph data with nodes, edges and adjancey list
 // => Done similarly for markers.json using the same documentation
 // Going to be used for routing
