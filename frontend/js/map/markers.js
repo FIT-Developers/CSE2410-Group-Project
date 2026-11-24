@@ -146,6 +146,7 @@ function show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, i
         // This is to check and see if a marker has "parking" in it's name, if it does
         // then search for it's polygon definition in the "parking-borders.json"
         let parkingString = "parking";  
+
         if (id.toLowerCase().includes(parkingString)) {
             fetch('./data/parking-borders.json')
             .then(response => response.json())
@@ -153,11 +154,12 @@ function show_Popup(marker, titleData, typeData, img1, img2, web, color, icon, i
                 items.definitions.forEach(def => {
                     if (def.id == id) {
                         let coordinates = def.coordinates; 
+
                         parkingPolygon = L.polygon(coordinates, {
-                            color : 'red', 
+                            color : '#B65050', 
                             weight : 3, 
-                            fillColor : 'red',
-                            fillOpacity : 0.5
+                            fillColor : '#B65050',
+                            fillOpacity : 0.2
                         }).addTo(map); 
                     }
                 });
