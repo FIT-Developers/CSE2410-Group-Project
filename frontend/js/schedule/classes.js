@@ -54,18 +54,41 @@ clsBtn.addEventListener('click', function() {
     console.log(classes);
 
 });
+function normalizeTime(value) {
+    const compact = value.trim().toLowerCase().replace(/\s+/g, '');
+    return compact.replace(/^(\d{1,2})(am|pm)$/, '$1:00$2');
+}
+async function addClass(name, day, start, end, loc, room, color) {
+    const classData = {
+    name: name,
+    day: day,
+    start: normalizeTime(start),
+    end: normalizeTime(end),
+    loc: loc,
+    room: room,
+    color: color
+    };
+    const csrfResponse = await fetch('/api/csrf');
 
-function addClass(name, day, start, end, loc, room, color) {
-    classes.push({
-        name: name,
-        day: day,
-        start: start,
-        end: end,
-        loc: loc,
-        room: room,
-        color: color
+    if (!csrfResponse.ok) {
+        throw new Error('Could not prepare to save the class.');
+    }
+
+    const csrf = await csrfResponse.json();
+
+    const response = await fetch('/api/classes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            [csrf.headerName]: csrf.token
+        },
+        body: JSON.stringify(classData)
     });
-    localStorage.setItem("myClasses", JSON.stringify(classes));
+    
+
+
+
+  
 }
 
 // Simple slicing function to convert that time to minutes after midnight

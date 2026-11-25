@@ -64,15 +64,7 @@ public class AuthController {
     }
 
 
-    @GetMapping("/api/signup")
-    public String signupPage(){
-        return "signup";
-    }
 
-    @GetMapping("/api/login")
-    public String loginPage(){
-        return "login";
-    }
     @GetMapping("/api/csrf")
     @ResponseBody
     public CsrfToken csrf(CsrfToken token) {
