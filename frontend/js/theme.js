@@ -35,8 +35,8 @@
 			return saved;
 		}
 
-		// Default to dark theme to match the application's base styling
-		return 'dark';
+		// Default to light theme
+		return 'light';
 	}
 
 	// Applies the chosen theme to the document root,
