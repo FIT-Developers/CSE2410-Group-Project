@@ -39,8 +39,10 @@
 </head>
 
 <body>
+	<!-- Map -->
     <div id="map"></div>
 
+	<!-- Markers -->
     <div class="marker-popup" id="marker-popup">
         <div id="container">
             <h1 id="MarkerName">Marker Name</h1>
@@ -49,17 +51,23 @@
                 <img src="./assets/icons/menu-icons/x.svg" alt="" class="icon" id="close">
             </div>
         </div>
+
+		<!-- Walking -->
         <div id="container">
             <h2 id="TypeName">Type Name</h2><pre style="word-spacing: -0.4em;"> • </pre> 
             <h2 id="Distance">0.0 mi</h2><pre style="word-spacing: -0.4em;"> • </pre>
             <h2 id="TimeAway">0 min</h2>
             <img src="./assets/icons/menu-icons/walk.svg" alt="" class="icon" id="walking">
         </div>
+
+		<!-- Open/Closed -->
         <div id="container">
             <h2 id="OpenStatus">Open</h2>
             <pre style="word-spacing: -0.4em;"> • </pre>
             <h2 id="CloseTime">Closes 7 PM</h2>
         </div>
+
+		<!-- Directions/Website -->
         <div id="container" style="gap: 15px; margin-top: 8px">
             <button type="button" id="directions" class="button">
                 <img src="./assets/icons/menu-icons/navigator.svg" alt="" class="icon" id="nav">
@@ -92,19 +100,20 @@
 		</a>
 	</div>
 
-    
-
-
+	
+	<!-- Active Location Button -->
     <div class="active-location-btn">
         <img src="./assets/icons/menu-icons/navigator.svg" alt="" class="icon">
     </div>
 
 
-
+	<!-- Weather Showcase -->
     <div class="weather-showcase">
         <img src="./assets/icons/weather/Sunny.svg" alt="" class="icon" id="weather-icon">
     </div>
 
+
+	<!-- Crosswalk Container -->
     <div class="crosswalk-container" style="--progress: 0;">
         <div class="crosswalk-icon">
             <img src="./assets/icons/menu-icons/walk.svg" alt="" class="icon">
@@ -118,7 +127,7 @@
 
 
 
-
+	<!-- Search Bar -->
     <div class="search-bar" id="search-bar">
         <img src="./assets/icons/menu-icons/pin.svg" alt="" class="icon">
         <input type="text" class="input" id="input" placeholder="Search here" />
@@ -231,55 +240,55 @@
 
 
 	<!-- Profile Overlay -->
-<div class="profile-overlay" id="profile-overlay" aria-hidden="true">
+	<div class="profile-overlay" id="profile-overlay" aria-hidden="true">
 
-	<!-- Signed-Out View -->
-	<section class="profile-card" id="signed-out-view">
-		<button type="button" class="card-close-btn" id="close-profile-btn" aria-label="Close profile">
-			<img src="./assets/icons/menu-icons/x.svg" alt="Close" class="icon">
-		</button>
-		<div class="avatar-circle">
-			<img src="./assets/icons/menu-icons/user.svg" alt="User Icon" class="avatar-icon">
-		</div>
-		<h1 class="profile-title">Not Signed In</h1>
-		<p class="profile-subtitle">
-			Sign in to save favorite campus buildings, sync your class schedule, and customize navigation preferences.
-		</p>
-
-		<div class="profile-actions">
-			<button type="button" class="btn-primary" id="open-login-btn">Log In</button>
-			<button type="button" class="btn-secondary" id="open-signup-btn">Create Account</button>
-		</div>
-	</section>
-
-	<!-- Signed-In View -->
-	<section class="profile-card hidden" id="signed-in-view">
-		<button type="button" class="card-close-btn" id="close-profile-signed-in-btn" aria-label="Close profile">
-			<img src="./assets/icons/menu-icons/x.svg" alt="Close" class="icon">
-		</button>
-		<div class="avatar-circle active-user">
-			<img src="./assets/icons/menu-icons/user.svg" alt="User Icon" class="avatar-icon">
-		</div>
-		<span class="status-badge">Signed In</span>
-		<h1 class="profile-title" id="user-display-email">student@my.fit.edu</h1>
-		<p class="profile-subtitle">Florida Tech Campus Navigator Account</p>
-
-		<div class="settings-list">
-			<div class="setting-row">
-				<div class="setting-info">
-					<span class="setting-label">App Theme</span>
-					<span class="setting-desc">Switch between Dark and Light mode</span>
-				</div>
-				<button type="button" class="btn-pill" id="theme-toggle-btn">Toggle Theme</button>
+		<!-- Signed-Out View -->
+		<section class="profile-card" id="signed-out-view">
+			<button type="button" class="card-close-btn" id="close-profile-btn" aria-label="Close profile">
+				<img src="./assets/icons/menu-icons/x.svg" alt="Close" class="icon">
+			</button>
+			<div class="avatar-circle">
+				<img src="./assets/icons/menu-icons/user.svg" alt="User Icon" class="avatar-icon">
 			</div>
-		</div>
+			<h1 class="profile-title">Not Signed In</h1>
+			<p class="profile-subtitle">
+				Sign in to save favorite campus buildings, sync your class schedule, and customize navigation preferences.
+			</p>
 
-		<div class="profile-actions">
-			<button type="button" class="btn-secondary" id="logout-btn">Sign Out</button>
-		</div>
-	</section>
+			<div class="profile-actions">
+				<button type="button" class="btn-primary" id="open-login-btn">Log In</button>
+				<button type="button" class="btn-secondary" id="open-signup-btn">Create Account</button>
+			</div>
+		</section>
 
-</div>
+		<!-- Signed-In View -->
+		<section class="profile-card hidden" id="signed-in-view">
+			<button type="button" class="card-close-btn" id="close-profile-signed-in-btn" aria-label="Close profile">
+				<img src="./assets/icons/menu-icons/x.svg" alt="Close" class="icon">
+			</button>
+			<div class="avatar-circle active-user">
+				<img src="./assets/icons/menu-icons/user.svg" alt="User Icon" class="avatar-icon">
+			</div>
+			<span class="status-badge">Signed In</span>
+			<h1 class="profile-title" id="user-display-email">student@my.fit.edu</h1>
+			<p class="profile-subtitle">Florida Tech Campus Navigator Account</p>
+
+			<div class="settings-list">
+				<div class="setting-row">
+					<div class="setting-info">
+						<span class="setting-label">App Theme</span>
+						<span class="setting-desc">Switch between Dark and Light mode</span>
+					</div>
+					<button type="button" class="btn-pill" id="theme-toggle-btn">Toggle Theme</button>
+				</div>
+			</div>
+
+			<div class="profile-actions">
+				<button type="button" class="btn-secondary" id="logout-btn">Sign Out</button>
+			</div>
+		</section>
+
+	</div>
 
 	<!-- Backdrop & Slide-Up Auth Drawer -->
 	<div class="drawer-backdrop" id="auth-backdrop"></div>
