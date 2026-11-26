@@ -19,12 +19,19 @@
 
     <title>Campus Map</title>
     <link rel="icon" type="svg" href="./assets/icons/menu-icons/tab-icon.svg" />
+	
     <!-- Leaflet's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
     <!-- Our CSS -->
 	<link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/map.css" />
+
+	<!-- Desktop Version CSS & Theme -->
+	<link rel="stylesheet" href="css/desktop-map.css" />
+    <script src="js/theme.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/leaflet-boundary-canvas@1.0.0/leaflet-boundary-canvas.min.js"></script>
     
     
@@ -69,20 +76,20 @@
     </div>
 
 
-    <div class="bottom-nav" id="footer">
-        <a href="map.html" class="nav-item active">
-            <img src="./assets/icons/menu-icons/compass.svg" alt="" class="icon">
-        </a>
-        <a href="scheduling.html" class="nav-item">
-            <img src="./assets/icons/menu-icons/calendar.svg" alt="" class="icon">
-        </a>
-        <a href="home.html" class="nav-item">
-            <img src="./assets/icons/menu-icons/user.svg" alt="" class="icon">
-        </a>
-        <a href="home.html" class="nav-item">
-            <img src="./assets/icons/menu-icons/setting.svg" alt="" class="icon">
-        </a>
-    </div>
+	<div class="bottom-nav" id="footer">
+		<a href="map.html" class="nav-item active">
+			<img src="./assets/icons/menu-icons/compass.svg" alt="Map" class="icon">
+		</a>
+		<a href="scheduling.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/calendar.svg" alt="Schedule" class="icon">
+		</a>
+		<a href="profile.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/user.svg" alt="Profile" class="icon">
+		</a>
+		<a href="index.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/setting.svg" alt="Home & Settings" class="icon">
+		</a>
+	</div>
 
     
 
