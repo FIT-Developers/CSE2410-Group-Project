@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const today = new Date().getDay(); 
 
     
-    // Dictionary mapping the day number to your HTML IDs
+    // Dictionary mapping the day number to the HTML IDs
     const dayMap = {
         1: 'mon',
         2: 'tues',
