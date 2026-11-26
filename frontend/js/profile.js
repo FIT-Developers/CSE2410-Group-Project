@@ -47,16 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Logout & Theme
 	const logoutBtn      = document.getElementById("logout-btn");
 	const themeToggleBtn = document.getElementById("theme-toggle-btn");
-
 	let authMode = "login";
 
-
-	// --- Search Backdrop & Auto-Close when Bottom Nav Clicked ---
+	// Search Backdrop & Auto-Close when Bottom Nav Clicked
 	const searchPopup    = document.getElementById("search-popup");
 	const searchBar      = document.getElementById("search-bar");
 	const searchCancel   = document.getElementById("cancel");
 	const searchBackdrop = document.getElementById("search-backdrop");
 	const bottomNavItems = document.querySelectorAll(".bottom-nav .nav-item");
+
+	// Schedule Overlay
+	const scheduleOverlay  = document.getElementById("schedule-overlay");
+	const navScheduleBtn   = document.getElementById("nav-schedule-btn");
+	const closeScheduleBtn = document.getElementById("close-schedule-btn");
 
 	// Close Search
 	function closeSearchUI() {
@@ -94,18 +97,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// --- Profile Overlay Controls ---
 	function openProfileOverlay() {
+		closeScheduleOverlay();
+
+		if (!profileOverlay) return;
+
 		profileOverlay.classList.add("open");
 		profileOverlay.setAttribute("aria-hidden", "false");
+
 		if (navProfileBtn) navProfileBtn.classList.add("active");
 		if (navMapBtn) navMapBtn.classList.remove("active");
 	}
 
 	function closeProfileOverlay() {
 		closeDrawer();
+
+		if (!profileOverlay) return;
+
 		profileOverlay.classList.remove("open");
 		profileOverlay.setAttribute("aria-hidden", "true");
+
 		if (navProfileBtn) navProfileBtn.classList.remove("active");
-		if (navMapBtn) navMapBtn.classList.add("active");
+
+		if (navMapBtn && (!scheduleOverlay || !scheduleOverlay.classList.contains("open"))) {
+			navMapBtn.classList.add("active");
+		}
 	}
 
 	if (navProfileBtn) {
@@ -120,9 +135,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	if (navMapBtn) {
 		navMapBtn.addEventListener("click", (event) => {
-			if (profileOverlay.classList.contains("open")) {
+			const profileOpen  = profileOverlay && profileOverlay.classList.contains("open");
+			const scheduleOpen = scheduleOverlay && scheduleOverlay.classList.contains("open");
+
+			if (profileOpen || scheduleOpen) {
 				event.preventDefault();
 				closeProfileOverlay();
+				closeScheduleOverlay();
 			}
 		});
 	}
@@ -135,6 +154,46 @@ document.addEventListener("DOMContentLoaded", () => {
 			closeProfileOverlay();
 		}
 	});
+
+	// --- Schedule Overlay Controls ---
+	function openScheduleOverlay() {
+		closeProfileOverlay();
+		if (!scheduleOverlay) return;
+		scheduleOverlay.classList.add("open");
+		scheduleOverlay.setAttribute("aria-hidden", "false");
+		if (navScheduleBtn) navScheduleBtn.classList.add("active");
+		if (navMapBtn) navMapBtn.classList.remove("active");
+	}
+
+	function closeScheduleOverlay() {
+		if (!scheduleOverlay) return;
+		scheduleOverlay.classList.remove("open");
+		scheduleOverlay.setAttribute("aria-hidden", "true");
+		if (navScheduleBtn) navScheduleBtn.classList.remove("active");
+		if (navMapBtn && (!profileOverlay || !profileOverlay.classList.contains("open"))) {
+			navMapBtn.classList.add("active");
+		}
+	}
+
+	if (navScheduleBtn) {
+		navScheduleBtn.addEventListener("click", () => {
+			if (scheduleOverlay.classList.contains("open")) {
+				closeScheduleOverlay();
+			} else {
+				openScheduleOverlay();
+			}
+		});
+	}
+
+	if (closeScheduleBtn) closeScheduleBtn.addEventListener("click", closeScheduleOverlay);
+
+	if (scheduleOverlay) {
+		scheduleOverlay.addEventListener("click", (event) => {
+			if (event.target === scheduleOverlay) {
+				closeScheduleOverlay();
+			}
+		});
+	}
 
 	// --- Drawer Controls ---
 	function setAuthMode(mode) {
