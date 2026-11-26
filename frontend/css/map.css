@@ -5,7 +5,7 @@ body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-    background-color: #000000;
+    background-color: var(--black-color);
     /* CSS Font stuff to help match it with the renders from figma */
     font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 400 !important;
@@ -16,14 +16,18 @@ body {
 }
 /* Colors to use for the frontend design */
 :root {
-    --accent-color: #B65050;
-    --base-color: #9F9F9F;
-    --light-color: #E7E7E7;
+    --accent-color: #B65050; /* #B65050 */
+    --base-color: #9F9F9F; /* #9F9F9F */
+    --light-color: #E7E7E7; /* #E7E7E7 */
+    --white-color: #ffffff; /* #000000 */
+    --black-color: #000000; /* #000000 */
 
     /* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
     /* https: //codepen.io/sosuke/pen/Pjoqqp */
     --accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
+    /* invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%) */
     --base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
+    /* invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%) */
     --light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
     --white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
     --black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
@@ -40,7 +44,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #ffffff;
+    background: var(--white-color);
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
     z-index: 2000;
@@ -106,6 +110,11 @@ body {
     transform: scale(1.6);
     transition: transform 0.2s ease-in-out;
 }
+/* Used for checking if a active exists change all non actives to be smaller and transparent */
+body:has(.custom-pin.active-pin) .custom-pin:not(.active-pin) svg {
+    opacity: 0.3;
+    transform: scale(0.8);
+}
 
 
 
@@ -123,12 +132,17 @@ div #container {
     bottom:0px;
     width:100%;
     height:85px;
-    background-color: #ffffff;
+    background-color: var(--white-color);
     border-radius: 0px;
     display:flex;
     justify-content: space-around;
     align-items: center;
     padding: 0 0px;
+} /* Fixes a crucial bug of having the mobile keyboard push the bottom nav up */
+@media (max-height: 300px) {
+    .bottom-nav {
+        display: none;
+    }
 }
 .bottom-nav .nav-item {
     display:flex;
@@ -157,6 +171,8 @@ div #container {
 }
 
 
+
+
 /* =====> Location Button <===== */
 .active-location-btn {
     z-index: 1002;
@@ -172,6 +188,8 @@ div #container {
     align-items: center;
     padding: 0 0px;
     filter:drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+
+    cursor: pointer;
 }
 .active-location-btn .icon {
     width: 2rem;
@@ -183,95 +201,56 @@ div #container {
 
 
 /* =====> Filter Button + Dropdown <===== */
-.filter-container {
+.crosswalk-container {
     z-index: 1003;
     position: fixed;
     top: 25px;
     right: 20px;
     width: 47px;
 }
-.filter-btn {
+.crosswalk-icon {
     position: relative;
     z-index: 1002;
     width: 47px;
     height: 47px;
-    background-color: white;
+    background-color: var(--white-color);
     border-radius: 100px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 0 0px;
 
-    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));
 }
-.filter-btn .icon {
-    width: 32px;
+.crosswalk-icon .icon {
+    width: 28px;
     margin-top: 2px;
     filter: var(--accent-color-filter);
 }
-/* Swaps the colors when btn active */
-.filter-container.active .filter-btn {
-    background-color: var(--accent-color);
-}
-.filter-container.active .filter-btn .icon {
-    filter: brightness(0) invert(1);
-}
-.dropdown-slot {
-    /* Position */
+
+.progress-ring {
     position: absolute;
-    top: -3px;
-    left: -3px;
-    width: 110%;
-    margin-top: 0px;
-    /* Border */
-    border-radius: 50px;
-    box-sizing: border-box;
-    border: 4px solid var(--accent-color);
-    /* Visuals */
-    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2));
-    background-color: #ffffff;
-    /* Contents */
-    padding: 54px 0 6px 0;
-    gap: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Animation */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(0px);
-    transition: opacity 0.15s ease, transform 0.15s ease, max-height 0.2s ease, visibility 0.15s;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    overflow: visible;
+    pointer-events: none;
 }
-/* --- ACTIVE DROPDOWN STATE --- */
-.filter-container.active .dropdown-slot {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    max-height: 300px;
+.progress-ring circle {
+    fill: none;
+    stroke-width: 10;
 }
-/* 5. Dropdown Menu Items */
-.icon-item {
-    width: 36px;
-    aspect-ratio: 1 / 1;
-    border-radius: 50px;
-    background-color: var(--light-color);
-    cursor: pointer;
-    /* Align text */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Text */
-    font-variation-settings: 'wght' 500;
-    font-size: 20px;
-    color:#000000;
+.progress-ring .ring-arc {
+    stroke: var(--accent-color);
+    /* Your active arc color */
+    stroke-linecap: round;
+
+    /* Works with pathLength="100" and --progress from 0 to 1 */
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--progress, 0));
+    transition: stroke-dashoffset 0.2s linear;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
 }
-.icon-item:active {
-    transform: scale(0.92); /* Change size when clicked */
-}
-.icon-item.active-filter {
-    background-color: var(--accent-color);
-    color: #FFFFFF;
-}
+
 
 
 
@@ -283,10 +262,10 @@ div #container {
     top: 25px;
     left: 20px;
     height: 35px;
-    right: 20px;
+    right: 80px;
     display: flex;
     align-items: center;
-    background-color: #ffffff;
+    background-color: var(--white-color);
     border-radius: 50px;
     padding: 6px 6px;
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
@@ -301,7 +280,7 @@ div #container {
     outline: none;
     background: transparent;
     font-size: 22px;
-    color: #000000;
+    color: var(--black-color);
     width:calc(100% - 82px);
 
     /* Weird font issues, so set it manually */
@@ -313,6 +292,165 @@ div #container {
 .search-bar .input::placeholder {
     color: var(--base-color);
 }
+
+
+
+
+
+
+/* ======> Search Popup <====== */
+.search-bar.show {
+    z-index: 2001;
+    filter: none;
+    background-color: var(--light-color);
+}
+.search-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white-color);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    z-index: 2000;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
+
+    /* Inside content, overall padding of popup */
+    padding: 21px 16px 20px 18px;
+    /* Top, Right, Bottom, Left */
+    box-sizing: border-box;
+
+    /* Have it hidden off screen */
+    transform: translateY(-110%);
+    transition: transform 0s
+}
+.search-popup.open {
+    transform: translateY(0);
+}
+.search-popup .close-container {
+    width: fit-content;
+    margin-left: auto;
+}
+.search-popup .close-container .icon {
+    cursor: pointer;
+    width: 55px;
+    height: auto;
+    filter: var(--accent-color-filter);
+}
+.break {
+    margin-top: 12px;
+    width: 85%;
+    border: none;
+    height: 2px;
+    background-color: var(--light-color);
+}
+
+/* ====> Types or categories of markers selection <== */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 14px 4px 4px;
+    /* Top, Right, Bottom, Left */
+    background-color: var(--light-color);
+    border-radius: 50px;
+    cursor: pointer;
+}
+.pill .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.pill .icon {
+    width: 22px;
+    height: 22px;
+    translate: 0px 1px;
+    filter: brightness(0) invert(1); /*Turns it white*/
+}
+.pill h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-variation-settings: 'wght' 400;
+}
+
+/* ==> Recents list <== */
+.search-popup h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-variation-settings: 'wght' 400;
+}
+.recents {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px 14px 4px 4px;
+    /* Top, Right, Bottom, Left */
+}
+.recents .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.recents .icon {
+    width: 22px;
+    height: 22px;
+    translate: 0px 1px;
+    filter: brightness(0) invert(1);
+    /*Turns it white*/
+}
+.recents text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.recents h1 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--black-color);
+}
+.recents h2 {
+    margin: 0;
+    font-size: .8rem;
+    color: var(--base-color);
+}
+
+
+
+
+
+
+/* =====> Weather Showcase <===== */
+.weather-showcase {
+    z-index: 1002;
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 47px;
+    height: 47px;
+    background-color: var(--white-color);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0px;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));
+}
+
+.weather-showcase .icon {
+    width: 2rem;
+    filter: var(--accent-color-filter);
+}
+
 
 
 
@@ -340,11 +478,11 @@ div #container {
 }
 #directions {
     background-color: var(--accent-color);
-    color:#ffffff;
+    color:var(--white-color);
 }
 #website {
     background-color: var(--light-color);
-    color:#000000;
+    color:var(--black-color);
 }
 #nav {
     filter: var(--white-filter)
@@ -362,17 +500,10 @@ div #container {
 .custom-pin {
     /* Adding a drop shadow to those custom pins to make sure they can be visible (css documentation helps for formatting) */
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
-} /* Animation for easing and outing of the parking area */
-.parking_7 {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-.parking_7.active {
-    opacity: 1;
-    border-radius: 10;
 }
 .campus_mask { /* Added a blur and drop shadow because the lines felt too strict */
     filter: blur(3px) drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.7));
+    cursor: grab;
 }
 .user-pin {
     filter: drop-shadow(0px 8px 8px rgba(182, 80, 80, 0.6));
@@ -388,5 +519,111 @@ div #container {
 @media screen and (max-width: 768px) {
     .custom-pin svg {
         transform: scale(1.1);
+    }
+}
+
+
+
+
+/* Card Container */
+.search-card-container {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 420px;
+    background: var(--white-color);
+    border-radius: 28px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header Row */
+.search-bar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    background: #f1f2f6;
+    border-radius: 20px;
+    padding: 8px 14px;
+}
+
+.pin-icon {
+    width: 18px;
+    height: 18px;
+    filter: invert(33%) sepia(85%) saturate(1450%) hue-rotate(335deg);
+}
+
+/* Fix for HDR images making white look bad */
+img {
+    dynamic-range-limit: standard;
+}
+
+
+/* ====> Desktop View <==== */
+@media screen and (min-width: 768px) {
+    .search-bar {
+        top: 25px;
+        left: calc(45vw - 190px);
+        right: auto;
+        width: 380px;
+        height: 35px;
+    }
+    .crosswalk-container {
+        top: 25px;
+        left: calc(45vw + 216px);
+    }
+
+    .weather-showcase {
+        top: 25px;
+        right: auto;
+        left: calc(45vw + 279px);
+    }
+    .search-popup {
+        top: 0;
+        left: calc(45vw - 210px);
+        width: 560px;
+    }
+    body:has(.search-popup.open) .weather-showcase {
+        display: none;
+    }
+    body:has(.search-popup.open) .search-bar {
+        width: calc(380px + 16px + 47px);
+    }
+    .bottom-nav {
+        bottom: 25px;
+        width: calc(380px + 94px + 32px);
+        height: 55px;
+        border-radius: 50px;
+        left: calc(45vw - 190px);
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
+    }
+    .bottom-nav .nav-item.active::before {
+        width: 88%;
+        height: 110%;
+    }
+    .bottom-nav .nav-item .icon {
+        width: 38px;
+    }
+    .marker-popup {
+        width: calc(380px + 94px + 32px);
+        left: calc(45vw - 190px);
+        bottom: 25px;
+        border-radius: 30px;
+    }
+    .active-location-btn {
+        left: calc(45vw + 330px);
+        bottom: 25px;
     }
 }

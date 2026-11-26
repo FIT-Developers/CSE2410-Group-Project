@@ -32,7 +32,26 @@ form.addEventListener('submit', async function (event) {
         return;
     }
 
-    window.location.href = '/html/login.html';
+    try {
+    const loginResponse = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            [csrf.headerName]: csrf.token
+        },
+        body: data
+    });
+
+    if (!loginResponse.ok) {
+        errorMessage.textContent =
+            'Account created, but automatic login failed. Please use the login page.';
+        return;
+    }
+
+    window.location.href = 'html/map.html';
+} catch (error) {
+    errorMessage.textContent =
+        'Account created, but automatic login could not finish. Please use the login page.';
+}
 } catch (error) {
     errorMessage.textContent = 'Could not complete signup. Please try again.';
 }

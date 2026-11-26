@@ -50,13 +50,13 @@
   {
     "id": "Parking_7",
     "tooltip": "Parking Lot 7",
-    "lat": 28.068709965835726,
-    "lng": -80.62516521548011,
+    "lat": 28.068760589068464,
+    "lng": -80.62518188391294,
     "color": "#606069",
     "icon": "parking.svg",
     "type": "Parking",
     "img1": "./assets/images/Parking7_Img1.jpg",
-    "img2":"",
+    "img2":"./assets/images/Parking-7-img2.jpg",
     "web":"https://www.fit.edu/security/parking/"
   },
   {
@@ -79,8 +79,8 @@
     "color": "#9b53b9",
     "icon": "masks.svg",
     "type": "Theater",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Pantherium-img1.jpg",
+    "img2":"./assets/images/Pantherium-img2.jpg",
     "web":""
   },
   {
@@ -91,8 +91,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Denius-img1.jpg",
+    "img2":"./assets/images/Denius-img2.jpg",
     "web":""
   },
   {
@@ -103,8 +103,8 @@
     "color": "#7b2f1c",
     "icon": "bag.svg",
     "type": "Store",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Bookstore-img1.jpg",
+    "img2":"./assets/images/Bookstore-img2.jpg",
     "web":""
   },
   {
@@ -115,8 +115,8 @@
     "color": "#65abcc",
     "icon": "shield.svg",
     "type": "Admin",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Keuper-img1.jpg",
+    "img2":"./assets/images/Keuper-img2.jpg",
     "web":""
   },
   {
@@ -127,8 +127,8 @@
     "color": "#c0ca85",
     "icon": "fork.svg",
     "type": "Food",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Dining-img1.jpg",
+    "img2":"./assets/images/Dining-img2.jpg",
     "web":""
   },
   {
@@ -139,8 +139,8 @@
     "color": "#05487f",
     "icon": "water.svg",
     "type": "Pool",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Aquatic-img1.jpg",
+    "img2":"./assets/images/Aquatic-img2.jpg",
     "web":""
   },
   {
@@ -151,8 +151,8 @@
     "color": "#1c1b1b",
     "icon": "dumbell.svg",
     "type": "Gym",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Clemente-img1.jpg",
+    "img2":"./assets/images/Clemente-img2.jpg",
     "web":""
   },
   {
@@ -163,8 +163,8 @@
     "color": "#4b6955",
     "icon": "gas.svg",
     "type": "Gas",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Mobil-img1.jpg",
+    "img2":"./assets/images/Mobil-img2.jpg",
     "web":""
   },
   {
@@ -175,8 +175,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Olin-img1.jpg",
+    "img2":"./assets/images/Olin-img2.jpg",
     "web":""
   },
   {
@@ -187,8 +187,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Life-img1.jpg",
+    "img2":"./assets/images/Life-img2.jpg",
     "web":""
   },
   {
@@ -199,8 +199,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Physical-img1.jpg",
+    "img2":"./assets/images/Physical-img2.jpg",
     "web":""
   },
   {
@@ -211,8 +211,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Bioengineering-img1.jpg",
+    "img2":"./assets/images/Bioengineering-img2.jpg",
     "web":""
   },
   {
@@ -223,8 +223,8 @@
     "color": "#4cdd9e",
     "icon": "house.svg",
     "type": "Dorm",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Campbell-img1.jpg",
+    "img2":"./assets/images/Campbell-img2.jpg",
     "web":"https://www.fit.edu/housing/"
   },
   {
@@ -235,20 +235,20 @@
     "color": "#4cdd9e",
     "icon": "house.svg",
     "type": "Dorm",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Evans-img1.jpg",
+    "img2":"./assets/images/Evans-img2.jpg",
     "web":"https://www.fit.edu/housing/"
   },
   {
-    "id": "Grimson",
-    "tooltip": "Grimson Hall",
+    "id": "Grimsson",
+    "tooltip": "Grimsson Hall",
     "lat": 28.067392,
     "lng": -80.623619,
     "color": "#4cdd9e",
     "icon": "house.svg",
     "type": "Dorm",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Grissom-img1.jpg",
+    "img2":"./assets/images/Grissom-img2.jpg",
     "web":"https://www.fit.edu/housing/"
   },
   {
@@ -259,8 +259,8 @@
     "color": "#4cdd9e",
     "icon": "house.svg",
     "type": "Dorm",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Shaw-img1.jpg",
+    "img2":"./assets/images/Shaw-img2.jpg",
     "web":"https://www.fit.edu/housing/"
   },
   {
@@ -271,8 +271,8 @@
     "color": "#4cdd9e",
     "icon": "house.svg",
     "type": "Dorm",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Wood-img1.jpg",
+    "img2":"./assets/images/Wood-img2.jpg",
     "web":""
   },
   {
@@ -283,8 +283,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/L3-Science-img1.jpg",
+    "img2":"./assets/images/L3-Science-img2.jpg",
     "web":""
 
   },
@@ -296,8 +296,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Crawford-img1.jpg",
+    "img2":"./assets/images/Crawford-img2.jpg",
     "web":""
   },
   {
@@ -308,8 +308,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Quad-404-img1.jpg",
+    "img2":"./assets/images/Quad-404-img2.jpg",
     "web":""
   },
   {
@@ -320,8 +320,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Quad-403-img1.jpg",
+    "img2":"./assets/images/Quad-403-img2.jpg",
     "web":""
   },
   {
@@ -332,8 +332,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Quad-402-img1.jpg",
+    "img2":"./assets/images/Quad-402-img2.jpg",
     "web":""
   },
   {
@@ -344,8 +344,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Quad-407-img1.jpg",
+    "img2":"./assets/images/Quad-407-img2.jpg",
     "web":""
   },
   {
@@ -356,8 +356,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Quad-406-img1.jpg",
+    "img2":"./assets/images/Quad-406-img2.jpg",
     "web":""
   },
   {
@@ -368,8 +368,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Quad-405-img1.jpg",
+    "img2":"./assets/images/Quad-405-img2.jpg",
     "web":""
   },
   {
@@ -380,8 +380,8 @@
     "color": "#65abcc",
     "icon": "shield.svg",
     "type": "Admin",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Miller-img1.jpg",
+    "img2":"./assets/images/Miller-img2.jpg",
     "web":""
   },
   {
@@ -392,8 +392,8 @@
     "color": "#c5a336",
     "icon": "grad_cap.svg",
     "type": "Facility",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Link-img1.jpg",
+    "img2":"./assets/images/Link-img2.jpg",
     "web":""
   },
   {
@@ -404,8 +404,8 @@
     "color": "#9b53b9",
     "icon": "masks.svg",
     "type": "Theater",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Gleason-img1.jpg",
+    "img2":"./assets/images/Gleason-img2.jpg",
     "web":""
   },
   {
@@ -416,8 +416,8 @@
     "color": "#e59ba8",
     "icon": "bell.svg",
     "type": "Service",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/WFIT-img1.jpg",
+    "img2":"./assets/images/WFIT-img2.jpg",
     "web":""
   },
   {
@@ -428,8 +428,8 @@
     "color": "#367b45",
     "icon": "trophy.svg",
     "type": "Sport",
-    "img1": "",
-    "img2":"",
+    "img1": "./assets/images/Ruth-img1.jpg",
+    "img2":"./assets/images/Ruth-img2.jpg",
     "web":""
   },
   {
@@ -515,7 +515,689 @@
     "img1": "./assets/images/CV_img2.jpg",
     "img2": "./assets/images/CV_Img1.jpg",
     "web": "https://www.fit.edu/housing/"
-  }
-
+  },
+  { "id" : "SSSC", 
+    "tooltip": "Student Support and Success Center",
+    "lat": 28.061614,
+    "lng": -80.622520,
+    "color": "#e59ba8",
+    "icon": "bell.svg",
+    "type": "Service",
+    "img1": "./assets/images/SSSC_img1.jpg",
+    "img2": "./assets/images/SSSC_img2.jpg",
+    "web": "https://www.fit.edu/student-success-support-center/"
+  },
+  {
+  "id": "SG_A",
+  "tooltip": "Southgate Building A",
+  "lat": 28.067695,
+  "lng": -80.620641,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_B",
+  "tooltip": "Southgate Building B",
+  "lat": 28.067152,
+  "lng": -80.620731,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_C",
+  "tooltip": "Southgate Building C",
+  "lat": 28.067049,
+  "lng": -80.620183,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_D",
+  "tooltip": "Southgate Building D",
+  "lat": 28.066631,
+  "lng": -80.620463,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_E",
+  "tooltip": "Southgate Building E",
+  "lat": 28.066789,
+  "lng": -80.621019,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_H",
+  "tooltip": "Southgate Building H",
+  "lat": 28.066047,
+  "lng": -80.620453,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_K",
+  "tooltip": "Southgate Building K",
+  "lat": 28.065782,
+  "lng": -80.620439,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_L",
+  "tooltip": "Southgate Building L",
+  "lat": 28.065450,
+  "lng": -80.620458,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+},
+{
+  "id": "SG_M",
+  "tooltip": "Southgate Building M",
+  "lat": 28.065812,
+  "lng": -80.621113,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Southgate_Img1.jpg",
+  "img2": "./assets/images/Southgate_Img2.jpg",
+  "web": "https://www.fit.edu/housing/"
+}, 
+{
+  "id": "Security",
+  "tooltip": "Security Welcome Center",
+  "lat": 28.061628,
+  "lng": -80.621954,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Admin",
+  "img1": "./assets/images/Security-img1.jpg",
+  "img2": "./assets/images/Security-img2.jpg",
+  "web": "https://www.fit.edu/security/"
+},
+{
+  "id": "Parking_25",
+  "tooltip": "Parking Lot 25",
+  "lat": 28.063344,
+  "lng": -80.621892,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-25-img1.jpg",
+  "img2": "./assets/images/Parking-25-img2.jpg",
+  "web": "https://www.fit.edu/security/parking/"
+},
+{
+  "id": "L3_Common",
+  "tooltip": "L3Harris Commons",
+  "lat": 28.063247,
+  "lng": -80.620827,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Admin",
+  "img1": "./assets/images/L3common_img1.jpg",
+  "img2": "./assets/images/L3common_img2.png",
+  "web": "needurl"
+},
+{
+  "id": "Sunrise",
+  "tooltip": "Sunrise Center",
+  "lat": 28.062864,
+  "lng": -80.622059,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Admin",
+  "img1": "./assets/images/Sunrise-img1.jpg",
+  "img2": "./assets/images/Sunrise-img2.jpg",
+  "web": "https://www.fit.edu/health/"
+},
+{
+  "id": "Scott_Center",
+  "tooltip": "The Scott Center for Autism Treatment",
+  "lat": 28.060923,
+  "lng": -80.622002,
+  "color": "#c5a336",
+  "icon": "grad_cap.svg",
+  "type": "Facility",
+  "img1": "./assets/images/Scott_Center_img1.jpg",
+  "img2": "./assets/images/Scott_Center_img2.jpg",
+  "web": "https://www.fit.edu/psychology/faculty-and-research/centers-and-institutes/the-scott-center-for-autism-treatment/"
+},
+{
+  "id": "Mail",
+  "tooltip": "Mail Center",
+  "lat": 28.060847,
+  "lng": -80.622828,
+  "color": "#52257e",
+  "icon": "mail.svg",
+  "type": "Mail",
+  "img1": "./assets/images/Mail-Operations-img1.jpg",
+  "img2": "./assets/images/Mail-Operations-img2.jpg",
+  "web": "https://www.fit.edu/asset-management/mailing-and-shipping-services/"
+},
+{
+  "id": "Machine_Shp",
+  "tooltip": "Machine Shop",
+  "lat": 28.060764,
+  "lng": -80.623528,
+  "color": "#7e4b30",
+  "icon": "tools.svg",
+  "type": "Workshop",
+  "img1": "./assets/images/Machine_Shop_img1.png",
+  "img2": "./assets/images/Machine_Shop_img2.png",
+  "web": "https://www.fit.edu/machine-shop/"
+},
+{
+  "id": "L3_Design",
+  "tooltip": "L3Harris Student Design Center",
+  "lat": 28.060762,
+  "lng": -80.624121,
+  "color": "#7e4b30",
+  "icon": "tools.svg",
+  "type": "Workshop",
+  "img1": "./assets/images/Student_Design_img1.jpg",
+  "img2": "./assets/images/Student_Design_img2.jpg",
+  "web": "https://www.fit.edu/machine-shop/"
+},
+{
+  "id": "Varsity",
+  "tooltip": "Anthony J. Catanese Varsity Training Center",
+  "lat": 28.060094,
+  "lng": -80.625256,
+  "color": "#1c1b1b",
+  "icon": "dumbell.svg",
+  "type": "Gym",
+  "img1": "./assets/images/Varisty_img1.jpg",
+  "img2": "./assets/images/Varisty_img2.jpg",
+  "web": "https://floridatechsports.com/facilities/varsity-training-center/1302"
+},
+{
+  "id": "Panther_Field",
+  "tooltip": "Panther Field",
+  "lat": 28.059382,
+  "lng": -80.625114,
+  "color": "#367b45",
+  "icon": "trophy.svg",
+  "type": "Sport",
+  "img1": "./assets/images/Panther-Field-img1.jpg",
+  "img2": "./assets/images/Panther-Field-img2.jpg",
+  "web": "https://www.fit.edu/machine-shop/"
+},
+{
+  "id": "Andy_Field",
+  "tooltip": "Andy Seminick Les Hall Baseball Field",
+  "lat": 28.059394,
+  "lng": -80.624057,
+  "color": "#367b45",
+  "icon": "trophy.svg",
+  "type": "Sport",
+  "img1": "./assets/images/Andy-img1.jpg",
+  "img2": "./assets/images/Andy-img2.jpg",
+  "web": "https://floridatechsports.com/facilities/andy-seminick-les-hall-field/5"
+},
+{
+  "id": "Nancy_Field",
+  "tooltip": "Nancy Bottge Varsity Softball Field",
+  "lat": 28.058523,
+  "lng": -80.625033,
+  "color": "#367b45",
+  "icon": "trophy.svg",
+  "type": "Sport",
+  "img1": "./assets/images/Nancy-img1.jpg",
+  "img2": "./assets/images/Nancy-img2.jpg",
+  "web": "https://floridatechsports.com/facilities/nancy-bottge-field/3"
+},
+{
+  "id": "Rick_Field",
+  "tooltip": "Rick Stottler Soccer Field",
+  "lat": 28.058357,
+  "lng": -80.623885,
+  "color": "#367b45",
+  "icon": "trophy.svg",
+  "type": "Sport",
+  "img1": "./assets/images/Rick-img1.jpg",
+  "img2": "./assets/images/Rick-img2.jpg",
+  "web": "https://floridatechsports.com/facilities/rick-stottler-field/6"
+},
+{
+  "id": "Hartley_Hall",
+  "tooltip": "Hartley Hall",
+  "lat": 28.059375,
+  "lng": -80.622708,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Hartley-img1.jpg",
+  "img2": "./assets/images/Hartley-img2.jpg",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "Building_C",
+  "tooltip": "Building C",
+  "lat": 28.058260,
+  "lng": -80.622292,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Building-C-img1.jpg",
+  "img2": "./assets/images/Building-C-img2.jpg",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "Farmer_Hall",
+  "tooltip": "Farmer Hall",
+  "lat": 28.058814,
+  "lng": -80.622509,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Farmer-img1.jpg",
+  "img2": "./assets/images/Farmer-img2.jpg",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "All_Faith",
+  "tooltip": "All Faiths Center",
+  "lat": 28.060172,
+  "lng": -80.623896,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/Faith-img1.jpg",
+  "img2": "./assets/images/Faith-img2.jpg",
+  "web": "https://www.fit.edu/spiritual-life//"
+},
+{
+  "id": "Mary_Star",
+  "tooltip": "Mary Star of the Sea Newman Hall",
+  "lat": 28.059398755713705,
+  "lng": -80.62039068082252,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Mary-img1.jpg",
+  "img2": "./assets/images/Mary-img2.jpg",
+  "web": "https://www.fit.edu/reslife/residence-halls/"
+},
+{
+  "id": "Frueauff_Building",
+  "tooltip": "Frueauff Energy Research Building",
+  "lat": 28.065138,
+  "lng": -80.621852,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/Frueauff-img1.jpg",
+  "img2": "./assets/images/Frueauff-img2.jpg",
+  "web": "https://news.fit.edu/archive/the-secret-history-of-the-frueauff-energy-building/"
+},
+{
+  "id": "Sheppard_Building",
+  "tooltip": "Sheppard Building",
+  "lat": 28.065282,
+  "lng": -80.622402,
+  "color": "#c5a336",
+  "icon": "grad_cap.svg",
+  "type": "Facility",
+  "img1": "./assets/images/Sheppard-img1.jpg",
+  "img2": "./assets/images/Sheppard-img2.jpg",
+  "web": "https://www.fit.edu/university-events-and-protocol//venues-and-campus-facilities/shephard-building/"
+},
+{
+  "id": "FIT_Work",
+  "tooltip": "FIT Work Building",
+  "lat": 28.065024,
+  "lng": -80.624430,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Admin",
+  "img1": "./assets/images/Work-img1.jpg",
+  "img2": "./assets/images/Work-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Alumni_Center",
+  "tooltip": "Alumni Center",
+  "lat": 28.070030,
+  "lng": -80.625170,
+  "color": "#65abcc",
+  "icon": "shield.svg",
+  "type": "Admin",
+  "img1": "./assets/images/Alumni-img1.jpg",
+  "img2": "./assets/images/Alumni-img2.jpg",
+  "web": "https://www.fit.edu/alumni-and-giving/"
+},
+{
+  "id": "Holzer_Health",
+  "tooltip": "Holzer Health Center",
+  "lat": 28.064371,
+  "lng": -80.625358,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/Holzer-img1.jpg",
+  "img2": "./assets/images/Holzer-img2.jpg",
+  "web": ""
+},
+{
+  "id": "CAPS_Counseling",
+  "tooltip": "FIT CAPS Counseling Center",
+  "lat": 28.064139,
+  "lng": -80.625438,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/CAPS-img1.jpg",
+  "img2": "./assets/images/CAPS-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Music_Studio",
+  "tooltip": "FIT Music Program Studios",
+  "lat": 28.064113,
+  "lng": -80.625870,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/Music-img1.jpg",
+  "img2": "./assets/images/Music-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Crismon_Crossing",
+  "tooltip": "Crimson Crossing",
+  "lat": 28.064691,
+  "lng": -80.620648,
+  "color": "#4cdd9e",
+  "icon": "house.svg",
+  "type": "Dorm",
+  "img1": "./assets/images/Crimson-img1.jpg",
+  "img2": "./assets/images/Crimson-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Firehouse",
+  "tooltip": "Firehouse Subs",
+  "lat": 28.066613,
+  "lng": -80.623553,
+  "color": "#c0ca85",
+  "icon": "fork.svg",
+  "type": "Food",
+  "img1": "./assets/images/Firehouse-img1.jpg",
+  "img2": "./assets/images/Firehouse-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Einstein_Bros",
+  "tooltip": "Einstein Bros. Bagels",
+  "lat": 28.066624,
+  "lng": -80.623748,
+  "color": "#c0ca85",
+  "icon": "fork.svg",
+  "type": "Food",
+  "img1": "./assets/images/Einstein-img1.jpg",
+  "img2": "./assets/images/Einstein-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_10",
+  "tooltip": "Parking Lot 10",
+  "lat": 28.065060,
+  "lng": -80.625309,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-10-img1.jpg",
+  "img2": "./assets/images/Parking-10-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_16",
+  "tooltip": "Parking Lot 16",
+  "lat": 28.066797,
+  "lng": -80.621672,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-16-img1.jpg",
+  "img2": "./assets/images/Parking-16-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_15",
+  "tooltip": "Parking Lot 15",
+  "lat": 28.064336,
+  "lng": -80.621694,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-15-img1.jpg",
+  "img2": "./assets/images/Parking-15-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_26",
+  "tooltip": "Parking Lot 26",
+  "lat": 28.063351,
+  "lng": -80.620267,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-26-img1.jpg",
+  "img2": "./assets/images/Parking-26-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_17",
+  "tooltip": "Parking Lot 17",
+  "lat": 28.062859,
+  "lng": -80.623308,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-17-img1.jpg",
+  "img2": "./assets/images/Parking-17-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_Complex",
+  "tooltip": "Panther Parking Complex",
+  "lat": 28.062310,
+  "lng": -80.622118,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-Complex-img1.jpg",
+  "img2": "./assets/images/Parking-Complex-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_20",
+  "tooltip": "Parking Lot 20",
+  "lat": 28.061372,
+  "lng": -80.624317,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-20-img1.jpg",
+  "img2": "./assets/images/Parking-20-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_28",
+  "tooltip": "Parking Lot 28",
+  "lat": 28.060397,
+  "lng": -80.624974,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-28-img1.jpg",
+  "img2": "./assets/images/Parking-28-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_Varisty",
+  "tooltip": "Parking Varsity Grass Lot",
+  "lat": 28.060594,
+  "lng": -80.624695,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-Grass-img1.jpg",
+  "img2": "./assets/images/Parking-Grass-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_6",
+  "tooltip": "Parking Lot 6",
+  "lat": 28.068731,
+  "lng": -80.624169,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-6-img1.jpg",
+  "img2": "./assets/images/Parking-6-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_9",
+  "tooltip": "Parking Lot 9",
+  "lat": 28.067218,
+  "lng": -80.625430,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-9-img1.jpg",
+  "img2": "./assets/images/Parking-9-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_23",
+  "tooltip": "Parking Lot 23",
+  "lat": 28.066324,
+  "lng": -80.620374,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-23-img1.jpg",
+  "img2": "./assets/images/Parking-23-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_22",
+  "tooltip": "Parking Lot 22",
+  "lat": 28.058729,
+  "lng": -80.622925,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Parking-22-img1.jpg",
+  "img2": "./assets/images/Parking-22-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_Overflow",
+  "tooltip": "Parking On-Campus Overflow",
+  "lat": 28.068333,
+  "lng": -80.619910,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Overflow-img1.jpg",
+  "img2": "./assets/images/Overflow-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Rathskeller",
+  "tooltip": "Rathskeller Pizza and Grill",
+  "lat": 28.067531,
+  "lng": -80.623070,
+  "color": "#c0ca85",
+  "icon": "fork.svg",
+  "type": "Food",
+  "img1": "./assets/images/Rathskeller-img1.jpg",
+  "img2": "./assets/images/Rathskeller-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Mail_Lockers",
+  "tooltip": "Amazon Lockers",
+  "lat": 28.066610,
+  "lng": -80.623853,
+  "color": "#52257e",
+  "icon": "mail.svg",
+  "type": "Mail",
+  "img1": "./assets/images/Amazon-img1.jpg",
+  "img2": "./assets/images/Amazon-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Mail_Crimson",
+  "tooltip": "Amazon Lockers Crimson Crossing",
+  "lat": 28.064421,
+  "lng": -80.621029,
+  "color": "#52257e",
+  "icon": "mail.svg",
+  "type": "Mail",
+  "img1": "./assets/images/Crimson-Mail-img1.jpg",
+  "img2": "./assets/images/Crimson-Mail-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Surf_Lab",
+  "tooltip": "Surf Mechanics Lab",
+  "lat": 28.061398,
+  "lng": -80.623209,
+  "color": "#e59ba8",
+  "icon": "bell.svg",
+  "type": "Service",
+  "img1": "./assets/images/Surf-img1.jpg",
+  "img2": "./assets/images/Surf-img2.jpg",
+  "web": ""
+},
+{
+  "id": "Parking_Mary",
+  "tooltip": "Mary Star of the Sea Parking Lot",
+  "lat": 28.059146,
+  "lng": -80.620771,
+  "color": "#606069",
+  "icon": "parking.svg",
+  "type": "Parking",
+  "img1": "./assets/images/Surf-img1.jpg",
+  "img2": "./assets/images/Surf-img2.jpg",
+  "web": ""
+}
   
 ]

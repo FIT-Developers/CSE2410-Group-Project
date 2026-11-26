@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=overlays-content">
+
+    <!-- Enable Standalone Fullscreen Mode for iOS Safari (Obtained from online sources/documentation)-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Campus Map">
+
+    <!-- Google font stuff -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <title>Campus Map</title>
+    <link rel="icon" type="svg" href="./assets/icons/menu-icons/tab-icon.svg" />
+    <!-- Leaflet's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Our CSS -->
+	<link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/map.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-boundary-canvas@1.0.0/leaflet-boundary-canvas.min.js"></script>
+    
+    
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <div class="marker-popup" id="marker-popup">
+        <div id="container">
+            <h1 id="MarkerName">Marker Name</h1>
+            <div class="popup-header-icons">
+                <img src="./assets/icons/menu-icons/bookmark.svg" alt="" class="icon" id="bookmark">
+                <img src="./assets/icons/menu-icons/x.svg" alt="" class="icon" id="close">
+            </div>
+        </div>
+        <div id="container">
+            <h2 id="TypeName">Type Name</h2><pre style="word-spacing: -0.4em;"> • </pre> 
+            <h2 id="Distance">0.0 mi</h2><pre style="word-spacing: -0.4em;"> • </pre>
+            <h2 id="TimeAway">0 min</h2>
+            <img src="./assets/icons/menu-icons/walk.svg" alt="" class="icon" id="walking">
+        </div>
+        <div id="container">
+            <h2 id="OpenStatus">Open</h2>
+            <pre style="word-spacing: -0.4em;"> • </pre>
+            <h2 id="CloseTime">Closes 7 PM</h2>
+        </div>
+        <div id="container" style="gap: 15px; margin-top: 8px">
+            <button type="button" id="directions" class="button">
+                <img src="./assets/icons/menu-icons/navigator.svg" alt="" class="icon" id="nav">
+                <span>Directions</span>
+            </button>
+            <button type = "button" id="website" class="button">
+                <img src="./assets/icons/menu-icons/send.svg" alt="" class="icon" id="send">
+                <span>Website</span>
+            </button>
+        </div>
+        <div id="container" style="gap: 20px; margin-top: 16px; overflow-x: auto">
+            <img src="./assets/images/Library1.png" alt="" class="img" id="img-1">
+            <img src="./assets/images/Library2.png" alt="" class="img" id="img-2">
+        </div>
+    </div>
+
+
+    <div class="bottom-nav" id="footer">
+        <a href="map.html" class="nav-item active">
+            <img src="./assets/icons/menu-icons/compass.svg" alt="" class="icon">
+        </a>
+        <a href="scheduling.html" class="nav-item">
+            <img src="./assets/icons/menu-icons/calendar.svg" alt="" class="icon">
+        </a>
+        <a href="home.html" class="nav-item">
+            <img src="./assets/icons/menu-icons/user.svg" alt="" class="icon">
+        </a>
+        <a href="home.html" class="nav-item">
+            <img src="./assets/icons/menu-icons/setting.svg" alt="" class="icon">
+        </a>
+    </div>
+
+    
+
+
+    <div class="active-location-btn">
+        <img src="./assets/icons/menu-icons/navigator.svg" alt="" class="icon">
+    </div>
+
+
+
+    <div class="weather-showcase">
+        <img src="./assets/icons/weather/Sunny.svg" alt="" class="icon" id="weather-icon">
+    </div>
+
+    <div class="crosswalk-container" style="--progress: 0;">
+        <div class="crosswalk-icon">
+            <img src="./assets/icons/menu-icons/walk.svg" alt="" class="icon">
+
+            <svg class="progress-ring" viewBox="0 0 100 100">
+                <circle class="ring-arc" cx="50" cy="50" r="54" pathLength="100"/>
+            </svg>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="search-bar" id="search-bar">
+        <img src="./assets/icons/menu-icons/pin.svg" alt="" class="icon">
+        <input type="text" class="input" id="input" placeholder="Search here" />
+    </div>
+
+    <div class="search-popup" id="search-popup">
+        <div class="close-container">
+            <img src="./assets/icons/menu-icons/x.svg" alt="" class="icon" id="cancel">
+        </div>
+        <div id="container" style="gap: 10px; margin-top: 5px; overflow-x: auto">
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/shield.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Admin</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/house.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Dorm</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/grad_cap.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Facility</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/fork.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Food</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/gas.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Gas</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/dumbell.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Gym</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/book.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Library</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/mail.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Mail</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/parking.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Parking</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/water.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Pool</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/bell.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Service</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/trophy.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Sport</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/bag.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Store</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/masks.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Theater</h1>
+            </div>
+            <div class="pill">
+                <div class="icon-container">
+                    <img src="./assets/icons/tools.svg" alt="" class="icon" id="icon">
+                </div>
+                <h1>Workshop</h1>
+            </div>
+        </div>
+        <hr class="break">
+        <h2 id="r-text" hidden>Recent</h2>
+
+
+        <div id="container" class="recent-container" style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 5px; overflow-x: auto;">
+
+        </div>
+    </div>
+    
+
+
+    <!-- Leaflet's JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Our JavaScript -->
+    <script src="js/map/variables.js"></script>
+    <script src="js/map/leaflet.js"></script>
+    <script src="js/map/fetches.js"></script>
+    <script src="js/map/markers.js"></script>
+    <script src="js/map/gps.js"></script>
+    <script src="js/map/search.js"></script>
+    <script src="js/map/routing.js"></script>
+
+</body>
+
+</html>

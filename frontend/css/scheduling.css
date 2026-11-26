@@ -1,0 +1,448 @@
+@import url('https://googleapis.com');
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #000000;
+    /* CSS Font stuff to help match it with the renders from figma */
+    font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400 !important;
+    font-optical-sizing: auto;
+    font-variation-settings: "wght" 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* Colors to use for the frontend design */
+:root {
+    --accent-color: #B65050;
+    --base-color: #9F9F9F;
+    --light-grey-color: #B3B3B3;
+    --light-color: #E7E7E7;
+    --light-blue-color: #6fb2ff;
+    --opacity-blue-color: #6fb2ff0f;
+
+    /* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
+    /* https://codepen.io/sosuke/pen/Pjoqqp */
+    --accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
+    --base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
+    --light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
+    --white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
+    --black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
+}
+
+
+/* =====> Bottom Nav Bar <===== */
+div #container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.bottom-nav {
+    z-index: 1002;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 85px;
+    background-color: #ffffff;
+    border-radius: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 0px;
+}
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex: 1;
+}
+.bottom-nav .nav-item .icon {
+    width: 41px;
+    filter: var(--base-color-filter);
+}
+.bottom-nav .nav-item.active {
+    filter: var(--accent-color-filter);
+}
+/* Highlight circle element */
+.bottom-nav .nav-item.active::before {
+    content: "";
+    position: absolute;
+    z-index: 1001;
+
+    width: 75%;
+    height: 140%;
+    border-radius: 100px;
+    background-color: #ffd4d446;
+}
+
+
+
+
+
+
+
+/* =====> Grid Layout <===== */
+/* Container holding the scrollable area */
+.schedule-area {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: #ffffff;
+    cursor: default;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.schedule-area::-webkit-scrollbar {
+    display: none;
+}
+.schedule-area:active {
+    cursor: grabbing;
+}
+/* The grid setup */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: 37px repeat(5, 1fr);
+    grid-template-rows: 60px 1fr;
+    min-width: max-content;
+}
+@media screen and (max-width: 768px) {
+    .schedule-grid {
+        display: grid;
+        grid-template-columns: 37px repeat(5, 28vw);
+        grid-template-rows: 60px 1fr;
+        min-width: max-content;
+    }
+}
+/* Padding corner (sets up grid) */
+.corner-cell {
+    position: sticky;
+    left: -30px;
+    width: 30px;
+    background-color: #ffffff;
+    z-index: 30;
+    
+}
+.head {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--base-color);
+    font-family: sans-serif;
+    margin-left:-5px;
+}
+.head .name {
+    font-size: 18px;
+    font-weight: 600;
+}
+.head.active {
+    color: var(--light-blue-color);
+    font-size: 20px;
+    font-weight: 700;
+}
+/* row times */
+.time-col {
+    /* Should stop the clipping */
+    padding-top: 10px;
+    position: sticky;
+    left: -40px;
+    width: 40px;
+    background-color: #ffffff;
+    z-index: 15;
+    height: 960px;
+}
+.time {
+    height: 80px;
+    font-size: 12px;
+    color: var(--light-color);
+    /* align numbers to line */
+    text-align: right;
+    padding-right: 3px;
+    transform: translateY(-8px);
+}
+/* time grid lines */
+.day-col {
+    position: relative;
+    height: 1080px;
+    box-sizing: border-box;
+
+    /* For clipping issues */
+    padding-top: 10px;
+
+    /* 2. Force background colors to respect the padding gap */
+    background-clip: content-box;
+
+    /* 3. Force background images (the lines) to start after the padding gap */
+    background-origin: content-box;
+
+    /* 4. Draw the lines normally starting at 0px */
+    background-image: repeating-linear-gradient(to bottom,
+            var(--light-color) 0px,
+            var(--light-color) 1px,
+            transparent 1px,
+            transparent 80px);
+
+    border-right: 1px solid transparent;
+}
+.day-col.active-bg {
+    background-color: var(--opacity-blue-color);
+}
+
+
+
+
+/* Add schedule button (Same code form navigator btn)*/
+.add-btn {
+    z-index: 3;
+    position: fixed;
+    bottom: 105px;
+    right: 20px;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--accent-color);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0px;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+
+    cursor: pointer;
+}
+
+.add-btn .icon {
+    width: 2rem;
+    filter: var(--white-filter);
+}
+
+
+
+
+
+
+
+/* Popup Menu */
+.marker-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    z-index: 2000;
+    padding: 20px 30px;
+    box-sizing: border-box;
+
+    /* Have it hidden off screen */
+    transform: translateY(110%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.marker-popup.open {
+    transform: translateY(0);
+}
+/* Blurring Background */
+.schedule-area.blur-active {
+    transform: scale(1.008);
+    overflow: auto;
+    filter: blur(1px) brightness(90%);
+}
+
+/* Handle Dragging */
+.marker-popup .drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 0 16px;
+    margin-top: -20px;
+    cursor: grab;
+    touch-action: none;
+}
+.drag-handle img {
+    width: 6rem;
+    pointer-events: none;
+}
+.marker-popup .drag-handle:active {
+    cursor: grabbing;
+}
+.marker-popup.dragging {
+    transition: none;
+}
+
+/* Inside text formatting for the popup */
+div #container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+div #icontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.marker-popup .label {
+    margin: 0px;
+    margin-bottom: 4px;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    font-variation-settings: 'wght' 500;
+}
+.marker-popup .input {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    outline: none;
+    border-radius: 15px;
+    border: 2px solid var(--light-grey-color);
+    height:36px;
+    /* Caret stuff */
+    font-size: 16px;
+    text-indent: 8px;
+    caret-color: var(--light-blue-color);
+    color: #000000;
+    padding-inline: 0px;
+
+    box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.10);
+}
+.marker-popup .input:focus {
+    border: 2px solid var(--accent-color);
+}
+.grid {
+    margin-left: 0px;
+    display: grid;
+    column-gap: 30px;
+    row-gap: 0px;
+    text-align: left;
+}
+.grid .label {
+    margin: 0;
+    margin-bottom: 4px;
+}
+.grid .input {
+    width: 100%;
+}
+/* How to change the input color element */
+.input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+.input[type="color"]::-webkit-color-swatch {
+    border: transparent;
+    border-radius: 11px;
+    block-size: 100%;
+    inline-size: 100%;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: 11px;
+}
+#cls-btn {
+    width: 100%;
+    height:50px;
+    background-color: var(--accent-color);
+    border-radius: 30px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#cls-btn h1 {
+    color: #ffffff;
+    font-variation-settings: 'wght' 700;
+    font-size: 31px;
+
+    margin:0px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/* Dropdown Styling */
+select.input {
+    /* Gets rid of default settings such as the default dropdown icon */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #ffffff;
+    cursor: pointer;
+
+    text-indent: 0;
+    padding: 0 20px 0 0px;
+
+    /* Embedded SVG down-arrow */
+    /* Information obtained from https://stackoverflow.com/questions/9185434/using-svg-as-background-image */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239F9F9F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+}
+/* Have the svg icon change color when selected */
+select.input:focus {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B65050' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+}
+
+
+.trash-btn:hover img{
+    filter: var(--accent-color-filter);
+}
+.trash-btn img {
+    padding: 3px 3px 3px 15px;
+}
+
+
+
+
+
+/* ====> Desktop View <==== */
+@media screen and (min-width: 768px) {
+    .bottom-nav {
+        bottom: 25px;
+        width: calc(380px + 94px + 32px);
+        height: 55px;
+        border-radius: 50px;
+        left: calc(45vw - 190px);
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    .bottom-nav .nav-item.active::before {
+        width: 88%;
+        height: 110%;
+    }
+
+    .bottom-nav .nav-item .icon {
+        width: 38px;
+    }
+    .marker-popup {
+        width: calc(380px + 94px + 32px);
+        left: calc(45vw - 190px);
+        bottom: 25px;
+        border-radius: 30px;
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
+    }
+    .marker-popup .drag-handle {
+        display: none;
+    }
+}
