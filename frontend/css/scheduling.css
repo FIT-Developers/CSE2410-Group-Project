@@ -232,7 +232,7 @@ div #container {
 
 
 /* Popup Menu */
-.marker-popup {
+.class-popup {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -248,7 +248,7 @@ div #container {
     transform: translateY(110%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.marker-popup.open {
+.class-popup.open {
     transform: translateY(0);
 }
 /* Blurring Background */
@@ -259,7 +259,7 @@ div #container {
 }
 
 /* Handle Dragging */
-.marker-popup .drag-handle {
+.class-popup .drag-handle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,10 +273,10 @@ div #container {
     width: 6rem;
     pointer-events: none;
 }
-.marker-popup .drag-handle:active {
+.class-popup .drag-handle:active {
     cursor: grabbing;
 }
-.marker-popup.dragging {
+.class-popup.dragging {
     transition: none;
 }
 
@@ -292,7 +292,7 @@ div #icontainer {
     justify-content: center;
     width: 100%;
 }
-.marker-popup .label {
+.class-popup .label {
     margin: 0px;
     margin-bottom: 4px;
     font-size: 1rem;
@@ -300,7 +300,7 @@ div #icontainer {
     overflow: hidden;
     font-variation-settings: 'wght' 500;
 }
-.marker-popup .input {
+.class-popup .input {
     box-sizing: border-box;
     width: 100%;
     margin-bottom: 10px;
@@ -320,7 +320,7 @@ div #icontainer {
 
     box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.10);
 }
-.marker-popup .input:focus {
+.class-popup .input:focus {
     border: 2px solid var(--accent-color);
 }
 .grid {
@@ -435,14 +435,14 @@ select.input:focus {
     .bottom-nav .nav-item .icon {
         width: 38px;
     }
-    .marker-popup {
+    .class-popup {
         width: calc(380px + 94px + 32px);
         left: calc(45vw - 190px);
         bottom: 25px;
         border-radius: 30px;
         filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
     }
-    .marker-popup .drag-handle {
+    .class-popup .drag-handle {
         display: none;
     }
 }

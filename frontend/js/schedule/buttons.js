@@ -5,22 +5,22 @@
 document.querySelector('#add-btn').addEventListener('click', function() {
 
     // Adds the open class to the html marker popup, allowing it to slide up and be visible
-    document.getElementById('marker-popup').classList.add('open');
+    document.getElementById('class-popup').classList.add('open');
     document.getElementById('scheduleArea').classList.add('blur-active');
 
 });
-document.getElementById('marker-popup').addEventListener('click', (e) => {
+document.getElementById('class-popup').addEventListener('click', (e) => {
     e.stopPropagation();
 });
 document.getElementById('scheduleArea').addEventListener('click', (e) => {
-    document.getElementById('marker-popup').classList.remove('open');
+    document.getElementById('class-popup').classList.remove('open');
     document.getElementById('scheduleArea').classList.remove('blur-active');
 });
 
 
 
 // Draggable Handle Code, parts obtained from a stack overflow
-const popup = document.getElementById('marker-popup');
+const popup = document.getElementById('class-popup');
 const dragHandle = popup.querySelector('.drag-handle');
 const scheduleArea = document.getElementById('scheduleArea');
 
