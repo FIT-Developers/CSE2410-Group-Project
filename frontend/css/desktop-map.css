@@ -13,6 +13,28 @@
 
 
 /* ==========================================================================
+   SECTION: SEARCH BACKDROP OVERLAY (ALL VIEWPORTS)
+   ========================================================================== */
+
+.search-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 990;
+	background-color: rgba(0, 0, 0, 0.35);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.22s ease;
+}
+
+.search-backdrop.open {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+
+/* ==========================================================================
    SECTION: DESKTOP VIEWPORT OVERRIDES (769px AND UP)
    ========================================================================== */
 
@@ -23,6 +45,7 @@
 		top: 24px;
 		left: 50%;
 		right: auto;
+		z-index: 1010;
 		transform: translateX(-50%);
 		width: 440px;
 		height: 40px;
@@ -31,11 +54,19 @@
 		border: 1px solid var(--border-subtle);
 		filter: none;
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-		transition: width 0.2s ease, background-color 0.2s ease;
+		transition: left 0.2s ease, width 0.2s ease, background-color 0.2s ease;
 	}
 
+	/* Shift left when expanded so it sits beside #cancel (X) without colliding */
 	.search-bar.show {
-		width: 480px;
+		left: calc(50% - 26px);
+		width: 440px;
+		background-color: var(--bg-surface-alt);
+	}
+
+	body:has(.search-popup.open) .search-bar, .search-bar.show {
+		left: calc(50% - 26px);
+		width: 440px;
 		background-color: var(--bg-surface-alt);
 	}
 
@@ -84,17 +115,22 @@
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 	}
 
+	body:has(.search-popup.open) .weather-showcase {
+		display: flex;
+	}
+
 
 	/* --- Subsection: Centered Search & Category Popup Drawer --- */
 	.search-popup {
 		top: 16px;
 		left: 50%;
 		right: auto;
+		z-index: 1005;
 		width: 560px;
 		max-height: 75vh;
 		overflow-y: auto;
 		border-radius: 28px;
-		padding: 18px 20px 22px 20px;
+		padding: 20px 22px 22px 22px;
 		background-color: var(--bg-surface);
 		color: var(--text-primary);
 		border: 1px solid var(--border-subtle);
@@ -107,8 +143,17 @@
 		transform: translate(-50%, 0);
 	}
 
+	.search-popup .close-container {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		min-height: 44px;
+		margin-bottom: 10px;
+	}
+
 	.search-popup .close-container .icon {
 		width: 38px;
+		cursor: pointer;
 	}
 
 	.break {
@@ -140,6 +185,7 @@
 	.bottom-nav {
 		left: 50%;
 		bottom: 24px;
+		z-index: 1020;
 		transform: translateX(-50%);
 		width: 340px;
 		height: 64px;

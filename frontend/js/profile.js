@@ -50,6 +50,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	let authMode = "login";
 
+
+	// --- Search Backdrop & Auto-Close when Bottom Nav Clicked ---
+	const searchPopup    = document.getElementById("search-popup");
+	const searchBar      = document.getElementById("search-bar");
+	const searchCancel   = document.getElementById("cancel");
+	const searchBackdrop = document.getElementById("search-backdrop");
+	const bottomNavItems = document.querySelectorAll(".bottom-nav .nav-item");
+
+	// Close Search
+	function closeSearchUI() {
+		if (!searchPopup || !searchPopup.classList.contains("open")) return;
+		if (searchCancel) {
+			searchCancel.click();
+		} else {
+			searchPopup.classList.remove("open");
+			if (searchBar) searchBar.classList.remove("show");
+		}
+		if (searchBackdrop) searchBackdrop.classList.remove("open");
+	}
+
+	// Keep searchBackdrop synced whenever searchPopup opens or closes
+	if (searchPopup && searchBackdrop) {
+		const observer = new MutationObserver(() => {
+			if (searchPopup.classList.contains("open")) {
+				searchBackdrop.classList.add("open");
+			} else {
+				searchBackdrop.classList.remove("open");
+			}
+		});
+		observer.observe(searchPopup, { attributes: true, attributeFilter: ["class"] });
+
+		searchBackdrop.addEventListener("click", closeSearchUI);
+	}
+
+	// Close search bar/dropdown whenever any bottom dock button is clicked
+	bottomNavItems.forEach((item) => {
+		item.addEventListener("click", () => {
+			closeSearchUI();
+		});
+	});
+
+
 	// --- Profile Overlay Controls ---
 	function openProfileOverlay() {
 		profileOverlay.classList.add("open");
