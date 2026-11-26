@@ -5,7 +5,7 @@ body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-    background-color: #000000;
+    background-color: var(--black-color);
     /* CSS Font stuff to help match it with the renders from figma */
     font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 400 !important;
@@ -19,6 +19,8 @@ body {
     --accent-color: #B65050;
     --base-color: #9F9F9F;
     --light-color: #E7E7E7;
+    --white-color: #FFFFFF;
+    --black-color: #000000;
 
     /* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
     /* https: //codepen.io/sosuke/pen/Pjoqqp */
@@ -40,7 +42,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #FFFFFF;
+    background: var(--white-color);
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
     z-index: 2000;
@@ -128,7 +130,7 @@ div #container {
     bottom:0px;
     width:100%;
     height:85px;
-    background-color: #ffffff;
+    background-color: var(--white-color);
     border-radius: 0px;
     display:flex;
     justify-content: space-around;
@@ -209,7 +211,7 @@ div #container {
     z-index: 1002;
     width: 47px;
     height: 47px;
-    background-color: white;
+    background-color: var(--white-color);
     border-radius: 100px;
     display: flex;
     justify-content: center;
@@ -261,7 +263,7 @@ div #container {
     right: 80px;
     display: flex;
     align-items: center;
-    background-color: #ffffff;
+    background-color: var(--white-color);
     border-radius: 50px;
     padding: 6px 6px;
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
@@ -276,7 +278,7 @@ div #container {
     outline: none;
     background: transparent;
     font-size: 22px;
-    color: #000000;
+    color: var(--black-color);
     width:calc(100% - 82px);
 
     /* Weird font issues, so set it manually */
@@ -305,7 +307,7 @@ div #container {
     top: 0;
     left: 0;
     width: 100%;
-    background: #ffffff;
+    background: var(--white-color);
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
     z-index: 2000;
@@ -412,7 +414,7 @@ div #container {
 .recents h1 {
     margin: 0;
     font-size: 1rem;
-    color: black;
+    color: var(--black-color);
 }
 .recents h2 {
     margin: 0;
@@ -433,7 +435,7 @@ div #container {
     right: 20px;
     width: 47px;
     height: 47px;
-    background-color: #FFFFFF;
+    background-color: var(--white-color);
     border-radius: 100px;
     display: flex;
     justify-content: center;
@@ -474,11 +476,11 @@ div #container {
 }
 #directions {
     background-color: var(--accent-color);
-    color:#ffffff;
+    color:var(--white-color);
 }
 #website {
     background-color: var(--light-color);
-    color:#000000;
+    color:var(--black-color);
 }
 #nav {
     filter: var(--white-filter)
@@ -529,7 +531,7 @@ div #container {
     transform: translateX(-50%);
     width: 92%;
     max-width: 420px;
-    background: #ffffff;
+    background: var(--white-color);
     border-radius: 28px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     z-index: 1000;
@@ -559,4 +561,63 @@ div #container {
     width: 18px;
     height: 18px;
     filter: invert(33%) sepia(85%) saturate(1450%) hue-rotate(335deg);
+}
+
+/* Fix for HDR images making white look bad */
+img {
+    dynamic-range-limit: standard;
+}
+
+
+/* ====> Desktop View <==== */
+@media screen and (min-width: 768px) {
+    .search-bar {
+        top: 25px;
+        left: calc(45vw - 190px);
+        right: auto;
+        width: 380px;
+        height: 35px;
+    }
+    .crosswalk-container {
+        top: 25px;
+        left: calc(45vw + 216px);
+    }
+
+    .weather-showcase {
+        top: 25px;
+        right: auto;
+        left: calc(45vw + 279px);
+    }
+    .search-popup {
+        top: 0;
+        left: calc(45vw - 210px);
+        width: 560px;
+    }
+    body:has(.search-popup.open) .weather-showcase {
+        display: none;
+    }
+    body:has(.search-popup.open) .search-bar {
+        width: calc(380px + 16px + 47px);
+    }
+    .bottom-nav {
+        bottom: 25px;
+        width: calc(380px + 94px + 32px);
+        height: 55px;
+        border-radius: 50px;
+        left: calc(45vw - 190px);
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
+    }
+    .bottom-nav .nav-item.active::before {
+        width: 88%;
+        height: 110%;
+    }
+    .bottom-nav .nav-item .icon {
+        width: 38px;
+    }
+    .marker-popup {
+        width: calc(380px + 94px + 32px);
+        left: calc(45vw - 190px);
+        bottom: 25px;
+        border-radius: 30px;
+    }
 }
