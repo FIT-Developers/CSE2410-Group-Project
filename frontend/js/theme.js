@@ -1,20 +1,16 @@
-/* ==========================================================================
-   SECTION: INFORMATION
-   ========================================================================== */
+// ==========================================================================
+// SECTION: INFORMATION
+// ==========================================================================
 
-	/*
-	Author: Michael Woodyard
-	Used by: All HTML files in frontend/html/
+	// Author: Michael Woodyard
+	// Used by: All HTML files in frontend/html/
 
-	Note: Manages the application-wide light/dark mode state via localStorage and the root attribute.
+	// Note: Manages the application-wide light/dark mode state via localStorage and the root attribute.
+	//       Designed to load in early, so themes apply before the browser paints anything.
 
-		  Designed to load in early, so themes apply before the browser paints anything.
-	*/
-
-
-/* ==========================================================================
-   SECTION: THEME CONTROLLER (LIGHT / DARK MODE)
-   ========================================================================== */
+// ==========================================================================
+// SECTION: THEME CONTROLLER (LIGHT / DARK MODE)
+// ==========================================================================
 
 // Function that will be immediately invoked
 // Any variables created here are scoped locally, it'll prevent any mixups

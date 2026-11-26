@@ -4,11 +4,11 @@
 
    /*
 	Author: Michael Woodyard
-	Used by: frontend/html/map.html
+	Used by: frontend/map.html
 
-	Note: Desktop-only responsive layout overrides (min-width: 769px).
-		  	This is so the map UI scales cleanly on widescreen monitors,
-		  	without altering the mobile layout in map.css.
+	Note: Desktop-only responsive layout, overrides (min-width: 769px).
+		  Adapted to the updated map.html structure.
+		  Uses Light/Dark theme variables from global.css.
    */
 
 
@@ -21,26 +21,33 @@
 	/* --- Subsection: Centered Top Search Bar --- */
 	.search-bar {
 		top: 24px;
-		left: calc(50% - 32px);
+		left: 50%;
 		right: auto;
 		transform: translateX(-50%);
 		width: 440px;
 		height: 40px;
 		padding: 6px 16px;
-		background-color: #1E1E1E;
-		border: 1px solid #333333;
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+		background-color: var(--bg-surface);
+		border: 1px solid var(--border-subtle);
+		filter: none;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+		transition: width 0.2s ease, background-color 0.2s ease;
+	}
+
+	.search-bar.show {
+		width: 480px;
+		background-color: var(--bg-surface-alt);
 	}
 
 	.search-bar .icon {
-		width: 22px;
+		width: 24px;
 	}
 
 	.search-bar .input {
-		font-size: 0.95rem;
+		font-size: 1rem;
 		width: 100%;
 		margin-left: 10px;
-		color: #FFFFFF;
+		color: var(--text-primary);
 	}
 
 	.search-bar .input::placeholder {
@@ -48,76 +55,84 @@
 	}
 
 
-	/* --- Subsection: Filter Button & Horizontal Pill Bar --- */
-	.filter-container {
+	/* --- Subsection: Top-Right Crosswalk & Weather Controls --- */
+	.crosswalk-container {
 		top: 24px;
-		left: calc(50% + 228px);
-		right: auto;
-		width: 52px;
-	}
-
-	.filter-btn {
-		width: 52px;
-		height: 52px;
-		background-color: #1E1E1E;
-		border: 1px solid #333333;
-		cursor: pointer;
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-		transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
-	}
-
-	.filter-btn:hover {
-		transform: scale(1.05);
-		border-color: var(--accent-color);
-	}
-
-	.filter-btn .icon {
-		width: 24px;
-		margin-top: 0;
-	}
-
-
-	/* Horizontal pill row below the centered search bar (replaces vertical tube) */
-	.dropdown-slot {
-		top: 62px;
 		left: auto;
-		right: 48px;
-		width: auto;
-		flex-direction: row;
-		padding: 8px 12px;
-		gap: 8px;
-		border-radius: 50px;
-		background-color: #1E1E1E;
-		border: 1px solid #333333;
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-		transform: translateY(-6px);
+		right: 28px;
+		width: 48px;
 	}
 
-	.filter-container.active .dropdown-slot {
-		transform: translateY(0);
-		max-height: none;
+	.crosswalk-icon {
+		width: 48px;
+		height: 48px;
+		background-color: var(--bg-surface);
+		border: 1px solid var(--border-subtle);
+		filter: none;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 	}
 
-	.icon-item {
-		width: auto;
-		min-width: 40px;
-		height: 34px;
-		padding: 0 12px;
-		aspect-ratio: auto;
-		border-radius: 30px;
-		background-color: #2A2A2A;
-		color: var(--light-color);
-		font-size: 0.9rem;
-		transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+	.weather-showcase {
+		top: 24px;
+		left: auto;
+		right: 88px;
+		width: 48px;
+		height: 48px;
+		background-color: var(--bg-surface);
+		border: 1px solid var(--border-subtle);
+		filter: none;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 	}
 
-	.icon-item:hover {
-		background-color: #3A3A3A;
+
+	/* --- Subsection: Centered Search & Category Popup Drawer --- */
+	.search-popup {
+		top: 16px;
+		left: 50%;
+		right: auto;
+		width: 560px;
+		max-height: 75vh;
+		overflow-y: auto;
+		border-radius: 28px;
+		padding: 18px 20px 22px 20px;
+		background-color: var(--bg-surface);
+		color: var(--text-primary);
+		border: 1px solid var(--border-subtle);
+		box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+		transform: translate(-50%, -120%);
+		transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	.icon-item.active-filter {
-		background-color: var(--accent-color);
-		color: #FFFFFF;
+	.search-popup.open {
+		transform: translate(-50%, 0);
+	}
+
+	.search-popup .close-container .icon {
+		width: 38px;
+	}
+
+	.break {
+		width: 100%;
+		background-color: var(--border-subtle);
+	}
+
+	.pill {
+		background-color: var(--bg-surface-alt);
+		color: var(--text-primary);
+		transition: transform 0.15s ease, background-color 0.15s ease;
+	}
+
+	.pill:hover {
+		transform: translateY(-1px);
+	}
+
+	.pill h1 {
+		font-size: 0.95rem;
+		color: var(--text-primary);
+	}
+
+	.recents h1 {
+		color: var(--text-primary);
 	}
 
 
@@ -130,9 +145,10 @@
 		height: 64px;
 		border-radius: 50px;
 		padding: 0 12px;
-		background-color: #1E1E1E;
-		border: 1px solid #333333;
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+		background-color: var(--bg-surface);
+		border: 1px solid var(--border-subtle);
+		filter: none;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 	}
 
 	.bottom-nav .nav-item {
@@ -154,24 +170,22 @@
 		height: 44px;
 	}
 
-	
-	/* --- Subsection: Floating Left Detail Card (Replaces Full-Width Sheet) --- */
+
+	/* --- Subsection: Floating Left Detail Card --- */
 	.marker-popup {
-		top: 124px;
+		top: 96px;
 		left: 24px;
 		bottom: auto;
 		width: 400px;
-		max-height: calc(100vh - 148px);
+		max-height: calc(100vh - 124px);
 		overflow-y: auto;
 		border-radius: 24px;
 		padding: 22px 24px;
-		background-color: #1E1E1E;
-		color: #FFFFFF;
-		border: 1px solid #333333;
+		background-color: var(--bg-surface);
+		color: var(--text-primary);
+		border: 1px solid var(--border-subtle);
 		border-top: 4px solid var(--accent-color);
-		box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-
-		/* Slide in from the left, instead of rising from the bottom */
+		box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 		transform: translateX(-120%);
 	}
 
@@ -179,13 +193,11 @@
 		transform: translateX(0);
 	}
 
-	/* Prevent top-row icons from shrinking when the building title wraps */
 	.marker-popup > #container:first-child {
 		align-items: flex-start;
 		gap: 12px;
 	}
 
-	/* Collapse empty image gallery container when a building has no photos */
 	.marker-popup > #container:last-child {
 		margin-top: 0 !important;
 	}
@@ -195,7 +207,7 @@
 	}
 
 	.marker-popup h1 {
-		color: #FFFFFF;
+		color: var(--text-primary);
 		white-space: normal;
 		overflow: visible;
 		text-overflow: unset;
@@ -208,11 +220,11 @@
 	}
 
 	.marker-popup #website {
-		background-color: #2C2C2C;
-		color: #FFFFFF;
+		background-color: var(--bg-surface-alt);
+		color: var(--text-primary);
 	}
 
-	.marker-popup #send {
+	:root[data-theme="dark"] .marker-popup #send {
 		filter: var(--white-filter);
 	}
 
@@ -225,8 +237,9 @@
 
 	/* --- Subsection: Active Location Button --- */
 	.active-location-btn {
-		bottom: 28px;
+		left: auto;
 		right: 28px;
+		bottom: 28px;
 		width: 3.5rem;
 		height: 3.5rem;
 		cursor: pointer;

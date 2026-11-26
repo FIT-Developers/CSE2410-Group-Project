@@ -1,0 +1,392 @@
+/* ==========================================================================
+   SECTION: Information
+   ========================================================================== */
+
+   /*
+
+	Author: Michael Woodyard
+	Used by: frontend/map.html
+
+	Note: Profile overlay card and slide-up authentication drawer rendered
+		  over the live campus map, using global.css theme variables.
+
+   */
+
+
+/* ==========================================================================
+   SECTION: PROFILE OVERLAY & CARD
+   ========================================================================== */
+
+.hidden {
+	display: none !important;
+}
+
+.bottom-nav .nav-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.profile-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1050;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px 16px 110px 16px;
+	box-sizing: border-box;
+	background-color: rgba(0, 0, 0, 0.35);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.22s ease;
+}
+
+.profile-overlay.open {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.profile-card {
+	position: relative;
+	width: 100%;
+	max-width: 420px;
+	background-color: var(--bg-surface);
+	border: 1px solid var(--border-subtle);
+	border-top: 4px solid var(--accent-color);
+	border-radius: 24px;
+	padding: 36px 28px;
+	text-align: center;
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+	transform: translateY(12px);
+	transition: transform 0.22s ease;
+}
+
+.profile-overlay.open .profile-card {
+	transform: translateY(0);
+}
+
+.card-close-btn {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 34px;
+	height: 34px;
+	border: none;
+	border-radius: 50%;
+	background-color: var(--bg-surface-alt);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.card-close-btn .icon {
+	width: 16px;
+}
+
+:root[data-theme="dark"] .card-close-btn .icon {
+	filter: var(--white-filter);
+}
+
+.avatar-circle {
+	width: 76px;
+	height: 76px;
+	margin: 0 auto 18px auto;
+	border-radius: 50%;
+	background-color: var(--bg-surface-alt);
+	border: 2px solid var(--border-subtle);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.avatar-circle.active-user {
+	border-color: var(--accent-color);
+}
+
+.avatar-icon {
+	width: 36px;
+	height: 36px;
+	filter: var(--base-color-filter);
+}
+
+:root[data-theme="dark"] .avatar-icon {
+	filter: var(--white-filter);
+}
+
+.status-badge {
+	display: inline-block;
+	padding: 4px 12px;
+	margin-bottom: 10px;
+	border-radius: 20px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	background-color: rgba(182, 80, 80, 0.18);
+	color: var(--accent-color);
+}
+
+.profile-title {
+	margin: 0 0 10px 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
+.profile-subtitle {
+	margin: 0 0 24px 0;
+	font-size: 0.95rem;
+	line-height: 1.5;
+	color: var(--text-secondary);
+}
+
+
+/* ==========================================================================
+   SECTION: BUTTONS & SETTINGS ROWS
+   ========================================================================== */
+
+.profile-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.profile-overlay .btn-primary,
+.profile-overlay .btn-secondary,
+.auth-drawer .btn-primary {
+	width: 100%;
+	padding: 13px 20px;
+	border-radius: 30px;
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.profile-overlay .btn-primary,
+.auth-drawer .btn-primary {
+	background-color: var(--accent-color);
+	color: #FFFFFF;
+	border: none;
+}
+
+.profile-overlay .btn-secondary {
+	background-color: transparent;
+	color: var(--text-primary);
+	border: 1px solid var(--border-subtle);
+}
+
+.profile-overlay .btn-primary:hover,
+.profile-overlay .btn-secondary:hover,
+.auth-drawer .btn-primary:hover {
+	opacity: 0.9;
+	transform: translateY(-1px);
+}
+
+.settings-list {
+	margin-bottom: 24px;
+	text-align: left;
+}
+
+.setting-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 14px 16px;
+	border-radius: 16px;
+	background-color: var(--bg-surface-alt);
+	border: 1px solid var(--border-subtle);
+}
+
+.setting-info {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.setting-label {
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+.setting-desc {
+	font-size: 0.8rem;
+	color: var(--text-secondary);
+}
+
+.btn-pill {
+	padding: 8px 14px;
+	border-radius: 20px;
+	border: 1px solid var(--border-subtle);
+	background-color: var(--bg-surface);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 0.85rem;
+	font-weight: 500;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   SECTION: SLIDE-UP AUTHENTICATION DRAWER
+   ========================================================================== */
+
+.drawer-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 1100;
+	background-color: rgba(0, 0, 0, 0.55);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.25s ease;
+}
+
+.drawer-backdrop.open {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.auth-drawer {
+	position: fixed;
+	left: 50%;
+	bottom: 0;
+	z-index: 1200;
+	width: 100%;
+	max-width: 460px;
+	background-color: var(--bg-surface);
+	color: var(--text-primary);
+	border: 1px solid var(--border-subtle);
+	border-bottom: none;
+	border-radius: 28px 28px 0 0;
+	padding: 12px 24px 32px 24px;
+	box-sizing: border-box;
+	box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.4);
+	transform: translate(-50%, 105%);
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-drawer.open {
+	transform: translate(-50%, 0);
+}
+
+.drawer-handle {
+	width: 44px;
+	height: 5px;
+	margin: 0 auto 14px auto;
+	border-radius: 999px;
+	background-color: var(--border-subtle);
+}
+
+.drawer-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.auth-tabs {
+	display: flex;
+	gap: 8px;
+	background-color: var(--bg-surface-alt);
+	padding: 4px;
+	border-radius: 999px;
+}
+
+.auth-tab {
+	padding: 8px 18px;
+	border: none;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--text-secondary);
+	font-family: inherit;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.auth-tab.active {
+	background-color: var(--accent-color);
+	color: #FFFFFF;
+}
+
+.drawer-close {
+	width: 36px;
+	height: 36px;
+	border: none;
+	border-radius: 50%;
+	background-color: var(--bg-surface-alt);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.drawer-close .icon {
+	width: 18px;
+}
+
+:root[data-theme="dark"] .drawer-close .icon {
+	filter: var(--white-filter);
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	text-align: left;
+}
+
+.form-group label {
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: var(--text-secondary);
+}
+
+.form-group input {
+	padding: 12px 14px;
+	border-radius: 12px;
+	border: 1px solid var(--border-subtle);
+	background-color: var(--bg-surface-alt);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 0.95rem;
+	outline: none;
+	transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+	border-color: var(--accent-color);
+}
+
+.auth-feedback {
+	margin: 0;
+	min-height: 1.2em;
+	font-size: 0.85rem;
+	color: var(--accent-color);
+	text-align: center;
+}
+
+@media screen and (min-width: 769px) {
+	.auth-drawer {
+		bottom: 24px;
+		border-bottom: 1px solid var(--border-subtle);
+		border-radius: 28px;
+	}
+}

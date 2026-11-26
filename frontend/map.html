@@ -27,6 +27,7 @@
     <!-- Our CSS -->
 	<link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/map.css" />
+	<link rel="stylesheet" href="css/profile.css" />
 
 	<!-- Desktop Version CSS & Theme -->
 	<link rel="stylesheet" href="css/desktop-map.css" />
@@ -75,17 +76,17 @@
         </div>
     </div>
 
-
+	<!-- Bottom Navbar -->
 	<div class="bottom-nav" id="footer">
-		<a href="map.html" class="nav-item active">
+		<a href="map.html" class="nav-item active" id="nav-map-btn">
 			<img src="./assets/icons/menu-icons/compass.svg" alt="Map" class="icon">
 		</a>
 		<a href="scheduling.html" class="nav-item">
 			<img src="./assets/icons/menu-icons/calendar.svg" alt="Schedule" class="icon">
 		</a>
-		<a href="profile.html" class="nav-item">
+		<button type="button" class="nav-item nav-btn" id="nav-profile-btn" aria-label="Profile">
 			<img src="./assets/icons/menu-icons/user.svg" alt="Profile" class="icon">
-		</a>
+		</button>
 		<a href="index.html" class="nav-item">
 			<img src="./assets/icons/menu-icons/setting.svg" alt="Home & Settings" class="icon">
 		</a>
@@ -227,6 +228,96 @@
 
         </div>
     </div>
+
+
+	<!-- Profile Overlay -->
+<div class="profile-overlay" id="profile-overlay" aria-hidden="true">
+
+	<!-- Signed-Out View -->
+	<section class="profile-card" id="signed-out-view">
+		<button type="button" class="card-close-btn" id="close-profile-btn" aria-label="Close profile">
+			<img src="./assets/icons/menu-icons/x.svg" alt="Close" class="icon">
+		</button>
+		<div class="avatar-circle">
+			<img src="./assets/icons/menu-icons/user.svg" alt="User Icon" class="avatar-icon">
+		</div>
+		<h1 class="profile-title">Not Signed In</h1>
+		<p class="profile-subtitle">
+			Sign in to save favorite campus buildings, sync your class schedule, and customize navigation preferences.
+		</p>
+
+		<div class="profile-actions">
+			<button type="button" class="btn-primary" id="open-login-btn">Log In</button>
+			<button type="button" class="btn-secondary" id="open-signup-btn">Create Account</button>
+		</div>
+	</section>
+
+	<!-- Signed-In View -->
+	<section class="profile-card hidden" id="signed-in-view">
+		<button type="button" class="card-close-btn" id="close-profile-signed-in-btn" aria-label="Close profile">
+			<img src="./assets/icons/menu-icons/x.svg" alt="Close" class="icon">
+		</button>
+		<div class="avatar-circle active-user">
+			<img src="./assets/icons/menu-icons/user.svg" alt="User Icon" class="avatar-icon">
+		</div>
+		<span class="status-badge">Signed In</span>
+		<h1 class="profile-title" id="user-display-email">student@my.fit.edu</h1>
+		<p class="profile-subtitle">Florida Tech Campus Navigator Account</p>
+
+		<div class="settings-list">
+			<div class="setting-row">
+				<div class="setting-info">
+					<span class="setting-label">App Theme</span>
+					<span class="setting-desc">Switch between Dark and Light mode</span>
+				</div>
+				<button type="button" class="btn-pill" id="theme-toggle-btn">Toggle Theme</button>
+			</div>
+		</div>
+
+		<div class="profile-actions">
+			<button type="button" class="btn-secondary" id="logout-btn">Sign Out</button>
+		</div>
+	</section>
+
+</div>
+
+	<!-- Backdrop & Slide-Up Auth Drawer -->
+	<div class="drawer-backdrop" id="auth-backdrop"></div>
+
+	<aside class="auth-drawer" id="auth-drawer" aria-hidden="true">
+		<div class="drawer-handle"></div>
+
+		<div class="drawer-header">
+			<div class="auth-tabs" role="tablist">
+				<button type="button" class="auth-tab active" id="tab-login" data-mode="login">Log In</button>
+				<button type="button" class="auth-tab" id="tab-signup" data-mode="signup">Sign Up</button>
+			</div>
+			<button type="button" class="drawer-close" id="close-drawer-btn" aria-label="Close drawer">
+				<img src="./assets/icons/menu-icons/x.svg" alt="Close" class="icon">
+			</button>
+		</div>
+
+		<form id="auth-form" class="auth-form">
+			<div class="form-group">
+				<label for="auth-email">University Email</label>
+				<input type="email" id="auth-email" name="email" placeholder="you@my.fit.edu" required />
+			</div>
+
+			<div class="form-group">
+				<label for="auth-password">Password</label>
+				<input type="password" id="auth-password" name="password" placeholder="Enter your password" required />
+			</div>
+
+			<div class="form-group hidden" id="confirm-password-group">
+				<label for="auth-confirm-password">Confirm Password</label>
+				<input type="password" id="auth-confirm-password" name="confirmPassword" placeholder="Re-enter your password" />
+			</div>
+
+			<p class="auth-feedback" id="auth-feedback" role="alert"></p>
+
+			<button type="submit" class="btn-primary submit-btn" id="auth-submit-btn">Log In</button>
+		</form>
+	</aside>
     
 
 
@@ -242,6 +333,7 @@
     <script src="js/map/gps.js"></script>
     <script src="js/map/search.js"></script>
     <script src="js/map/routing.js"></script>
+	<script src="js/profile.js"></script>
 
 </body>
 
