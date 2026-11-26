@@ -16,16 +16,18 @@ body {
 }
 /* Colors to use for the frontend design */
 :root {
-    --accent-color: #B65050;
-    --base-color: #9F9F9F;
-    --light-color: #E7E7E7;
-    --white-color: #FFFFFF;
-    --black-color: #000000;
+    --accent-color: #B65050; /* #B65050 */
+    --base-color: #9F9F9F; /* #9F9F9F */
+    --light-color: #E7E7E7; /* #E7E7E7 */
+    --white-color: #ffffff; /* #000000 */
+    --black-color: #000000; /* #000000 */
 
     /* Tool for converting hex to filter colors so <img> can be changed because color: doesn't work */
     /* https: //codepen.io/sosuke/pen/Pjoqqp */
     --accent-color-filter: invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%);
+    /* invert(44%) sepia(70%) saturate(494%) hue-rotate(314deg) brightness(79%) contrast(86%) */
     --base-color-filter: invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%);
+    /* invert(66%) sepia(18%) saturate(8%) hue-rotate(21deg) brightness(92%) contrast(90%) */
     --light-color-filter: invert(100%) sepia(0%) saturate(2230%) hue-rotate(2deg) brightness(116%) contrast(81%);
     --white-filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(103%) contrast(101%);
     --black-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(101%) contrast(103%);
@@ -619,5 +621,9 @@ img {
         left: calc(45vw - 190px);
         bottom: 25px;
         border-radius: 30px;
+    }
+    .active-location-btn {
+        left: calc(45vw + 330px);
+        bottom: 25px;
     }
 }
