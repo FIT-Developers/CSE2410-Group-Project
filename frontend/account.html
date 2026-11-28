@@ -1,0 +1,368 @@
+<!-- account page -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=overlays-content">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="Campus Map">
+
+	<!-- fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+	<title>Account - Campus Map</title>
+	<link rel="icon" type="svg" href="./assets/icons/menu-icons/tab-icon.svg" />
+
+	<!-- css -->
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/account.css" />
+</head>
+
+<body>
+	<main class="account-shell" id="account-shell">
+
+		<!-- header with the avatar icon -->
+		<header class="account-banner" id="account-banner">
+			<div class="avatar-ring" id="avatar-ring">
+				<img src="./assets/icons/menu-icons/user.svg" alt="User Avatar" class="avatar-icon" id="avatar-icon">
+			</div>
+		</header>
+
+		<!-- not signed in -->
+		<!-- https://developer.mozilla.org/docs/Web/HTML/Global_attributes/hidden -->
+		<section class="account-view" id="view-guest">
+			<h1 class="status-heading">Not Signed In</h1>
+
+			<div class="guest-actions">
+				<!-- login button -->
+				<div class="btn-wrapper">
+					<!-- stick figure -->
+					<img src="./assets/icons/stick-figures/stick-figure-sitting-reading.svg" alt="" class="sitting-figure">
+
+					<button type="button" class="pill-btn primary-btn" id="btn-show-signin">Log In</button>
+				</div>
+
+				<!-- sign up button -->
+				<div class="btn-wrapper">
+					<!-- stick figure -->
+					 <img src="./assets/icons/stick-figures/stick-figure-hanging.svg" alt="" class="hanging-figure">
+
+					<button type="button" class="pill-btn secondary-btn" id="btn-show-signup">Sign Up</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- sign in card -->
+		<section class="account-card" id="view-signin" hidden>
+			<div class="card-top-bar">
+				<!-- character code for '←' -->
+				<button type="button" class="back-link">&larr; Back</button>
+			</div>
+
+			<h1 class="card-title">Sign In</h1>
+
+			<form class="auth-form" id="signin-form" action="/api/login" method="post">
+				<div class="pill-input-group">
+					<img src="./assets/icons/menu-icons/tinyuser.svg" alt="" class="input-icon">
+					<input type="text" id="signin-email" name="username" placeholder="Enter Email" autocomplete="username" required>
+				</div>
+
+				<div class="pill-input-group">
+					<img src="./assets/icons/menu-icons/lock.svg" alt="" class="input-icon">
+					<input type="password" id="signin-password" name="password" placeholder="Enter Password" autocomplete="current-password" required>
+				</div>
+
+				<p class="form-error" id="signin-error" role="alert"></p>
+
+				<button type="submit" class="pill-btn primary-btn submit-btn">Login</button>
+			</form>
+		</section>
+
+		<!-- sign up card -->
+		<section class="account-card" id="view-signup" hidden>
+			<div class="card-top-bar">
+				<button type="button" class="back-link">&larr; Back</button>
+			</div>
+
+			<h1 class="card-title">Sign Up</h1>
+
+			<form class="auth-form" id="signup-form" action="/api/signup" method="post">
+				<div class="pill-input-group">
+					<img src="./assets/icons/menu-icons/tinyuser.svg" alt="" class="input-icon">
+					<input type="text" id="signup-email" name="username" placeholder="Enter Email" autocomplete="username" required>
+				</div>
+
+				<div class="pill-input-group">
+					<img src="./assets/icons/menu-icons/lock.svg" alt="" class="input-icon">
+					<input type="password" id="signup-password" name="password" placeholder="Enter Password" autocomplete="new-password" required>
+				</div>
+
+				<p class="form-error" id="signup-error" role="alert"></p>
+
+				<button type="submit" class="pill-btn primary-btn submit-btn">Create Account</button>
+			</form>
+		</section>
+
+		<!-- signed in profile -->
+		<section class="account-view" id="view-signedin" hidden>
+			<h1 class="status-heading" id="signedin-username">Student Account</h1>
+			<p class="status-subtext">Signed in to Campus Map</p>
+
+			<div class="signedin-actions">
+				<button type="button" class="pill-btn secondary-btn" id="btn-signout">Sign Out</button>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- bottom navbar -->
+	<div class="bottom-nav" id="footer">
+		<a href="map.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/compass.svg" alt="Map" class="icon">
+		</a>
+		<a href="scheduling.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/calendar.svg" alt="Schedule" class="icon">
+		</a>
+		<a href="account.html" class="nav-item active">
+			<img src="./assets/icons/menu-icons/user.svg" alt="Account" class="icon">
+		</a>
+		<a href="html/settings.html" class="nav-item">
+			<img src="./assets/icons/menu-icons/setting.svg" alt="Settings" class="icon">
+		</a>
+	</div>
+
+	<!-- view switching & auth -->
+	<script>
+		// grab main shell and the 4 account view sections
+		// elements: account-shell/view-guest/view-signin/view-signup/view-signedin
+		// https://developer.mozilla.org/docs/Web/API/Document/querySelector
+		const shell        = document.querySelector('#account-shell');
+		const guestView    = document.querySelector('#view-guest');
+		const signinView   = document.querySelector('#view-signin');
+		const signupView   = document.querySelector('#view-signup');
+		const signedinView = document.querySelector('#view-signedin');
+
+		// grab auth forms, error message containers, and profile heading
+		// elements: signin-form/signup-form/signin-error/signup-error/signedin-username
+		// https://developer.mozilla.org/docs/Web/API/Document/querySelector
+		const signinForm       = document.querySelector('#signin-form');
+		const signupForm       = document.querySelector('#signup-form');
+		const signinError      = document.querySelector('#signin-error');
+		const signupError      = document.querySelector('#signup-error');
+		const signedinUsername = document.querySelector('#signedin-username');
+
+		// changing views
+		// toggle which section is visible and clear any old form errors
+		function switchView(target) {
+			guestView.hidden    = target !== 'guest';
+			signinView.hidden   = target !== 'signin';
+			signupView.hidden   = target !== 'signup';
+			signedinView.hidden = target !== 'signedin';
+
+			// switch top banner and avatar colors between grey (guest) and pink/red (signed in)
+			// https://developer.mozilla.org/docs/Web/API/DOMTokenList/toggle
+			shell.classList.toggle('is-signed-in', target === 'signedin');
+
+
+			// reset validation alerts whenever navigating between views
+			// https://developer.mozilla.org/docs/Web/API/Node/textContent
+			signinError.textContent = '';
+			signupError.textContent = '';
+		}
+
+		// request a fresh CSRF token from the spring security endpoint before post requests
+		// https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function
+		// https://developer.mozilla.org/docs/Web/API/Window/fetch
+		// https://developer.mozilla.org/docs/Web/API/Response/ok
+		// https://developer.mozilla.org/docs/Web/API/Response/json
+		async function getCsrf() {
+			const res = await fetch('/api/csrf');
+			if (!res.ok) return null;
+
+			return res.json();
+		}
+
+		// open sign-in card from guest view
+		// https://developer.mozilla.org/docs/Web/API/Document/querySelector
+		// https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener
+		document.querySelector('#btn-show-signin').addEventListener('click', function () {
+			switchView('signin');
+		});
+
+		// open sign-up card from guest view
+		document.querySelector('#btn-show-signup').addEventListener('click', function () {
+			switchView('signup');
+		});
+
+
+		// return to guest view when clicking either card's back button
+		// https://developer.mozilla.org/docs/Web/API/NodeList/forEach
+		document.querySelectorAll('.back-link').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+
+				switchView('guest');
+			});
+		});
+
+
+
+		// restore signed-in state on page reload if a user session is stored
+		// https://developer.mozilla.org/docs/Web/API/Storage/getItem
+		const savedUser = localStorage.getItem('campus_user');
+
+		if (savedUser) {
+			signedinUsername.textContent = savedUser;
+
+			switchView('signedin');
+		}
+
+		// handle sign-in form submission against /api/login
+		signinForm.addEventListener('submit', async function (event) {
+			// stop default full page form navigation so errors can render inline
+			// https://developer.mozilla.org/docs/Web/API/Event/preventDefault
+			event.preventDefault();
+
+			signinError.textContent = '';
+
+			// serialize form inputs (username & password)
+			// https://developer.mozilla.org/docs/Web/API/URLSearchParams
+			// https://developer.mozilla.org/docs/Web/API/FormData
+			const data     = new URLSearchParams(new FormData(signinForm));
+			const username = data.get('username');
+
+			// https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/try...catch
+			try {
+				const csrf = await getCsrf();
+
+				if (!csrf) {
+					signinError.textContent = 'Could not prepare login. Please try again.';
+					return;
+				}
+
+				// send credentials with csrf token header
+				// https://developer.mozilla.org/docs/Web/API/Window/fetch
+				const response = await fetch('/api/login', {
+					method:  'POST',
+					headers: { [csrf.headerName]: csrf.token },
+					body:    data
+				});
+
+				// handle invalid credentials
+				if (response.status === 401) {
+					signinError.textContent = 'Incorrect username or password.';
+
+					return;
+				}
+
+				// handles unexpected server errors
+				if (!response.ok) {
+					signinError.textContent = 'Could not log in. Please try again.';
+
+					return;
+				}
+
+				// save username locally, then switch to the signed in profile view
+				// https://developer.mozilla.org/docs/Web/API/Storage/setItem
+				localStorage.setItem('campus_user', username);
+				signedinUsername.textContent = username;
+
+				// clear form inputs after logging in
+				// https://developer.mozilla.org/docs/Web/API/HTMLFormElement/reset
+				signinForm.reset();
+
+				switchView('signedin');
+
+			} catch (error) {
+				signinError.textContent = 'Could not complete login. Please try again.';
+			}
+		});
+
+		// handle sign-up form submission against /api/signup, then log the new user in
+		signupForm.addEventListener('submit', async function (event) {
+			// https://developer.mozilla.org/docs/Web/API/Event/preventDefault
+			event.preventDefault();
+			signupError.textContent = '';
+
+			// same as sign in form, serialize form inputs
+			const data     = new URLSearchParams(new FormData(signupForm));
+			const username = data.get('username');
+
+			try {
+				const csrf = await getCsrf();
+
+				if (!csrf) {
+					signupError.textContent = 'Could not prepare signup. Please try again.';
+					return;
+				}
+
+				// create account via /api/signup
+				const response = await fetch('/api/signup', {
+					method:  'POST',
+					headers: { [csrf.headerName]: csrf.token },
+					body:    data
+				});
+
+				// get the json error message if registration fails
+				// https://developer.mozilla.org/docs/Web/API/Request/json
+				let result = {};
+
+				try {
+					result = await response.json();
+
+				} catch (error) {}
+
+				// display backend message if signup failed
+				if (!response.ok) {
+					signupError.textContent = result.error || 'Could not create your account.';
+
+					return;
+				}
+
+				// automatically authenticate the new user created via /api/login
+				const loginResponse = await fetch('/api/login', {
+					method:  'POST',
+					headers: { [csrf.headerName]: csrf.token },
+					body:    data
+				});
+
+				// fallback to signin card if the account was created, but auto-login failed
+				if (!loginResponse.ok) {
+					signupError.textContent = 'Account created, please log in.';
+
+					switchView('signin');
+
+					return;
+				}
+
+				// persist the username and move to signedin profile view
+				// https://developer.mozilla.org/docs/Web/API/Storage/setItem
+				localStorage.setItem('campus_user', username);
+				signedinUsername.textContent = username;
+
+				// reset
+				signupForm.reset();
+				switchView('signedin');
+
+			} catch (error) {
+				signupError.textContent = 'Could not complete signup. Please try again.';
+			}
+		});
+
+		// clear the stored user session and return to the guest view after signing out
+		document.querySelector('#btn-signout').addEventListener('click', function () {
+
+			// https://developer.mozilla.org/docs/Web/API/Storage/removeItem
+			localStorage.removeItem('campus_user');
+
+			switchView('guest');
+		});
+	</script>
+</body>
+
+</html>
